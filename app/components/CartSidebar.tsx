@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { useCart } from "../context/CartContext"
 import { X, Plus, Minus, ShoppingBag, Trash2 } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export default function CartSidebar() {
   const { items, removeFromCart, updateQuantity, getTotalPrice, getTotalItems, isOpen, setIsOpen } = useCart()
@@ -46,7 +47,7 @@ export default function CartSidebar() {
                 <Card key={item.id} className="bg-white border-gray-200 shadow-sm">
                   <CardContent className="p-4">
                     <div className="flex gap-3">
-                      <img
+                      <Image
                         src={item.image || "/placeholder.svg"}
                         alt={item.name}
                         className="w-16 h-16 object-cover rounded"

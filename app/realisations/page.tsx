@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { ArrowRight } from "lucide-react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import Image from "next/image"
 
 // Dummy data for realisations
 const realisations = [
@@ -82,7 +83,7 @@ export default function RealisationsPage() {
                 className="bg-white border border-gray-200 hover:border-blue-500 transition-all duration-300 transform hover:scale-[1.02] overflow-hidden h-full shadow-sm hover:shadow-md"
               >
                 <div className="relative h-56">
-                  <img
+                  <Image
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
                     className="w-full h-full object-cover"

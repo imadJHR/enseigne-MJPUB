@@ -8,6 +8,7 @@ import Header from "../components/Header"
 import Footer from "../components/Footer"
 import { Plus, Minus, Trash2, ShoppingBag, ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export default function CartPage() {
   const { items, removeFromCart, updateQuantity, getTotalPrice, clearCart } = useCart()
@@ -63,7 +64,7 @@ export default function CartPage() {
                   <Card key={item.id} className="bg-white border border-gray-200 shadow-sm">
                     <CardContent className="p-6">
                       <div className="flex gap-4">
-                        <img
+                        <Image
                           src={item.image || "/placeholder.svg"}
                           alt={item.name}
                           className="w-24 h-24 object-cover rounded-lg"

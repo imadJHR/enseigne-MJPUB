@@ -20,6 +20,7 @@ import {
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { blogPosts } from "./blog/[slug]/page";
+import Image from "next/image";
 
 export default function HomePage() {
   const latestBlogPosts = blogPosts.slice(0, 3);
@@ -257,7 +258,7 @@ export default function HomePage() {
               >
                 <Card className="bg-white border border-gray-200 hover:border-yellow-500 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-yellow-100 overflow-hidden h-full shadow-md">
                   <div className="relative h-56">
-                    <img
+                    <Image
                       src={
                         post.image ||
                         "/placeholder.svg?height=300&width=400&text=Blog+Image"

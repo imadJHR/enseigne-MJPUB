@@ -10,6 +10,7 @@ import Footer from "../../components/Footer"
 import { ChevronLeft, ChevronRight, ShoppingCart, Star, Truck, Shield, Zap, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useCart } from "../../context/CartContext"
+import Image from "next/image"
 
 export const productsData = {
   "enseigne-led-premium": {
@@ -302,7 +303,7 @@ export default function ProductDetailPage({ params }) {
           <div className="grid lg:grid-cols-2 gap-12">
             <div>
               <div className="relative mb-4">
-                <img
+                <Image
                   src={product.images[currentImage] || "/placeholder.svg"}
                   alt={product.name}
                   className="w-full h-96 object-cover rounded-lg shadow-lg"
