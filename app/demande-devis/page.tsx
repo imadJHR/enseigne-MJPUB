@@ -94,10 +94,9 @@ export default function DemandeDevisPage() {
         projectDescription: "",
       });
     } catch (error) {
-      setSubmissionStatus("error");
-    } finally {
-      setIsLoading(false);
-    }
+  console.error("Erreur lors de l'envoi du formulaire :", error);
+  setSubmissionStatus("error");
+}
   };
 
   return (
@@ -228,7 +227,7 @@ export default function DemandeDevisPage() {
                     htmlFor="manufacturingProcess"
                     className="text-gray-800 font-medium"
                   >
-                    Type d'enseigne <span className="text-red-500">*</span>
+                    Type d&apos;enseigne <span className="text-red-500">*</span>
                   </Label>
                   <Select
                     value={formData.manufacturingProcess}

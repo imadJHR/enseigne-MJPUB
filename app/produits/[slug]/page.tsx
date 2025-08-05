@@ -347,7 +347,7 @@ export default function ProductDetailPage({ params }) {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl font-bold mb-4">Produit non trouvé</h1>
             <p className="text-blue-600 mb-8">
-              Le produit que vous recherchez n'existe pas.
+              Le produit que vous recherchez n&apos;existe pas.
             </p>
             <div className="space-y-4">
               <p className="text-gray-600">Produits disponibles :</p>
