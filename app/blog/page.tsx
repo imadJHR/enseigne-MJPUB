@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Search, Calendar, User, ArrowRight } from "lucide-react";
 import { useState } from "react";
-import { blogPosts } from "../blog/[slug]/page";
+import { blogPosts } from "@/lib/blogPosts";
 import Image from "next/image";
 
 export default function BlogPage() {
