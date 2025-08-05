@@ -9,13 +9,13 @@ import { blogPosts } from "@/lib/blogPosts";
 
 // Dummy data for blog posts (same as in blog/page.tsx for consistency)
 
-interface BlogPostPageProps {
+interface PageProps {
   params: {
     slug: string;
   };
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export default function BlogPostPage({ params }: PageProps) {
   const post = blogPosts.find((p) => p.slug === params.slug);
 
   if (!post) {
