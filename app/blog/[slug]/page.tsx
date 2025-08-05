@@ -139,14 +139,14 @@ interface BlogPostPageProps {
   };
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = blogPosts.find((p) => p.slug === params.slug);
 
-  if (!post) {
+ if (!post) {
     return (
-      <div className="min-h-screen bg-white text-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-white text-gray-900 flex flex-col">
         <Header />
-        <div className="text-center py-12">
+        <div className="text-center py-12 flex-grow flex flex-col justify-center items-center">
           <h1 className="text-4xl font-bold mb-4">Article non trouvé</h1>
           <p className="text-xl text-gray-600">
             L&apos;article que vous recherchez n&apos;existe pas.
@@ -161,11 +161,10 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
       </div>
     );
   }
-
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+   <div className="min-h-screen bg-white text-gray-900 flex flex-col">
       <Header />
-      <div className="pt-20 px-4 py-12">
+      <main className="pt-20 px-4 py-12 flex-grow">
         <div className="max-w-4xl mx-auto">
           {/* Back Button */}
           <div className="mb-8">
@@ -182,7 +181,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Blog Post Content */}
           <article className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
             <Image
-              src={post.image || "/placeholder.svg"}
+              src={post.image}
               alt={post.title}
               width={400}
               height={300}
@@ -205,10 +204,10 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
             </div>
             <div className="prose max-w-none text-gray-700 leading-relaxed">
-              {/* Render HTML content directly */}
               <div dangerouslySetInnerHTML={{ __html: post.content }} />
             </div>
           </article>
+
           {/* CTA Section */}
           <div className="mt-12 text-center bg-white rounded-lg p-8 border border-gray-200">
             <h2 className="text-3xl font-bold mb-4 text-gray-900">
@@ -225,7 +224,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             </Link>
           </div>
         </div>
-      </div>
+      </main>
       <Footer />
     </div>
   );
