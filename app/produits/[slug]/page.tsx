@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useState, use } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -194,58 +194,58 @@ export const productsData = {
   },
 }
 
-export default function ProductDetailPage({ params }: { params: { slug: string } }) {
+export default function ProductDetailPage({ params }) {
+  const unwrappedParams = use(params);
   const [currentImage, setCurrentImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
   const [selectedMaterial, setSelectedMaterial] = useState("")
   const { addToCart } = useCart()
-
-  const product = productsData[params.slug as keyof typeof productsData]
+  const product = productsData[unwrappedParams.slug as keyof typeof productsData]
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-indigo-900 to-indigo-950 text-white">
+      <div className="min-h-screen bg-white text-gray-900">
         <Header />
         <div className="pt-20 px-4 py-12">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl font-bold mb-4">Produit non trouvé</h1>
-            <p className="text-indigo-300 mb-8">Le produit que vous recherchez n'existe pas.</p>
+            <p className="text-blue-600 mb-8">Le produit que vous recherchez n'existe pas.</p>
             <div className="space-y-4">
-              <p className="text-indigo-200">Produits disponibles :</p>
+              <p className="text-gray-600">Produits disponibles :</p>
               <div className="grid md:grid-cols-2 gap-4 text-left">
                 <Link
                   href="/produits/enseigne-led-premium"
-                  className="block p-4 bg-indigo-800 rounded-lg hover:bg-indigo-700 transition-colors"
+                  className="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
                 >
-                  <h3 className="font-bold text-teal-300">Enseigne LED Premium</h3>
-                  <p className="text-sm text-indigo-300">Éclairage LED haute qualité</p>
+                  <h3 className="font-bold text-blue-700">Enseigne LED Premium</h3>
+                  <p className="text-sm text-gray-600">Éclairage LED haute qualité</p>
                 </Link>
                 <Link
                   href="/produits/lettres-decoupees-pvc"
-                  className="block p-4 bg-indigo-800 rounded-lg hover:bg-indigo-700 transition-colors"
+                  className="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
                 >
-                  <h3 className="font-bold text-teal-300">Lettres Découpées PVC</h3>
-                  <p className="text-sm text-indigo-300">Solution économique et durable</p>
+                  <h3 className="font-bold text-blue-700">Lettres Découpées PVC</h3>
+                  <p className="text-sm text-gray-600">Solution économique et durable</p>
                 </Link>
                 <Link
                   href="/produits/panneau-dibond"
-                  className="block p-4 bg-indigo-800 rounded-lg hover:bg-indigo-700 transition-colors"
+                  className="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
                 >
-                  <h3 className="font-bold text-teal-300">Panneau Dibond</h3>
-                  <p className="text-sm text-indigo-300">Composite aluminium résistant</p>
+                  <h3 className="font-bold text-blue-700">Panneau Dibond</h3>
+                  <p className="text-sm text-gray-600">Composite aluminium résistant</p>
                 </Link>
                 <Link
                   href="/produits/totem-lumineux"
-                  className="block p-4 bg-indigo-800 rounded-lg hover:bg-indigo-700 transition-colors"
+                  className="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
                 >
-                  <h3 className="font-bold text-teal-300">Totem Lumineux</h3>
-                  <p className="text-sm text-indigo-300">Signalétique de grande visibilité</p>
+                  <h3 className="font-bold text-blue-700">Totem Lumineux</h3>
+                  <p className="text-sm text-gray-600">Signalétique de grande visibilité</p>
                 </Link>
               </div>
             </div>
             <div className="mt-8">
               <Link href="/produits">
-                <Button className="bg-teal-600 hover:bg-teal-500">
+                <Button className="bg-blue-600 hover:bg-blue-500 text-white">
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Voir tous les produits
                 </Button>
@@ -267,17 +267,17 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
   const getBadgeColor = (badge) => {
     switch (badge) {
       case "Bestseller":
-        return "bg-teal-600"
+        return "bg-blue-600"
       case "Nouveau":
         return "bg-green-600"
       case "Premium":
-        return "bg-pink-600"
+        return "bg-purple-600"
       case "Pro":
-        return "bg-amber-600"
+        return "bg-yellow-600"
       case "Économique":
-        return "bg-indigo-600"
+        return "bg-blue-800"
       case "Résistant":
-        return "bg-orange-600"
+        return "bg-gray-800"
       default:
         return "bg-gray-600"
     }
@@ -288,16 +288,16 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
       <Header />
       <div className="pt-20 px-4 py-12">
         <div className="max-w-7xl mx-auto">
-          <nav className="mb-8 text-sm text-indigo-700">
-            <Link href="/" className="hover:text-teal-600">
+          <nav className="mb-8 text-sm text-blue-700">
+            <Link href="/" className="hover:text-blue-800">
               Accueil
             </Link>
             <span className="mx-2">/</span>
-            <Link href="/produits" className="hover:text-teal-600">
+            <Link href="/produits" className="hover:text-blue-800">
               Produits
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-indigo-900 font-medium">{product.name}</span>
+            <span className="text-blue-900 font-medium">{product.name}</span>
           </nav>
           <div className="grid lg:grid-cols-2 gap-12">
             <div>
@@ -326,7 +326,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                     key={index}
                     onClick={() => setCurrentImage(index)}
                     className={`border-2 rounded-lg overflow-hidden transition-colors ${
-                      currentImage === index ? "border-teal-500" : "border-gray-200 hover:border-teal-300"
+                      currentImage === index ? "border-blue-500" : "border-gray-200 hover:border-blue-300"
                     }`}
                   >
                     <img
@@ -340,18 +340,18 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
             </div>
             <div>
               <div className="mb-4">
-                <Badge className={`mb-2 ${getBadgeColor(product.badge)}`}>{product.badge}</Badge>
+                <Badge className={`mb-2 ${getBadgeColor(product.badge)} text-white`}>{product.badge}</Badge>
                 <h1 className="text-3xl font-bold mb-2 text-gray-900">{product.name}</h1>
                 <div className="flex items-center gap-2 mb-4">
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className={`h-4 w-4 ${i < Math.floor(product.rating) ? "fill-teal-500 text-teal-500" : "text-gray-300"}`}
+                        className={`h-4 w-4 ${i < Math.floor(product.rating) ? "fill-blue-500 text-blue-500" : "text-gray-300"}`}
                       />
                     ))}
                   </div>
-                  <span className="text-indigo-700">({product.reviewCount} avis)</span>
+                  <span className="text-blue-700">({product.reviewCount} avis)</span>
                 </div>
               </div>
               <p className="text-gray-600 mb-6">{product.description}</p>
@@ -359,7 +359,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                 <div className="mb-6">
                   <h3 className="text-lg font-bold mb-3 text-gray-800">Matériau / Options</h3>
                   <Select value={selectedMaterial} onValueChange={setSelectedMaterial}>
-                    <SelectTrigger className="bg-white border-gray-300 text-gray-900 hover:border-teal-500">
+                    <SelectTrigger className="bg-white border-gray-300 text-gray-900 hover:border-blue-500">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="bg-white border-gray-300">
@@ -373,10 +373,10 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                 </div>
               )}
               <div className="mb-6">
-                <div className="text-3xl font-bold text-teal-600 mb-2">
-                  {selectedMaterialData?.price || product.basePrice}€ <span className="text-lg text-indigo-700">HT</span>
+                <div className="text-3xl font-bold text-blue-600 mb-2">
+                  {selectedMaterialData?.price || product.basePrice}€ <span className="text-lg text-gray-600">HT</span>
                 </div>
-                <p className="text-indigo-700">Prix pour lettres de 20cm de hauteur</p>
+                <p className="text-gray-600">Prix pour lettres de 20cm de hauteur</p>
               </div>
               <div className="flex items-center gap-4 mb-6">
                 <div className="flex items-center border border-gray-300 rounded-lg">
@@ -395,7 +395,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   </button>
                 </div>
                 <Button
-                  className="flex-1 bg-teal-600 hover:bg-teal-500"
+                  className="flex-1 bg-blue-600 hover:bg-blue-500 text-white"
                   onClick={() =>
                     addToCart({
                       id: `product-${product.id}-${selectedMaterial}`,
@@ -414,22 +414,22 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               </div>
               <div className="grid grid-cols-3 gap-4 mb-6">
                 <div className="text-center">
-                  <Truck className="h-8 w-8 text-teal-500 mx-auto mb-2" />
+                  <Truck className="h-8 w-8 text-blue-500 mx-auto mb-2" />
                   <p className="text-sm text-gray-600">Livraison 5-7j</p>
                 </div>
                 <div className="text-center">
-                  <Shield className="h-8 w-8 text-teal-500 mx-auto mb-2" />
+                  <Shield className="h-8 w-8 text-blue-500 mx-auto mb-2" />
                   <p className="text-sm text-gray-600">Garantie 2 ans</p>
                 </div>
                 <div className="text-center">
-                  <Zap className="h-8 w-8 text-teal-500 mx-auto mb-2" />
+                  <Zap className="h-8 w-8 text-blue-500 mx-auto mb-2" />
                   <p className="text-sm text-gray-600">Qualité pro</p>
                 </div>
               </div>
               <Link href="/contact">
                 <Button
                   variant="outline"
-                  className="w-full border-teal-600 text-teal-600 hover:bg-teal-50 hover:text-teal-700"
+                  className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 hover:text-blue-700"
                 >
                   Demander un devis personnalisé
                 </Button>
@@ -438,14 +438,14 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           </div>
           <div className="mt-16">
             <Tabs defaultValue="description" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 bg-indigo-100">
-                <TabsTrigger value="description" className="text-indigo-800 data-[state=active]:bg-teal-500 data-[state=active]:text-white">
+              <TabsList className="grid w-full grid-cols-3 bg-blue-50">
+                <TabsTrigger value="description" className="text-blue-800 data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                   Description
                 </TabsTrigger>
-                <TabsTrigger value="specifications" className="text-indigo-800 data-[state=active]:bg-teal-500 data-[state=active]:text-white">
+                <TabsTrigger value="specifications" className="text-blue-800 data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                   Spécifications
                 </TabsTrigger>
-                <TabsTrigger value="delivery" className="text-indigo-800 data-[state=active]:bg-teal-500 data-[state=active]:text-white">
+                <TabsTrigger value="delivery" className="text-blue-800 data-[state=active]:bg-blue-600 data-[state=active]:text-white">
                   Livraison
                 </TabsTrigger>
               </TabsList>
@@ -515,7 +515,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           </div>
           <div className="mt-12">
             <Link href="/produits">
-              <Button variant="outline" className="border-teal-600 text-teal-600 hover:bg-teal-50">
+              <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Retour aux produits
               </Button>

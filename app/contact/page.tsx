@@ -28,25 +28,25 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-white text-gray-900">
       <Header />
 
       <div className="pt-20 px-4 py-12">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4">Contactez-nous</h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-black to-blue-500 bg-clip-text text-transparent">Contactez-nous</h1>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Une question ? Un projet ? Notre équipe est là pour vous accompagner
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <Card className="bg-gray-800 border-gray-700">
+            <Card className="bg-white border-gray-200 shadow-sm">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Send className="h-5 w-5 text-primary" />
+                <CardTitle className="flex items-center gap-2 text-gray-900">
+                  <Send className="h-5 w-5 text-blue-600" />
                   Envoyez-nous un message
                 </CardTitle>
               </CardHeader>
@@ -54,19 +54,19 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="name" className="text-white mb-2 block">
+                      <Label htmlFor="name" className="text-gray-700 mb-2 block">
                         Nom *
                       </Label>
                       <Input
                         id="name"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="bg-gray-700 border-gray-600 text-white"
+                        className="bg-white border-gray-300 text-gray-900"
                         required
                       />
                     </div>
                     <div>
-                      <Label htmlFor="email" className="text-white mb-2 block">
+                      <Label htmlFor="email" className="text-gray-700 mb-2 block">
                         Email *
                       </Label>
                       <Input
@@ -74,7 +74,7 @@ export default function ContactPage() {
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="bg-gray-700 border-gray-600 text-white"
+                        className="bg-white border-gray-300 text-gray-900"
                         required
                       />
                     </div>
@@ -82,44 +82,44 @@ export default function ContactPage() {
 
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="phone" className="text-white mb-2 block">
+                      <Label htmlFor="phone" className="text-gray-700 mb-2 block">
                         Téléphone
                       </Label>
                       <Input
                         id="phone"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="bg-gray-700 border-gray-600 text-white"
+                        className="bg-white border-gray-300 text-gray-900"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="subject" className="text-white mb-2 block">
+                      <Label htmlFor="subject" className="text-gray-700 mb-2 block">
                         Sujet *
                       </Label>
                       <Input
                         id="subject"
                         value={formData.subject}
                         onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                        className="bg-gray-700 border-gray-600 text-white"
+                        className="bg-white border-gray-300 text-gray-900"
                         required
                       />
                     </div>
                   </div>
 
                   <div>
-                    <Label htmlFor="message" className="text-white mb-2 block">
+                    <Label htmlFor="message" className="text-gray-700 mb-2 block">
                       Message *
                     </Label>
                     <Textarea
                       id="message"
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="bg-gray-700 border-gray-600 text-white min-h-32"
+                      className="bg-white border-gray-300 text-gray-900 min-h-32"
                       required
                     />
                   </div>
 
-                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
+                  <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
                     <Send className="mr-2 h-4 w-4" />
                     Envoyer le message
                   </Button>
@@ -130,60 +130,60 @@ export default function ContactPage() {
             {/* Contact Info & Map */}
             <div className="space-y-8">
               {/* Contact Info */}
-              <Card className="bg-gray-800 border-gray-700">
+              <Card className="bg-white border-gray-200 shadow-sm">
                 <CardHeader>
-                  <CardTitle>Informations de contact</CardTitle>
+                  <CardTitle className="text-gray-900">Informations de contact</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="flex items-start space-x-4">
-                    <Phone className="h-6 w-6 text-primary mt-1" />
+                    <Phone className="h-6 w-6 text-blue-600 mt-1" />
                     <div>
-                      <h3 className="font-bold mb-1">Téléphone</h3>
-                      <p className="text-gray-400">01 23 45 67 89</p>
-                      <p className="text-sm text-gray-500">Lun-Ven: 8h-18h</p>
+                      <h3 className="font-bold mb-1 text-gray-900">Téléphone</h3>
+                      <p className="text-gray-600"></p>
+                      <p className="text-sm text-gray-500"></p>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-4">
-                    <Mail className="h-6 w-6 text-primary mt-1" />
+                    <Mail className="h-6 w-6 text-blue-600 mt-1" />
                     <div>
-                      <h3 className="font-bold mb-1">Email</h3>
-                      <p className="text-gray-400">contact@enseigne42.fr</p>
+                      <h3 className="font-bold mb-1 text-gray-900">Email</h3>
+                      <p className="text-gray-600"></p>
                       <p className="text-sm text-gray-500">Réponse sous 24h</p>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-4">
-                    <MapPin className="h-6 w-6 text-primary mt-1" />
+                    <MapPin className="h-6 w-6 text-blue-600 mt-1" />
                     <div>
-                      <h3 className="font-bold mb-1">Adresse</h3>
-                      <p className="text-gray-400">123 Rue de l'Industrie</p>
-                      <p className="text-gray-400">75001 Paris, France</p>
+                      <h3 className="font-bold mb-1 text-gray-900">Adresse</h3>
+                      <p className="text-gray-600"></p>
+                      <p className="text-gray-600"></p>
                     </div>
                   </div>
 
                   <div className="flex items-start space-x-4">
-                    <Clock className="h-6 w-6 text-primary mt-1" />
+                    <Clock className="h-6 w-6 text-blue-600 mt-1" />
                     <div>
-                      <h3 className="font-bold mb-1">Horaires d'ouverture</h3>
-                      <p className="text-gray-400">Lundi - Vendredi: 8h00 - 18h00</p>
-                      <p className="text-gray-400">Samedi: 9h00 - 12h00</p>
-                      <p className="text-gray-400">Dimanche: Fermé</p>
+                      <h3 className="font-bold mb-1 text-gray-900">Horaires d'ouverture</h3>
+                      <p className="text-gray-600"></p>
+                      <p className="text-gray-600"></p>
+                      <p className="text-gray-600"></p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
               {/* Map */}
-              <Card className="bg-gray-800 border-gray-700">
+              <Card className="bg-white border-gray-200 shadow-sm">
                 <CardHeader>
-                  <CardTitle>Notre atelier</CardTitle>
+                  <CardTitle className="text-gray-900">Notre atelier</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="w-full h-64 bg-gray-700 rounded-lg flex items-center justify-center">
+                  <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
                     <div className="text-center">
-                      <MapPin className="h-12 w-12 text-primary mx-auto mb-2" />
-                      <p className="text-gray-400">Carte Google Maps</p>
+                      <MapPin className="h-12 w-12 text-blue-600 mx-auto mb-2" />
+                      <p className="text-gray-600">Carte Google Maps</p>
                       <p className="text-sm text-gray-500">123 Rue de l'Industrie, Paris</p>
                     </div>
                   </div>
@@ -201,7 +201,7 @@ export default function ContactPage() {
                 </a>
                 <a
                   href="mailto:contact@enseigne42.fr"
-                  className="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white p-4 rounded-lg transition-colors"
+                  className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-lg transition-colors"
                 >
                   <Mail className="h-5 w-5" />
                   Email
@@ -212,37 +212,37 @@ export default function ContactPage() {
 
           {/* FAQ Section */}
           <div className="mt-16">
-            <h2 className="text-3xl font-bold text-center mb-8">Questions fréquentes</h2>
+            <h2 className="text-3xl font-bold text-center mb-8 text-gray-900">Questions fréquentes</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <Card className="bg-gray-800 border-gray-700">
+              <Card className="bg-white border-gray-200 shadow-sm">
                 <CardContent className="p-6">
-                  <h3 className="font-bold mb-2">Quel est le délai de fabrication ?</h3>
-                  <p className="text-gray-400">
+                  <h3 className="font-bold mb-2 text-gray-900">Quel est le délai de fabrication ?</h3>
+                  <p className="text-gray-600">
                     Nos enseignes sont fabriquées sous 5 à 7 jours ouvrés selon la complexité du projet.
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="bg-gray-800 border-gray-700">
+              <Card className="bg-white border-gray-200 shadow-sm">
                 <CardContent className="p-6">
-                  <h3 className="font-bold mb-2">Proposez-vous l'installation ?</h3>
-                  <p className="text-gray-400">
+                  <h3 className="font-bold mb-2 text-gray-900">Proposez-vous l'installation ?</h3>
+                  <p className="text-gray-600">
                     Oui, nous proposons un service d'installation par nos techniciens qualifiés sur toute la France.
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="bg-gray-800 border-gray-700">
+              <Card className="bg-white border-gray-200 shadow-sm">
                 <CardContent className="p-6">
-                  <h3 className="font-bold mb-2">Quelle est la garantie ?</h3>
-                  <p className="text-gray-400">Toutes nos enseignes sont garanties 2 ans pièces et main d'œuvre.</p>
+                  <h3 className="font-bold mb-2 text-gray-900">Quelle est la garantie ?</h3>
+                  <p className="text-gray-600">Toutes nos enseignes sont garanties 2 ans pièces et main d'œuvre.</p>
                 </CardContent>
               </Card>
 
-              <Card className="bg-gray-800 border-gray-700">
+              <Card className="bg-white border-gray-200 shadow-sm">
                 <CardContent className="p-6">
-                  <h3 className="font-bold mb-2">Puis-je avoir un devis gratuit ?</h3>
-                  <p className="text-gray-400">
+                  <h3 className="font-bold mb-2 text-gray-900">Puis-je avoir un devis gratuit ?</h3>
+                  <p className="text-gray-600">
                     Bien sûr ! Utilisez notre configurateur en ligne ou contactez-nous directement.
                   </p>
                 </CardContent>

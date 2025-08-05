@@ -93,40 +93,6 @@ export default function ProductsPage() {
       badge: "Pro",
       slug: "totem-lumineux",
     },
-    {
-      id: 7,
-      name: "Enseigne LED Étanche",
-      category: "led",
-      price: 359,
-      image: "/placeholder.svg?height=400&width=600",
-      description:
-        "Enseigne LED étanche IP67 pour utilisation extérieure intensive",
-      rating: 4.9,
-      badge: "Étanche",
-      slug: "enseigne-led-etanche",
-    },
-    {
-      id: 8,
-      name: "Lettres Dibond Brossé",
-      category: "lettres",
-      price: 129,
-      image: "/placeholder.svg?height=400&width=600",
-      description: "Lettres en Dibond avec finition brossée, aspect métallique",
-      rating: 4.5,
-      badge: "Design",
-      slug: "lettres-dibond-brosse",
-    },
-    {
-      id: 9,
-      name: "Panneau Acrylique",
-      category: "panneaux",
-      price: 219,
-      image: "/placeholder.svg?height=400&width=600",
-      description: "Panneau en acrylique transparent avec gravure laser",
-      rating: 4.8,
-      badge: "Élégant",
-      slug: "panneau-acrylique",
-    },
   ];
 
   const categories = [
@@ -328,7 +294,7 @@ export default function ProductsPage() {
                   Configurateur en ligne
                 </Button>
               </Link>
-              <Link href="/contact">
+              <Link href="/demande-devis">
                 <Button
                   variant="outline"
                   className="border-blue-600 text-blue-600 hover:bg-blue-50 bg-white px-8 py-3"
@@ -345,10 +311,10 @@ export default function ProductsPage() {
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Lightbulb className="h-8 w-8 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold mb-2">Fabrication Française</h3>
+              <h3 className="text-xl font-bold mb-2">Fabrication Marocaine</h3>
               <p className="text-gray-600">
-                Tous nos produits sont fabriqués dans nos ateliers en France
-                avec des matériaux de qualité
+                Tous nos produits sont fabriqués dans nos ateliers en Maroc avec
+                des matériaux de qualité
               </p>
             </div>
             <div className="text-center bg-white p-6 rounded-lg border border-gray-200 shadow-sm">

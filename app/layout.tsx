@@ -1,13 +1,12 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
-import { CartProvider } from "./context/CartContext"
-import { lazy, Suspense } from "react"
-import Header from "./components/Header" 
-import Footer from "./components/Footer" 
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { CartProvider } from "./context/CartContext";
+import { lazy, Suspense } from "react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "MJ PUB - Enseignes Lumineuses & Signalétique sur Mesure",
@@ -58,23 +57,25 @@ export const metadata: Metadata = {
       "Spécialiste de la fabrication et installation d'enseignes LED, lettres découpées et panneaux personnalisés en France. Devis gratuit et rapide.",
     images: ["/placeholder.svg?height=630&width=1200&text=Enseigne42 Twitter Image"],
   },
-}
+};
 
-const LazyCartSidebar = lazy(() => import("./components/CartSidebar"))
-const LazyScrollToTopButton = lazy(() => import("./components/ScrollToTopButton"))
+const LazyCartSidebar = lazy(() => import("./components/CartSidebar"));
+const LazyScrollToTopButton = lazy(() => import("./components/ScrollToTopButton"));
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="fr">
+    <html lang="fr" className="">
+      {/* ✅ Évite tout contenu dynamique ici */}
       <body className={inter.className}>
         <CartProvider>
-          <Header /> {/* Place Header inside CartProvider */}
+          <Header />
           {children}
-          <Footer /> {/* Place Footer inside CartProvider */}
+          
+
           <Suspense fallback={null}>
             <LazyCartSidebar />
           </Suspense>
@@ -84,5 +85,5 @@ export default function RootLayout({
         </CartProvider>
       </body>
     </html>
-  )
+  );
 }
