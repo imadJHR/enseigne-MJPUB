@@ -1,15 +1,13 @@
-"use client"
-
-import Header from "../components/Header"
-import Footer from "../components/Footer"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Slider } from "@/components/ui/slider"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Input } from "@/components/ui/input"
-import { useState, useMemo } from "react"
+"use client";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { useState, useMemo } from "react";
 import {
   Ruler,
   Palette,
@@ -22,35 +20,56 @@ import {
   Lightbulb,
   Paintbrush,
   HardHat,
-} from "lucide-react"
-import Image from "next/image" // Keep Image import
-import img1 from "@/public/decoupes.jpg" // Keep img1 import
-import img2 from "@/public/lumineuses.jpg" // Keep img2 import
-import { useCart } from "../context/CartContext" // Import useCart
+} from "lucide-react";
+import Image from "next/image";
+import img1 from "@/public/decoupes.jpg";
+import img2 from "@/public/lumineuses.jpg";
+import { useCart } from "../context/CartContext";
+import Footer from "../components/Footer";
+
+type SignStyle = "cut-out" | "lighted";
+type Material = "plexiglas" | "pvc" | "dibond" | "aluminium";
+type Thickness = "3mm" | "5mm" | "10mm" | "15mm" | "20mm";
+type FixationType = "murale" | "suspendue" | "sur-pied" | "entretoises";
+type LedColor = "blanc-froid" | "blanc-chaud" | "rouge" | "bleu" | "vert" | "rgb";
+
+interface FontOption {
+  value: string;
+  label: string;
+}
+
+interface FixationOption {
+  value: FixationType;
+  label: string;
+}
+
+interface Options {
+  installationKit: boolean;
+  dimmer: boolean;
+  customDesign: boolean;
+}
 
 export default function ConfigurateurPage() {
-  const { addToCart } = useCart() // Get addToCart from useCart hook
-
-  const [signText, setSignText] = useState("Votre Enseigne")
-  const [signStyle, setSignStyle] = useState<"cut-out" | "lighted">("lighted")
-  const [font, setFont] = useState("Arial") // Default font
-  const [height, setHeight] = useState(30) // Height in cm
-  const [material, setMaterial] = useState("plexiglas")
-  const [thickness, setThickness] = useState("5mm") // New state for thickness
-  const [textColor, setTextColor] = useState("#000000") // Default black
-  const [backgroundColor, setBackgroundColor] = useState("#FFFFFF") // Default white
-  const [ledColor, setLedColor] = useState("blanc-froid") // For lighted signs
-  const [intensity, setIntensity] = useState(50) // 0-100%
-  const [neonEffect, setNeonEffect] = useState(false)
-  const [fixationType, setFixationType] = useState("murale") // New state for fixation
-  const [options, setOptions] = useState({
+  const { addToCart } = useCart();
+  const [signText, setSignText] = useState("Votre Enseigne");
+  const [signStyle, setSignStyle] = useState<SignStyle>("lighted");
+  const [font, setFont] = useState("Arial, sans-serif");
+  const [height, setHeight] = useState(30);
+  const [material, setMaterial] = useState<Material>("plexiglas");
+  const [thickness, setThickness] = useState<Thickness>("5mm");
+  const [textColor, setTextColor] = useState("#000000");
+  const [backgroundColor, setBackgroundColor] = useState("#FFFFFF");
+  const [ledColor, setLedColor] = useState<LedColor>("blanc-froid");
+  const [intensity, setIntensity] = useState(50);
+  const [neonEffect, setNeonEffect] = useState(false);
+  const [fixationType, setFixationType] = useState<FixationType>("murale");
+  const [options, setOptions] = useState<Options>({
     installationKit: false,
     dimmer: false,
     customDesign: false,
-  })
+  });
 
-  // Dummy data for options
-  const fontOptions = [
+  const fontOptions: FontOption[] = [
     { value: "Arial, sans-serif", label: "Arial" },
     { value: "Verdana, sans-serif", label: "Verdana" },
     { value: "Georgia, serif", label: "Georgia" },
@@ -65,84 +84,78 @@ export default function ConfigurateurPage() {
     { value: "Dancing Script, cursive", label: "Dancing Script" },
     { value: "Oswald, sans-serif", label: "Oswald (Strong)" },
     { value: "Lato, sans-serif", label: "Lato (Clean)" },
-  ]
+  ];
 
-  const thicknessOptions = ["3mm", "5mm", "10mm", "15mm", "20mm"]
-  const fixationOptions = [
+  const thicknessOptions: Thickness[] = ["3mm", "5mm", "10mm", "15mm", "20mm"];
+
+  const fixationOptions: FixationOption[] = [
     { value: "murale", label: "Murale (vis et chevilles)" },
     { value: "suspendue", label: "Suspendue (câbles)" },
     { value: "sur-pied", label: "Sur Pied (socle)" },
     { value: "entretoises", label: "Entretoises (déport mural)" },
-  ]
+  ];
 
-  // Base prices and multipliers (simplified for demo)
-  const basePrices: { [key: string]: number } = {
-    "cut-out": 0.8, // per cm²
-    lighted: 50, // per m²
-  }
+  const basePrices = {
+    "cut-out": 0.8,
+    "lighted": 50,
+  };
 
-  const materialMultipliers: { [key: string]: number } = {
+  const materialMultipliers: Record<Material, number> = {
     plexiglas: 1.2,
     pvc: 0.8,
     dibond: 1.0,
     aluminium: 1.5,
-  }
+  };
 
-  const thicknessMultipliers: { [key: string]: number } = {
+  const thicknessMultipliers: Record<Thickness, number> = {
     "3mm": 0.9,
     "5mm": 1.0,
     "10mm": 1.2,
     "15mm": 1.4,
     "20mm": 1.6,
-  }
+  };
 
   const optionCosts = {
     installationKit: 50,
     dimmer: 30,
     customDesign: 100,
-    neonEffect: 75, // Additional cost for neon effect
-  }
+    neonEffect: 75,
+  };
 
-  // Calculate estimated width based on text length and height (very rough estimate)
   const estimatedWidth = useMemo(() => {
-    const charWidthFactor = 0.6 // Average character width relative to height
-    return Math.max(10, signText.length * height * charWidthFactor)
-  }, [signText, height])
+    const charWidthFactor = 0.6;
+    return Math.max(10, signText.length * height * charWidthFactor);
+  }, [signText, height]);
 
-  const calculatePrice = () => {
-    let price = 0
-    const surfaceAreaCm2 = estimatedWidth * height
-    const surfaceAreaM2 = surfaceAreaCm2 / 10000 // Convert cm² to m²
+  const calculatePrice = (): string => {
+    let price = 0;
+    const surfaceAreaCm2 = estimatedWidth * height;
+    const surfaceAreaM2 = surfaceAreaCm2 / 10000;
 
     if (signStyle === "cut-out") {
-      price = basePrices[signStyle] * surfaceAreaCm2 * materialMultipliers[material] * thicknessMultipliers[thickness]
+      price = basePrices[signStyle] * surfaceAreaCm2 * materialMultipliers[material] * thicknessMultipliers[thickness];
     } else {
-      // lighted
-      price = basePrices[signStyle] * surfaceAreaM2 * materialMultipliers[material] * thicknessMultipliers[thickness]
-      // Add lighting specific costs
-      price += (intensity / 100) * 50 // Intensity cost
-      if (neonEffect) price += optionCosts.neonEffect
+      price = basePrices[signStyle] * surfaceAreaM2 * materialMultipliers[material] * thicknessMultipliers[thickness];
+      price += (intensity / 100) * 50;
+      if (neonEffect) price += optionCosts.neonEffect;
     }
 
-    if (options.installationKit) price += optionCosts.installationKit
-    if (options.dimmer) price += optionCosts.dimmer
-    if (options.customDesign) price += optionCosts.customDesign
+    if (options.installationKit) price += optionCosts.installationKit;
+    if (options.dimmer) price += optionCosts.dimmer;
+    if (options.customDesign) price += optionCosts.customDesign;
 
-    return price > 0 ? price.toFixed(2) : "0.00"
-  }
-
-  const previewImage = signStyle === "cut-out" ? img1 : img2 // Use imported images
-  const imageAltText = signStyle === "cut-out" ? "Lettres découpées" : "Lettres lumineuses"
+    return price > 0 ? price.toFixed(2) : "0.00";
+  };
 
   const handleAddToCart = () => {
     const configuredItem = {
-      id: Date.now(), // Unique ID for the configured item
-      name: `Enseigne personnalisée: "${signText}"`,
+      id: Date.now().toString(),
+      name: `Enseigne personnalisée: '${signText}'`,
       price: Number.parseFloat(calculatePrice()),
       quantity: 1,
-      image: signStyle === "cut-out" ? "/decoupes.jpg" : "/lumineuses.jpg", // Use public path for image
+      image: signStyle === "cut-out" ? "/decoupes.jpg" : "/lumineuses.jpg",
       material: `${material} (${thickness})`,
-      type: "product" as const, // Explicitly cast to "product"
+      type: "product" as const,
       details: {
         font: fontOptions.find((f) => f.value === font)?.label || font,
         height: `${height}cm`,
@@ -156,36 +169,34 @@ export default function ConfigurateurPage() {
         }),
         fixationType: fixationOptions.find((f) => f.value === fixationType)?.label || fixationType,
         additionalOptions: Object.keys(options)
-          .filter((key) => options[key as keyof typeof options])
+          .filter((key) => options[key as keyof Options])
           .map((key) => key.replace(/([A-Z])/g, " $1").toLowerCase())
           .join(", "),
       },
-    }
-    addToCart(configuredItem)
-  }
+    };
+    addToCart(configuredItem);
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-black">
-      <Header />
-
       <div className="pt-20 px-4 py-12 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-black to-blue-500 bg-clip-text text-transparent">Configurez Votre Enseigne</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-black to-blue-500 bg-clip-text text-transparent">
+              Configurez Votre Enseigne
+            </h1>
             <p className="text-xl text-gray-700 max-w-2xl mx-auto">
               Créez votre enseigne lumineuse ou signalétique sur mesure et obtenez un devis instantané.
             </p>
           </div>
-
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Configuration Options */}
             <div className="lg:col-span-2 bg-white p-8 rounded-lg shadow-lg border border-gray-200 space-y-8">
               <h2 className="text-2xl font-bold mb-6 text-black">Options de Configuration</h2>
-
               {/* Sign Text Input */}
               <div>
                 <Label htmlFor="signText" className="text-lg font-medium flex items-center mb-3 text-gray-800">
-                  <TextCursorInput className="mr-2 h-5 w-5 text-blue-600" /> Texte de l'Enseigne
+                  <TextCursorInput className="mr-2 h-5 w-5 text-blue-600" /> Texte de l&apos;Enseigne
                 </Label>
                 <Input
                   id="signText"
@@ -193,14 +204,13 @@ export default function ConfigurateurPage() {
                   placeholder="Votre texte ici..."
                   value={signText}
                   onChange={(e) => setSignText(e.target.value)}
-                  maxLength={50} // Character limit
+                  maxLength={50}
                   className="w-full bg-gray-50 border-gray-300 text-black focus:border-blue-500 focus:ring-blue-500"
                 />
                 <p className="text-sm text-gray-500 mt-1">
                   Max 50 caractères. Caractères restants: {50 - signText.length}
                 </p>
               </div>
-
               {/* Font Selection */}
               <div>
                 <Label htmlFor="font" className="text-lg font-medium flex items-center mb-3 text-gray-800">
@@ -222,7 +232,6 @@ export default function ConfigurateurPage() {
                   Pour des polices Google Fonts, elles doivent être importées globalement (ex: dans globals.css).
                 </p>
               </div>
-
               {/* Text Size (Height) */}
               <div>
                 <Label htmlFor="height" className="text-lg font-medium flex items-center mb-3 text-gray-800">
@@ -242,7 +251,6 @@ export default function ConfigurateurPage() {
                 />
                 <p className="text-sm text-gray-500 mt-1">Largeur estimée: {estimatedWidth.toFixed(0)} cm</p>
               </div>
-
               {/* Style Selection (Cut-out vs Lighted) */}
               <div>
                 <Label className="text-lg font-medium flex items-center mb-3 text-gray-800">
@@ -257,7 +265,7 @@ export default function ConfigurateurPage() {
                   >
                     <CardContent className="p-4 text-center flex flex-col items-center">
                       <Image
-                        src={img1 || "/placeholder.svg"}
+                        src={img1}
                         alt="Lettres découpées"
                         className="w-32 h-32 object-contain mb-2"
                         width={128}
@@ -274,7 +282,6 @@ export default function ConfigurateurPage() {
                       />
                     </CardContent>
                   </Card>
-
                   <Card
                     className={`cursor-pointer border-2 ${
                       signStyle === "lighted" ? "border-blue-600" : "border-gray-300"
@@ -283,7 +290,7 @@ export default function ConfigurateurPage() {
                   >
                     <CardContent className="p-4 text-center flex flex-col items-center">
                       <Image
-                        src={img2 || "/placeholder.svg"}
+                        src={img2}
                         alt="Lettres lumineuses"
                         className="w-32 h-32 object-contain mb-2"
                         width={128}
@@ -302,14 +309,13 @@ export default function ConfigurateurPage() {
                   </Card>
                 </div>
               </div>
-
               {/* Material & Thickness */}
               <div className="grid sm:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="material" className="text-lg font-medium flex items-center mb-3 text-gray-800">
                     <Type className="mr-2 h-5 w-5 text-blue-600" /> Matériau
                   </Label>
-                  <Select value={material} onValueChange={setMaterial}>
+                  <Select value={material} onValueChange={(value: Material) => setMaterial(value)}>
                     <SelectTrigger className="w-full bg-gray-50 border-gray-300 text-black focus:ring-blue-500">
                       <SelectValue placeholder="Sélectionnez le matériau" />
                     </SelectTrigger>
@@ -325,9 +331,9 @@ export default function ConfigurateurPage() {
                   <Label htmlFor="thickness" className="text-lg font-medium flex items-center mb-3 text-gray-800">
                     <Ruler className="mr-2 h-5 w-5 text-blue-600" /> Épaisseur
                   </Label>
-                  <Select value={thickness} onValueChange={setThickness}>
+                  <Select value={thickness} onValueChange={(value: Thickness) => setThickness(value)}>
                     <SelectTrigger className="w-full bg-gray-50 border-gray-300 text-black focus:ring-blue-500">
-                      <SelectValue placeholder="Sélectionnez l'épaisseur" />
+                      <SelectValue placeholder="Sélectionnez l&apos;épaisseur" />
                     </SelectTrigger>
                     <SelectContent className="bg-white text-black border-gray-300">
                       {thicknessOptions.map((opt) => (
@@ -339,7 +345,6 @@ export default function ConfigurateurPage() {
                   </Select>
                 </div>
               </div>
-
               {/* Text Color & Background Color */}
               <div className="grid sm:grid-cols-2 gap-6">
                 <div>
@@ -369,18 +374,17 @@ export default function ConfigurateurPage() {
                   <p className="text-sm text-gray-500 mt-1">Code Hex: {backgroundColor.toUpperCase()}</p>
                 </div>
               </div>
-
               {/* Lighting Options (Conditional) */}
               {signStyle === "lighted" && (
                 <div className="space-y-6">
                   <h3 className="text-xl font-bold text-black flex items-center">
-                    <Lightbulb className="mr-2 h-5 w-5 text-blue-600" /> Options d'Éclairage
+                    <Lightbulb className="mr-2 h-5 w-5 text-blue-600" /> Options d&apos;Éclairage
                   </h3>
                   <div>
                     <Label htmlFor="ledColor" className="text-lg font-medium flex items-center mb-3 text-gray-800">
                       Couleur de la LED
                     </Label>
-                    <Select value={ledColor} onValueChange={setLedColor}>
+                    <Select value={ledColor} onValueChange={(value: LedColor) => setLedColor(value)}>
                       <SelectTrigger className="w-full bg-gray-50 border-gray-300 text-black focus:ring-blue-500">
                         <SelectValue placeholder="Sélectionnez la couleur" />
                       </SelectTrigger>
@@ -421,13 +425,12 @@ export default function ConfigurateurPage() {
                   </div>
                 </div>
               )}
-
               {/* Fixation */}
               <div>
                 <Label htmlFor="fixationType" className="text-lg font-medium flex items-center mb-3 text-gray-800">
                   <HardHat className="mr-2 h-5 w-5 text-blue-600" /> Type de Fixation
                 </Label>
-                <Select value={fixationType} onValueChange={setFixationType}>
+                <Select value={fixationType} onValueChange={(value: FixationType) => setFixationType(value)}>
                   <SelectTrigger className="w-full bg-gray-50 border-gray-300 text-black focus:ring-blue-500">
                     <SelectValue placeholder="Sélectionnez le type de fixation" />
                   </SelectTrigger>
@@ -443,7 +446,6 @@ export default function ConfigurateurPage() {
                   Des illustrations des méthodes de fixation peuvent être ajoutées ici.
                 </p>
               </div>
-
               {/* General Additional Options */}
               <div>
                 <Label className="text-lg font-medium flex items-center mb-3 text-gray-800">
@@ -458,7 +460,7 @@ export default function ConfigurateurPage() {
                       className="border-gray-400 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
                     />
                     <label htmlFor="installationKit" className="text-gray-700">
-                      Kit d'installation (+{optionCosts.installationKit}MAD)
+                      Kit d&apos;installation (+{optionCosts.installationKit}MAD)
                     </label>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -486,7 +488,6 @@ export default function ConfigurateurPage() {
                 </div>
               </div>
             </div>
-
             {/* Visual Preview and Order Summary */}
             <div>
               <Card className="bg-white border-gray-200 shadow-lg sticky top-24">
@@ -506,10 +507,9 @@ export default function ConfigurateurPage() {
                       style={{
                         fontFamily: font,
                         color: textColor,
-                        fontSize: `${Math.min(4, (height / 30) * 2)}rem`, // Dynamic font size based on height
+                        fontSize: `${Math.min(4, (height / 30) * 2)}rem`,
                         lineHeight: 1,
                         textShadow: signStyle === "lighted" ? `0 0 ${intensity / 10}px ${ledColor}` : "none",
-                        // Basic neon effect simulation
                         ...(neonEffect &&
                           signStyle === "lighted" && {
                             boxShadow: `0 0 10px ${ledColor}, 0 0 20px ${ledColor}, 0 0 30px ${ledColor}`,
@@ -520,7 +520,6 @@ export default function ConfigurateurPage() {
                       {signText || "Votre Enseigne"}
                     </p>
                   </div>
-
                   {/* Summary Details */}
                   <div className="space-y-2 text-gray-800">
                     <div className="flex justify-between text-lg">
@@ -588,31 +587,29 @@ export default function ConfigurateurPage() {
                       <span className="font-semibold">
                         {Object.values(options).some(Boolean)
                           ? Object.keys(options)
-                              .filter((key) => options[key as keyof typeof options])
+                              .filter((key) => options[key as keyof Options])
                               .map((key) => key.replace(/([A-Z])/g, " $1").toLowerCase())
                               .join(", ")
                           : "Aucune"}
                       </span>
                     </div>
                   </div>
-
                   <div className="border-t border-gray-300 pt-4">
                     <div className="flex justify-between text-lg font-bold text-black">
                       <span>Prix Estimé HT:</span>
-                      <span className="text-blue-600 text-2xl">{calculatePrice()}MAD</span>
+                      <span className="text-blue-600 text-2xl">{calculatePrice()} MAD</span>
                     </div>
                     <p className="text-sm text-gray-600 mt-1">
-                      TVA (20%): {(Number.parseFloat(calculatePrice()) * 0.2).toFixed(2)}MAD
+                      TVA (20%): {(Number.parseFloat(calculatePrice()) * 0.2).toFixed(2)} MAD
                     </p>
                     <p className="text-sm font-medium text-black mt-1">
-                      Total TTC: {(Number.parseFloat(calculatePrice()) * 1.2).toFixed(2)}MAD
+                      Total TTC: {(Number.parseFloat(calculatePrice()) * 1.2).toFixed(2)} MAD
                     </p>
                   </div>
-
                   <div className="space-y-3 pt-4">
                     <Button
                       className="w-full bg-blue-600 hover:bg-blue-700 text-white text-lg py-3"
-                      onClick={handleAddToCart} // Attach the new handler
+                      onClick={handleAddToCart}
                     >
                       <ShoppingCart className="mr-2 h-5 w-5" /> Ajouter au panier
                     </Button>
@@ -629,8 +626,7 @@ export default function ConfigurateurPage() {
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
-  )
+  );
 }

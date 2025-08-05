@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -65,8 +64,8 @@ export default function BlogPage() {
                         "/placeholder.svg?height=300&width=400&text=Blog+Image"
                       }
                       alt={post.title}
-                      width={400} 
-                      height={300} 
+                      width={400}
+                      height={300}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
@@ -92,7 +91,7 @@ export default function BlogPage() {
                       </div>
                     </div>
                     <div className="flex items-center text-blue-600 group-hover:text-blue-800 font-medium">
-                      <span>Lire l'article</span>
+                      <span>Lire l&apos;article</span>
                       <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </CardContent>
@@ -122,7 +121,6 @@ export default function BlogPage() {
           )}
         </div>
       </div>
-
       <Footer />
     </div>
   );

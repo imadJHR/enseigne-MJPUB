@@ -1,18 +1,18 @@
-"use client"
-import Link from "next/link"
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react"
-import logo from "@/public/logo.png"
-import Image from "next/image"
+"use client";
+import Link from "next/link";
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import logo from "@/public/logo.png";
+import Image from "next/image";
 
 export default function Footer() {
   const handleLinkClick = () => {
     setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    }, 100)
-  }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 100);
+  };
 
   return (
-    <footer className="bg-gray-9zzz00 text-white py-12">
+    <footer className="bg-gray-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -122,7 +122,7 @@ export default function Footer() {
               <div className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 mt-1 text-indigo-400" />
                 <span className="text-gray-300">
-                  123 Rue de l'Industrie
+                  123 Rue de l&apos;Industrie
                   <br />
                   75001 Paris, France
                 </span>
@@ -130,7 +130,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
         <div className="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">© 2024 Enseigne42. Tous droits réservés.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
@@ -147,5 +146,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

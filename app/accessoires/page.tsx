@@ -27,6 +27,7 @@ export default function AccessoriesPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("name");
+
   const { addToCart } = useCart();
 
   const accessories: Accessory[] = [
@@ -206,7 +207,7 @@ export default function AccessoriesPage() {
       }
     });
 
-  const handleAddToCart = (accessory: Accessory) => {
+  const handleAddToCart = (accessory: Accessory): void => {
     addToCart({
       id: `accessory-${accessory.id}`,
       name: accessory.name,
@@ -305,8 +306,8 @@ export default function AccessoriesPage() {
                   <Image
                     src={accessory.image || "/placeholder.svg"}
                     alt={accessory.name}
-                    width={400} 
-                    height={300} 
+                    width={400}
+                    height={300}
                     className="w-full h-48 object-cover"
                   />
                   {!accessory.inStock && (
@@ -351,7 +352,7 @@ export default function AccessoriesPage() {
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="text-xl font-bold text-blue-600">
-                      {accessory.price}&apos;HT
+                      {accessory.price} MAD HT
                     </div>
                     <Button
                       size="sm"

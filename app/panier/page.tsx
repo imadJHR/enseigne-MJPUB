@@ -81,8 +81,8 @@ export default function CartPage() {
                       <div className="flex gap-4">
                         <Image
                           src={item.image || "/placeholder.svg"}
-                          width={400} 
-                          height={300} 
+                          width={400}
+                          height={300}
                           alt={item.name}
                           className="w-24 h-24 object-cover rounded-lg"
                         />
