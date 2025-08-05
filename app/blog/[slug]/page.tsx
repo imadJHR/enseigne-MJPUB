@@ -7,15 +7,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { blogPosts } from "@/lib/blogPosts";
 
-// Dummy data for blog posts (same as in blog/page.tsx for consistency)
-
-interface PageProps {
-  params: {
-    slug: string;
-  };
+export interface PageParams {
+  slug: string;
 }
 
-export default async function BlogPostPage({ params }: PageProps) {
+export default function BlogPostPage({ params }: { params: PageParams }) {
   const post = blogPosts.find((p) => p.slug === params.slug);
 
   if (!post) {
@@ -37,12 +33,12 @@ export default async function BlogPostPage({ params }: PageProps) {
       </div>
     );
   }
+
   return (
     <div className="min-h-screen bg-white text-gray-900 flex flex-col">
       <Header />
       <main className="pt-20 px-4 py-12 flex-grow">
         <div className="max-w-4xl mx-auto">
-          {/* Bouton retour */}
           <div className="mb-8">
             <Link href="/blog">
               <Button
@@ -55,14 +51,13 @@ export default async function BlogPostPage({ params }: PageProps) {
             </Link>
           </div>
 
-          {/* Article */}
           <article className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
             <Image
               src={post.image}
               alt={post.title}
-              width={400}
-              height={300}
-              className="w-full h-80 object-cover rounded-lg mb-6"
+              width={800}
+              height={450}
+              className="w-full h-auto aspect-video object-cover rounded-lg mb-6"
               priority
             />
             <Badge className="bg-blue-600 text-white mb-4">
@@ -81,12 +76,12 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <span>{post.author}</span>
               </div>
             </div>
-            <div className="prose max-w-none text-gray-700 leading-relaxed">
-              <div dangerouslySetInnerHTML={{ __html: post.content }} />
-            </div>
+            <div 
+              className="prose max-w-none text-gray-700 leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: post.content }} 
+            />
           </article>
 
-          {/* CTA */}
           <div className="mt-12 text-center bg-white rounded-lg p-8 border border-gray-200">
             <h2 className="text-3xl font-bold mb-4 text-gray-900">
               Intéressé par nos solutions ?
