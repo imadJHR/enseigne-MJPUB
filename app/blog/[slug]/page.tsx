@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, Calendar, User } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 // Dummy data for blog posts (same as in blog/page.tsx for consistency)
 export const blogPosts = [
@@ -171,7 +172,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
           {/* Blog Post Content */}
           <article className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
-            <img
+            <Image
               src={post.image || "/placeholder.svg"}
               alt={post.title}
               className="w-full h-80 object-cover rounded-lg mb-6"

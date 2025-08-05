@@ -10,6 +10,7 @@ import Footer from "../components/Footer";
 import { Search, Calendar, User, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { blogPosts } from "../blog/[slug]/page"; 
+import Image from "next/image";
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -58,7 +59,7 @@ export default function BlogPage() {
               >
                 <Card className="bg-white border border-gray-200 hover:border-blue-500 transition-all duration-300 transform hover:scale-[1.02] overflow-hidden h-full shadow-sm hover:shadow-md">
                   <div className="relative h-56">
-                    <img
+                    <Image
                       src={
                         post.image ||
                         "/placeholder.svg?height=300&width=400&text=Blog+Image"

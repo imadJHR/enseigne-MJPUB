@@ -9,6 +9,7 @@ import Header from "../components/Header"
 import Footer from "../components/Footer"
 import { ShoppingCart, Star, Search, Filter } from "lucide-react"
 import { useCart } from "../context/CartContext"
+import Image from "next/image"
 
 export default function AccessoriesPage() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -291,7 +292,7 @@ export default function AccessoriesPage() {
                 className="bg-white border border-gray-200 hover:border-blue-500 transition-all duration-300 transform hover:scale-[1.02] overflow-hidden shadow-sm hover:shadow-md"
               >
                 <div className="relative">
-                  <img
+                  <Image
                     src={accessory.image || "/placeholder.svg"}
                     alt={accessory.name}
                     className="w-full h-48 object-cover"
