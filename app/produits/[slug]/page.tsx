@@ -1,16 +1,31 @@
-"use client"
-import { useState, use } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import Header from "../../components/Header"
-import Footer from "../../components/Footer"
-import { ChevronLeft, ChevronRight, ShoppingCart, Star, Truck, Shield, Zap, ArrowLeft } from "lucide-react"
-import Link from "next/link"
-import { useCart } from "../../context/CartContext"
-import Image from "next/image"
+"use client";
+import { useState, use } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ShoppingCart,
+  Star,
+  Truck,
+  Shield,
+  Zap,
+  ArrowLeft,
+} from "lucide-react";
+import Link from "next/link";
+import { useCart } from "../../context/CartContext";
+import Image from "next/image";
 
 export const productsData = {
   "enseigne-led-premium": {
@@ -30,11 +45,31 @@ export const productsData = {
       "/placeholder.svg?height=600&width=800&text=Enseigne+LED+Premium+4",
     ],
     materials: [
-      { id: "pvc", name: "PVC", price: 299, description: "Économique et résistant" },
-      { id: "dibond", name: "Dibond", price: 449, description: "Haute résistance" },
-      { id: "plexiglas", name: "Plexiglas", price: 599, description: "Finition premium" },
+      {
+        id: "pvc",
+        name: "PVC",
+        price: 299,
+        description: "Économique et résistant",
+      },
+      {
+        id: "dibond",
+        name: "Dibond",
+        price: 449,
+        description: "Haute résistance",
+      },
+      {
+        id: "plexiglas",
+        name: "Plexiglas",
+        price: 599,
+        description: "Finition premium",
+      },
     ],
-    features: ["LEDs haute efficacité", "Durée de vie 50 000h", "Étanche IP65", "Garantie 2 ans"],
+    features: [
+      "LEDs haute efficacité",
+      "Durée de vie 50 000h",
+      "Étanche IP65",
+      "Garantie 2 ans",
+    ],
     specifications: {
       "Température de couleur": "6500K (blanc froid)",
       Consommation: "12W par mètre linéaire",
@@ -60,11 +95,31 @@ export const productsData = {
       "/placeholder.svg?height=600&width=800&text=Lettres+PVC+4",
     ],
     materials: [
-      { id: "pvc-3mm", name: "PVC 3mm", price: 89, description: "Standard, économique" },
-      { id: "pvc-5mm", name: "PVC 5mm", price: 129, description: "Plus résistant" },
-      { id: "pvc-10mm", name: "PVC 10mm", price: 189, description: "Effet relief" },
+      {
+        id: "pvc-3mm",
+        name: "PVC 3mm",
+        price: 89,
+        description: "Standard, économique",
+      },
+      {
+        id: "pvc-5mm",
+        name: "PVC 5mm",
+        price: 129,
+        description: "Plus résistant",
+      },
+      {
+        id: "pvc-10mm",
+        name: "PVC 10mm",
+        price: 189,
+        description: "Effet relief",
+      },
     ],
-    features: ["Découpe laser précise", "Résistant aux UV", "Facile à installer", "Personnalisable"],
+    features: [
+      "Découpe laser précise",
+      "Résistant aux UV",
+      "Facile à installer",
+      "Personnalisable",
+    ],
     specifications: {
       Matériau: "PVC expansé",
       "Épaisseurs disponibles": "3mm, 5mm, 10mm",
@@ -90,11 +145,31 @@ export const productsData = {
       "/placeholder.svg?height=600&width=800&text=Panneau+Dibond+4",
     ],
     materials: [
-      { id: "dibond-3mm", name: "Dibond 3mm", price: 159, description: "Standard professionnel" },
-      { id: "dibond-4mm", name: "Dibond 4mm", price: 199, description: "Renforcé" },
-      { id: "dibond-6mm", name: "Dibond 6mm", price: 259, description: "Ultra résistant" },
+      {
+        id: "dibond-3mm",
+        name: "Dibond 3mm",
+        price: 159,
+        description: "Standard professionnel",
+      },
+      {
+        id: "dibond-4mm",
+        name: "Dibond 4mm",
+        price: 199,
+        description: "Renforcé",
+      },
+      {
+        id: "dibond-6mm",
+        name: "Dibond 6mm",
+        price: 259,
+        description: "Ultra résistant",
+      },
     ],
-    features: ["Composite aluminium", "Impression HD", "Résistant aux intempéries", "Léger et rigide"],
+    features: [
+      "Composite aluminium",
+      "Impression HD",
+      "Résistant aux intempéries",
+      "Léger et rigide",
+    ],
     specifications: {
       Composition: "Aluminium + âme polyéthylène",
       Épaisseurs: "3mm, 4mm, 6mm",
@@ -120,11 +195,31 @@ export const productsData = {
       "/placeholder.svg?height=600&width=800&text=Enseigne+LED+RGB+4",
     ],
     materials: [
-      { id: "pvc-rgb", name: "PVC + RGB", price: 449, description: "Économique avec RGB" },
-      { id: "dibond-rgb", name: "Dibond + RGB", price: 599, description: "Résistant avec RGB" },
-      { id: "plexiglas-rgb", name: "Plexiglas + RGB", price: 749, description: "Premium avec RGB" },
+      {
+        id: "pvc-rgb",
+        name: "PVC + RGB",
+        price: 449,
+        description: "Économique avec RGB",
+      },
+      {
+        id: "dibond-rgb",
+        name: "Dibond + RGB",
+        price: 599,
+        description: "Résistant avec RGB",
+      },
+      {
+        id: "plexiglas-rgb",
+        name: "Plexiglas + RGB",
+        price: 749,
+        description: "Premium avec RGB",
+      },
     ],
-    features: ["LEDs RGB programmables", "Télécommande incluse", "16 millions de couleurs", "Effets dynamiques"],
+    features: [
+      "LEDs RGB programmables",
+      "Télécommande incluse",
+      "16 millions de couleurs",
+      "Effets dynamiques",
+    ],
     specifications: {
       "Température de couleur": "RGB (toutes couleurs)",
       Consommation: "18W par mètre linéaire",
@@ -150,11 +245,31 @@ export const productsData = {
       "/placeholder.svg?height=600&width=800&text=Lettres+Plexiglas+4",
     ],
     materials: [
-      { id: "plexi-5mm", name: "Plexiglas 5mm", price: 199, description: "Standard premium" },
-      { id: "plexi-8mm", name: "Plexiglas 8mm", price: 259, description: "Épaisseur renforcée" },
-      { id: "plexi-10mm", name: "Plexiglas 10mm", price: 319, description: "Ultra premium" },
+      {
+        id: "plexi-5mm",
+        name: "Plexiglas 5mm",
+        price: 199,
+        description: "Standard premium",
+      },
+      {
+        id: "plexi-8mm",
+        name: "Plexiglas 8mm",
+        price: 259,
+        description: "Épaisseur renforcée",
+      },
+      {
+        id: "plexi-10mm",
+        name: "Plexiglas 10mm",
+        price: 319,
+        description: "Ultra premium",
+      },
     ],
-    features: ["Matériau noble", "Finition brillante", "Résistant aux UV", "Découpe laser précise"],
+    features: [
+      "Matériau noble",
+      "Finition brillante",
+      "Résistant aux UV",
+      "Découpe laser précise",
+    ],
     specifications: {
       Matériau: "PMMA (Plexiglas)",
       "Épaisseurs disponibles": "5mm, 8mm, 10mm",
@@ -180,11 +295,31 @@ export const productsData = {
       "/placeholder.svg?height=600&width=800&text=Totem+Lumineux+4",
     ],
     materials: [
-      { id: "totem-150", name: "Totem 150cm", price: 899, description: "Hauteur standard" },
-      { id: "totem-200", name: "Totem 200cm", price: 1199, description: "Hauteur renforcée" },
-      { id: "totem-250", name: "Totem 250cm", price: 1499, description: "Hauteur maximum" },
+      {
+        id: "totem-150",
+        name: "Totem 150cm",
+        price: 899,
+        description: "Hauteur standard",
+      },
+      {
+        id: "totem-200",
+        name: "Totem 200cm",
+        price: 1199,
+        description: "Hauteur renforcée",
+      },
+      {
+        id: "totem-250",
+        name: "Totem 250cm",
+        price: 1499,
+        description: "Hauteur maximum",
+      },
     ],
-    features: ["Structure aluminium", "Double face", "Éclairage LED intégré", "Résistant aux intempéries"],
+    features: [
+      "Structure aluminium",
+      "Double face",
+      "Éclairage LED intégré",
+      "Résistant aux intempéries",
+    ],
     specifications: {
       Structure: "Aluminium anodisé",
       "Hauteurs disponibles": "150cm, 200cm, 250cm",
@@ -193,15 +328,16 @@ export const productsData = {
       Résistance: "Vent 120 km/h",
     },
   },
-}
+};
 
 export default function ProductDetailPage({ params }) {
   const unwrappedParams = use(params);
-  const [currentImage, setCurrentImage] = useState(0)
-  const [quantity, setQuantity] = useState(1)
-  const [selectedMaterial, setSelectedMaterial] = useState("")
-  const { addToCart } = useCart()
-  const product = productsData[unwrappedParams.slug as keyof typeof productsData]
+  const [currentImage, setCurrentImage] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [selectedMaterial, setSelectedMaterial] = useState("");
+  const { addToCart } = useCart();
+  const product =
+    productsData[unwrappedParams.slug as keyof typeof productsData];
 
   if (!product) {
     return (
@@ -210,7 +346,9 @@ export default function ProductDetailPage({ params }) {
         <div className="pt-20 px-4 py-12">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl font-bold mb-4">Produit non trouvé</h1>
-            <p className="text-blue-600 mb-8">Le produit que vous recherchez n'existe pas.</p>
+            <p className="text-blue-600 mb-8">
+              Le produit que vous recherchez n'existe pas.
+            </p>
             <div className="space-y-4">
               <p className="text-gray-600">Produits disponibles :</p>
               <div className="grid md:grid-cols-2 gap-4 text-left">
@@ -218,29 +356,41 @@ export default function ProductDetailPage({ params }) {
                   href="/produits/enseigne-led-premium"
                   className="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
                 >
-                  <h3 className="font-bold text-blue-700">Enseigne LED Premium</h3>
-                  <p className="text-sm text-gray-600">Éclairage LED haute qualité</p>
+                  <h3 className="font-bold text-blue-700">
+                    Enseigne LED Premium
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    Éclairage LED haute qualité
+                  </p>
                 </Link>
                 <Link
                   href="/produits/lettres-decoupees-pvc"
                   className="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
                 >
-                  <h3 className="font-bold text-blue-700">Lettres Découpées PVC</h3>
-                  <p className="text-sm text-gray-600">Solution économique et durable</p>
+                  <h3 className="font-bold text-blue-700">
+                    Lettres Découpées PVC
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    Solution économique et durable
+                  </p>
                 </Link>
                 <Link
                   href="/produits/panneau-dibond"
                   className="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
                 >
                   <h3 className="font-bold text-blue-700">Panneau Dibond</h3>
-                  <p className="text-sm text-gray-600">Composite aluminium résistant</p>
+                  <p className="text-sm text-gray-600">
+                    Composite aluminium résistant
+                  </p>
                 </Link>
                 <Link
                   href="/produits/totem-lumineux"
                   className="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
                 >
                   <h3 className="font-bold text-blue-700">Totem Lumineux</h3>
-                  <p className="text-sm text-gray-600">Signalétique de grande visibilité</p>
+                  <p className="text-sm text-gray-600">
+                    Signalétique de grande visibilité
+                  </p>
                 </Link>
               </div>
             </div>
@@ -256,33 +406,35 @@ export default function ProductDetailPage({ params }) {
         </div>
         <Footer />
       </div>
-    )
+    );
   }
 
   if (!selectedMaterial && product.materials.length > 0) {
-    setSelectedMaterial(product.materials[0].id)
+    setSelectedMaterial(product.materials[0].id);
   }
 
-  const selectedMaterialData = product.materials.find((m) => m.id === selectedMaterial)
+  const selectedMaterialData = product.materials.find(
+    (m) => m.id === selectedMaterial
+  );
 
   const getBadgeColor = (badge) => {
     switch (badge) {
       case "Bestseller":
-        return "bg-blue-600"
+        return "bg-blue-600";
       case "Nouveau":
-        return "bg-green-600"
+        return "bg-green-600";
       case "Premium":
-        return "bg-purple-600"
+        return "bg-purple-600";
       case "Pro":
-        return "bg-yellow-600"
+        return "bg-yellow-600";
       case "Économique":
-        return "bg-blue-800"
+        return "bg-blue-800";
       case "Résistant":
-        return "bg-gray-800"
+        return "bg-gray-800";
       default:
-        return "bg-gray-600"
+        return "bg-gray-600";
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
@@ -306,16 +458,30 @@ export default function ProductDetailPage({ params }) {
                 <Image
                   src={product.images[currentImage] || "/placeholder.svg"}
                   alt={product.name}
+                  width={400}
+                  height={300} 
                   className="w-full h-96 object-cover rounded-lg shadow-lg"
                 />
                 <button
-                  onClick={() => setCurrentImage(currentImage > 0 ? currentImage - 1 : product.images.length - 1)}
+                  onClick={() =>
+                    setCurrentImage(
+                      currentImage > 0
+                        ? currentImage - 1
+                        : product.images.length - 1
+                    )
+                  }
                   className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </button>
                 <button
-                  onClick={() => setCurrentImage(currentImage < product.images.length - 1 ? currentImage + 1 : 0)}
+                  onClick={() =>
+                    setCurrentImage(
+                      currentImage < product.images.length - 1
+                        ? currentImage + 1
+                        : 0
+                    )
+                  }
                   className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
                 >
                   <ChevronRight className="h-5 w-5" />
@@ -327,7 +493,9 @@ export default function ProductDetailPage({ params }) {
                     key={index}
                     onClick={() => setCurrentImage(index)}
                     className={`border-2 rounded-lg overflow-hidden transition-colors ${
-                      currentImage === index ? "border-blue-500" : "border-gray-200 hover:border-blue-300"
+                      currentImage === index
+                        ? "border-blue-500"
+                        : "border-gray-200 hover:border-blue-300"
                     }`}
                   >
                     <img
@@ -341,32 +509,50 @@ export default function ProductDetailPage({ params }) {
             </div>
             <div>
               <div className="mb-4">
-                <Badge className={`mb-2 ${getBadgeColor(product.badge)} text-white`}>{product.badge}</Badge>
-                <h1 className="text-3xl font-bold mb-2 text-gray-900">{product.name}</h1>
+                <Badge
+                  className={`mb-2 ${getBadgeColor(product.badge)} text-white`}
+                >
+                  {product.badge}
+                </Badge>
+                <h1 className="text-3xl font-bold mb-2 text-gray-900">
+                  {product.name}
+                </h1>
                 <div className="flex items-center gap-2 mb-4">
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className={`h-4 w-4 ${i < Math.floor(product.rating) ? "fill-blue-500 text-blue-500" : "text-gray-300"}`}
+                        className={`h-4 w-4 ${
+                          i < Math.floor(product.rating)
+                            ? "fill-blue-500 text-blue-500"
+                            : "text-gray-300"
+                        }`}
                       />
                     ))}
                   </div>
-                  <span className="text-blue-700">({product.reviewCount} avis)</span>
+                  <span className="text-blue-700">
+                    ({product.reviewCount} avis)
+                  </span>
                 </div>
               </div>
               <p className="text-gray-600 mb-6">{product.description}</p>
               {product.materials.length > 0 && (
                 <div className="mb-6">
-                  <h3 className="text-lg font-bold mb-3 text-gray-800">Matériau / Options</h3>
-                  <Select value={selectedMaterial} onValueChange={setSelectedMaterial}>
+                  <h3 className="text-lg font-bold mb-3 text-gray-800">
+                    Matériau / Options
+                  </h3>
+                  <Select
+                    value={selectedMaterial}
+                    onValueChange={setSelectedMaterial}
+                  >
                     <SelectTrigger className="bg-white border-gray-300 text-gray-900 hover:border-blue-500">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="bg-white border-gray-300">
                       {product.materials.map((material) => (
                         <SelectItem key={material.id} value={material.id}>
-                          {material.name} - {material.price}€ - {material.description}
+                          {material.name} - {material.price}€ -{" "}
+                          {material.description}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -375,9 +561,12 @@ export default function ProductDetailPage({ params }) {
               )}
               <div className="mb-6">
                 <div className="text-3xl font-bold text-blue-600 mb-2">
-                  {selectedMaterialData?.price || product.basePrice}€ <span className="text-lg text-gray-600">HT</span>
+                  {selectedMaterialData?.price || product.basePrice}€{" "}
+                  <span className="text-lg text-gray-600">HT</span>
                 </div>
-                <p className="text-gray-600">Prix pour lettres de 20cm de hauteur</p>
+                <p className="text-gray-600">
+                  Prix pour lettres de 20cm de hauteur
+                </p>
               </div>
               <div className="flex items-center gap-4 mb-6">
                 <div className="flex items-center border border-gray-300 rounded-lg">
@@ -387,7 +576,9 @@ export default function ProductDetailPage({ params }) {
                   >
                     -
                   </button>
-                  <span className="px-4 py-2 border-x border-gray-300 text-gray-900">{quantity}</span>
+                  <span className="px-4 py-2 border-x border-gray-300 text-gray-900">
+                    {quantity}
+                  </span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
                     className="px-3 py-2 hover:bg-gray-100 transition-colors text-gray-700"
@@ -400,7 +591,9 @@ export default function ProductDetailPage({ params }) {
                   onClick={() =>
                     addToCart({
                       id: `product-${product.id}-${selectedMaterial}`,
-                      name: `${product.name} - ${selectedMaterialData?.name || "Standard"}`,
+                      name: `${product.name} - ${
+                        selectedMaterialData?.name || "Standard"
+                      }`,
                       price: selectedMaterialData?.price || product.basePrice,
                       image: product.images[0],
                       type: "product",
@@ -440,23 +633,36 @@ export default function ProductDetailPage({ params }) {
           <div className="mt-16">
             <Tabs defaultValue="description" className="w-full">
               <TabsList className="grid w-full grid-cols-3 bg-blue-50">
-                <TabsTrigger value="description" className="text-blue-800 data-[state=active]:bg-blue-600 data-[state=active]:text-white">
+                <TabsTrigger
+                  value="description"
+                  className="text-blue-800 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
+                >
                   Description
                 </TabsTrigger>
-                <TabsTrigger value="specifications" className="text-blue-800 data-[state=active]:bg-blue-600 data-[state=active]:text-white">
+                <TabsTrigger
+                  value="specifications"
+                  className="text-blue-800 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
+                >
                   Spécifications
                 </TabsTrigger>
-                <TabsTrigger value="delivery" className="text-blue-800 data-[state=active]:bg-blue-600 data-[state=active]:text-white">
+                <TabsTrigger
+                  value="delivery"
+                  className="text-blue-800 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
+                >
                   Livraison
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="description" className="mt-8">
                 <Card className="bg-white border-gray-200 shadow-sm">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-bold mb-4 text-gray-900">Description détaillée</h3>
+                    <h3 className="text-xl font-bold mb-4 text-gray-900">
+                      Description détaillée
+                    </h3>
                     <div className="space-y-4 text-gray-600">
                       <p>{product.description}</p>
-                      <h4 className="text-lg font-semibold text-gray-900">Caractéristiques principales :</h4>
+                      <h4 className="text-lg font-semibold text-gray-900">
+                        Caractéristiques principales :
+                      </h4>
                       <ul className="list-disc list-inside space-y-2">
                         {product.features.map((feature, index) => (
                           <li key={index}>{feature}</li>
@@ -469,14 +675,23 @@ export default function ProductDetailPage({ params }) {
               <TabsContent value="specifications" className="mt-8">
                 <Card className="bg-white border-gray-200 shadow-sm">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-bold mb-4 text-gray-900">Spécifications techniques</h3>
+                    <h3 className="text-xl font-bold mb-4 text-gray-900">
+                      Spécifications techniques
+                    </h3>
                     <div className="grid md:grid-cols-2 gap-6">
-                      {Object.entries(product.specifications).map(([key, value]) => (
-                        <div key={key} className="flex justify-between border-b border-gray-100 pb-2">
-                          <span className="font-medium text-gray-900">{key}:</span>
-                          <span className="text-gray-600">{value}</span>
-                        </div>
-                      ))}
+                      {Object.entries(product.specifications).map(
+                        ([key, value]) => (
+                          <div
+                            key={key}
+                            className="flex justify-between border-b border-gray-100 pb-2"
+                          >
+                            <span className="font-medium text-gray-900">
+                              {key}:
+                            </span>
+                            <span className="text-gray-600">{value}</span>
+                          </div>
+                        )
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -484,11 +699,15 @@ export default function ProductDetailPage({ params }) {
               <TabsContent value="delivery" className="mt-8">
                 <Card className="bg-white border-gray-200 shadow-sm">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-bold mb-4 text-gray-900">Informations de livraison</h3>
+                    <h3 className="text-xl font-bold mb-4 text-gray-900">
+                      Informations de livraison
+                    </h3>
                     <div className="space-y-4 text-gray-600">
                       <div className="grid md:grid-cols-2 gap-6">
                         <div>
-                          <h4 className="text-lg font-semibold text-gray-900 mb-2">Délais de livraison</h4>
+                          <h4 className="text-lg font-semibold text-gray-900 mb-2">
+                            Délais de livraison
+                          </h4>
                           <ul className="space-y-1">
                             <li>• France métropolitaine : 5-7 jours ouvrés</li>
                             <li>• Corse et DOM-TOM : 10-15 jours ouvrés</li>
@@ -496,7 +715,9 @@ export default function ProductDetailPage({ params }) {
                           </ul>
                         </div>
                         <div>
-                          <h4 className="text-lg font-semibold text-gray-900 mb-2">Frais de port</h4>
+                          <h4 className="text-lg font-semibold text-gray-900 mb-2">
+                            Frais de port
+                          </h4>
                           <ul className="space-y-1">
                             <li>• Gratuit à partir de 200€</li>
                             <li>• Standard : 15€</li>
@@ -505,8 +726,9 @@ export default function ProductDetailPage({ params }) {
                         </div>
                       </div>
                       <p>
-                        Toutes nos enseignes sont soigneusement emballées dans un carton renforcé avec protection mousse
-                        pour éviter tout dommage pendant le transport.
+                        Toutes nos enseignes sont soigneusement emballées dans
+                        un carton renforcé avec protection mousse pour éviter
+                        tout dommage pendant le transport.
                       </p>
                     </div>
                   </CardContent>
@@ -516,7 +738,10 @@ export default function ProductDetailPage({ params }) {
           </div>
           <div className="mt-12">
             <Link href="/produits">
-              <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
+              <Button
+                variant="outline"
+                className="border-blue-600 text-blue-600 hover:bg-blue-50"
+              >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Retour aux produits
               </Button>
@@ -526,5 +751,5 @@ export default function ProductDetailPage({ params }) {
       </div>
       <Footer />
     </div>
-  )
+  );
 }

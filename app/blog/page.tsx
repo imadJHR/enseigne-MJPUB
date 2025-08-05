@@ -9,7 +9,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Search, Calendar, User, ArrowRight } from "lucide-react";
 import { useState } from "react";
-import { blogPosts } from "../blog/[slug]/page"; 
+import { blogPosts } from "../blog/[slug]/page";
 import Image from "next/image";
 
 export default function BlogPage() {
@@ -65,6 +65,8 @@ export default function BlogPage() {
                         "/placeholder.svg?height=300&width=400&text=Blog+Image"
                       }
                       alt={post.title}
+                      width={400} 
+                      height={300} 
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
