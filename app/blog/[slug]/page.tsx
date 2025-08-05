@@ -139,10 +139,11 @@ interface BlogPostPageProps {
   };
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+export default function BlogPostPage({ params }: BlogPostPageProps) {
+
   const post = blogPosts.find((p) => p.slug === params.slug);
 
- if (!post) {
+  if (!post) {
     return (
       <div className="min-h-screen bg-white text-gray-900 flex flex-col">
         <Header />
@@ -162,11 +163,11 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     );
   }
   return (
-   <div className="min-h-screen bg-white text-gray-900 flex flex-col">
+    <div className="min-h-screen bg-white text-gray-900 flex flex-col">
       <Header />
       <main className="pt-20 px-4 py-12 flex-grow">
         <div className="max-w-4xl mx-auto">
-          {/* Back Button */}
+          {/* Bouton retour */}
           <div className="mb-8">
             <Link href="/blog">
               <Button
@@ -178,7 +179,8 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               </Button>
             </Link>
           </div>
-          {/* Blog Post Content */}
+
+          {/* Article */}
           <article className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
             <Image
               src={post.image}
@@ -186,13 +188,10 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               width={400}
               height={300}
               className="w-full h-80 object-cover rounded-lg mb-6"
+              priority
             />
-            <Badge className="bg-blue-600 text-white mb-4">
-              {post.category}
-            </Badge>
-            <h1 className="text-4xl font-bold mb-4 text-gray-900">
-              {post.title}
-            </h1>
+            <Badge className="bg-blue-600 text-white mb-4">{post.category}</Badge>
+            <h1 className="text-4xl font-bold mb-4 text-gray-900">{post.title}</h1>
             <div className="flex items-center text-gray-600 text-sm mb-6 space-x-4">
               <div className="flex items-center gap-1">
                 <Calendar className="h-4 w-4" />
@@ -208,14 +207,13 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             </div>
           </article>
 
-          {/* CTA Section */}
+          {/* CTA */}
           <div className="mt-12 text-center bg-white rounded-lg p-8 border border-gray-200">
             <h2 className="text-3xl font-bold mb-4 text-gray-900">
               Intéressé par nos solutions ?
             </h2>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Contactez-nous pour discuter de votre projet d&apos;enseigne lumineuse
-              ou de signalétique.
+              Contactez-nous pour discuter de votre projet d&apos;enseigne lumineuse ou de signalétique.
             </p>
             <Link href="/demande-devis">
               <Button className="bg-blue-600 hover:bg-blue-700 px-8 py-3">
