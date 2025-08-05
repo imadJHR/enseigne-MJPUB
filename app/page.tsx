@@ -84,7 +84,8 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Pourquoi nous choisir ?</h2>
             <p className="text-xl text-gray-600">
-              Des solutions d&apos;enseignage professionnel adaptées à vos besoins
+              Des solutions d&apos;enseignage professionnel adaptées à vos
+              besoins
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -312,8 +313,8 @@ export default function HomePage() {
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
             Chez Enseigne42, nous sommes fiers de notre savoir-faire artisanal
-            et de notre engagement envers l&apos;excellence. Forts de plus de 15 ans
-            d&apos;expérience, nous concevons et fabriquons des solutions de
+            et de notre engagement envers l&apos;excellence. Forts de plus de 15
+            ans d&apos;expérience, nous concevons et fabriquons des solutions de
             signalétique sur mesure qui captivent l&apos;attention et renforcent
             l&apos;identité de votre marque.
           </p>
@@ -326,13 +327,13 @@ export default function HomePage() {
                 Toutes nos **enseignes lumineuses**, **lettres découpées** et
                 **panneaux publicitaires** sont fabriqués avec passion dans nos
                 ateliers en France. Nous utilisons des matériaux de première
-                qualité comme le PVC, le Dibond, le Plexiglas, l&apos;aluminium et
-                l&apos;acier, garantissant durabilité et résistance aux intempéries.
-                Notre processus de fabrication intègre les dernières
-                technologies, y compris la découpe laser de précision et
-                l&apos;intégration de **LEDs haute efficacité**, pour des produits
-                finis impeccables et une visibilité optimale, de jour comme de
-                nuit.
+                qualité comme le PVC, le Dibond, le Plexiglas, l&apos;aluminium
+                et l&apos;acier, garantissant durabilité et résistance aux
+                intempéries. Notre processus de fabrication intègre les
+                dernières technologies, y compris la découpe laser de précision
+                et l&apos;intégration de **LEDs haute efficacité**, pour des
+                produits finis impeccables et une visibilité optimale, de jour
+                comme de nuit.
               </p>
             </div>
             <div className="bg-white p-8 rounded-xl shadow-md">
@@ -417,8 +418,9 @@ export default function HomePage() {
                     ))}
                   </div>
                   <p className="text-gray-700 mb-4 italic">
-                    "{testimonial.text}"
+                    &quot;{testimonial.text}&quot;
                   </p>
+
                   <div>
                     <p className="font-bold">{testimonial.name}</p>
                     <p className="text-sm text-gray-500">

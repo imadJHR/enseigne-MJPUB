@@ -498,8 +498,10 @@ export default function ProductDetailPage({ params }) {
                         : "border-gray-200 hover:border-blue-300"
                     }`}
                   >
-                    <img
+                    <Image
                       src={image || "/placeholder.svg"}
+                      height={300}
+                      width={400}
                       alt={`${product.name} ${index + 1}`}
                       className="w-full h-20 object-cover"
                     />

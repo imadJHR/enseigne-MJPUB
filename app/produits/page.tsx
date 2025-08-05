@@ -149,8 +149,8 @@ export default function ProductsPage() {
               Nos Produits
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Découvrez notre gamme complète d'enseignes professionnelles sur
-              mesure
+              Découvrez notre gamme complète d&apos;enseignes professionnelles
+              sur mesure
             </p>
           </div>
 
@@ -282,8 +282,9 @@ export default function ProductsPage() {
           {/* CTA Section */}
           <div className="mt-16 text-center bg-blue-50 rounded-lg p-8 border border-blue-100">
             <h2 className="text-3xl font-bold mb-4">
-              Besoin d'un produit sur mesure ?
+              Besoin d&apos;un produit sur mesure ?
             </h2>
+
             <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
               Notre équipe peut créer des enseignes entièrement personnalisées
               selon vos spécifications exactes
@@ -333,8 +334,8 @@ export default function ProductsPage() {
               </div>
               <h3 className="text-xl font-bold mb-2">Garantie 2 ans</h3>
               <p className="text-gray-600">
-                Tous nos produits sont garantis 2 ans pièces et main d'œuvre
-                pour votre tranquillité
+                Tous nos produits sont garantis 2 ans pièces et main
+                d&apos;œuvre pour votre tranquillité
               </p>
             </div>
           </div>

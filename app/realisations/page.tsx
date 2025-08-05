@@ -79,7 +79,7 @@ export default function RealisationsPage() {
               Nos Réalisations
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Découvrez quelques-uns de nos projets d'enseignes lumineuses et
+              Découvrez quelques-uns de nos projets d&apos;enseignes lumineuses et
               signalétiques sur mesure
             </p>
           </div>
