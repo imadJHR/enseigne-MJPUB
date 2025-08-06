@@ -174,7 +174,7 @@ export default function ConfigurateurPage() {
     };
 
     try {
-      const response = await fetch("http://localhost:3001/api/configurator-email", {
+      const response = await fetch("https://enseigne-mjpub-api.vercel.app/api/configurator-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

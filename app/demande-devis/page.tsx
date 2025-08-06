@@ -76,27 +76,49 @@ export default function DemandeDevisPage() {
     e.preventDefault();
     setIsLoading(true);
     setSubmissionStatus("idle");
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      console.log("Form Data Submitted:", formData);
-      setSubmissionStatus("success");
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-        postalCode: "",
-        address: "",
-        manufacturingProcess: "",
-        photoMontage: false,
-        logoFile: null,
-        projectDescription: "",
+    const formPayload = new FormData();
+    formPayload.append("name", formData.name);
+    formPayload.append("phone", formData.phone);
+    formPayload.append("email", formData.email);
+    formPayload.append("postalCode", formData.postalCode);
+    formPayload.append("address", formData.address);
+    formPayload.append("manufacturingProcess", formData.manufacturingProcess);
+    formPayload.append("photoMontage", formData.photoMontage.toString());
+    if (formData.logoFile) {
+        formPayload.append("logoFile", formData.logoFile);
+    }
+    formPayload.append("projectDescription", formData.projectDescription);
+    
+    try {
+      const response = await fetch("https://enseigne-mjpub-api.vercel.app/api/devis-request", {
+        method: "POST",
+        body: formPayload,
       });
+
+      if (response.ok) {
+        setSubmissionStatus("success");
+        setFormData({
+          name: "",
+          phone: "",
+          email: "",
+          postalCode: "",
+          address: "",
+          manufacturingProcess: "",
+          photoMontage: false,
+          logoFile: null,
+          projectDescription: "",
+        });
+      } else {
+        console.error("Échec de l'envoi du formulaire.");
+        setSubmissionStatus("error");
+      }
     } catch (error) {
-  console.error("Erreur lors de l'envoi du formulaire :", error);
-  setSubmissionStatus("error");
-}
+      console.error("Erreur lors de l'envoi du formulaire :", error);
+      setSubmissionStatus("error");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -105,7 +127,6 @@ export default function DemandeDevisPage() {
         <title>
           Demande de Devis | MJ PUB - Création d&apos;enseignes lumineuses
         </title>
-
         <meta
           name="description"
           content="Obtenez un devis personnalisé pour votre enseigne lumineuse. Notre équipe d'experts vous accompagne dans votre projet de signalétique."
