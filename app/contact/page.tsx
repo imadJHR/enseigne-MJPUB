@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,21 +9,70 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from "lucide-react";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  MessageCircle,
+  Send,
+  CheckCircle,
+} from "lucide-react";
+import Link from "next/link";
+
+interface ContactFormData {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
     phone: "",
     subject: "",
     message: "",
   });
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
+
+    try {
+      const response = await fetch("http://localhost:3001/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        alert("Échec de l'envoi du message. Veuillez réessayer.");
+      }
+    } catch (error) {
+      console.error("Erreur réseau:", error);
+      alert("Erreur réseau. Veuillez vérifier votre connexion.");
+    }
   };
 
   return (
@@ -54,107 +102,115 @@ export default function ContactPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <Label
-                        htmlFor="name"
-                        className="text-gray-700 mb-2 block"
-                      >
-                        Nom *
-                      </Label>
-                      <Input
-                        id="name"
-                        value={formData.name}
-                        onChange={(e) =>
-                          setFormData({ ...formData, name: e.target.value })
-                        }
-                        className="bg-white border-gray-300 text-gray-900"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Label
-                        htmlFor="email"
-                        className="text-gray-700 mb-2 block"
-                      >
-                        Email *
-                      </Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) =>
-                          setFormData({ ...formData, email: e.target.value })
-                        }
-                        className="bg-white border-gray-300 text-gray-900"
-                        required
-                      />
-                    </div>
+                {isSubmitted ? (
+                  <div className="bg-green-50 text-green-800 p-8 rounded-lg text-center">
+                    <CheckCircle className="h-16 w-16 text-green-600 mx-auto mb-4" />
+                    <h2 className="text-2xl font-bold mb-2">
+                      Message envoyé !
+                    </h2>
+                    <p className="text-lg text-gray-700">
+                      Merci de nous avoir contacté. Nous vous répondrons dans
+                      les plus brefs délais.
+                    </p>
+                    <Link href="/">
+                      <Button className="mt-6 bg-blue-600 hover:bg-blue-700">
+                        Retour à l&apos;accueil
+                      </Button>
+                    </Link>
                   </div>
-
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <Label
-                        htmlFor="phone"
-                        className="text-gray-700 mb-2 block"
-                      >
-                        Téléphone
-                      </Label>
-                      <Input
-                        id="phone"
-                        value={formData.phone}
-                        onChange={(e) =>
-                          setFormData({ ...formData, phone: e.target.value })
-                        }
-                        className="bg-white border-gray-300 text-gray-900"
-                      />
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label
+                          htmlFor="name"
+                          className="text-gray-700 mb-2 block"
+                        >
+                          Nom *
+                        </Label>
+                        <Input
+                          id="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          className="bg-white border-gray-300 text-gray-900"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label
+                          htmlFor="email"
+                          className="text-gray-700 mb-2 block"
+                        >
+                          Email *
+                        </Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className="bg-white border-gray-300 text-gray-900"
+                          required
+                        />
+                      </div>
                     </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label
+                          htmlFor="phone"
+                          className="text-gray-700 mb-2 block"
+                        >
+                          Téléphone
+                        </Label>
+                        <Input
+                          id="phone"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          className="bg-white border-gray-300 text-gray-900"
+                        />
+                      </div>
+                      <div>
+                        <Label
+                          htmlFor="subject"
+                          className="text-gray-700 mb-2 block"
+                        >
+                          Sujet *
+                        </Label>
+                        <Input
+                          id="subject"
+                          value={formData.subject}
+                          onChange={handleInputChange}
+                          className="bg-white border-gray-300 text-gray-900"
+                          required
+                        />
+                      </div>
+                    </div>
+
                     <div>
                       <Label
-                        htmlFor="subject"
+                        htmlFor="message"
                         className="text-gray-700 mb-2 block"
                       >
-                        Sujet *
+                        Message *
                       </Label>
-                      <Input
-                        id="subject"
-                        value={formData.subject}
-                        onChange={(e) =>
-                          setFormData({ ...formData, subject: e.target.value })
-                        }
-                        className="bg-white border-gray-300 text-gray-900"
+                      <Textarea
+                        id="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        className="bg-white border-gray-300 text-gray-900 min-h-32"
                         required
                       />
                     </div>
-                  </div>
 
-                  <div>
-                    <Label
-                      htmlFor="message"
-                      className="text-gray-700 mb-2 block"
+                    <Button
+                      type="submit"
+                      className="w-full bg-blue-600 hover:bg-blue-700"
                     >
-                      Message *
-                    </Label>
-                    <Textarea
-                      id="message"
-                      value={formData.message}
-                      onChange={(e) =>
-                        setFormData({ ...formData, message: e.target.value })
-                      }
-                      className="bg-white border-gray-300 text-gray-900 min-h-32"
-                      required
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full bg-blue-600 hover:bg-blue-700"
-                  >
-                    <Send className="mr-2 h-4 w-4" />
-                    Envoyer le message
-                  </Button>
-                </form>
+                      <Send className="mr-2 h-4 w-4" />
+                      Envoyer le message
+                    </Button>
+                  </form>
+                )}
               </CardContent>
             </Card>
 
@@ -174,8 +230,7 @@ export default function ContactPage() {
                       <h3 className="font-bold mb-1 text-gray-900">
                         Téléphone
                       </h3>
-                      <p className="text-gray-600"></p>
-                      <p className="text-sm text-gray-500"></p>
+                      <p className="text-gray-600">+33 1 23 45 67 89</p>
                     </div>
                   </div>
 
@@ -183,7 +238,7 @@ export default function ContactPage() {
                     <Mail className="h-6 w-6 text-blue-600 mt-1" />
                     <div>
                       <h3 className="font-bold mb-1 text-gray-900">Email</h3>
-                      <p className="text-gray-600"></p>
+                      <p className="text-gray-600">contact@votreboutique.fr</p>
                       <p className="text-sm text-gray-500">Réponse sous 24h</p>
                     </div>
                   </div>
@@ -192,8 +247,8 @@ export default function ContactPage() {
                     <MapPin className="h-6 w-6 text-blue-600 mt-1" />
                     <div>
                       <h3 className="font-bold mb-1 text-gray-900">Adresse</h3>
-                      <p className="text-gray-600"></p>
-                      <p className="text-gray-600"></p>
+                      <p className="text-gray-600">123 Rue de l&apos;Industrie</p>
+                      <p className="text-gray-600">75001 Paris, France</p>
                     </div>
                   </div>
 
@@ -203,9 +258,9 @@ export default function ContactPage() {
                       <h3 className="font-bold mb-1 text-gray-900">
                         Horaires d&apos;ouverture
                       </h3>
-                      <p className="text-gray-600"></p>
-                      <p className="text-gray-600"></p>
-                      <p className="text-gray-600"></p>
+                      <p className="text-gray-600">
+                        Lundi - Vendredi: 8h30 - 19h
+                      </p>
                     </div>
                   </div>
                 </CardContent>
@@ -217,14 +272,17 @@ export default function ContactPage() {
                   <CardTitle className="text-gray-900">Notre atelier</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
-                    <div className="text-center">
-                      <MapPin className="h-12 w-12 text-blue-600 mx-auto mb-2" />
-                      <p className="text-gray-600">Carte Google Maps</p>
-                      <p className="text-sm text-gray-500">
-                        123 Rue de l&apos;Industrie, Paris
-                      </p>
-                    </div>
+                  <div className="w-full h-64 rounded-lg overflow-hidden">
+                    {/* The iframe is now correctly formatted for React */}
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.991620862744!2d2.2922926156749917!3d48.85837367928741!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e23%3A0x8ddca9af5547b710!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1625078174780!5m2!1sfr!2sfr"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen={true}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
                   </div>
                 </CardContent>
               </Card>
@@ -232,14 +290,14 @@ export default function ContactPage() {
               {/* Quick Contact Buttons */}
               <div className="grid grid-cols-2 gap-4">
                 <a
-                  href="https://wa.me/33123456789"
+                  href="https://wa.me/33781546359"
                   className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white p-4 rounded-lg transition-colors"
                 >
                   <MessageCircle className="h-5 w-5" />
                   WhatsApp
                 </a>
                 <a
-                  href="mailto:contact@enseigne42.fr"
+                  href="mailto:mjpub59@gmail.com"
                   className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-lg transition-colors"
                 >
                   <Mail className="h-5 w-5" />

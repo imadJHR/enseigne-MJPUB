@@ -78,256 +78,7 @@ export const productsData = {
       Épaisseur: "20mm",
     },
   },
-  "lettres-decoupees-pvc": {
-    id: 2,
-    name: "Lettres Découpées PVC",
-    category: "lettres",
-    basePrice: 89,
-    description:
-      "Lettres découpées en PVC haute qualité, résistantes aux intempéries. Solution économique et durable pour votre signalétique extérieure.",
-    rating: 4.7,
-    reviewCount: 32,
-    badge: "Économique",
-    images: [
-      "/placeholder.svg?height=600&width=800&text=Lettres+PVC+1",
-      "/placeholder.svg?height=600&width=800&text=Lettres+PVC+2",
-      "/placeholder.svg?height=600&width=800&text=Lettres+PVC+3",
-      "/placeholder.svg?height=600&width=800&text=Lettres+PVC+4",
-    ],
-    materials: [
-      {
-        id: "pvc-3mm",
-        name: "PVC 3mm",
-        price: 89,
-        description: "Standard, économique",
-      },
-      {
-        id: "pvc-5mm",
-        name: "PVC 5mm",
-        price: 129,
-        description: "Plus résistant",
-      },
-      {
-        id: "pvc-10mm",
-        name: "PVC 10mm",
-        price: 189,
-        description: "Effet relief",
-      },
-    ],
-    features: [
-      "Découpe laser précise",
-      "Résistant aux UV",
-      "Facile à installer",
-      "Personnalisable",
-    ],
-    specifications: {
-      Matériau: "PVC expansé",
-      "Épaisseurs disponibles": "3mm, 5mm, 10mm",
-      Couleurs: "Blanc, noir, couleurs sur demande",
-      Finition: "Mat ou brillant",
-      Résistance: "Extérieur 10 ans",
-    },
-  },
-  "panneau-dibond": {
-    id: 3,
-    name: "Panneau Dibond",
-    category: "panneaux",
-    basePrice: 159,
-    description:
-      "Panneau en Dibond avec impression haute définition. Matériau composite aluminium pour une excellente tenue dans le temps.",
-    rating: 4.9,
-    reviewCount: 28,
-    badge: "Résistant",
-    images: [
-      "/placeholder.svg?height=600&width=800&text=Panneau+Dibond+1",
-      "/placeholder.svg?height=600&width=800&text=Panneau+Dibond+2",
-      "/placeholder.svg?height=600&width=800&text=Panneau+Dibond+3",
-      "/placeholder.svg?height=600&width=800&text=Panneau+Dibond+4",
-    ],
-    materials: [
-      {
-        id: "dibond-3mm",
-        name: "Dibond 3mm",
-        price: 159,
-        description: "Standard professionnel",
-      },
-      {
-        id: "dibond-4mm",
-        name: "Dibond 4mm",
-        price: 199,
-        description: "Renforcé",
-      },
-      {
-        id: "dibond-6mm",
-        name: "Dibond 6mm",
-        price: 259,
-        description: "Ultra résistant",
-      },
-    ],
-    features: [
-      "Composite aluminium",
-      "Impression HD",
-      "Résistant aux intempéries",
-      "Léger et rigide",
-    ],
-    specifications: {
-      Composition: "Aluminium + âme polyéthylène",
-      Épaisseurs: "3mm, 4mm, 6mm",
-      Impression: "Numérique haute définition",
-      Finition: "Mat, brillant, brossé",
-      Résistance: "Extérieur 15 ans",
-    },
-  },
-  "enseigne-led-rgb": {
-    id: 4,
-    name: "Enseigne LED RGB",
-    category: "led",
-    basePrice: 449,
-    description:
-      "Enseigne LED avec changement de couleurs et télécommande. Créez des effets lumineux spectaculaires pour attirer l'attention sur votre commerce.",
-    rating: 4.6,
-    reviewCount: 23,
-    badge: "Nouveau",
-    images: [
-      "/placeholder.svg?height=600&width=800&text=Enseigne+LED+RGB+1",
-      "/placeholder.svg?height=600&width=800&text=Enseigne+LED+RGB+2",
-      "/placeholder.svg?height=600&width=800&text=Enseigne+LED+RGB+3",
-      "/placeholder.svg?height=600&width=800&text=Enseigne+LED+RGB+4",
-    ],
-    materials: [
-      {
-        id: "pvc-rgb",
-        name: "PVC + RGB",
-        price: 449,
-        description: "Économique avec RGB",
-      },
-      {
-        id: "dibond-rgb",
-        name: "Dibond + RGB",
-        price: 599,
-        description: "Résistant avec RGB",
-      },
-      {
-        id: "plexiglas-rgb",
-        name: "Plexiglas + RGB",
-        price: 749,
-        description: "Premium avec RGB",
-      },
-    ],
-    features: [
-      "LEDs RGB programmables",
-      "Télécommande incluse",
-      "16 millions de couleurs",
-      "Effets dynamiques",
-    ],
-    specifications: {
-      "Température de couleur": "RGB (toutes couleurs)",
-      Consommation: "18W par mètre linéaire",
-      Alimentation: "24V DC",
-      "Indice de protection": "IP65",
-      Épaisseur: "25mm",
-    },
-  },
-  "lettres-plexiglas": {
-    id: 5,
-    name: "Lettres Plexiglas",
-    category: "lettres",
-    basePrice: 199,
-    description:
-      "Lettres en plexiglas transparent ou coloré, finition premium. Matériau noble pour une signalétique haut de gamme avec un rendu exceptionnel.",
-    rating: 4.8,
-    reviewCount: 19,
-    badge: "Premium",
-    images: [
-      "/placeholder.svg?height=600&width=800&text=Lettres+Plexiglas+1",
-      "/placeholder.svg?height=600&width=800&text=Lettres+Plexiglas+2",
-      "/placeholder.svg?height=600&width=800&text=Lettres+Plexiglas+3",
-      "/placeholder.svg?height=600&width=800&text=Lettres+Plexiglas+4",
-    ],
-    materials: [
-      {
-        id: "plexi-5mm",
-        name: "Plexiglas 5mm",
-        price: 199,
-        description: "Standard premium",
-      },
-      {
-        id: "plexi-8mm",
-        name: "Plexiglas 8mm",
-        price: 259,
-        description: "Épaisseur renforcée",
-      },
-      {
-        id: "plexi-10mm",
-        name: "Plexiglas 10mm",
-        price: 319,
-        description: "Ultra premium",
-      },
-    ],
-    features: [
-      "Matériau noble",
-      "Finition brillante",
-      "Résistant aux UV",
-      "Découpe laser précise",
-    ],
-    specifications: {
-      Matériau: "PMMA (Plexiglas)",
-      "Épaisseurs disponibles": "5mm, 8mm, 10mm",
-      Couleurs: "Transparent, blanc, noir, couleurs",
-      Finition: "Brillant, mat, satiné",
-      Résistance: "Extérieur 15 ans",
-    },
-  },
-  "totem-lumineux": {
-    id: 6,
-    name: "Totem Lumineux",
-    category: "totems",
-    basePrice: 899,
-    description:
-      "Totem publicitaire lumineux double face avec structure aluminium. Solution idéale pour la signalétique extérieure de grande visibilité.",
-    rating: 4.7,
-    reviewCount: 15,
-    badge: "Pro",
-    images: [
-      "/placeholder.svg?height=600&width=800&text=Totem+Lumineux+1",
-      "/placeholder.svg?height=600&width=800&text=Totem+Lumineux+2",
-      "/placeholder.svg?height=600&width=800&text=Totem+Lumineux+3",
-      "/placeholder.svg?height=600&width=800&text=Totem+Lumineux+4",
-    ],
-    materials: [
-      {
-        id: "totem-150",
-        name: "Totem 150cm",
-        price: 899,
-        description: "Hauteur standard",
-      },
-      {
-        id: "totem-200",
-        name: "Totem 200cm",
-        price: 1199,
-        description: "Hauteur renforcée",
-      },
-      {
-        id: "totem-250",
-        name: "Totem 250cm",
-        price: 1499,
-        description: "Hauteur maximum",
-      },
-    ],
-    features: [
-      "Structure aluminium",
-      "Double face",
-      "Éclairage LED intégré",
-      "Résistant aux intempéries",
-    ],
-    specifications: {
-      Structure: "Aluminium anodisé",
-      "Hauteurs disponibles": "150cm, 200cm, 250cm",
-      Largeur: "60cm standard",
-      Éclairage: "LED intégré",
-      Résistance: "Vent 120 km/h",
-    },
-  },
+  
 };
 
 export default function ProductDetailPage({ params }) {
@@ -345,13 +96,13 @@ export default function ProductDetailPage({ params }) {
         <Header />
         <div className="pt-20 px-4 py-12">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl font-bold mb-4">Produit non trouvé</h1>
-            <p className="text-blue-600 mb-8">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">Produit non trouvé</h1>
+            <p className="text-blue-600 mb-6 md:mb-8">
               Le produit que vous recherchez n&apos;existe pas.
             </p>
             <div className="space-y-4">
               <p className="text-gray-600">Produits disponibles :</p>
-              <div className="grid md:grid-cols-2 gap-4 text-left">
+              <div className="grid sm:grid-cols-2 gap-4 text-left">
                 <Link
                   href="/produits/enseigne-led-premium"
                   className="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
@@ -394,7 +145,7 @@ export default function ProductDetailPage({ params }) {
                 </Link>
               </div>
             </div>
-            <div className="mt-8">
+            <div className="mt-6 md:mt-8">
               <Link href="/produits">
                 <Button className="bg-blue-600 hover:bg-blue-500 text-white">
                   <ArrowLeft className="mr-2 h-4 w-4" />
@@ -439,9 +190,9 @@ export default function ProductDetailPage({ params }) {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <Header />
-      <div className="pt-20 px-4 py-12">
+      <div className="pt-20 px-4 py-8 md:py-12">
         <div className="max-w-7xl mx-auto">
-          <nav className="mb-8 text-sm text-blue-700">
+          <nav className="mb-4 md:mb-8 text-sm text-blue-700">
             <Link href="/" className="hover:text-blue-800">
               Accueil
             </Link>
@@ -452,16 +203,19 @@ export default function ProductDetailPage({ params }) {
             <span className="mx-2">/</span>
             <span className="text-blue-900 font-medium">{product.name}</span>
           </nav>
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12">
+            {/* Image Gallery */}
             <div>
               <div className="relative mb-4">
-                <Image
-                  src={product.images[currentImage] || "/placeholder.svg"}
-                  alt={product.name}
-                  width={400}
-                  height={300} 
-                  className="w-full h-96 object-cover rounded-lg shadow-lg"
-                />
+                <div className="aspect-w-16 aspect-h-9">
+                  <Image
+                    src={product.images[currentImage] || "/placeholder.svg"}
+                    alt={product.name}
+                    width={800}
+                    height={600}
+                    className="w-full h-auto max-h-[400px] md:max-h-[500px] object-cover rounded-lg shadow-lg"
+                  />
+                </div>
                 <button
                   onClick={() =>
                     setCurrentImage(
@@ -470,9 +224,9 @@ export default function ProductDetailPage({ params }) {
                         : product.images.length - 1
                     )
                   }
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                  className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-1 md:p-2 rounded-full hover:bg-black/70 transition-colors"
                 >
-                  <ChevronLeft className="h-5 w-5" />
+                  <ChevronLeft className="h-4 w-4 md:h-5 md:w-5" />
                 </button>
                 <button
                   onClick={() =>
@@ -482,9 +236,9 @@ export default function ProductDetailPage({ params }) {
                         : 0
                     )
                   }
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                  className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-1 md:p-2 rounded-full hover:bg-black/70 transition-colors"
                 >
-                  <ChevronRight className="h-5 w-5" />
+                  <ChevronRight className="h-4 w-4 md:h-5 md:w-5" />
                 </button>
               </div>
               <div className="grid grid-cols-4 gap-2">
@@ -492,7 +246,7 @@ export default function ProductDetailPage({ params }) {
                   <button
                     key={index}
                     onClick={() => setCurrentImage(index)}
-                    className={`border-2 rounded-lg overflow-hidden transition-colors ${
+                    className={`aspect-square border-2 rounded-lg overflow-hidden transition-colors ${
                       currentImage === index
                         ? "border-blue-500"
                         : "border-gray-200 hover:border-blue-300"
@@ -500,15 +254,17 @@ export default function ProductDetailPage({ params }) {
                   >
                     <Image
                       src={image || "/placeholder.svg"}
-                      height={300}
-                      width={400}
+                      width={200}
+                      height={200}
                       alt={`${product.name} ${index + 1}`}
-                      className="w-full h-20 object-cover"
+                      className="w-full h-full object-cover"
                     />
                   </button>
                 ))}
               </div>
             </div>
+
+            {/* Product Info */}
             <div>
               <div className="mb-4">
                 <Badge
@@ -516,10 +272,10 @@ export default function ProductDetailPage({ params }) {
                 >
                   {product.badge}
                 </Badge>
-                <h1 className="text-3xl font-bold mb-2 text-gray-900">
+                <h1 className="text-2xl md:text-3xl font-bold mb-2 text-gray-900">
                   {product.name}
                 </h1>
-                <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center gap-2 mb-3 md:mb-4">
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
                       <Star
@@ -532,15 +288,17 @@ export default function ProductDetailPage({ params }) {
                       />
                     ))}
                   </div>
-                  <span className="text-blue-700">
+                  <span className="text-blue-700 text-sm md:text-base">
                     ({product.reviewCount} avis)
                   </span>
                 </div>
               </div>
-              <p className="text-gray-600 mb-6">{product.description}</p>
+              <p className="text-gray-600 mb-4 md:mb-6">{product.description}</p>
+              
+              {/* Material Selection */}
               {product.materials.length > 0 && (
-                <div className="mb-6">
-                  <h3 className="text-lg font-bold mb-3 text-gray-800">
+                <div className="mb-4 md:mb-6">
+                  <h3 className="text-base md:text-lg font-bold mb-2 md:mb-3 text-gray-800">
                     Matériau / Options
                   </h3>
                   <Select
@@ -553,25 +311,33 @@ export default function ProductDetailPage({ params }) {
                     <SelectContent className="bg-white border-gray-300">
                       {product.materials.map((material) => (
                         <SelectItem key={material.id} value={material.id}>
-                          {material.name} - {material.price}€ -{" "}
-                          {material.description}
+                          <div className="flex flex-col">
+                            <span className="font-medium">{material.name}</span>
+                            <span className="text-sm text-gray-600">
+                              {material.price}€ - {material.description}
+                            </span>
+                          </div>
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
               )}
-              <div className="mb-6">
-                <div className="text-3xl font-bold text-blue-600 mb-2">
+
+              {/* Price */}
+              <div className="mb-4 md:mb-6">
+                <div className="text-2xl md:text-3xl font-bold text-blue-600 mb-1 md:mb-2">
                   {selectedMaterialData?.price || product.basePrice}€{" "}
-                  <span className="text-lg text-gray-600">HT</span>
+                  <span className="text-base md:text-lg text-gray-600">HT</span>
                 </div>
-                <p className="text-gray-600">
+                <p className="text-sm md:text-base text-gray-600">
                   Prix pour lettres de 20cm de hauteur
                 </p>
               </div>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="flex items-center border border-gray-300 rounded-lg">
+
+              {/* Add to Cart */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4 md:mb-6">
+                <div className="flex items-center border border-gray-300 rounded-lg w-full sm:w-auto">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     className="px-3 py-2 hover:bg-gray-100 transition-colors text-gray-700"
@@ -589,7 +355,7 @@ export default function ProductDetailPage({ params }) {
                   </button>
                 </div>
                 <Button
-                  className="flex-1 bg-blue-600 hover:bg-blue-500 text-white"
+                  className="w-full sm:flex-1 bg-blue-600 hover:bg-blue-500 text-white"
                   onClick={() =>
                     addToCart({
                       id: `product-${product.id}-${selectedMaterial}`,
@@ -608,21 +374,25 @@ export default function ProductDetailPage({ params }) {
                   Ajouter au panier
                 </Button>
               </div>
-              <div className="grid grid-cols-3 gap-4 mb-6">
-                <div className="text-center">
-                  <Truck className="h-8 w-8 text-blue-500 mx-auto mb-2" />
-                  <p className="text-sm text-gray-600">Livraison 5-7j</p>
+
+              {/* Features Icons */}
+              <div className="grid grid-cols-3 gap-2 md:gap-4 mb-4 md:mb-6">
+                <div className="text-center p-2">
+                  <Truck className="h-6 w-6 md:h-8 md:w-8 text-blue-500 mx-auto mb-1 md:mb-2" />
+                  <p className="text-xs md:text-sm text-gray-600">Livraison 5-7j</p>
                 </div>
-                <div className="text-center">
-                  <Shield className="h-8 w-8 text-blue-500 mx-auto mb-2" />
-                  <p className="text-sm text-gray-600">Garantie 2 ans</p>
+                <div className="text-center p-2">
+                  <Shield className="h-6 w-6 md:h-8 md:w-8 text-blue-500 mx-auto mb-1 md:mb-2" />
+                  <p className="text-xs md:text-sm text-gray-600">Garantie 2 ans</p>
                 </div>
-                <div className="text-center">
-                  <Zap className="h-8 w-8 text-blue-500 mx-auto mb-2" />
-                  <p className="text-sm text-gray-600">Qualité pro</p>
+                <div className="text-center p-2">
+                  <Zap className="h-6 w-6 md:h-8 md:w-8 text-blue-500 mx-auto mb-1 md:mb-2" />
+                  <p className="text-xs md:text-sm text-gray-600">Qualité pro</p>
                 </div>
               </div>
-              <Link href="/contact">
+
+              {/* Quote Button */}
+              <Link href="/contact" className="block mb-6 md:mb-8">
                 <Button
                   variant="outline"
                   className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 hover:text-blue-700"
@@ -632,40 +402,42 @@ export default function ProductDetailPage({ params }) {
               </Link>
             </div>
           </div>
-          <div className="mt-16">
+
+          {/* Product Tabs */}
+          <div className="mt-8 md:mt-16">
             <Tabs defaultValue="description" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 bg-blue-50">
+              <TabsList className="grid w-full grid-cols-3 bg-blue-50 h-auto">
                 <TabsTrigger
                   value="description"
-                  className="text-blue-800 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
+                  className="text-sm md:text-base text-blue-800 data-[state=active]:bg-blue-600 data-[state=active]:text-white py-2 px-1"
                 >
                   Description
                 </TabsTrigger>
                 <TabsTrigger
                   value="specifications"
-                  className="text-blue-800 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
+                  className="text-sm md:text-base text-blue-800 data-[state=active]:bg-blue-600 data-[state=active]:text-white py-2 px-1"
                 >
                   Spécifications
                 </TabsTrigger>
                 <TabsTrigger
                   value="delivery"
-                  className="text-blue-800 data-[state=active]:bg-blue-600 data-[state=active]:text-white"
+                  className="text-sm md:text-base text-blue-800 data-[state=active]:bg-blue-600 data-[state=active]:text-white py-2 px-1"
                 >
                   Livraison
                 </TabsTrigger>
               </TabsList>
-              <TabsContent value="description" className="mt-8">
+              <TabsContent value="description" className="mt-4 md:mt-8">
                 <Card className="bg-white border-gray-200 shadow-sm">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold mb-4 text-gray-900">
+                  <CardContent className="p-4 md:p-6">
+                    <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-gray-900">
                       Description détaillée
                     </h3>
-                    <div className="space-y-4 text-gray-600">
+                    <div className="space-y-3 md:space-y-4 text-gray-600 text-sm md:text-base">
                       <p>{product.description}</p>
-                      <h4 className="text-lg font-semibold text-gray-900">
+                      <h4 className="text-base md:text-lg font-semibold text-gray-900">
                         Caractéristiques principales :
                       </h4>
-                      <ul className="list-disc list-inside space-y-2">
+                      <ul className="list-disc list-inside space-y-1 md:space-y-2">
                         {product.features.map((feature, index) => (
                           <li key={index}>{feature}</li>
                         ))}
@@ -674,23 +446,23 @@ export default function ProductDetailPage({ params }) {
                   </CardContent>
                 </Card>
               </TabsContent>
-              <TabsContent value="specifications" className="mt-8">
+              <TabsContent value="specifications" className="mt-4 md:mt-8">
                 <Card className="bg-white border-gray-200 shadow-sm">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold mb-4 text-gray-900">
+                  <CardContent className="p-4 md:p-6">
+                    <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-gray-900">
                       Spécifications techniques
                     </h3>
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid gap-4 md:grid-cols-2 md:gap-6">
                       {Object.entries(product.specifications).map(
                         ([key, value]) => (
                           <div
                             key={key}
                             className="flex justify-between border-b border-gray-100 pb-2"
                           >
-                            <span className="font-medium text-gray-900">
+                            <span className="font-medium text-gray-900 text-sm md:text-base">
                               {key}:
                             </span>
-                            <span className="text-gray-600">{value}</span>
+                            <span className="text-gray-600 text-sm md:text-base">{value}</span>
                           </div>
                         )
                       )}
@@ -698,16 +470,16 @@ export default function ProductDetailPage({ params }) {
                   </CardContent>
                 </Card>
               </TabsContent>
-              <TabsContent value="delivery" className="mt-8">
+              <TabsContent value="delivery" className="mt-4 md:mt-8">
                 <Card className="bg-white border-gray-200 shadow-sm">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold mb-4 text-gray-900">
+                  <CardContent className="p-4 md:p-6">
+                    <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-gray-900">
                       Informations de livraison
                     </h3>
-                    <div className="space-y-4 text-gray-600">
-                      <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-3 md:space-y-4 text-gray-600 text-sm md:text-base">
+                      <div className="grid gap-4 md:grid-cols-2 md:gap-6">
                         <div>
-                          <h4 className="text-lg font-semibold text-gray-900 mb-2">
+                          <h4 className="text-base md:text-lg font-semibold text-gray-900 mb-1 md:mb-2">
                             Délais de livraison
                           </h4>
                           <ul className="space-y-1">
@@ -717,7 +489,7 @@ export default function ProductDetailPage({ params }) {
                           </ul>
                         </div>
                         <div>
-                          <h4 className="text-lg font-semibold text-gray-900 mb-2">
+                          <h4 className="text-base md:text-lg font-semibold text-gray-900 mb-1 md:mb-2">
                             Frais de port
                           </h4>
                           <ul className="space-y-1">
@@ -738,7 +510,9 @@ export default function ProductDetailPage({ params }) {
               </TabsContent>
             </Tabs>
           </div>
-          <div className="mt-12">
+
+          {/* Back Button */}
+          <div className="mt-6 md:mt-12">
             <Link href="/produits">
               <Button
                 variant="outline"

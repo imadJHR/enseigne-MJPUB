@@ -19,12 +19,14 @@ import {
   Lightbulb,
   Paintbrush,
   HardHat,
+  CheckCircle,
 } from "lucide-react";
 import Image from "next/image";
 import img1 from "@/public/decoupes.jpg";
 import img2 from "@/public/lumineuses.jpg";
 import { useCart } from "../context/CartContext";
 import Footer from "../components/Footer";
+import Link from "next/link";
 
 type SignStyle = "cut-out" | "lighted";
 type Material = "plexiglas" | "pvc" | "dibond" | "aluminium";
@@ -67,6 +69,7 @@ export default function ConfigurateurPage() {
     dimmer: false,
     customDesign: false,
   });
+  const [isSuccessPage, setIsSuccessPage] = useState(false);
 
   const fontOptions: FontOption[] = [
     { value: "Arial, sans-serif", label: "Arial" },
@@ -146,15 +149,11 @@ export default function ConfigurateurPage() {
     return price > 0 ? price.toFixed(2) : "0.00";
   };
 
-  const handleAddToCart = () => {
+  const handleSendEmail = async () => {
     const configuredItem = {
-      id: Date.now().toString(),
       name: `Enseigne personnalisée: '${signText}'`,
       price: Number.parseFloat(calculatePrice()),
-      quantity: 1,
-      image: signStyle === "cut-out" ? "/decoupes.jpg" : "/lumineuses.jpg",
       material: `${material} (${thickness})`,
-      type: "product" as const,
       details: {
         font: fontOptions.find((f) => f.value === font)?.label || font,
         height: `${height}cm`,
@@ -173,8 +172,47 @@ export default function ConfigurateurPage() {
           .join(", "),
       },
     };
-    addToCart(configuredItem);
+
+    try {
+      const response = await fetch("http://localhost:3001/api/configurator-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(configuredItem),
+      });
+
+      if (response.ok) {
+        setIsSuccessPage(true);
+      } else {
+        alert("Échec de l'envoi des informations. Veuillez réessayer.");
+      }
+    } catch (error) {
+      alert("Erreur réseau. Veuillez vérifier votre connexion.");
+    }
   };
+
+  if (isSuccessPage) {
+    return (
+      <div className="min-h-screen bg-gray-900 text-white flex flex-col">
+        <div className="flex-1 flex items-center justify-center px-4 py-12">
+          <div className="bg-white text-green-800 p-8 rounded-lg shadow-lg text-center">
+            <CheckCircle className="h-16 w-16 text-green-600 mx-auto mb-4" />
+            <h2 className="text-3xl font-bold mb-4">Demande de devis envoyée !</h2>
+            <p className="text-lg mb-6 text-gray-700">
+              Merci pour votre demande. Un de nos experts vous contactera bientôt pour discuter de votre projet.
+            </p>
+            <Link href="/">
+              <Button className="mt-8 bg-blue-600 hover:bg-blue-700">
+                Retour à l&apos;accueil
+              </Button>
+            </Link>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 text-black">
@@ -332,7 +370,7 @@ export default function ConfigurateurPage() {
                   </Label>
                   <Select value={thickness} onValueChange={(value: Thickness) => setThickness(value)}>
                     <SelectTrigger className="w-full bg-gray-50 border-gray-300 text-black focus:ring-blue-500">
-                      <SelectValue placeholder="Sélectionnez l&apos;épaisseur" />
+                      <SelectValue placeholder="Sélectionnez l'épaisseur" />
                     </SelectTrigger>
                     <SelectContent className="bg-white text-black border-gray-300">
                       {thicknessOptions.map((opt) => (
@@ -608,15 +646,15 @@ export default function ConfigurateurPage() {
                   <div className="space-y-3 pt-4">
                     <Button
                       className="w-full bg-blue-600 hover:bg-blue-700 text-white text-lg py-3"
-                      onClick={handleAddToCart}
+                      onClick={handleSendEmail}
                     >
-                      <ShoppingCart className="mr-2 h-5 w-5" /> Ajouter au panier
+                      <ShoppingCart className="mr-2 h-5 w-5" /> Envoyer votre enseigne sur mesure
                     </Button>
                     <Button
                       variant="outline"
                       className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 hover:text-blue-700 bg-transparent"
                     >
-                      Demander un devis détaillé
+                      Ajouter au panier pour acheter
                     </Button>
                   </div>
                 </CardContent>
