@@ -123,7 +123,7 @@ export default function CheckoutPage() {
               </p>
               <Link href="/">
                 <Button className="mt-8 bg-blue-600 hover:bg-blue-700">
-                  Retour à l'accueil
+                  Retour à l&apos;accueil
                 </Button>
               </Link>
             </div>

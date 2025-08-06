@@ -4,6 +4,7 @@ import "./globals.css";
 import { CartProvider } from "./context/CartContext";
 import { lazy, Suspense } from "react";
 import Header from "./components/Header";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,17 +34,17 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Enseigne42 - Enseignes Lumineuses & Signalétique sur Mesure",
+    title: "MJ PUB - Enseignes Lumineuses & Signalétique sur Mesure",
     description:
       "Spécialiste de la fabrication et installation d'enseignes LED, lettres découpées et panneaux personnalisés en France. Devis gratuit et rapide.",
-    url: "https://enseigne42.fr",
-    siteName: "Enseigne42",
+    url: "https://MJ PUB .fr",
+    siteName: "MJ PUB ",
     images: [
       {
-        url: "/placeholder.svg?height=630&width=1200&text=Enseigne42 Open Graph Image",
+        url: "/placeholder.svg?height=630&width=1200&text=MJ PUB  Open Graph Image",
         width: 1200,
         height: 630,
-        alt: "Enseigne42 - Enseignes Lumineuses & Signalétique sur Mesure",
+        alt: "MJ PUB  - Enseignes Lumineuses & Signalétique sur Mesure",
       },
     ],
     locale: "fr_FR",
@@ -51,15 +52,19 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Enseigne42 - Enseignes Lumineuses & Signalétique sur Mesure",
+    title: "MJ PUB  - Enseignes Lumineuses & Signalétique sur Mesure",
     description:
       "Spécialiste de la fabrication et installation d'enseignes LED, lettres découpées et panneaux personnalisés en France. Devis gratuit et rapide.",
-    images: ["/placeholder.svg?height=630&width=1200&text=Enseigne42 Twitter Image"],
+    images: [
+      "/placeholder.svg?height=630&width=1200&text=MJ PUB  Twitter Image",
+    ],
   },
 };
 
 const LazyCartSidebar = lazy(() => import("./components/CartSidebar"));
-const LazyScrollToTopButton = lazy(() => import("./components/ScrollToTopButton"));
+const LazyScrollToTopButton = lazy(() =>
+  import("./components/ScrollToTopButton")
+);
 
 export default function RootLayout({
   children,
@@ -68,12 +73,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className="">
-      {/* ✅ Évite tout contenu dynamique ici */}
       <body className={inter.className}>
         <CartProvider>
           <Header />
           {children}
-          
 
           <Suspense fallback={null}>
             <LazyCartSidebar />
@@ -82,6 +85,7 @@ export default function RootLayout({
             <LazyScrollToTopButton />
           </Suspense>
         </CartProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
