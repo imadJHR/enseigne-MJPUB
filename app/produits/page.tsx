@@ -218,7 +218,7 @@ export default function ProductsPage() {
                       }}
                       aria-label={`Image du produit ${product.name}`}
                     ></div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/30 to-transparent"></div>
+                    
                     <Badge
                       className={`absolute top-4 left-4 ${getBadgeColor(
                         product.badge

@@ -48,7 +48,7 @@ export default function HomePage() {
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl mb-10 text-gray-700 max-w-2xl mx-auto font-light">
               Créateur d&apos;enseignes LED, lettres découpées et panneaux
-              personnalisés
+              personnalisés depuis 5 ans
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/configurateur">
@@ -148,7 +148,7 @@ export default function HomePage() {
                     }}
                     aria-label="Image d'une enseigne LED lumineuse pour magasin"
                   ></div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent"></div>
+                  <div className=""></div>
                   <Badge className="absolute top-4 left-4 bg-blue-100 text-blue-800">
                     <Lightbulb className="h-4 w-4 mr-1" />
                     LED
@@ -177,7 +177,7 @@ export default function HomePage() {
                     }}
                     aria-label="Image de lettres découpées en PVC pour signalétique"
                   ></div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent"></div>
+                  
                   <Badge className="absolute top-4 left-4 bg-green-100 text-green-800">
                     <Scissors className="h-4 w-4 mr-1" />
                     Découpe
@@ -205,7 +205,7 @@ export default function HomePage() {
                     }}
                     aria-label="Image d'accessoires pour enseignes lumineuses"
                   ></div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent"></div>
+                 
                   <Badge className="absolute top-4 left-4 bg-pink-100 text-pink-800">
                     <Settings className="h-4 w-4 mr-1" />
                     Accessoires
@@ -256,7 +256,7 @@ export default function HomePage() {
                       height={300}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent"></div>
+                    <div className=""></div>
                     <Badge className="absolute top-4 left-4 bg-yellow-100 text-yellow-800">
                       {post.category}
                     </Badge>
@@ -312,8 +312,8 @@ export default function HomePage() {
             Notre Expertise et Engagement
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Chez Enseigne42, nous sommes fiers de notre savoir-faire artisanal
-            et de notre engagement envers l&apos;excellence. Forts de plus de 15
+            Chez MJ PUB, nous sommes fiers de notre savoir-faire artisanal
+            et de notre engagement envers l&apos;excellence. Forts de plus de 5
             ans d&apos;expérience, nous concevons et fabriquons des solutions de
             signalétique sur mesure qui captivent l&apos;attention et renforcent
             l&apos;identité de votre marque.

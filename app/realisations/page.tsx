@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Image from "next/image";
 
-// Dummy data for realisations
+
 const realisations = [
   {
     id: 1,

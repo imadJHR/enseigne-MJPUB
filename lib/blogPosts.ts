@@ -1,16 +1,16 @@
 export const blogPosts = [
   {
     id: 1,
-    title: "Les Tendances 2024 en Enseignes Lumineuses",
+    title: "Les Tendances 2025 en Enseignes Lumineuses",
     excerpt:
       "Découvrez les innovations et les styles qui marqueront l&apos;année pour votre signalétique.",
-    image: "/placeholder.svg?height=300&width=400&text=Blog Post 1",
-    date: "15 Mars 2024",
+    image: "https://images.pexels.com/photos/7317291/pexels-photo-7317291.jpeg",
+    date: "06 Août 2025",
     author: "MJ PUB Team",
     category: "Tendances",
     slug: "tendances-2024-enseignes-lumineuses",
     content: `
-      <p>Le monde de l&apos;enseigne lumineuse est en constante évolution, et 2024 apporte son lot de nouveautés passionnantes. Voici les tendances à surveiller :</p>
+      <p>Le monde de l&apos;enseigne lumineuse est en constante évolution, et 2025 apporte son lot de nouveautés passionnantes. Voici les tendances à surveiller :</p>
       <h3>1. L&apos;intégration de l&apos;AI et de l&apos;interactivité</h3>
       <p>Les enseignes ne sont plus de simples panneaux statiques. L&apos;intelligence artificielle permet désormais de créer des affichages dynamiques qui s&apos;adaptent au public, à l&apos;heure de la journée ou même à la météo. Imaginez une enseigne qui change de message en fonction des passants ou qui propose des promotions ciblées !</p>
       <h3>2. Le retour du néon flexible</h3>
@@ -29,8 +29,8 @@ export const blogPosts = [
     title: "Comment Choisir le Bon Matériau pour Votre Enseigne ?",
     excerpt:
       "PVC, Dibond, Plexiglas... Guide pour sélectionner le matériau idéal selon vos besoins.",
-    image: "/placeholder.svg?height=300&width=400&text=Blog Post 2",
-    date: "01 Février 2024",
+    image: "https://www.resultats-services-publics.fr/wp-content/uploads/2022/07/0-4.jpg",
+    date: "06 Août 2025",
     author: "MJ PUB Team",
     category: "Conseils",
     slug: "choisir-materiau-enseigne",
@@ -69,8 +69,8 @@ export const blogPosts = [
     title: "L'Impact d'une Bonne Signalétique sur Votre Commerce",
     excerpt:
       "Découvrez comment une enseigne bien conçue peut transformer votre visibilité et attirer plus de clients.",
-    image: "/placeholder.svg?height=300&width=400&text=Blog Post 3",
-    date: "10 Janvier 2024",
+    image: "https://www.realisaprint.com/blog/wp-content/uploads/2023/05/visu-enseigne-drapeau.jpg",
+    date: "06 Août 2025",
     author: "MJ PUB Team",
     category: "Marketing",
     slug: "impact-bonne-signaletique",
@@ -96,8 +96,8 @@ export const blogPosts = [
     title: "L'Éclairage LED : Avantages et Innovations",
     excerpt:
       "Découvrez pourquoi les LEDs sont le choix numéro un pour les enseignes modernes.",
-    image: "/placeholder.svg?height=300&width=400&text=Blog Post 4",
-    date: "25 Décembre 2023",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO0gndiZGW-caZhrOzdCYn6DOcAwzAE1R12w&s",
+    date: "06 Août 2025",
     author: "MJ PUB Team",
     category: "Technologie",
     slug: "eclairage-led-avantages-innovations",
