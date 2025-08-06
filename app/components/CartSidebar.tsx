@@ -127,7 +127,7 @@ export default function CartSidebar() {
                         </div>
                         <div className="text-right mt-1">
                           <span className="text-blue-600 font-bold">
-                            {(item.price * item.quantity).toFixed(2)}MAD
+                            {(item.price * item.quantity).toFixed(2)}€
                           </span>
                         </div>
                       </div>
@@ -145,7 +145,7 @@ export default function CartSidebar() {
             <div className="flex justify-between items-center">
               <span className="text-lg font-bold text-gray-900">Total:</span>
               <span className="text-blue-600 text-xl font-bold">
-                {getTotalPrice().toFixed(2)}MAD HT
+                {getTotalPrice().toFixed(2)}€ HT
               </span>
             </div>
             <div className="space-y-2">

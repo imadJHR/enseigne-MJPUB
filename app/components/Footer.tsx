@@ -113,18 +113,18 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-indigo-400" />
-                <span className="text-gray-300">01 23 45 67 89</span>
+                <span className="text-gray-300">+33 7 81 54 63 59</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-indigo-400" />
-                <span className="text-gray-300">contact@enseigne42.fr</span>
+                <span className="text-gray-300">mjpub59@gmail.com</span>
               </div>
               <div className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 mt-1 text-indigo-400" />
                 <span className="text-gray-300">
-                  123 Rue de l&apos;Industrie
-                  <br />
-                  75001 Paris, France
+                  644 route de lille  <br />saint Amand les eaux 59230
+                 
+                  
                 </span>
               </div>
             </div>

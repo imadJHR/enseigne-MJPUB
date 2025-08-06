@@ -28,7 +28,7 @@ export default function ProductsPage() {
       name: "Enseigne LED Premium",
       category: "led",
       price: 299,
-      image: "/placeholder.svg?height=400&width=600",
+      image: "https://images.pexels.com/photos/8296426/pexels-photo-8296426.jpeg",
       description:
         "Enseigne LED haute qualité avec éclairage uniforme et longue durée de vie",
       rating: 4.8,
@@ -40,7 +40,7 @@ export default function ProductsPage() {
       name: "Lettres Découpées PVC",
       category: "lettres",
       price: 89,
-      image: "/placeholder.svg?height=400&width=600",
+      image: "https://images.pexels.com/photos/6185232/pexels-photo-6185232.jpeg",
       description:
         "Lettres découpées en PVC haute qualité, résistantes aux intempéries",
       rating: 4.7,
@@ -52,7 +52,7 @@ export default function ProductsPage() {
       name: "Panneau Dibond",
       category: "panneaux",
       price: 159,
-      image: "/placeholder.svg?height=400&width=600",
+      image: "https://images.pexels.com/photos/33315758/pexels-photo-33315758.jpeg",
       description: "Panneau en Dibond avec impression haute définition",
       rating: 4.9,
       badge: "Résistant",
@@ -63,7 +63,7 @@ export default function ProductsPage() {
       name: "Enseigne LED RGB",
       category: "led",
       price: 449,
-      image: "/placeholder.svg?height=400&width=600",
+      image: "https://images.pexels.com/photos/7317291/pexels-photo-7317291.jpeg",
       description: "Enseigne LED avec changement de couleurs et télécommande",
       rating: 4.6,
       badge: "Nouveau",
@@ -74,7 +74,7 @@ export default function ProductsPage() {
       name: "Lettres Plexiglas",
       category: "lettres",
       price: 199,
-      image: "/placeholder.svg?height=400&width=600",
+      image: "https://www.deleage.com/store/wp-content/uploads/2021/05/plexi-3mm-d-705x705.jpg",
       description:
         "Lettres en plexiglas transparent ou coloré, finition premium",
       rating: 4.8,
@@ -86,7 +86,7 @@ export default function ProductsPage() {
       name: "Totem Lumineux",
       category: "totems",
       price: 899,
-      image: "/placeholder.svg?height=400&width=600",
+      image: "https://com1pub.com/wp-content/uploads/2020/01/totem-lumineux-harry-cafeteria-2.jpg",
       description:
         "Totem publicitaire lumineux double face avec structure aluminium",
       rating: 4.7,
@@ -242,7 +242,7 @@ export default function ProductsPage() {
                     </p>
                     <div className="flex items-center justify-between">
                       <div className="text-2xl font-bold text-blue-600">
-                        À partir de {product.price} MAD
+                        À partir de {product.price} €
                         <span className="text-sm text-gray-500 ml-1">HT</span>
                       </div>
                       <div className="flex items-center text-blue-600 group-hover:text-blue-800 transition-colors">

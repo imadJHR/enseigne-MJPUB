@@ -35,7 +35,8 @@ export default function AccessoriesPage() {
       id: 1,
       name: "Alimentation LED 12V 60W",
       price: 45,
-      image: "/placeholder.svg?height=300&width=400&text=Alimentation+LED",
+      image:
+        "https://m.media-amazon.com/images/I/81I9VDDMrdL.__AC_SX300_SY300_QL70_ML2_.jpg",
       description: "Alimentation stabilisée pour enseignes LED",
       rating: 4.8,
       inStock: true,
@@ -46,7 +47,7 @@ export default function AccessoriesPage() {
       id: 2,
       name: "Kit de fixation murale",
       price: 25,
-      image: "/placeholder.svg?height=300&width=400&text=Kit+Fixation",
+      image: "https://m.media-amazon.com/images/I/61gUm5cWuzL._AC_UL320_.jpg",
       description: "Supports et fixations pour montage mural",
       rating: 4.9,
       inStock: true,
@@ -57,7 +58,8 @@ export default function AccessoriesPage() {
       id: 3,
       name: "Câble d'extension 5m",
       price: 15,
-      image: "/placeholder.svg?height=300&width=400&text=Cable+Extension",
+      image:
+        "https://m.media-amazon.com/images/I/51qXOjkak+L._AC_SX300_SY300_.jpg",
       description: "Câble d'extension étanche IP65",
       rating: 4.7,
       inStock: true,
@@ -68,7 +70,7 @@ export default function AccessoriesPage() {
       id: 4,
       name: "Contrôleur RGB",
       price: 85,
-      image: "/placeholder.svg?height=300&width=400&text=Controleur+RGB",
+      image: "https://m.media-amazon.com/images/I/617l3T6m7SL._AC_SX425_.jpg",
       description: "Contrôleur pour éclairage RGB avec télécommande",
       rating: 4.6,
       inStock: false,
@@ -79,7 +81,7 @@ export default function AccessoriesPage() {
       id: 5,
       name: "Transformateur 24V 100W",
       price: 65,
-      image: "/placeholder.svg?height=300&width=400&text=Transformateur",
+      image: "https://m.media-amazon.com/images/I/51R1auzLkxL._AC_UL320_.jpg",
       description: "Transformateur haute puissance pour grandes enseignes",
       rating: 4.8,
       inStock: true,
@@ -90,7 +92,7 @@ export default function AccessoriesPage() {
       id: 6,
       name: "Connecteurs étanches",
       price: 12,
-      image: "/placeholder.svg?height=300&width=400&text=Connecteurs",
+      image: "https://m.media-amazon.com/images/I/51XAQP7oWdL._AC_.jpg",
       description: "Lot de 10 connecteurs étanches IP67",
       rating: 4.5,
       inStock: true,
@@ -101,7 +103,7 @@ export default function AccessoriesPage() {
       id: 7,
       name: "Variateur d'intensité",
       price: 35,
-      image: "/placeholder.svg?height=300&width=400&text=Variateur",
+      image: "https://m.media-amazon.com/images/I/51Bm6FNFVAL._AC_UL320_.jpg",
       description: "Variateur pour régler l'intensité lumineuse",
       rating: 4.7,
       inStock: true,
@@ -112,7 +114,7 @@ export default function AccessoriesPage() {
       id: 8,
       name: "Profilé aluminium 2m",
       price: 28,
-      image: "/placeholder.svg?height=300&width=400&text=Profile+Alu",
+      image: "https://m.media-amazon.com/images/I/71LcIWDTz9L.__AC_SY445_SX342_QL70_ML2_.jpg",
       description: "Profilé aluminium pour bandes LED",
       rating: 4.9,
       inStock: true,
@@ -123,7 +125,7 @@ export default function AccessoriesPage() {
       id: 9,
       name: "Alimentation LED 24V 150W",
       price: 89,
-      image: "/placeholder.svg?height=300&width=400&text=Alimentation+24V",
+      image: "https://m.media-amazon.com/images/I/61pipa82VkL._SL1500_.jpg",
       description: "Alimentation haute puissance 24V",
       rating: 4.8,
       inStock: true,
@@ -134,7 +136,7 @@ export default function AccessoriesPage() {
       id: 10,
       name: "Télécommande RGB",
       price: 22,
-      image: "/placeholder.svg?height=300&width=400&text=Telecommande",
+      image: "https://m.media-amazon.com/images/I/61XripREEqL._AC_UL320_.jpg",
       description: "Télécommande pour contrôleurs RGB",
       rating: 4.4,
       inStock: true,
@@ -145,24 +147,14 @@ export default function AccessoriesPage() {
       id: 11,
       name: "Câble alimentation 10m",
       price: 28,
-      image: "/placeholder.svg?height=300&width=400&text=Cable+10m",
+      image: "https://m.media-amazon.com/images/I/71stQ3WP0eL._AC_SL1500_.jpg",
       description: "Câble d'alimentation renforcé 10 mètres",
       rating: 4.6,
       inStock: true,
       category: "cables",
       brand: "CableTech",
     },
-    {
-      id: 12,
-      name: "Support d'angle ajustable",
-      price: 18,
-      image: "/placeholder.svg?height=300&width=400&text=Support+Angle",
-      description: "Support d'angle pour fixation en coin",
-      rating: 4.7,
-      inStock: false,
-      category: "fixations",
-      brand: "FixPro",
-    },
+    
   ];
 
   const categories = [
@@ -352,7 +344,7 @@ export default function AccessoriesPage() {
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="text-xl font-bold text-blue-600">
-                      {accessory.price} MAD HT
+                      {accessory.price} € HT
                     </div>
                     <Button
                       size="sm"

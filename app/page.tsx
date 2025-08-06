@@ -144,7 +144,7 @@ export default function HomePage() {
                   <div
                     className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-300"
                     style={{
-                      backgroundImage: `url('/placeholder.svg?height=400&width=600')`,
+                      backgroundImage: `url('https://images.pexels.com/photos/8296426/pexels-photo-8296426.jpeg')`,
                     }}
                     aria-label="Image d'une enseigne LED lumineuse pour magasin"
                   ></div>
@@ -173,7 +173,7 @@ export default function HomePage() {
                   <div
                     className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-300"
                     style={{
-                      backgroundImage: `url('/placeholder.svg?height=400&width=600')`,
+                      backgroundImage: `url('https://images.pexels.com/photos/6185232/pexels-photo-6185232.jpeg')`,
                     }}
                     aria-label="Image de lettres découpées en PVC pour signalétique"
                   ></div>
@@ -201,7 +201,7 @@ export default function HomePage() {
                   <div
                     className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-300"
                     style={{
-                      backgroundImage: `url('/placeholder.svg?height=400&width=600')`,
+                      backgroundImage: `url('https://www.silamp.fr/cdn/shop/products/6644-thumb-detail-zoom.jpg?v=1683187832&width=800')`,
                     }}
                     aria-label="Image d'accessoires pour enseignes lumineuses"
                   ></div>
@@ -448,14 +448,14 @@ export default function HomePage() {
               className="flex items-center gap-3 bg-white text-blue-600 px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors"
             >
               <Phone className="h-5 w-5" />
-              01 23 45 67 89
+              +33 7 81 54 63 59
             </a>
             <a
               href="mailto:contact@enseigne42.fr"
               className="flex items-center gap-3 bg-white text-green-600 px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors"
             >
               <Mail className="h-5 w-5" />
-              contact@enseigne42.fr
+              mjpub59@gmail.com
             </a>
           </div>
           <div className="mt-8">
