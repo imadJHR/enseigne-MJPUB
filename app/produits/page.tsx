@@ -312,7 +312,7 @@ export default function ProductsPage() {
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Lightbulb className="h-8 w-8 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold mb-2">Fabrication Marocaine</h3>
+              <h3 className="text-xl font-bold mb-2">Fabrication Française</h3>
               <p className="text-gray-600">
                 Tous nos produits sont fabriqués dans nos ateliers en Maroc avec
                 des matériaux de qualité
