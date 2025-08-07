@@ -7,62 +7,127 @@ import { ArrowRight } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Image from "next/image";
-
+import img1 from "@/public/img1.jpg";
+import img2 from "@/public/img2.jpg";
+import img3 from "@/public/img3.jpg";
+import img4 from "@/public/img4.jpg";
+import img6 from "@/public/img6.jpg";
+import img7 from "@/public/img7.jpg";
+import img8 from "@/public/img8.jpg";
+import img9 from "@/public/img9.jpg";
+import img10 from "@/public/img10.jpg";
+import img11 from "@/public/img11.jpg";
+import img12 from "@/public/img12.jpg";
+import img13 from "@/public/img13.jpg";
 
 const realisations = [
   {
     id: 1,
-    title: "Enseigne Restaurant 'Le Gourmet'",
+    title: "Enseigne Lumineuse 'Frite Fraîche Kebab Maison",
     description:
-      "Création et installation d'une enseigne LED sur mesure pour un restaurant gastronomique.",
-    image: "/placeholder.svg?height=400&width=600",
-    category: "Restaurant",
-    slug: "restaurant-le-gourmet",
+      "Création et installation d'une enseigne lumineuse ronde pour un établissement proposant des frites fraîches et des kebabs faits maison. L'enseigne présente un design moderne avec un logo stylisé et des inscriptions claires.",
+    image: img1,
+    category: "Restauration",
+    slug: "frite-fraiche-kebab-maison",
   },
   {
     id: 2,
-    title: "Lettres Découpées 'Boutique Chic'",
+    title: "Enseigne Lumineuse 'TIME FOOD'",
     description:
-      "Lettres découpées en Plexiglas pour une boutique de mode, avec rétro-éclairage subtil.",
-    image: "/placeholder.svg?height=400&width=600",
-    category: "Commerce",
-    slug: "boutique-chic",
+      "Conception et installation d'un ensemble d'enseignes lumineuses pour un restaurant de restauration rapide. Le projet inclut une grande enseigne en lettres boîtiers lumineuses pour le nom 'TIME', un caisson lumineux pour le mot 'FOOD' et deux enseignes rondes suspendues 'Frite Fraîche Kebab Maison'. L'objectif était de maximiser la visibilité nocturne et de créer une identité visuelle moderne et percutante.",
+    image: img2,
+    category: "Restauration",
+    slug: "enseigne-time-food",
   },
   {
     id: 3,
-    title: "Panneau Publicitaire 'Garage Auto'",
+    title: "Enseigne Restaurant 'La Médina'",
     description:
-      "Grand panneau Dibond résistant aux intempéries pour un garage automobile.",
-    image: "/placeholder.svg?height=400&width=600",
-    category: "Industrie",
-    slug: "garage-auto",
+      "Création d'une enseigne de façade pour le restaurant 'La Médina'. Le panneau principal de couleur orange vive est mis en valeur par des lettres découpées en relief. Le design inclut un logo distinctif avec une silhouette de chameau et de palmiers, évoquant une ambiance exotique et chaleureuse.",
+    image: img3,
+    category: "Restaurant",
+    slug: "restaurant-la-medina",
   },
   {
     id: 4,
-    title: "Totem Lumineux 'Centre Commercial'",
+    title: "Enseigne 'Mister Cook 99'",
     description:
-      "Totem lumineux imposant pour l'entrée d'un centre commercial, haute visibilité.",
-    image: "/placeholder.svg?height=400&width=600",
-    category: "Grand Format",
-    slug: "centre-commercial-totem",
+      "Conception et installation d'une enseigne moderne et percutante pour l'établissement 'Mister Cook 99'. Le panneau noir laqué offre un contraste saisissant avec le logo rond et les lettres en relief blanches. L'éclairage extérieur par spots accentue la visibilité et met en avant les services proposés : 'Grillades' et 'Snack'.",
+    image: img4,
+    category: "Restauration Rapide",
+    slug: "enseigne-mister-cook-99",
   },
   {
     id: 5,
-    title: "Enseigne Néon 'Bar Lounge'",
+    title: "Enseigne 'Time Shop'",
     description:
-      "Enseigne LED effet néon pour un bar lounge, ambiance rétro et moderne.",
-    image: "/placeholder.svg?height=400&width=600",
-    category: "Loisirs",
-    slug: "bar-lounge",
+      "Création et installation d'une enseigne de façade et de deux enseignes rondes suspendues pour le commerce 'Time Shop'. Le panneau principal en noir brillant met en valeur le nom du magasin en lettres boîtiers lumineuses. Des informations clés comme les horaires et les services sont ajoutées en rose pour une touche de modernité.",
+    image: img8,
+    category: "Alimentation Générale",
+    slug: "enseigne-time-shop",
   },
   {
     id: 6,
-    title: "Signalétique Intérieure 'Bureau Moderne'",
+    title: "Enseigne Lumineuse 'La Renaissance du Wonen'",
     description:
-      "Signalétique intérieure élégante avec lettres en aluminium brossé pour des bureaux.",
-    image: "/placeholder.svg?height=400&width=600",
-    category: "Intérieur",
-    slug: "bureau-moderne",
+      "Conception et installation d'une enseigne lumineuse pour une boutique de prêt-à-porter. Le nom 'La Renaissance du Wonen' est réalisé en néon LED sur mesure avec une typographie cursive élégante, offrant un style moderne et distinctif qui attire l'attention en soirée.",
+    image: img9,
+    category: "Prêt-à-porter",
+    slug: "la-renaissance-du-wonen",
+  },
+  {
+    id: 7,
+    title: "Enseigne Intérieure 'L'Atelier'",
+    description:
+      "Création d'une enseigne intérieure rétro-éclairée pour une boutique de robes traditionnelles. Le logo 'LH' est mis en valeur par un halo lumineux sur un panneau blanc, accompagné des inscriptions 'L'Atelier' et 'Robes Traditionnelles'. Le design sobre et élégant s'intègre parfaitement à la décoration intérieure de la boutique.",
+    image: img6,
+    category: "Boutique de vêtements",
+    slug: "enseigne-interieure-l-atelier",
+  },
+  {
+    id: 8,
+    title: "Enseigne Façade 'Sidi Bou Said'",
+    description:
+      "Conception d'une enseigne de façade simple et efficace pour un établissement nommé 'Sidi Bou Said'. Les lettres boîtiers en relief, de couleur cyan sur un fond gris clair, offrent une excellente lisibilité et un style épuré, tout en évoquant les couleurs de la célèbre ville tunisienne.",
+    image: img7,
+    category: "Restaurant",
+    slug: "sidi-bou-said",
+  },
+  {
+    id: 9,
+    title: "Enseigne Lumineuse 'La Fayette Food'",
+    description:
+      "Création d'une enseigne de façade lumineuse pour le restaurant 'La Fayette Food'. L'enseigne se compose de lettres boîtiers rétro-éclairées sur un panneau noir, offrant une visibilité maximale de nuit. Les spécialités du restaurant sont clairement indiquées pour attirer la clientèle.",
+    image: img10,
+    category: "Restauration Rapide",
+    slug: "la-fayette-food",
+  },
+  {
+    id: 10,
+    title: "Enseigne de Comptoir 'Number One Tacos'",
+    description:
+      "Réalisation d'une enseigne lumineuse sur mesure pour le comptoir de 'Number One Tacos'. Le caisson rond rétro-éclairé met en valeur le logo de la marque et s'intègre harmonieusement dans la décoration intérieure du restaurant, renforçant l'identité visuelle de l'établissement.",
+    image:img11,
+    category: "Décoration intérieure",
+    slug: "number-one-tacos",
+  },
+  {
+    id: 11,
+    title: "Enseigne 'Barbershop Dender'",
+    description:
+      "Conception d'une enseigne de façade pour le salon 'Barbershop Dender'. L'enseigne combine des lettres boîtiers lumineuses pour le nom et un logo central rond, créant un look à la fois classique et moderne, et maximisant la visibilité du salon.",
+    image: img12,
+    category: "Salon de coiffure",
+    slug: "barbershop-dender",
+  },
+  {
+    id: 12,
+    title: "Enseigne 'SN Institut de Beauté'",
+    description:
+      "Réalisation d'une enseigne moderne pour l'institut de beauté 'SN'. L'enseigne se compose d'un panneau blanc avec le logo 'SN' en lettres boîtiers rétro-éclairées, créant un halo lumineux élégant. Le design épuré et contemporain s'accorde parfaitement avec l'esthétique du bâtiment.",
+    image: img13,
+    category: "Institut de beauté",
+    slug: "sn-institut-de-beaute",
   },
 ];
 
@@ -79,8 +144,8 @@ export default function RealisationsPage() {
               Nos Réalisations
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Découvrez quelques-uns de nos projets d&apos;enseignes lumineuses et
-              signalétiques sur mesure
+              Découvrez quelques-uns de nos projets d&apos;enseignes lumineuses
+              et signalétiques sur mesure
             </p>
           </div>
 
@@ -95,8 +160,8 @@ export default function RealisationsPage() {
                   <Image
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
-                    width={400} 
-                    height={300} 
+                    width={400}
+                    height={300}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
