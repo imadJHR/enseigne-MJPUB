@@ -18,6 +18,13 @@ import img10 from "@/public/img10.jpg";
 import img11 from "@/public/img11.jpg";
 import img12 from "@/public/img12.jpg";
 import img13 from "@/public/img13.jpg";
+import img14 from "@/public/img14.jpg";
+import img15 from "@/public/img15.jpg";
+import img16 from "@/public/img16.jpg";
+import img17 from "@/public/img17.jpg";
+import img18 from "@/public/img18.jpg";
+import img19 from "@/public/img19.jpg";
+import img22 from "@/public/img22.jpg"
 
 export const realisations = [
   {
@@ -219,7 +226,7 @@ export const realisations = [
       "Installation sur le comptoir d'accueil",
       "Intégration au carrelage mosaïque du comptoir",
     ],
-    galleryImages: [img11],
+    galleryImages: [img11,img22],
   },
   {
     id: 11,
@@ -258,6 +265,86 @@ export const realisations = [
       "Texte 'Institut de Beauté' en lettres découpées noires",
     ],
     galleryImages: [img13],
+  },
+  {
+    id: 13,
+    title: "Enseigne Lumineuse 'Fresh Pizza'",
+    description:
+      "Création d'une enseigne de façade et de caissons lumineux ronds pour la pizzeria 'Fresh Pizza'. L'ensemble allie un panneau noir brillant avec des lettres lumineuses et deux caissons suspendus, pour une identité visuelle moderne et une visibilité optimale de jour comme de nuit. Le design met en avant le logo de la marque et les services proposés.",
+    image: img14,
+    category: "Restauration Rapide",
+    slug: "fresh-pizza",
+    client: "Fresh Pizza",
+    location: "Lille, France",
+    date: "Décembre 2024",
+    features: [
+      "Panneau de façade en composite noir",
+      "Lettres boîtiers lumineuses en relief 'Fresh Pizza'",
+      "Deux caissons lumineux ronds avec logo",
+      "Mentions des services : 'Sur Place - Emporter - Livraison'",
+      "Design moderne et harmonieux",
+    ],
+    galleryImages: [img14, img15],
+  },
+  {
+    id: 14,
+    title: "Enseigne Lumineuse 'Shisha Company'",
+    description:
+      "Conception et installation d'une enseigne de façade pour le commerce 'Shisha Company'. Le panneau noir brillant sert de fond à des lettres boîtiers lumineuses blanches et un logo rond rétro-éclairé. Le design sobre et élégant confère une image de marque professionnelle et moderne.",
+    image: img16,
+    category: "Commerce de détail",
+    slug: "shisha-company",
+    client: "Shisha Company",
+    location: "Bruxelles, Belgique",
+    date: "Janvier 2025",
+    features: [
+      "Panneau de façade en composite noir laqué",
+      "Lettres boîtiers lumineuses blanches",
+      "Caisson lumineux rond avec logo",
+      "Éclairage LED intégré et halo lumineux",
+      "Design élégant et professionnel",
+    ],
+    galleryImages: [img16],
+  },
+  {
+    id: 15,
+    title: "Enseigne Lumineuse 'MJ Barber'",
+    description:
+      "Création d'une enseigne de façade pour le salon de coiffure 'MJ Barber'. Le projet combine des lettres lumineuses pour le nom, un caisson lumineux rond avec le logo, et un poteau de barbier traditionnel. Une guirlande lumineuse a été ajoutée pour un effet festif et une visibilité accrue de nuit.",
+    image: img17,
+    category: "Salon de coiffure",
+    slug: "mj-barber",
+    client: "MJ Barber",
+    location: "Paris, France",
+    date: "Février 2025",
+    features: [
+      "Lettres boîtiers lumineuses pour 'MJ BARBER'",
+      "Caisson lumineux rond avec logo",
+      "Guirlande lumineuse LED décorative",
+      "Poteau de barbier traditionnel lumineux",
+      "Combinaison de plusieurs éléments lumineux",
+    ],
+    galleryImages: [img17],
+  },
+  {
+    id: 16,
+    title: "Enseigne Caisson Lumineux 'Ch'ti Kebab'",
+    description:
+      "Réalisation d'un caisson lumineux rond double face pour 'Ch'ti Kebab'. Le design est personnalisé avec un fond jaune vif et une illustration de chef cuisinier. L'enseigne est conçue pour être installée en potence, garantissant une visibilité maximale aux passants.",
+    image: img19,
+    category: "Restauration Rapide",
+    slug: "chti-kebab",
+    client: "Ch'ti Kebab",
+    location: "Lille, France",
+    date: "Mars 2025",
+    features: [
+      "Caisson lumineux rond double face",
+      "Design graphique personnalisé 'Ch'ti Kebab'",
+      "Fond jaune pour un contraste élevé",
+      "Illustration d'un chef stylisé",
+      "Conçu pour une installation sur potence",
+    ],
+    galleryImages: [img19 , img18],
   },
 ];
 
