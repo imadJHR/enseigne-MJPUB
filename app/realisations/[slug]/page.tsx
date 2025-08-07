@@ -365,7 +365,7 @@ export default function RealisationPage({ params }: RealisationPageProps) {
           <div>
             <h1 className="text-4xl font-bold mb-4">Réalisation non trouvée</h1>
             <p className="text-xl text-gray-600">
-              La réalisation que vous recherchez n'existe pas.
+              La réalisation que vous recherchez n&apos;existe pas.
             </p>
             <Link href="/realisations">
               <Button className="mt-8 bg-blue-600 hover:bg-blue-700">
