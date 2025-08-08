@@ -97,10 +97,10 @@ export default function ConfigurateurPage() {
     { value: "sur-pied", label: "Sur Pied (socle)" },
     { value: "entretoises", label: "Entretoises (déport mural)" },
   ];
-
+  
   const basePrices = {
-    "cut-out": 0.8,
-    "lighted": 50,
+    "cut-out": 0.8, //Euros par centimètre carré.
+    "lighted": 50, //(Lettres lumineuses) : 50 euros le mètre carré.
   };
 
   const materialMultipliers: Record<Material, number> = {
