@@ -49,13 +49,16 @@ export default function ContactPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://enseigne-mjpub-api.vercel.app/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://enseigne-mjpub-api.vercel.app/api/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         setIsSubmitted(true);
@@ -238,7 +241,7 @@ export default function ContactPage() {
                     <Mail className="h-6 w-6 text-blue-600 mt-1" />
                     <div>
                       <h3 className="font-bold mb-1 text-gray-900">Email</h3>
-                      <p className="text-gray-600">contact@votreboutique.fr</p>
+                      <p className="text-gray-600">mjpub59@gmail.com</p>
                       <p className="text-sm text-gray-500">Réponse sous 24h</p>
                     </div>
                   </div>
@@ -247,8 +250,8 @@ export default function ContactPage() {
                     <MapPin className="h-6 w-6 text-blue-600 mt-1" />
                     <div>
                       <h3 className="font-bold mb-1 text-gray-900">Adresse</h3>
-                      <p className="text-gray-600">123 Rue de l&apos;Industrie</p>
-                      <p className="text-gray-600">75001 Paris, France</p>
+                      <p className="text-gray-600">644 route de lille saint </p>
+                      <p className="text-gray-600"> Amand les eaux 59230</p>
                     </div>
                   </div>
 
