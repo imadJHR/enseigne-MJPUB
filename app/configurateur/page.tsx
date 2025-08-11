@@ -338,7 +338,7 @@ export default function ConfigurateurPage() {
       <div className="pt-16 sm:pt-20 px-4 py-8 sm:py-12">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12 px-2">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-black to-blue-500 bg-clip-text text-transparent">
               Configurez Votre Enseigne
             </h1>
             <p className="text-base sm:text-xl text-gray-600 max-w-2xl mx-auto">
@@ -882,7 +882,7 @@ export default function ConfigurateurPage() {
                     </Button>
                     <Button
                       variant="outline"
-                      className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 hover:text-blue-700 bg-transparent py-3 rounded-md transition-colors"
+                      className="w-full hidden border-blue-600 text-blue-600 hover:bg-blue-50 hover:text-blue-700 bg-transparent py-3 rounded-md transition-colors"
                       onClick={handleAddToCart}
                     >
                       Ajouter au panier
