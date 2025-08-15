@@ -50,7 +50,7 @@ export default function ContactPage() {
 
     try {
       const response = await fetch(
-        "https://enseigne-mjpub-api.vercel.app/api/contact",
+        "http://localhost:5001/api/contact",
         {
           method: "POST",
           headers: {

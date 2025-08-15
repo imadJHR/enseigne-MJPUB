@@ -12,7 +12,7 @@ import {
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   Ruler,
   Palette,
@@ -25,6 +25,10 @@ import {
   Lightbulb,
   HardHat,
   CheckCircle,
+  Zap,
+  Droplets,
+  Plug,
+  Power,
 } from "lucide-react";
 import Image, { StaticImageData } from "next/image";
 import img1 from "@/public/decoupes.jpg";
@@ -34,17 +38,13 @@ import Footer from "../components/Footer";
 import Link from "next/link";
 
 // Import material images
-import materialPlexi from "@/public/img1.jpg";
 import materialPvc from "@/public/img2.jpg";
-import materialDibond from "@/public/img13.jpg";
 import materialAlu from "@/public/img8.jpg";
 
-// Import example images for cut-out signs
+// Import example images
 import exCutOut1 from "@/public/decoupes.jpg";
 import exCutOut2 from "@/public/img17.jpg";
 import exCutOut3 from "@/public/img14.jpg";
-
-// Import example images for lighted signs
 import exLighted1 from "@/public/img15.jpg";
 import exLighted2 from "@/public/img10.jpg";
 import exLighted3 from "@/public/img16.jpg";
@@ -52,19 +52,28 @@ import exLighted3 from "@/public/img16.jpg";
 // Import fixation images
 import fixationNone from "@/public/img17.jpg";
 import fixationStandoffs from "@/public/img10.jpg";
-import fixationWallMount from "@/public/img11.jpg";
-import fixationSuspended from "@/public/img15.jpg";
-import fixationFloor from "@/public/img10.jpg";
 
+// --- Configuration for API URL ---
+// This uses an environment variable for production and falls back to localhost for development.
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
+
+// Types mis à jour pour correspondre aux nouvelles options
 type SignStyle = "cut-out" | "lighted";
-type Material = "plexiglas" | "pvc" | "dibond" | "aluminium";
-type Thickness = "3mm" | "5mm" | "10mm" | "15mm" | "20mm";
-type FixationType =
-  | "sans"
-  | "gabarit-entretoises"
-  | "murale"
-  | "suspendue"
-  | "sur-pied";
+type Material = "pvc" | "aluminium-composite";
+type ThicknessRelief = "5mm" | "10mm" | "15mm" | "19mm";
+type ThicknessLighted = "15mm" | "19mm";
+type FixationType = "sans" | "gabarit-entretoises";
+type PvcColor = "blanc" | "noir";
+type AluFinition =
+  | "noir"
+  | "rouge"
+  | "blanc"
+  | "miroir_argente"
+  | "miroir_dore"
+  | "brosse_argente"
+  | "brosse_dore";
+type AluChant = "noir" | "blanc";
+
 type LedColor =
   | "blanc-froid"
   | "blanc-chaud"
@@ -72,6 +81,9 @@ type LedColor =
   | "bleu"
   | "vert"
   | "rgb";
+
+type PowerSupplyWattage = "100w" | "150w" | "200w";
+type LedModuleColor = "blanc" | "rouge" | "bleu" | "vert" | "jaune";
 
 interface FontOption {
   value: string;
@@ -88,31 +100,96 @@ interface Options {
   installationKit: boolean;
   dimmer: boolean;
   customDesign: boolean;
+  standoffs: number; // nombre de lots de 50 entretoises
+  glue: boolean;
+  wagoConnectors: boolean;
+  powerSupply: PowerSupplyWattage | null;
+  firemanSwitch: boolean;
+  ledModules: {
+    color: LedModuleColor;
+    quantity: number; // nombre de bandes de 90 modules
+  } | null;
 }
 
 export default function ConfigurateurPage() {
   const { addToCart } = useCart();
   const [signText, setSignText] = useState("Votre Enseigne");
-  const [signStyle, setSignStyle] = useState<SignStyle>("lighted");
+  const [signStyle, setSignStyle] = useState<SignStyle>("cut-out");
   const [font, setFont] = useState("Montserrat, sans-serif");
   const [height, setHeight] = useState(30);
-  const [material, setMaterial] = useState<Material>("plexiglas");
-  const [thickness, setThickness] = useState<Thickness>("5mm");
+  const [material, setMaterial] = useState<Material>("pvc");
+  const [thickness, setThickness] = useState<
+    ThicknessRelief | ThicknessLighted
+  >("5mm");
+  const [pvcColor, setPvcColor] = useState<PvcColor>("blanc");
+  const [aluFinition, setAluFinition] = useState<AluFinition>("noir");
+  const [aluChant, setAluChant] = useState<AluChant>("noir");
   const [textColor, setTextColor] = useState("#000000");
   const [backgroundColor, setBackgroundColor] = useState("#FFFFFF");
   const [ledColor, setLedColor] = useState<LedColor>("blanc-froid");
   const [intensity, setIntensity] = useState(50);
-  const [neonEffect, setNeonEffect] = useState(false);
-  const [fixationType, setFixationType] = useState<FixationType>(
-    "gabarit-entretoises"
-  );
+  const [fixationType, setFixationType] = useState<FixationType>("sans");
   const [options, setOptions] = useState<Options>({
     installationKit: false,
     dimmer: false,
     customDesign: false,
+    standoffs: 0,
+    glue: false,
+    wagoConnectors: false,
+    powerSupply: null,
+    firemanSwitch: false,
+    ledModules: null,
   });
   const [isSuccessPage, setIsSuccessPage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Prix des accessoires
+  const ACCESSOIRES_PRICES = {
+    standoffs: 20, // par lot de 50 pièces
+    glue: 15,
+    wagoConnectors: 10, // prix supposé non fourni dans la fiche
+    powerSupply: {
+      "100w": 45,
+      "150w": 55,
+      "200w": 65,
+    },
+    firemanSwitch: 60,
+    ledModules: 13.5, // par bande de 90 modules
+  };
+
+  // --- Section de définition des prix ---
+  const PRIX_RELIEF = {
+    pvc: {
+      blanc: { "5mm": 110, "10mm": 140, "15mm": 160, "19mm": 180 },
+      noir: { "10mm": 160, "15mm": 180, "19mm": 200 },
+    },
+    "aluminium-composite": {
+      // Epaisseur 3mm fixe
+      noir: 180,
+      rouge: 180,
+      blanc: 160,
+      miroir_argente: 230,
+      miroir_dore: 230,
+      brosse_argente: 230,
+      brosse_dore: 230,
+    },
+  };
+
+  const PRIX_LUMINEUX = {
+    pvc: {
+      // Prix par lettre
+      blanc: { "15mm": 500, "19mm": 600 },
+      noir: { "15mm": 560, "19mm": 660 },
+    },
+    "aluminium-composite": {
+      // Prix au m² pour boitier alu 6cm
+      noir: 950,
+      blanc: 950,
+    },
+  };
+
+  const PRIX_FIXATION_ENTRETOISES = 88;
+  // --- Fin de la section de prix ---
 
   const fontOptions: FontOption[] = [
     { value: "Arial, sans-serif", label: "Arial" },
@@ -132,32 +209,53 @@ export default function ConfigurateurPage() {
   ];
 
   const materialOptions = [
-    { name: "Plexiglas", value: "plexiglas", image: materialPlexi },
     { name: "PVC", value: "pvc", image: materialPvc },
-    { name: "Dibond", value: "dibond", image: materialDibond },
-    { name: "Aluminium", value: "aluminium", image: materialAlu },
+    {
+      name: "Aluminium Composite",
+      value: "aluminium-composite",
+      image: materialAlu,
+    },
   ];
 
-  const thicknessOptions: Thickness[] = ["3mm", "5mm", "10mm", "15mm", "20mm"];
+  const aluFinitionOptions: { value: AluFinition; label: string }[] = [
+    { value: "noir", label: "Noir" },
+    { value: "rouge", label: "Rouge" },
+    { value: "blanc", label: "Blanc" },
+    { value: "miroir_argente", label: "Miroir Argenté" },
+    { value: "miroir_dore", label: "Miroir Doré" },
+    { value: "brosse_argente", label: "Brossé Argenté" },
+    { value: "brosse_dore", label: "Brossé Doré" },
+  ];
+
+  const thicknessOptions = useMemo(() => {
+    if (signStyle === "lighted") {
+      return ["15mm", "19mm"];
+    }
+    // signStyle === 'cut-out' (lettres en relief)
+    if (material === "pvc") {
+      return pvcColor === "blanc"
+        ? ["5mm", "10mm", "15mm", "19mm"]
+        : ["10mm", "15mm", "19mm"];
+    }
+    if (material === "aluminium-composite") {
+      return ["3mm"]; // L'épaisseur est fixe à 3mm sur votre fiche pour l'alu composite
+    }
+    return [];
+  }, [signStyle, material, pvcColor]);
+
+  useEffect(() => {
+    if (!thicknessOptions.includes(thickness as any)) {
+      setThickness(thicknessOptions[0] as any);
+    }
+  }, [thicknessOptions, thickness]);
 
   const fixationOptions: FixationOption[] = [
-    { value: "sans", label: "Sans (gabarit seul)", image: fixationNone },
+    { value: "sans", label: "Sans fixation", image: fixationNone },
     {
       value: "gabarit-entretoises",
-      label: "Gabarit de perçage + Entretoises",
+      label: "Gabarit + Entretoises",
       image: fixationStandoffs,
     },
-    {
-      value: "murale",
-      label: "Murale (vis et chevilles)",
-      image: fixationWallMount,
-    },
-    {
-      value: "suspendue",
-      label: "Suspendue (câbles)",
-      image: fixationSuspended,
-    },
-    { value: "sur-pied", label: "Sur Pied (socle)", image: fixationFloor },
   ];
 
   const examples = {
@@ -173,70 +271,77 @@ export default function ConfigurateurPage() {
     ],
   };
 
-  const basePrices = {
-    "cut-out": 0.8,
-    lighted: 50,
-  };
-
-  const materialMultipliers: Record<Material, number> = {
-    plexiglas: 1.2,
-    pvc: 0.8,
-    dibond: 1.0,
-    aluminium: 1.5,
-  };
-
-  const thicknessMultipliers: Record<Thickness, number> = {
-    "3mm": 0.9,
-    "5mm": 1.0,
-    "10mm": 1.2,
-    "15mm": 1.4,
-    "20mm": 1.6,
-  };
-
-  const optionCosts = {
-    installationKit: 50,
-    dimmer: 30,
-    customDesign: 100,
-    neonEffect: 75,
-  };
-
   const estimatedWidth = useMemo(() => {
     const charWidthFactor = 0.6;
     return Math.max(10, signText.length * height * charWidthFactor);
   }, [signText, height]);
 
   const calculatePrice = (): string => {
-    let price = 0;
-    const surfaceAreaCm2 = estimatedWidth * height;
-    const surfaceAreaM2 = surfaceAreaCm2 / 10000;
+    try {
+      let price = 0;
+      const surfaceAreaM2 = (estimatedWidth * height) / 10000;
 
-    if (signStyle === "cut-out") {
-      price =
-        basePrices[signStyle] *
-        surfaceAreaCm2 *
-        materialMultipliers[material] *
-        thicknessMultipliers[thickness];
-    } else {
-      price =
-        basePrices[signStyle] *
-        surfaceAreaM2 *
-        materialMultipliers[material] *
-        thicknessMultipliers[thickness];
-      price += (intensity / 100) * 50;
-      if (neonEffect) price += optionCosts.neonEffect;
+      if (signStyle === "cut-out") {
+        // Lettres en relief
+        if (material === "pvc") {
+          const prixM2 =
+            PRIX_RELIEF.pvc[pvcColor][thickness as ThicknessRelief];
+          if (!prixM2) throw new Error("Combinaison non disponible");
+          price = surfaceAreaM2 * prixM2;
+        } else if (material === "aluminium-composite") {
+          const prixM2 = PRIX_RELIEF["aluminium-composite"][aluFinition];
+          price = surfaceAreaM2 * prixM2;
+        }
+        // Ajout du coût de fixation
+        if (fixationType === "gabarit-entretoises") {
+          price += PRIX_FIXATION_ENTRETOISES;
+        }
+      } else if (signStyle === "lighted") {
+        // Lettres lumineuses
+        if (material === "pvc") {
+          const prixParLettre =
+            PRIX_LUMINEUX.pvc[pvcColor][thickness as ThicknessLighted];
+          if (!prixParLettre) throw new Error("Combinaison non disponible");
+          price = prixParLettre * (signText.length || 1);
+        } else if (material === "aluminium-composite") {
+          const prixM2 = PRIX_LUMINEUX["aluminium-composite"][aluChant];
+          price = surfaceAreaM2 * prixM2;
+        }
+      }
+
+      // Ajout des accessoires
+      if (options.standoffs > 0) {
+        price += options.standoffs * ACCESSOIRES_PRICES.standoffs;
+      }
+      if (options.glue) {
+        price += ACCESSOIRES_PRICES.glue;
+      }
+      if (options.wagoConnectors) {
+        price += ACCESSOIRES_PRICES.wagoConnectors;
+      }
+      if (options.powerSupply) {
+        price += ACCESSOIRES_PRICES.powerSupply[options.powerSupply];
+      }
+      if (options.firemanSwitch) {
+        price += ACCESSOIRES_PRICES.firemanSwitch;
+      }
+      if (options.ledModules) {
+        price += options.ledModules.quantity * ACCESSOIRES_PRICES.ledModules;
+      }
+
+      return price > 0 ? price.toFixed(2) : "0.00";
+    } catch (error) {
+      return "Sur devis";
     }
-
-    if (options.installationKit) price += optionCosts.installationKit;
-    if (options.dimmer) price += optionCosts.dimmer;
-    if (options.customDesign) price += optionCosts.customDesign;
-
-    return price > 0 ? price.toFixed(2) : "0.00";
   };
+
+  const finalPrice = calculatePrice();
+  const isPriceOnQuote = finalPrice === "Sur devis";
 
   const configuredItem = useMemo(() => {
     return {
       name: `Enseigne personnalisée: '${signText}'`,
-      price: Number.parseFloat(calculatePrice()),
+      price: isPriceOnQuote ? 0 : Number.parseFloat(finalPrice),
       material: `${material} (${thickness})`,
       details: {
         font: fontOptions.find((f) => f.value === font)?.label || font,
@@ -247,20 +352,35 @@ export default function ConfigurateurPage() {
         ...(signStyle === "lighted" && {
           ledColor: ledColor.replace("-", " "),
           intensity: `${intensity}%`,
-          neonEffect: neonEffect ? "Oui" : "Non",
         }),
         fixationType:
           fixationOptions.find((f) => f.value === fixationType)?.label ||
           fixationType,
         additionalOptions: Object.keys(options)
-          .filter((key) => options[key as keyof Options])
-          .map((key) => key.replace(/([A-Z])/g, " $1").toLowerCase())
+          .filter((key) => {
+            if (key === "ledModules") return options.ledModules !== null;
+            if (key === "powerSupply") return options.powerSupply !== null;
+            return (
+              options[key as keyof Options] !== false &&
+              options[key as keyof Options] !== 0
+            );
+          })
+          .map((key) => {
+            if (key === "standoffs")
+              return `${options.standoffs} lot(s) d'entretoises`;
+            if (key === "ledModules")
+              return `${options.ledModules?.quantity} bande(s) LED ${options.ledModules?.color}`;
+            if (key === "powerSupply")
+              return `Alimentation ${options.powerSupply}`;
+            return key.replace(/([A-Z])/g, " $1").toLowerCase();
+          })
           .join(", "),
       },
     };
   }, [
     signText,
-    calculatePrice,
+    finalPrice,
+    isPriceOnQuote,
     material,
     thickness,
     font,
@@ -271,7 +391,6 @@ export default function ConfigurateurPage() {
     signStyle,
     ledColor,
     intensity,
-    neonEffect,
     fixationType,
     options,
     fontOptions,
@@ -281,23 +400,30 @@ export default function ConfigurateurPage() {
   const handleSendEmail = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(
-        "https://enseigne-mjpub-api.vercel.app/api/configurator-email",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(configuredItem),
-        }
-      );
-      if (response.ok) {
+      // ✅ FIXED: Use the API_BASE_URL constant to build the full URL
+      const response = await fetch(`${API_BASE_URL}/api/configurator-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(configuredItem),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Erreur serveur");
+      }
+
+      const data = await response.json();
+      if (data.success) {
         setIsSuccessPage(true);
       } else {
-        alert("Échec de l'envoi des informations. Veuillez réessayer.");
+        alert(`Erreur: ${data.message}`);
       }
-    } catch (error) {
-      alert("Erreur réseau. Veuillez vérifier votre connexion.");
+    } catch (error: any) {
+      // Explicitly type error as any
+      console.error("Détails de l'erreur:", error);
+      alert(`Erreur: ${error.message || "Problème de connexion au serveur"}`);
     } finally {
       setIsLoading(false);
     }
@@ -308,6 +434,8 @@ export default function ConfigurateurPage() {
     alert("Votre enseigne a été ajoutée au panier !");
   };
 
+  // The rest of your component's JSX remains exactly the same.
+  // ... (pasting the full JSX below for completeness) ...
   if (isSuccessPage) {
     return (
       <div className="min-h-screen bg-gray-900 text-white flex flex-col">
@@ -421,11 +549,11 @@ export default function ConfigurateurPage() {
                   Largeur estimée: {estimatedWidth.toFixed(0)} cm
                 </p>
               </div>
-              {/* Style Selection (Cut-out vs Lighted) */}
+              {/* Style Selection */}
               <div className="space-y-2">
                 <Label className="text-base sm:text-lg font-semibold flex items-center text-gray-800">
                   <Layers className="mr-2 h-5 w-5 text-blue-600" />
-                  Type de Support
+                  Type d'Enseigne
                 </Label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Card
@@ -439,13 +567,13 @@ export default function ConfigurateurPage() {
                     <CardContent className="p-4 flex flex-col items-center">
                       <Image
                         src={img1}
-                        alt="Lettres découpées"
+                        alt="Lettres en relief"
                         className="w-24 h-24 sm:w-32 sm:h-32 object-contain mb-2"
                         width={128}
                         height={128}
                       />
                       <h3 className="text-base sm:text-lg font-bold text-gray-900 text-center">
-                        Lettres découpées
+                        Lettres en relief
                       </h3>
                     </CardContent>
                   </Card>
@@ -506,6 +634,81 @@ export default function ConfigurateurPage() {
                   ))}
                 </div>
               </div>
+              {/* Conditional Options for PVC and Aluminium */}
+              {material === "pvc" && (
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="pvcColor"
+                    className="text-base sm:text-lg font-semibold flex items-center text-gray-800"
+                  >
+                    <Palette className="mr-2 h-5 w-5 text-blue-600" />
+                    Couleur du PVC
+                  </Label>
+                  <Select
+                    value={pvcColor}
+                    onValueChange={(v) => setPvcColor(v as PvcColor)}
+                  >
+                    <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white text-gray-900 border-gray-300">
+                      <SelectItem value="blanc">Blanc</SelectItem>
+                      <SelectItem value="noir">Noir</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+              {material === "aluminium-composite" &&
+                signStyle === "cut-out" && (
+                  <div className="space-y-2">
+                    <Label
+                      htmlFor="aluFinition"
+                      className="text-base sm:text-lg font-semibold flex items-center text-gray-800"
+                    >
+                      <Palette className="mr-2 h-5 w-5 text-blue-600" />
+                      Finition Aluminium
+                    </Label>
+                    <Select
+                      value={aluFinition}
+                      onValueChange={(v) => setAluFinition(v as AluFinition)}
+                    >
+                      <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white text-gray-900 border-gray-300">
+                        {aluFinitionOptions.map((opt) => (
+                          <SelectItem key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
+              {material === "aluminium-composite" &&
+                signStyle === "lighted" && (
+                  <div className="space-y-2">
+                    <Label
+                      htmlFor="aluChant"
+                      className="text-base sm:text-lg font-semibold flex items-center text-gray-800"
+                    >
+                      <Palette className="mr-2 h-5 w-5 text-blue-600" />
+                      Couleur du Chant (Bordure)
+                    </Label>
+                    <Select
+                      value={aluChant}
+                      onValueChange={(v) => setAluChant(v as AluChant)}
+                    >
+                      <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white text-gray-900 border-gray-300">
+                        <SelectItem value="noir">Noir</SelectItem>
+                        <SelectItem value="blanc">Blanc</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
               {/* Thickness Selection */}
               <div className="space-y-2">
                 <Label
@@ -517,7 +720,8 @@ export default function ConfigurateurPage() {
                 </Label>
                 <Select
                   value={thickness}
-                  onValueChange={(value: Thickness) => setThickness(value)}
+                  onValueChange={(value) => setThickness(value as any)}
+                  disabled={thicknessOptions.length <= 1}
                 >
                   <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500">
                     <SelectValue placeholder="Sélectionnez l'épaisseur" />
@@ -526,6 +730,10 @@ export default function ConfigurateurPage() {
                     {thicknessOptions.map((opt) => (
                       <SelectItem key={opt} value={opt}>
                         {opt}
+                        {material === "aluminium-composite" &&
+                        signStyle === "cut-out"
+                          ? " (fixe)"
+                          : ""}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -629,20 +837,6 @@ export default function ConfigurateurPage() {
                       className="mt-2 [&>span:first-child]:bg-blue-600 [&>span:first-child]:border-blue-600"
                     />
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="neonEffect"
-                      checked={neonEffect}
-                      onCheckedChange={(checked) => setNeonEffect(!!checked)}
-                      className="border-gray-400 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
-                    />
-                    <label
-                      htmlFor="neonEffect"
-                      className="text-sm sm:text-base font-medium text-gray-800"
-                    >
-                      Effet Néon (+{optionCosts.neonEffect}€)
-                    </label>
-                  </div>
                 </div>
               )}
               {/* Fixation Options with Images */}
@@ -679,70 +873,212 @@ export default function ConfigurateurPage() {
                   ))}
                 </div>
               </div>
-              {/* General Additional Options */}
-              <div className="space-y-2">
-                <Label className="text-base sm:text-lg font-semibold flex items-center text-gray-800">
-                  <Settings className="mr-2 h-5 w-5 text-blue-600" />
-                  Options Supplémentaires
-                </Label>
-                <div className="space-y-2 sm:space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="installationKit"
-                      checked={options.installationKit}
-                      onCheckedChange={(checked) =>
+              {/* Nouvelle section pour les accessoires */}
+              <div className="space-y-4 sm:space-y-6">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 flex items-center">
+                  <Zap className="mr-2 h-5 w-5 text-blue-600" />
+                  Accessoires
+                </h3>
+                {/* Entretoises de fixation */}
+                <div className="space-y-2">
+                  <Label className="text-base sm:text-lg font-semibold flex items-center text-gray-800">
+                    <HardHat className="mr-2 h-5 w-5 text-blue-600" />
+                    Entretoises de fixation
+                  </Label>
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm text-gray-600">
+                      Lot de 50 pièces - 20 €
+                    </p>
+                    <div className="flex items-center space-x-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() =>
+                          setOptions((prev) => ({
+                            ...prev,
+                            standoffs: Math.max(0, prev.standoffs - 1),
+                          }))
+                        }
+                        disabled={options.standoffs <= 0}
+                      >
+                        -
+                      </Button>
+                      <span className="w-8 text-center">
+                        {options.standoffs}
+                      </span>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() =>
+                          setOptions((prev) => ({
+                            ...prev,
+                            standoffs: prev.standoffs + 1,
+                          }))
+                        }
+                      >
+                        +
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                {/* Colle */}
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="glue"
+                    checked={options.glue}
+                    onCheckedChange={(checked) =>
+                      setOptions((prev) => ({ ...prev, glue: !!checked }))
+                    }
+                    className="border-gray-400 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
+                  />
+                  <label
+                    htmlFor="glue"
+                    className="text-sm sm:text-base text-gray-700 font-medium"
+                  >
+                    Colle (15 €)
+                  </label>
+                </div>
+                {/* Connecteurs Wago */}
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="wagoConnectors"
+                    checked={options.wagoConnectors}
+                    onCheckedChange={(checked) =>
+                      setOptions((prev) => ({
+                        ...prev,
+                        wagoConnectors: !!checked,
+                      }))
+                    }
+                    className="border-gray-400 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
+                  />
+                  <label
+                    htmlFor="wagoConnectors"
+                    className="text-sm sm:text-base text-gray-700 font-medium"
+                  >
+                    Connecteurs Wago (10 €)
+                  </label>
+                </div>
+                {/* Alimentation */}
+                <div className="space-y-2">
+                  <Label className="text-base sm:text-lg font-semibold flex items-center text-gray-800">
+                    <Power className="mr-2 h-5 w-5 text-blue-600" />
+                    Alimentation 12V
+                  </Label>
+                  <Select
+                    value={options.powerSupply || ""}
+                    onValueChange={(value) =>
+                      setOptions((prev) => ({
+                        ...prev,
+                        powerSupply: value as PowerSupplyWattage,
+                      }))
+                    }
+                  >
+                    <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500">
+                      <SelectValue placeholder="Sélectionnez une alimentation" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white text-gray-900 border-gray-300">
+                      <SelectItem value="100w">100W - 45 €</SelectItem>
+                      <SelectItem value="150w">150W - 55 €</SelectItem>
+                      <SelectItem value="200w">200W - 65 €</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                {/* Interrupteur pompiers */}
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="firemanSwitch"
+                    checked={options.firemanSwitch}
+                    onCheckedChange={(checked) =>
+                      setOptions((prev) => ({
+                        ...prev,
+                        firemanSwitch: !!checked,
+                      }))
+                    }
+                    className="border-gray-400 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
+                  />
+                  <label
+                    htmlFor="firemanSwitch"
+                    className="text-sm sm:text-base text-gray-700 font-medium"
+                  >
+                    Interrupteur pompiers (60 €)
+                  </label>
+                </div>
+                {/* Modules LED */}
+                <div className="space-y-2">
+                  <Label className="text-base sm:text-lg font-semibold flex items-center text-gray-800">
+                    <Droplets className="mr-2 h-5 w-5 text-blue-600" />
+                    Modules LED (13,50 € par bande de 90 modules)
+                  </Label>
+                  <div className="grid grid-cols-2 gap-4">
+                    <Select
+                      value={options.ledModules?.color || ""}
+                      onValueChange={(color) =>
                         setOptions((prev) => ({
                           ...prev,
-                          installationKit: !!checked,
+                          ledModules: {
+                            color: color as LedModuleColor,
+                            quantity: prev.ledModules?.quantity || 1,
+                          },
                         }))
                       }
-                      className="border-gray-400 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
-                    />
-                    <label
-                      htmlFor="installationKit"
-                      className="text-sm sm:text-base text-gray-700 font-medium"
                     >
-                      Kit d&apos;installation (+{optionCosts.installationKit}€)
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="dimmer"
-                      checked={options.dimmer}
-                      onCheckedChange={(checked) =>
-                        setOptions((prev) => ({ ...prev, dimmer: !!checked }))
-                      }
-                      className="border-gray-400 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
-                    />
-                    <label
-                      htmlFor="dimmer"
-                      className="text-sm sm:text-base text-gray-700 font-medium"
-                    >
-                      Variateur de luminosité (+{optionCosts.dimmer}€)
-                    </label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="customDesign"
-                      checked={options.customDesign}
-                      onCheckedChange={(checked) =>
-                        setOptions((prev) => ({
-                          ...prev,
-                          customDesign: !!checked,
-                        }))
-                      }
-                      className="border-gray-400 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
-                    />
-                    <label
-                      htmlFor="customDesign"
-                      className="text-sm sm:text-base font-medium text-gray-700"
-                    >
-                      Design personnalisé par un expert (+
-                      {optionCosts.customDesign}€)
-                    </label>
+                      <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500">
+                        <SelectValue placeholder="Couleur" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white text-gray-900 border-gray-300">
+                        <SelectItem value="blanc">Blanc</SelectItem>
+                        <SelectItem value="rouge">Rouge</SelectItem>
+                        <SelectItem value="bleu">Bleu</SelectItem>
+                        <SelectItem value="vert">Vert</SelectItem>
+                        <SelectItem value="jaune">Jaune</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <div className="flex items-center space-x-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() =>
+                          setOptions((prev) => ({
+                            ...prev,
+                            ledModules: {
+                              color: prev.ledModules?.color || "blanc",
+                              quantity: Math.max(
+                                1,
+                                (prev.ledModules?.quantity || 1) - 1
+                              ),
+                            },
+                          }))
+                        }
+                        disabled={
+                          !options.ledModules ||
+                          options.ledModules.quantity <= 1
+                        }
+                      >
+                        -
+                      </Button>
+                      <span className="w-8 text-center">
+                        {options.ledModules?.quantity || 0}
+                      </span>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() =>
+                          setOptions((prev) => ({
+                            ...prev,
+                            ledModules: {
+                              color: prev.ledModules?.color || "blanc",
+                              quantity: (prev.ledModules?.quantity || 0) + 1,
+                            },
+                          }))
+                        }
+                      >
+                        +
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
+            
             </div>
             {/* Visual Preview and Order Summary */}
             <div className="lg:sticky lg:top-4 h-fit">
@@ -770,11 +1106,6 @@ export default function ConfigurateurPage() {
                           signStyle === "lighted"
                             ? `0 0 ${intensity / 10}px ${ledColor}`
                             : "none",
-                        ...(neonEffect &&
-                          signStyle === "lighted" && {
-                            boxShadow: `0 0 10px ${ledColor}, 0 0 20px ${ledColor}, 0 0 30px ${ledColor}`,
-                            textShadow: `0 0 5px ${ledColor}, 0 0 10px ${ledColor}`,
-                          }),
                       }}
                     >
                       {signText || "Votre Enseigne"}
@@ -814,7 +1145,7 @@ export default function ConfigurateurPage() {
                       <span className="font-medium">Style:</span>
                       <span className="capitalize font-semibold text-right">
                         {signStyle === "cut-out"
-                          ? "Lettres découpées"
+                          ? "Lettres en relief"
                           : "Lettres lumineuses"}
                       </span>
                     </div>
@@ -830,44 +1161,30 @@ export default function ConfigurateurPage() {
                         {estimatedWidth.toFixed(0)} x {height} cm
                       </span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium">Options:</span>
-                      <span className="font-semibold text-right max-w-[60%]">
-                        {Object.values(options).some(Boolean)
-                          ? Object.keys(options)
-                              .filter((key) => options[key as keyof Options])
-                              .map((key) =>
-                                key.replace(/([A-Z])/g, " $1").toLowerCase()
-                              )
-                              .join(", ")
-                          : "Aucune"}
-                        {signStyle === "lighted" &&
-                          neonEffect &&
-                          ", effet néon"}
-                      </span>
-                    </div>
                   </div>
                   <div className="border-t border-gray-300 pt-4 space-y-2">
                     <div className="flex justify-between items-center text-lg font-bold text-gray-900">
                       <span>Prix Estimé HT:</span>
                       <span className="text-blue-600 text-xl sm:text-2xl">
-                        {calculatePrice()} €
+                        {isPriceOnQuote ? finalPrice : `${finalPrice} €`}
                       </span>
                     </div>
-                    <div className="flex justify-between text-sm sm:text-base text-gray-600">
-                      <span>TVA (20%):</span>
-                      <span className="font-medium">
-                        {(Number.parseFloat(calculatePrice()) * 0.2).toFixed(2)}{" "}
-                        €
-                      </span>
-                    </div>
-                    <div className="flex justify-between text-base sm:text-lg font-bold text-gray-900">
-                      <span>Total TTC:</span>
-                      <span className="font-bold text-xl text-blue-800">
-                        {(Number.parseFloat(calculatePrice()) * 1.2).toFixed(2)}{" "}
-                        €
-                      </span>
-                    </div>
+                    {!isPriceOnQuote && (
+                      <>
+                        <div className="flex justify-between text-sm sm:text-base text-gray-600">
+                          <span>TVA (20%):</span>
+                          <span className="font-medium">
+                            {(Number.parseFloat(finalPrice) * 0.2).toFixed(2)} €
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-base sm:text-lg font-bold text-gray-900">
+                          <span>Total TTC:</span>
+                          <span className="font-bold text-xl text-blue-800">
+                            {(Number.parseFloat(finalPrice) * 1.2).toFixed(2)} €
+                          </span>
+                        </div>
+                      </>
+                    )}
                   </div>
                   <div className="space-y-2 sm:space-y-3 pt-4">
                     <Button

@@ -51,7 +51,7 @@ export default function CheckoutPage() {
     };
 
     try {
-      const response = await fetch("https://enseigne-mjpub-api.vercel.app/api/checkout", {
+      const response = await fetch("http://localhost:5001/api/checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
