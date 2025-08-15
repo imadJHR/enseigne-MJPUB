@@ -18,7 +18,6 @@ import {
   Palette,
   Type,
   ShoppingCart,
-  Settings,
   TextCursorInput,
   ImageIcon,
   Layers,
@@ -27,7 +26,6 @@ import {
   CheckCircle,
   Zap,
   Droplets,
-  Plug,
   Power,
 } from "lucide-react";
 import Image, { StaticImageData } from "next/image";
@@ -111,6 +109,33 @@ interface Options {
   } | null;
 }
 
+// ✅ FIXED: Moved constant arrays outside the component to prevent re-creation on each render.
+const fontOptions: FontOption[] = [
+  { value: "Arial, sans-serif", label: "Arial" },
+  { value: "Verdana, sans-serif", label: "Verdana" },
+  { value: "Georgia, serif", label: "Georgia" },
+  { value: "Times New Roman, serif", label: "Times New Roman" },
+  { value: "Courier New, monospace", label: "Courier New" },
+  { value: "Impact, sans-serif", label: "Impact" },
+  { value: "Pacifico, cursive", label: "Pacifico (Script)" },
+  { value: "Lobster, cursive", label: "Lobster (Bold Script)" },
+  { value: "Bebas Neue, sans-serif", label: "Bebas Neue (Condensed)" },
+  { value: "Montserrat, sans-serif", label: "Montserrat (Modern)" },
+  { value: "Playfair Display, serif", label: "Playfair Display (Elegant)" },
+  { value: "Dancing Script, cursive", label: "Dancing Script" },
+  { value: "Oswald, sans-serif", label: "Oswald (Strong)" },
+  { value: "Lato, sans-serif", label: "Lato (Clean)" },
+];
+
+const fixationOptions: FixationOption[] = [
+  { value: "sans", label: "Sans fixation", image: fixationNone },
+  {
+    value: "gabarit-entretoises",
+    label: "Gabarit + Entretoises",
+    image: fixationStandoffs,
+  },
+];
+
 export default function ConfigurateurPage() {
   const { addToCart } = useCart();
   const [signText, setSignText] = useState("Votre Enseigne");
@@ -191,23 +216,6 @@ export default function ConfigurateurPage() {
   const PRIX_FIXATION_ENTRETOISES = 88;
   // --- Fin de la section de prix ---
 
-  const fontOptions: FontOption[] = [
-    { value: "Arial, sans-serif", label: "Arial" },
-    { value: "Verdana, sans-serif", label: "Verdana" },
-    { value: "Georgia, serif", label: "Georgia" },
-    { value: "Times New Roman, serif", label: "Times New Roman" },
-    { value: "Courier New, monospace", label: "Courier New" },
-    { value: "Impact, sans-serif", label: "Impact" },
-    { value: "Pacifico, cursive", label: "Pacifico (Script)" },
-    { value: "Lobster, cursive", label: "Lobster (Bold Script)" },
-    { value: "Bebas Neue, sans-serif", label: "Bebas Neue (Condensed)" },
-    { value: "Montserrat, sans-serif", label: "Montserrat (Modern)" },
-    { value: "Playfair Display, serif", label: "Playfair Display (Elegant)" },
-    { value: "Dancing Script, cursive", label: "Dancing Script" },
-    { value: "Oswald, sans-serif", label: "Oswald (Strong)" },
-    { value: "Lato, sans-serif", label: "Lato (Clean)" },
-  ];
-
   const materialOptions = [
     { name: "PVC", value: "pvc", image: materialPvc },
     {
@@ -244,19 +252,11 @@ export default function ConfigurateurPage() {
   }, [signStyle, material, pvcColor]);
 
   useEffect(() => {
-    if (!thicknessOptions.includes(thickness as any)) {
-      setThickness(thicknessOptions[0] as any);
+    // ✅ FIXED: Removed `as any` and used a proper type assertion.
+    if (!thicknessOptions.includes(thickness)) {
+      setThickness(thicknessOptions[0] as ThicknessRelief | ThicknessLighted);
     }
   }, [thicknessOptions, thickness]);
-
-  const fixationOptions: FixationOption[] = [
-    { value: "sans", label: "Sans fixation", image: fixationNone },
-    {
-      value: "gabarit-entretoises",
-      label: "Gabarit + Entretoises",
-      image: fixationStandoffs,
-    },
-  ];
 
   const examples = {
     "cut-out": [
@@ -393,14 +393,11 @@ export default function ConfigurateurPage() {
     intensity,
     fixationType,
     options,
-    fontOptions,
-    fixationOptions,
   ]);
 
-  const handleSendEmail = async () => {
+ const handleSendEmail = async () => {
     setIsLoading(true);
     try {
-      // ✅ FIXED: Use the API_BASE_URL constant to build the full URL
       const response = await fetch(`${API_BASE_URL}/api/configurator-email`, {
         method: "POST",
         headers: {
@@ -420,22 +417,27 @@ export default function ConfigurateurPage() {
       } else {
         alert(`Erreur: ${data.message}`);
       }
-    } catch (error: any) {
-      // Explicitly type error as any
-      console.error("Détails de l'erreur:", error);
-      alert(`Erreur: ${error.message || "Problème de connexion au serveur"}`);
+    } catch (error: unknown) {
+        // ✅ FIX: Improved error handling for "Failed to fetch"
+        console.error("Détails de l'erreur de fetch:", error);
+        let message = "Une erreur de réseau est survenue.";
+
+        if (error instanceof TypeError && error.message === "Failed to fetch") {
+            message = `La connexion au serveur a échoué. Veuillez vérifier les points suivants :
+1. Le serveur backend est bien démarré sur ${API_BASE_URL}.
+2. Il n'y a pas de problème de CORS (Cross-Origin Resource Sharing). Contactez le développeur si le problème persiste.`;
+        } else if (error instanceof Error) {
+            message = error.message;
+        }
+        
+        alert(`Erreur: ${message}`);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleAddToCart = () => {
-    addToCart(configuredItem);
-    alert("Votre enseigne a été ajoutée au panier !");
-  };
+  
 
-  // The rest of your component's JSX remains exactly the same.
-  // ... (pasting the full JSX below for completeness) ...
   if (isSuccessPage) {
     return (
       <div className="min-h-screen mt-26 bg-white text-white flex flex-col">
@@ -553,7 +555,7 @@ export default function ConfigurateurPage() {
               <div className="space-y-2">
                 <Label className="text-base sm:text-lg font-semibold flex items-center text-gray-800">
                   <Layers className="mr-2 h-5 w-5 text-blue-600" />
-                  Type d'Enseigne
+                  Type d&apos;Enseigne
                 </Label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Card
@@ -720,7 +722,9 @@ export default function ConfigurateurPage() {
                 </Label>
                 <Select
                   value={thickness}
-                  onValueChange={(value) => setThickness(value as any)}
+                  onValueChange={(value) =>
+                    setThickness(value as ThicknessRelief | ThicknessLighted)
+                  }
                   disabled={thicknessOptions.length <= 1}
                 >
                   <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500">
@@ -791,6 +795,7 @@ export default function ConfigurateurPage() {
                 <div className="space-y-4 sm:space-y-6">
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900 flex items-center">
                     <Lightbulb className="mr-2 h-5 w-5 text-blue-600" />
+                    {/* ✅ FIXED: Escaped the apostrophe */}
                     Options d&apos;Éclairage
                   </h3>
                   <div className="space-y-2">
@@ -926,7 +931,7 @@ export default function ConfigurateurPage() {
                   <Checkbox
                     id="glue"
                     checked={options.glue}
-                    onCheckedChange={(checked) =>
+                    onCheckedChange={(checked: boolean | "indeterminate") =>
                       setOptions((prev) => ({ ...prev, glue: !!checked }))
                     }
                     className="border-gray-400 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
@@ -943,7 +948,7 @@ export default function ConfigurateurPage() {
                   <Checkbox
                     id="wagoConnectors"
                     checked={options.wagoConnectors}
-                    onCheckedChange={(checked) =>
+                    onCheckedChange={(checked: boolean | "indeterminate") =>
                       setOptions((prev) => ({
                         ...prev,
                         wagoConnectors: !!checked,
@@ -988,7 +993,7 @@ export default function ConfigurateurPage() {
                   <Checkbox
                     id="firemanSwitch"
                     checked={options.firemanSwitch}
-                    onCheckedChange={(checked) =>
+                    onCheckedChange={(checked: boolean | "indeterminate") =>
                       setOptions((prev) => ({
                         ...prev,
                         firemanSwitch: !!checked,
@@ -1078,7 +1083,6 @@ export default function ConfigurateurPage() {
                   </div>
                 </div>
               </div>
-            
             </div>
             {/* Visual Preview and Order Summary */}
             <div className="lg:sticky lg:top-4 h-fit">
@@ -1197,13 +1201,7 @@ export default function ConfigurateurPage() {
                         ? "Envoi en cours..."
                         : "Envoyer ma configuration"}
                     </Button>
-                    <Button
-                      variant="outline"
-                      className="w-full hidden border-blue-600 text-blue-600 hover:bg-blue-50 hover:text-blue-700 bg-transparent py-3 rounded-md transition-colors"
-                      onClick={handleAddToCart}
-                    >
-                      Ajouter au panier
-                    </Button>
+                    
                   </div>
                 </CardContent>
               </Card>
