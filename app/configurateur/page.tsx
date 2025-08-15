@@ -438,7 +438,7 @@ export default function ConfigurateurPage() {
   // ... (pasting the full JSX below for completeness) ...
   if (isSuccessPage) {
     return (
-      <div className="min-h-screen bg-gray-900 text-white flex flex-col">
+      <div className="min-h-screen mt-26 bg-white text-white flex flex-col">
         <div className="flex-1 flex items-center justify-center px-4 py-12">
           <div className="bg-white text-green-800 p-6 sm:p-8 rounded-lg shadow-lg text-center max-w-md w-full mx-4">
             <CheckCircle className="h-16 w-16 text-green-600 mx-auto mb-4" />
