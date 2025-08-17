@@ -25,10 +25,9 @@ import {
   CheckCircle,
   Zap,
 } from "lucide-react";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
-import { useCart } from "../context/CartContext";
 
 // --- IMPORT IMAGES ---
 // Remplacez les chemins par les bonnes images
@@ -42,7 +41,7 @@ import exLighted1 from "@/public/decoupes.jpg";
 import exLighted2 from "@/public/decoupes.jpg";
 import exLighted3 from "@/public/decoupes.jpg";
 import exLightedBox1 from "@/public/decoupes.jpg";
-import pvcBlancImg from"@/public/decoupes.jpg";
+import pvcBlancImg from "@/public/decoupes.jpg";
 import pvcNoirImg from "@/public/decoupes.jpg";
 import aluBlancImg from "@/public/decoupes.jpg";
 import aluNoirImg from "@/public/decoupes.jpg";
@@ -92,7 +91,7 @@ interface FontOption {
 interface FixationOption {
   value: FixationType;
   label: string;
-  image: any;
+  image: StaticImageData;
 }
 
 interface Options {
@@ -113,7 +112,7 @@ interface Options {
 interface MaterialOption {
   id: string;
   label: string;
-  image: any;
+  image: StaticImageData;
   material: Material;
   thickness: ThicknessRelief | ThicknessLighted;
   color: PvcColor | AluFinition | AluChant;
@@ -196,7 +195,6 @@ const PRIX_BOITIER_LUMINEUX = {
 
 // --- Main Component ---
 export default function ConfigurateurPage() {
-  const { addToCart } = useCart();
   const [signText, setSignText] = useState("Votre Enseigne");
   const [signStyle, setSignStyle] = useState<SignStyle>("cut-out");
   const [font, setFont] = useState("Montserrat, sans-serif");
@@ -212,7 +210,7 @@ export default function ConfigurateurPage() {
   const [ledColor, setLedColor] = useState<LedColor>("blanc-froid");
   const [intensity, setIntensity] = useState(50);
   const [fixationType, setFixationType] = useState<FixationType>("sans");
-  const [options, setOptions] = useState<Options>({
+  const [options] = useState<Options>({
     installationKit: false,
     dimmer: false,
     customDesign: false,
@@ -227,7 +225,7 @@ export default function ConfigurateurPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   // --- Material Image Mapping ---
-  const materialImageMap: Record<string, any> = {
+  const materialImageMap: Record<string, StaticImageData> = {
     "pvc-blanc": pvcBlancImg,
     "pvc-noir": pvcNoirImg,
     "alu-blanc": aluBlancImg,
@@ -291,7 +289,7 @@ export default function ConfigurateurPage() {
       });
     }
     return options;
-  }, [signStyle]);
+  }, [signStyle, materialImageMap]);
 
   // --- Update Material Selection ---
   useEffect(() => {
@@ -378,7 +376,7 @@ export default function ConfigurateurPage() {
       if (options.firemanSwitch) price += ACCESSOIRES_PRICES.firemanSwitch;
       if (options.ledModules) price += options.ledModules.quantity * ACCESSOIRES_PRICES.ledModules;
       return price > 0 ? price.toFixed(2) : "0.00";
-    } catch (error) {
+    } catch {
       return "Sur devis";
     }
   };
