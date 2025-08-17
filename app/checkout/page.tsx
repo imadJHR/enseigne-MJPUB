@@ -117,10 +117,7 @@ export default function CheckoutPage() {
                 Votre commande a été soumise avec succès. Nous vous contacterons
                 bientôt pour confirmer les détails de la livraison.
               </p>
-              <p className="text-sm text-gray-700">
-                Un récapitulatif de votre commande a été envoyé à votre adresse
-                e-mail.
-              </p>
+              
               <Link href="/">
                 <Button className="mt-8 bg-blue-600 hover:bg-blue-700">
                   Retour à l&apos;accueil

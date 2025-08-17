@@ -233,7 +233,7 @@ export default function ContactPage() {
                       <h3 className="font-bold mb-1 text-gray-900">
                         Téléphone
                       </h3>
-                      <p className="text-gray-600">+33 1 23 45 67 89</p>
+                      <p className="text-gray-600">+33 7 81 54 63 59</p>
                     </div>
                   </div>
 
