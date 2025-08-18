@@ -30,28 +30,26 @@ import Link from "next/link";
 import Footer from "../components/Footer";
 
 // --- IMPORT IMAGES ---
-// Remplacez les chemins par les bonnes images
-import imgCutOut from "@/public/decoupes.jpg";
-import imgLighted from "@/public/decoupes.jpg";
-import imgLightedBox from "@/public/decoupes.jpg";
-import exCutOut1 from "@/public/decoupes.jpg";
-import exCutOut2 from "@/public/decoupes.jpg";
-import exCutOut3 from "@/public/decoupes.jpg";
-import exLighted1 from "@/public/decoupes.jpg";
-import exLighted2 from "@/public/decoupes.jpg";
-import exLighted3 from "@/public/decoupes.jpg";
-import exLightedBox1 from "@/public/decoupes.jpg";
-import pvcBlancImg from "@/public/decoupes.jpg";
-import pvcNoirImg from "@/public/decoupes.jpg";
-import aluBlancImg from "@/public/decoupes.jpg";
-import aluNoirImg from "@/public/decoupes.jpg";
-import aluRougeImg from "@/public/decoupes.jpg";
-import aluMiroirImg from "@/public/decoupes.jpg";
-import aluBrosseImg from "@/public/decoupes.jpg";
-import fixationNone from "@/public/decoupes.jpg";
-import fixationStandoffs from "@/public/decoupes.jpg";
+import imgCutOut from "@/public/imgCutOut.png";
+import imgLighted from "@/public/imgLightedt.png";
+import imgLightedBox from "@/public/imgLightedBoxx.png";
+import exCutOut1 from "@/public/exCutOut1.png";
+import exCutOut2 from "@/public/exCutOut2.png";
+import exCutOut3 from "@/public/exCutOut3.png";
+import exLighted1 from "@/public/exLighted1.png";
+import exLighted2 from "@/public/exLighted2.png";
+import exLighted3 from "@/public/exLighted3.png";
+import exLightedBox1 from "@/public/exLightedBox1.png";
+import pvcBlancImg from "@/public/pvcBlancImg.png";
+import pvcNoirImg from "@/public/pvcNoirImg.png";
+import aluBlancImg from "@/public/aluBlancImg.png";
+import aluNoirImg from "@/public/aluNoirImg.png";
+import aluRougeImg from "@/public/aluRougeImg.png";
+import aluMiroirImg from "@/public/aluMiroirImg.png";
+import aluBrosseImg from "@/public/aluBrosseImg.png";
+import fixationNone from "@/public/fixationNone.png";
+import fixationStandoffs from "@/public/fixationStandoffs.png";
 
-// --- Configuration for API URL ---
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
 
 // --- TYPES ---
@@ -193,7 +191,6 @@ const PRIX_BOITIER_LUMINEUX = {
   "chant-alu-blanc-plexi-blanc": 950,
 };
 
-// --- Main Component ---
 export default function ConfigurateurPage() {
   const [signText, setSignText] = useState("Votre Enseigne");
   const [signStyle, setSignStyle] = useState<SignStyle>("cut-out");
@@ -474,8 +471,8 @@ export default function ConfigurateurPage() {
   // --- Success Page ---
   if (isSuccessPage) {
     return (
-      <div className="min-h-screen mt-20 sm:mt-26 bg-white text-white flex flex-col">
-        <div className="flex-1 flex items-center justify-center px-4 py-8 sm:py-12">
+      <div className="min-h-screen flex flex-col">
+        <main className="flex-1 flex items-center justify-center px-4 py-8 sm:py-12">
           <div className="bg-white text-green-800 p-4 sm:p-6 rounded-lg shadow-lg text-center max-w-md w-full mx-4">
             <CheckCircle className="h-12 w-12 sm:h-16 sm:w-16 text-green-600 mx-auto mb-3" />
             <h2 className="text-xl sm:text-2xl font-bold mb-3">
@@ -490,7 +487,7 @@ export default function ConfigurateurPage() {
               </Button>
             </Link>
           </div>
-        </div>
+        </main>
         <Footer />
       </div>
     );
@@ -498,27 +495,28 @@ export default function ConfigurateurPage() {
 
   // --- Main Render ---
   return (
-    <div className="min-h-screen bg-gray-50 text-black">
-      <div className="pt-12 sm:pt-16 px-2 sm:px-4 py-4 sm:py-8">
+    <div className="min-h-screen bg-gray-50 text-black flex flex-col">
+      <main className="flex-1 pt-12 sm:pt-16 px-2 sm:px-4 py-4 sm:py-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-4 sm:mb-8 px-2">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl uppercase mt-4 font-bold mb-2 sm:mb-4 bg-gradient-to-r from-black to-blue-500 bg-clip-text text-transparent">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase mt-16 font-bold mb-2 sm:mb-4 bg-gradient-to-r from-black to-blue-500 bg-clip-text text-transparent">
               Créez vos lettres découpées
             </h1>
-            <p className="text-sm sm:text-base md:text-xl text-gray-600 max-w-xl sm:max-w-2xl mx-auto">
+            <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 max-w-xl sm:max-w-2xl mx-auto">
               Créez votre enseigne lumineuse ou signalétique sur mesure et obtenez un devis instantané.
             </p>
           </div>
+          
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
             {/* Configuration Options */}
-            <div className="lg:col-span-2 bg-white p-2 sm:p-4 md:p-6 rounded-lg shadow-lg border border-gray-200 space-y-4 sm:space-y-6">
+            <div className="lg:col-span-2 bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-lg border border-gray-200 space-y-4 sm:space-y-6">
               {/* Sign Text */}
               <div className="space-y-1">
                 <Label
                   htmlFor="signText"
-                  className="text-sm sm:text-base font-semibold flex items-center text-gray-800"
+                  className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800"
                 >
-                  <TextCursorInput className="mr-2 h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />{" "}
+                  <TextCursorInput className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                   Texte de l&apos;Enseigne
                 </Label>
                 <Input
@@ -528,26 +526,27 @@ export default function ConfigurateurPage() {
                   value={signText}
                   onChange={(e) => setSignText(e.target.value)}
                   maxLength={50}
-                  className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 rounded-md p-2 text-sm sm:text-base"
+                  className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 rounded-md p-2 text-xs sm:text-sm md:text-base"
                 />
                 <p className="text-xs text-gray-500">
                   Max 50 caractères. Restants: {50 - signText.length}
                 </p>
               </div>
+              
               {/* Font */}
               <div className="space-y-1">
                 <Label
                   htmlFor="font"
-                  className="text-sm sm:text-base font-semibold flex items-center text-gray-800"
+                  className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800"
                 >
-                  <Type className="mr-2 h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />{" "}
+                  <Type className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                   Police
                 </Label>
                 <Select value={font} onValueChange={setFont}>
-                  <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500 text-sm sm:text-base">
+                  <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500 text-xs sm:text-sm md:text-base">
                     <SelectValue placeholder="Sélectionnez une police" />
                   </SelectTrigger>
-                  <SelectContent className="bg-white text-gray-900 border-gray-300 max-h-60 overflow-y-auto text-sm sm:text-base">
+                  <SelectContent className="bg-white text-gray-900 border-gray-300 max-h-60 overflow-y-auto text-xs sm:text-sm md:text-base">
                     {fontOptions.map((option) => (
                       <SelectItem key={option.value} value={option.value}>
                         <span style={{ fontFamily: option.value }}>{option.label}</span>
@@ -556,13 +555,14 @@ export default function ConfigurateurPage() {
                   </SelectContent>
                 </Select>
               </div>
+              
               {/* Height */}
               <div className="space-y-1">
                 <Label
                   htmlFor="height"
-                  className="text-sm sm:text-base font-semibold flex items-center text-gray-800"
+                  className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800"
                 >
-                  <Ruler className="mr-2 h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />{" "}
+                  <Ruler className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                   Hauteur du Texte:{" "}
                   <span className="font-bold ml-1">{height} cm</span>
                 </Label>
@@ -579,24 +579,25 @@ export default function ConfigurateurPage() {
                   Largeur estimée: {estimatedWidth.toFixed(0)} cm
                 </p>
               </div>
+              
               {/* Sign Style */}
               <div className="space-y-1">
-                <Label className="text-sm sm:text-base font-semibold flex items-center text-gray-800">
-                  <Layers className="mr-2 h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />{" "}
+                <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                  <Layers className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                   Type d&apos;Enseigne
                 </Label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
                   <Card
                     className={`cursor-pointer border-2 ${
                       signStyle === "cut-out" ? "border-blue-600 ring-2 ring-blue-500" : "border-gray-300"
                     } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
                     onClick={() => setSignStyle("cut-out")}
                   >
-                    <CardContent className="p-2 sm:p-4 flex flex-col items-center">
+                    <CardContent className="p-2 sm:p-3 flex flex-col items-center">
                       <Image
                         src={imgCutOut}
                         alt="Lettres en relief"
-                        className="w-16 h-16 sm:w-20 sm:h-20 object-contain mb-1 sm:mb-2"
+                        className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain mb-1 sm:mb-2"
                         width={80}
                         height={80}
                       />
@@ -611,11 +612,11 @@ export default function ConfigurateurPage() {
                     } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
                     onClick={() => setSignStyle("lighted")}
                   >
-                    <CardContent className="p-2 sm:p-4 flex flex-col items-center">
+                    <CardContent className="p-2 sm:p-3 flex flex-col items-center">
                       <Image
                         src={imgLighted}
                         alt="Lettres lumineuses"
-                        className="w-16 h-16 sm:w-20 sm:h-20 object-contain mb-1 sm:mb-2"
+                        className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain mb-1 sm:mb-2"
                         width={80}
                         height={80}
                       />
@@ -630,11 +631,11 @@ export default function ConfigurateurPage() {
                     } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
                     onClick={() => setSignStyle("lighted-box")}
                   >
-                    <CardContent className="p-2 sm:p-4 flex flex-col items-center">
+                    <CardContent className="p-2 sm:p-3 flex flex-col items-center">
                       <Image
                         src={imgLightedBox}
                         alt="Lettres lumineuses boîtier alu"
-                        className="w-16 h-16 sm:w-20 sm:h-20 object-contain mb-1 sm:mb-2"
+                        className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain mb-1 sm:mb-2"
                         width={80}
                         height={80}
                       />
@@ -645,10 +646,11 @@ export default function ConfigurateurPage() {
                   </Card>
                 </div>
               </div>
+              
               {/* Materials */}
               <div className="space-y-1">
-                <Label className="text-sm sm:text-base font-semibold flex items-center text-gray-800">
-                  <Ruler className="mr-2 h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />{" "}
+                <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                  <Ruler className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                   Matériaux
                 </Label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
@@ -661,10 +663,10 @@ export default function ConfigurateurPage() {
                       onClick={() => setSelectedMaterialId(opt.id)}
                     >
                       <CardContent className="p-1 sm:p-2 flex flex-col items-center">
-                        <div className="relative w-full h-12 sm:h-16 mb-1 overflow-hidden rounded-md">
+                        <div className="relative w-full h-10 sm:h-12 md:h-16 mb-1 overflow-hidden rounded-md">
                           <Image src={opt.image} alt={opt.label} layout="fill" objectFit="cover" />
                         </div>
-                        <h3 className="text-xs sm:text-sm capitalize font-semibold text-center h-8 flex items-center justify-center">
+                        <h3 className="text-xxs sm:text-xs md:text-sm capitalize font-semibold text-center h-8 flex items-center justify-center">
                           {opt.label}
                         </h3>
                       </CardContent>
@@ -672,46 +674,54 @@ export default function ConfigurateurPage() {
                   ))}
                 </div>
               </div>
+              
               {/* Text Color & Background Color */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <div className="space-y-1">
-                  <Label className="text-sm sm:text-base font-semibold flex items-center text-gray-800">
-                    <Palette className="mr-2 h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />{" "}
+                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                    <Palette className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                     Couleur du Texte
                   </Label>
-                  <Input
-                    type="color"
-                    value={textColor}
-                    onChange={(e) => setTextColor(e.target.value)}
-                    className="w-full h-8 sm:h-10 p-0 border-none"
-                  />
+                  <div className="flex items-center gap-2">
+                    <Input
+                      type="color"
+                      value={textColor}
+                      onChange={(e) => setTextColor(e.target.value)}
+                      className="w-10 h-10 p-0 border-none rounded-md overflow-hidden"
+                    />
+                    <span className="text-xs sm:text-sm">{textColor.toUpperCase()}</span>
+                  </div>
                 </div>
                 <div className="space-y-1">
-                  <Label className="text-sm sm:text-base font-semibold flex items-center text-gray-800">
-                    <Palette className="mr-2 h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />{" "}
+                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                    <Palette className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                     Couleur de Fond
                   </Label>
-                  <Input
-                    type="color"
-                    value={backgroundColor}
-                    onChange={(e) => setBackgroundColor(e.target.value)}
-                    className="w-full h-8 sm:h-10 p-0 border-none"
-                  />
+                  <div className="flex items-center gap-2">
+                    <Input
+                      type="color"
+                      value={backgroundColor}
+                      onChange={(e) => setBackgroundColor(e.target.value)}
+                      className="w-10 h-10 p-0 border-none rounded-md overflow-hidden"
+                    />
+                    <span className="text-xs sm:text-sm">{backgroundColor.toUpperCase()}</span>
+                  </div>
                 </div>
               </div>
+              
               {/* Lighting Options (if lighted or lighted-box) */}
               {(signStyle === "lighted" || signStyle === "lighted-box") && (
-                <div className="space-y-2 sm:space-y-4">
+                <div className="space-y-2 sm:space-y-3">
                   <div className="space-y-1">
-                    <Label className="text-sm sm:text-base font-semibold flex items-center text-gray-800">
-                      <Lightbulb className="mr-2 h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />{" "}
+                    <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                      <Lightbulb className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                       Couleur des LEDs
                     </Label>
                     <Select value={ledColor} onValueChange={(value: LedColor) => setLedColor(value)}>
-                      <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500 text-sm sm:text-base">
+                      <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500 text-xs sm:text-sm md:text-base">
                         <SelectValue placeholder="Sélectionnez une couleur" />
                       </SelectTrigger>
-                      <SelectContent className="bg-white text-gray-900 border-gray-300 text-sm sm:text-base">
+                      <SelectContent className="bg-white text-gray-900 border-gray-300 text-xs sm:text-sm md:text-base">
                         <SelectItem value="blanc-froid">Blanc Froid</SelectItem>
                         <SelectItem value="blanc-chaud">Blanc Chaud</SelectItem>
                         <SelectItem value="rouge">Rouge</SelectItem>
@@ -722,8 +732,8 @@ export default function ConfigurateurPage() {
                     </Select>
                   </div>
                   <div className="space-y-1">
-                    <Label className="text-sm sm:text-base font-semibold flex items-center text-gray-800">
-                      <Zap className="mr-2 h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />{" "}
+                    <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                      <Zap className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                       Intensité: {intensity}%
                     </Label>
                     <Slider
@@ -737,13 +747,14 @@ export default function ConfigurateurPage() {
                   </div>
                 </div>
               )}
+              
               {/* Fixation (for all sign types) */}
               <div className="space-y-1">
-                <Label className="text-sm sm:text-base font-semibold flex items-center text-gray-800">
-                  <HardHat className="mr-2 h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />{" "}
+                <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                  <HardHat className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                   Fixation
                 </Label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                   {fixationOptions.map((option) => (
                     <Card
                       key={option.value}
@@ -752,11 +763,11 @@ export default function ConfigurateurPage() {
                       } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
                       onClick={() => setFixationType(option.value)}
                     >
-                      <CardContent className="p-2 sm:p-4 flex flex-col items-center">
-                        <div className="relative w-full h-16 sm:h-24 mb-1 sm:mb-2 overflow-hidden rounded-md">
+                      <CardContent className="p-2 sm:p-3 flex flex-col items-center">
+                        <div className="relative w-full h-12 sm:h-16 md:h-20 mb-1 sm:mb-2 overflow-hidden rounded-md">
                           <Image src={option.image} alt={option.label} layout="fill" objectFit="cover" />
                         </div>
-                        <h3 className="text-sm sm:text-base font-bold text-gray-900 text-center">
+                        <h3 className="text-xs sm:text-sm md:text-base font-bold text-gray-900 text-center">
                           {option.label}
                         </h3>
                       </CardContent>
@@ -765,18 +776,19 @@ export default function ConfigurateurPage() {
                 </div>
               </div>
             </div>
+            
             {/* Preview and Summary */}
             <div className="lg:sticky lg:top-4 h-fit self-start">
               <Card className="bg-white border-gray-200 shadow-lg w-full">
-                <CardHeader className="border-b border-gray-200 p-2 sm:p-4">
-                  <CardTitle className="flex items-center text-lg sm:text-xl font-bold text-gray-900">
-                    <ImageIcon className="mr-2 h-5 w-5 text-blue-600" />
+                <CardHeader className="border-b border-gray-200 p-2 sm:p-3 md:p-4">
+                  <CardTitle className="flex items-center text-sm sm:text-base md:text-lg font-bold text-gray-900">
+                    <ImageIcon className="mr-2 h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
                     Aperçu & Récapitulatif
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="p-2 sm:p-4 space-y-2 sm:space-y-4">
+                <CardContent className="p-2 sm:p-3 md:p-4 space-y-2 sm:space-y-3">
                   <div
-                    className="relative w-full h-24 sm:h-32 rounded-lg flex items-center justify-center overflow-hidden border border-gray-300"
+                    className="relative w-full h-20 sm:h-24 md:h-32 rounded-lg flex items-center justify-center overflow-hidden border border-gray-300"
                     style={{ backgroundColor: backgroundColor }}
                   >
                     <p
@@ -784,7 +796,7 @@ export default function ConfigurateurPage() {
                       style={{
                         fontFamily: font,
                         color: textColor,
-                        fontSize: `${Math.min(2, height / 20)}rem`,
+                        fontSize: `${Math.min(1.5, height / 25)}rem`,
                         lineHeight: 1,
                         textShadow:
                           signStyle === "lighted" || signStyle === "lighted-box"
@@ -796,12 +808,12 @@ export default function ConfigurateurPage() {
                     </p>
                   </div>
                   <div className="space-y-1 sm:space-y-2">
-                    <h4 className="text-sm sm:text-base font-bold text-gray-800">
+                    <h4 className="text-xs sm:text-sm md:text-base font-bold text-gray-800">
                       Exemples de réalisations
                     </h4>
                     <div className="grid grid-cols-2 gap-1 sm:gap-2">
                       {examples[signStyle].map((example) => (
-                        <div key={example.id} className="relative w-full h-16 sm:h-24 overflow-hidden rounded-md">
+                        <div key={example.id} className="relative w-full h-12 sm:h-16 md:h-20 overflow-hidden rounded-md">
                           <Image
                             src={example.img}
                             alt={example.alt}
@@ -813,7 +825,7 @@ export default function ConfigurateurPage() {
                       ))}
                     </div>
                   </div>
-                  <div className="space-y-1 sm:space-y-2 text-gray-700 text-xs sm:text-sm border-t border-gray-200 pt-2 sm:pt-4">
+                  <div className="space-y-1 sm:space-y-2 text-gray-700 text-xxs sm:text-xs md:text-sm border-t border-gray-200 pt-2 sm:pt-3">
                     <div className="flex justify-between items-center">
                       <span className="font-medium">Texte:</span>
                       <span className="font-semibold text-right">{signText || "Non défini"}</span>
@@ -849,23 +861,23 @@ export default function ConfigurateurPage() {
                       </span>
                     </div>
                   </div>
-                  <div className="border-t border-gray-300 pt-2 sm:pt-4 space-y-1 sm:space-y-2">
+                  <div className="border-t border-gray-300 pt-2 sm:pt-3 space-y-1 sm:space-y-2">
                     {!isPriceOnQuote && (
-                      <div className="flex justify-between text-sm sm:text-base font-bold text-gray-900">
+                      <div className="flex justify-between text-xs sm:text-sm md:text-base font-bold text-gray-900">
                         <span>Total TTC:</span>
-                        <span className="font-bold text-lg sm:text-xl text-blue-800">
+                        <span className="font-bold text-sm sm:text-base md:text-lg text-blue-800">
                           {(Number.parseFloat(finalPrice) * 1.2).toFixed(2)} €
                         </span>
                       </div>
                     )}
                   </div>
-                  <div className="space-y-1 sm:space-y-2 pt-2 sm:pt-4">
+                  <div className="space-y-1 sm:space-y-2 pt-2 sm:pt-3">
                     <Button
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base py-2 sm:py-3 rounded-md transition-colors"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm md:text-base py-1 sm:py-2 rounded-md transition-colors"
                       onClick={handleSendEmail}
                       disabled={isLoading}
                     >
-                      <ShoppingCart className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                      <ShoppingCart className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                       {isLoading ? "Envoi en cours..." : "Envoyer ma configuration"}
                     </Button>
                   </div>
@@ -874,7 +886,7 @@ export default function ConfigurateurPage() {
             </div>
           </div>
         </div>
-      </div>
+      </main>
       <Footer />
     </div>
   );
