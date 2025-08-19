@@ -49,6 +49,7 @@ import aluMiroirImg from "@/public/aluMiroirImg.png";
 import aluBrosseImg from "@/public/aluBrosseImg.png";
 import fixationNone from "@/public/fixationNone.png";
 import fixationStandoffs from "@/public/fixationStandoffs.png";
+import Head from "next/head";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
 
@@ -198,7 +199,9 @@ export default function ConfigurateurPage() {
   const [height, setHeight] = useState(30);
   const [selectedMaterialId, setSelectedMaterialId] = useState("pvc-5mm-blanc");
   const [material, setMaterial] = useState<Material>("pvc");
-  const [thickness, setThickness] = useState<ThicknessRelief | ThicknessLighted>("5mm");
+  const [thickness, setThickness] = useState<
+    ThicknessRelief | ThicknessLighted
+  >("5mm");
   const [pvcColor, setPvcColor] = useState<PvcColor>("blanc");
   const [aluFinition, setAluFinition] = useState<AluFinition>("blanc");
   const [aluChant, setAluChant] = useState<AluChant>("blanc");
@@ -239,18 +242,22 @@ export default function ConfigurateurPage() {
     const options: MaterialOption[] = [];
     if (signStyle === "cut-out") {
       (Object.keys(PRIX_RELIEF.pvc) as PvcColor[]).forEach((color) => {
-        (Object.keys(PRIX_RELIEF.pvc[color]) as ThicknessRelief[]).forEach((thick) => {
-          options.push({
-            id: `pvc-${thick}-${color}`,
-            label: `PVC ${thick} ${color}`,
-            image: materialImageMap[`pvc-${color}`] || pvcBlancImg,
-            material: "pvc",
-            thickness: thick,
-            color: color,
-          });
-        });
+        (Object.keys(PRIX_RELIEF.pvc[color]) as ThicknessRelief[]).forEach(
+          (thick) => {
+            options.push({
+              id: `pvc-${thick}-${color}`,
+              label: `PVC ${thick} ${color}`,
+              image: materialImageMap[`pvc-${color}`] || pvcBlancImg,
+              material: "pvc",
+              thickness: thick,
+              color: color,
+            });
+          }
+        );
       });
-      (Object.keys(PRIX_RELIEF["aluminium-composite"]) as AluFinition[]).forEach((finition) => {
+      (
+        Object.keys(PRIX_RELIEF["aluminium-composite"]) as AluFinition[]
+      ).forEach((finition) => {
         options.push({
           id: `aluminium-composite-3mm-${finition}`,
           label: `Alu Dibond 3mm ${finition.replace(/_/g, " ")}`,
@@ -262,19 +269,23 @@ export default function ConfigurateurPage() {
       });
     } else if (signStyle === "lighted") {
       (Object.keys(PRIX_LUMINEUX.pvc) as PvcColor[]).forEach((color) => {
-        (Object.keys(PRIX_LUMINEUX.pvc[color]) as ThicknessLighted[]).forEach((thick) => {
-          options.push({
-            id: `pvc-${thick}-${color}`,
-            label: `PVC Lumineux ${thick} ${color}`,
-            image: materialImageMap[`pvc-${color}`] || pvcBlancImg,
-            material: "pvc",
-            thickness: thick,
-            color: color,
-          });
-        });
+        (Object.keys(PRIX_LUMINEUX.pvc[color]) as ThicknessLighted[]).forEach(
+          (thick) => {
+            options.push({
+              id: `pvc-${thick}-${color}`,
+              label: `PVC Lumineux ${thick} ${color}`,
+              image: materialImageMap[`pvc-${color}`] || pvcBlancImg,
+              material: "pvc",
+              thickness: thick,
+              color: color,
+            });
+          }
+        );
       });
     } else if (signStyle === "lighted-box") {
-      (Object.keys(PRIX_LUMINEUX_BOX["aluminium-composite"]) as AluChant[]).forEach((chant) => {
+      (
+        Object.keys(PRIX_LUMINEUX_BOX["aluminium-composite"]) as AluChant[]
+      ).forEach((chant) => {
         options.push({
           id: `aluminium-composite-6cm-${chant}`,
           label: `Alu Boîtier Chant ${chant}`,
@@ -290,7 +301,9 @@ export default function ConfigurateurPage() {
 
   // --- Update Material Selection ---
   useEffect(() => {
-    const selectedOption = allMaterialOptions.find((opt) => opt.id === selectedMaterialId);
+    const selectedOption = allMaterialOptions.find(
+      (opt) => opt.id === selectedMaterialId
+    );
     if (selectedOption) {
       setMaterial(selectedOption.material);
       setThickness(selectedOption.thickness);
@@ -321,7 +334,11 @@ export default function ConfigurateurPage() {
       { id: 3, img: exLighted3, alt: "Exemple de lettre lumineuse 3" },
     ],
     "lighted-box": [
-      { id: 1, img: exLightedBox1, alt: "Exemple de lettre lumineuse boîtier 1" },
+      {
+        id: 1,
+        img: exLightedBox1,
+        alt: "Exemple de lettre lumineuse boîtier 1",
+      },
     ],
   };
 
@@ -338,7 +355,8 @@ export default function ConfigurateurPage() {
       const surfaceAreaM2 = (estimatedWidth * height) / 10000;
       if (signStyle === "cut-out") {
         if (material === "pvc") {
-          const prixM2 = PRIX_RELIEF.pvc[pvcColor]?.[thickness as ThicknessRelief];
+          const prixM2 =
+            PRIX_RELIEF.pvc[pvcColor]?.[thickness as ThicknessRelief];
           if (!prixM2) throw new Error("Combinaison non disponible");
           price = surfaceAreaM2 * prixM2;
         } else if (material === "aluminium-composite") {
@@ -350,7 +368,8 @@ export default function ConfigurateurPage() {
         }
       } else if (signStyle === "lighted") {
         if (material === "pvc") {
-          const prixParLettre = PRIX_LUMINEUX.pvc[pvcColor]?.[thickness as ThicknessLighted];
+          const prixParLettre =
+            PRIX_LUMINEUX.pvc[pvcColor]?.[thickness as ThicknessLighted];
           if (!prixParLettre) throw new Error("Combinaison non disponible");
           price = prixParLettre * (signText.length || 1);
         }
@@ -362,16 +381,21 @@ export default function ConfigurateurPage() {
         price = surfaceAreaM2 * prixM2;
         if (fixationType === "boitier-lumineux") {
           const boitierOption: BoitierLumineuxOption =
-            aluChant === "noir" ? "chant-alu-noir-plexi-blanc" : "chant-alu-blanc-plexi-blanc";
+            aluChant === "noir"
+              ? "chant-alu-noir-plexi-blanc"
+              : "chant-alu-blanc-plexi-blanc";
           price += PRIX_BOITIER_LUMINEUX[boitierOption];
         }
       }
-      if (options.standoffs > 0) price += options.standoffs * ACCESSOIRES_PRICES.standoffs;
+      if (options.standoffs > 0)
+        price += options.standoffs * ACCESSOIRES_PRICES.standoffs;
       if (options.glue) price += ACCESSOIRES_PRICES.glue;
       if (options.wagoConnectors) price += ACCESSOIRES_PRICES.wagoConnectors;
-      if (options.powerSupply) price += ACCESSOIRES_PRICES.powerSupply[options.powerSupply];
+      if (options.powerSupply)
+        price += ACCESSOIRES_PRICES.powerSupply[options.powerSupply];
       if (options.firemanSwitch) price += ACCESSOIRES_PRICES.firemanSwitch;
-      if (options.ledModules) price += options.ledModules.quantity * ACCESSOIRES_PRICES.ledModules;
+      if (options.ledModules)
+        price += options.ledModules.quantity * ACCESSOIRES_PRICES.ledModules;
       return price > 0 ? price.toFixed(2) : "0.00";
     } catch {
       return "Sur devis";
@@ -383,7 +407,9 @@ export default function ConfigurateurPage() {
 
   // --- Configured Item ---
   const configuredItem = useMemo(() => {
-    const selectedOption = allMaterialOptions.find((opt) => opt.id === selectedMaterialId);
+    const selectedOption = allMaterialOptions.find(
+      (opt) => opt.id === selectedMaterialId
+    );
     return {
       name: `Enseigne personnalisée: '${signText}'`,
       price: isPriceOnQuote ? 0 : Number.parseFloat(finalPrice),
@@ -403,17 +429,22 @@ export default function ConfigurateurPage() {
         fixationType:
           fixationType === "boitier-lumineux"
             ? `Boîtier lumineux ${aluChant} + Plexi Blanc`
-            : fixationOptions.find((f) => f.value === fixationType)?.label || fixationType,
+            : fixationOptions.find((f) => f.value === fixationType)?.label ||
+              fixationType,
         additionalOptions: Object.keys(options)
           .filter((key) => {
             const value = options[key as keyof Options];
-            if (key === "ledModules" || key === "powerSupply") return value !== null;
+            if (key === "ledModules" || key === "powerSupply")
+              return value !== null;
             return value !== false && value !== 0;
           })
           .map((key) => {
-            if (key === "standoffs") return `${options.standoffs} lot(s) d'entretoises`;
-            if (key === "ledModules") return `${options.ledModules?.quantity} bande(s) LED ${options.ledModules?.color}`;
-            if (key === "powerSupply") return `Alimentation ${options.powerSupply}`;
+            if (key === "standoffs")
+              return `${options.standoffs} lot(s) d'entretoises`;
+            if (key === "ledModules")
+              return `${options.ledModules?.quantity} bande(s) LED ${options.ledModules?.color}`;
+            if (key === "powerSupply")
+              return `Alimentation ${options.powerSupply}`;
             return key.replace(/([A-Z])/g, " $1").toLowerCase();
           })
           .join(", "),
@@ -479,7 +510,8 @@ export default function ConfigurateurPage() {
               Demande de devis envoyée !
             </h2>
             <p className="text-sm sm:text-base mb-4 text-gray-700">
-              Merci pour votre demande. Un de nos experts vous contactera bientôt.
+              Merci pour votre demande. Un de nos experts vous contactera
+              bientôt.
             </p>
             <Link href="/">
               <Button className="mt-4 sm:mt-6 bg-blue-600 hover:bg-blue-700 text-sm sm:text-base">
@@ -493,9 +525,60 @@ export default function ConfigurateurPage() {
     );
   }
 
-  // --- Main Render ---
+ 
   return (
     <div className="min-h-screen bg-gray-50 text-black flex flex-col">
+      <Head>
+        {/* --- Primary Meta Tags --- */}
+        <title>
+          Configurateur d&apos;Enseigne sur Mesure | Créez vos Lettres Découpées
+        </title>
+        <meta
+          name="description"
+          content="Personnalisez votre enseigne en relief, lumineuse ou en boîtier. Obtenez un devis instantané pour vos lettres découpées en PVC ou aluminium. Idéal pour votre commerce ou entreprise."
+        />
+        <meta
+          name="keywords"
+          content="enseigne sur mesure, lettres découpées, configurateur enseigne, signalétique, PVC, aluminium dibond, enseigne lumineuse, rétroéclairage LED, devis en ligne, enseigne magasin"
+        />
+        <meta name="author" content="MJ-PUB" />
+
+        {/* --- Open Graph / Facebook Meta Tags --- */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://www.yourwebsite.com/configurateur"
+        />
+        <meta
+          property="og:title"
+          content="Configurateur d'Enseigne sur Mesure | Créez vos Lettres Découpées"
+        />
+        <meta
+          property="og:description"
+          content="Personnalisez votre enseigne en relief, lumineuse ou en boîtier. Obtenez un devis instantané pour vos lettres découpées en PVC ou aluminium."
+        />
+        {/* IMPORTANT: Replace with an absolute URL to a compelling image for social sharing */}
+        <meta
+          property="og:image"
+          content="https://www.yourwebsite.com/og-image-configurateur.png"
+        />
+        <meta property="og:site_name" content="Your Site Name" />
+        <meta property="og:locale" content="fr_FR" />
+        {/* IMPORTANT: Replace with an absolute URL to a compelling image for Twitter cards */}
+        <meta
+          name="twitter:image"
+          content="https://www.yourwebsite.com/twitter-image-configurateur.png"
+        />
+        {/* Optional: Replace with your site's Twitter handle */}
+        <meta name="twitter:creator" content="@YourTwitterHandle" />
+
+        {/* --- Other Meta Tags --- */}
+        <link
+          rel="canonical"
+          href="https://www.yourwebsite.com/configurateur"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <main className="flex-1 pt-12 sm:pt-16 px-2 sm:px-4 py-4 sm:py-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-4 sm:mb-8 px-2">
@@ -503,10 +586,11 @@ export default function ConfigurateurPage() {
               Créez vos lettres découpées
             </h1>
             <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 max-w-xl sm:max-w-2xl mx-auto">
-              Créez votre enseigne lumineuse ou signalétique sur mesure et obtenez un devis instantané.
+              Créez votre enseigne lumineuse ou signalétique sur mesure et
+              obtenez un devis instantané.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
             {/* Configuration Options */}
             <div className="lg:col-span-2 bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-lg border border-gray-200 space-y-4 sm:space-y-6">
@@ -532,7 +616,7 @@ export default function ConfigurateurPage() {
                   Max 50 caractères. Restants: {50 - signText.length}
                 </p>
               </div>
-              
+
               {/* Font */}
               <div className="space-y-1">
                 <Label
@@ -549,13 +633,15 @@ export default function ConfigurateurPage() {
                   <SelectContent className="bg-white text-gray-900 border-gray-300 max-h-60 overflow-y-auto text-xs sm:text-sm md:text-base">
                     {fontOptions.map((option) => (
                       <SelectItem key={option.value} value={option.value}>
-                        <span style={{ fontFamily: option.value }}>{option.label}</span>
+                        <span style={{ fontFamily: option.value }}>
+                          {option.label}
+                        </span>
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
-              
+
               {/* Height */}
               <div className="space-y-1">
                 <Label
@@ -579,7 +665,7 @@ export default function ConfigurateurPage() {
                   Largeur estimée: {estimatedWidth.toFixed(0)} cm
                 </p>
               </div>
-              
+
               {/* Sign Style */}
               <div className="space-y-1">
                 <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
@@ -589,7 +675,9 @@ export default function ConfigurateurPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
                   <Card
                     className={`cursor-pointer border-2 ${
-                      signStyle === "cut-out" ? "border-blue-600 ring-2 ring-blue-500" : "border-gray-300"
+                      signStyle === "cut-out"
+                        ? "border-blue-600 ring-2 ring-blue-500"
+                        : "border-gray-300"
                     } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
                     onClick={() => setSignStyle("cut-out")}
                   >
@@ -608,7 +696,9 @@ export default function ConfigurateurPage() {
                   </Card>
                   <Card
                     className={`cursor-pointer border-2 ${
-                      signStyle === "lighted" ? "border-blue-600 ring-2 ring-blue-500" : "border-gray-300"
+                      signStyle === "lighted"
+                        ? "border-blue-600 ring-2 ring-blue-500"
+                        : "border-gray-300"
                     } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
                     onClick={() => setSignStyle("lighted")}
                   >
@@ -627,7 +717,9 @@ export default function ConfigurateurPage() {
                   </Card>
                   <Card
                     className={`cursor-pointer border-2 ${
-                      signStyle === "lighted-box" ? "border-blue-600 ring-2 ring-blue-500" : "border-gray-300"
+                      signStyle === "lighted-box"
+                        ? "border-blue-600 ring-2 ring-blue-500"
+                        : "border-gray-300"
                     } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
                     onClick={() => setSignStyle("lighted-box")}
                   >
@@ -646,7 +738,7 @@ export default function ConfigurateurPage() {
                   </Card>
                 </div>
               </div>
-              
+
               {/* Materials */}
               <div className="space-y-1">
                 <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
@@ -658,13 +750,20 @@ export default function ConfigurateurPage() {
                     <Card
                       key={opt.id}
                       className={`cursor-pointer border-2 ${
-                        selectedMaterialId === opt.id ? "border-blue-600 ring-2 ring-blue-500" : "border-gray-300"
+                        selectedMaterialId === opt.id
+                          ? "border-blue-600 ring-2 ring-blue-500"
+                          : "border-gray-300"
                       } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
                       onClick={() => setSelectedMaterialId(opt.id)}
                     >
                       <CardContent className="p-1 sm:p-2 flex flex-col items-center">
                         <div className="relative w-full h-10 sm:h-12 md:h-16 mb-1 overflow-hidden rounded-md">
-                          <Image src={opt.image} alt={opt.label} layout="fill" objectFit="cover" />
+                          <Image
+                            src={opt.image}
+                            alt={opt.label}
+                            layout="fill"
+                            objectFit="cover"
+                          />
                         </div>
                         <h3 className="text-xxs sm:text-xs md:text-sm capitalize font-semibold text-center h-8 flex items-center justify-center">
                           {opt.label}
@@ -674,7 +773,7 @@ export default function ConfigurateurPage() {
                   ))}
                 </div>
               </div>
-              
+
               {/* Text Color & Background Color */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <div className="space-y-1">
@@ -689,7 +788,9 @@ export default function ConfigurateurPage() {
                       onChange={(e) => setTextColor(e.target.value)}
                       className="w-10 h-10 p-0 border-none rounded-md overflow-hidden"
                     />
-                    <span className="text-xs sm:text-sm">{textColor.toUpperCase()}</span>
+                    <span className="text-xs sm:text-sm">
+                      {textColor.toUpperCase()}
+                    </span>
                   </div>
                 </div>
                 <div className="space-y-1">
@@ -704,11 +805,13 @@ export default function ConfigurateurPage() {
                       onChange={(e) => setBackgroundColor(e.target.value)}
                       className="w-10 h-10 p-0 border-none rounded-md overflow-hidden"
                     />
-                    <span className="text-xs sm:text-sm">{backgroundColor.toUpperCase()}</span>
+                    <span className="text-xs sm:text-sm">
+                      {backgroundColor.toUpperCase()}
+                    </span>
                   </div>
                 </div>
               </div>
-              
+
               {/* Lighting Options (if lighted or lighted-box) */}
               {(signStyle === "lighted" || signStyle === "lighted-box") && (
                 <div className="space-y-2 sm:space-y-3">
@@ -717,7 +820,10 @@ export default function ConfigurateurPage() {
                       <Lightbulb className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                       Couleur des LEDs
                     </Label>
-                    <Select value={ledColor} onValueChange={(value: LedColor) => setLedColor(value)}>
+                    <Select
+                      value={ledColor}
+                      onValueChange={(value: LedColor) => setLedColor(value)}
+                    >
                       <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500 text-xs sm:text-sm md:text-base">
                         <SelectValue placeholder="Sélectionnez une couleur" />
                       </SelectTrigger>
@@ -747,7 +853,7 @@ export default function ConfigurateurPage() {
                   </div>
                 </div>
               )}
-              
+
               {/* Fixation (for all sign types) */}
               <div className="space-y-1">
                 <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
@@ -759,13 +865,20 @@ export default function ConfigurateurPage() {
                     <Card
                       key={option.value}
                       className={`cursor-pointer border-2 ${
-                        fixationType === option.value ? "border-blue-600 ring-2 ring-blue-500" : "border-gray-300"
+                        fixationType === option.value
+                          ? "border-blue-600 ring-2 ring-blue-500"
+                          : "border-gray-300"
                       } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
                       onClick={() => setFixationType(option.value)}
                     >
                       <CardContent className="p-2 sm:p-3 flex flex-col items-center">
                         <div className="relative w-full h-12 sm:h-16 md:h-20 mb-1 sm:mb-2 overflow-hidden rounded-md">
-                          <Image src={option.image} alt={option.label} layout="fill" objectFit="cover" />
+                          <Image
+                            src={option.image}
+                            alt={option.label}
+                            layout="fill"
+                            objectFit="cover"
+                          />
                         </div>
                         <h3 className="text-xs sm:text-sm md:text-base font-bold text-gray-900 text-center">
                           {option.label}
@@ -776,7 +889,7 @@ export default function ConfigurateurPage() {
                 </div>
               </div>
             </div>
-            
+
             {/* Preview and Summary */}
             <div className="lg:sticky lg:top-4 h-fit self-start">
               <Card className="bg-white border-gray-200 shadow-lg w-full">
@@ -813,7 +926,10 @@ export default function ConfigurateurPage() {
                     </h4>
                     <div className="grid grid-cols-2 gap-1 sm:gap-2">
                       {examples[signStyle].map((example) => (
-                        <div key={example.id} className="relative w-full h-12 sm:h-16 md:h-20 overflow-hidden rounded-md">
+                        <div
+                          key={example.id}
+                          className="relative w-full h-12 sm:h-16 md:h-20 overflow-hidden rounded-md"
+                        >
                           <Image
                             src={example.img}
                             alt={example.alt}
@@ -828,7 +944,9 @@ export default function ConfigurateurPage() {
                   <div className="space-y-1 sm:space-y-2 text-gray-700 text-xxs sm:text-xs md:text-sm border-t border-gray-200 pt-2 sm:pt-3">
                     <div className="flex justify-between items-center">
                       <span className="font-medium">Texte:</span>
-                      <span className="font-semibold text-right">{signText || "Non défini"}</span>
+                      <span className="font-semibold text-right">
+                        {signText || "Non défini"}
+                      </span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="font-medium">Style:</span>
@@ -843,7 +961,9 @@ export default function ConfigurateurPage() {
                     <div className="flex justify-between items-center">
                       <span className="font-medium">Matériau:</span>
                       <span className="capitalize font-semibold text-right">
-                        {allMaterialOptions.find((opt) => opt.id === selectedMaterialId)?.label || "N/A"}
+                        {allMaterialOptions.find(
+                          (opt) => opt.id === selectedMaterialId
+                        )?.label || "N/A"}
                       </span>
                     </div>
                     <div className="flex justify-between items-center">
@@ -851,7 +971,9 @@ export default function ConfigurateurPage() {
                       <span className="font-semibold text-right">
                         {fixationType === "boitier-lumineux"
                           ? `Boîtier lumineux ${aluChant} + Plexi Blanc`
-                          : fixationOptions.find((f) => f.value === fixationType)?.label || fixationType}
+                          : fixationOptions.find(
+                              (f) => f.value === fixationType
+                            )?.label || fixationType}
                       </span>
                     </div>
                     <div className="flex justify-between items-center">
@@ -878,7 +1000,9 @@ export default function ConfigurateurPage() {
                       disabled={isLoading}
                     >
                       <ShoppingCart className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
-                      {isLoading ? "Envoi en cours..." : "Envoyer ma configuration"}
+                      {isLoading
+                        ? "Envoi en cours..."
+                        : "Envoyer ma configuration"}
                     </Button>
                   </div>
                 </CardContent>

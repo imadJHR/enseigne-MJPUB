@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: http://lettre3dshop.com
+
+# Sitemaps
+Sitemap: http://lettre3dshop.com/sitemap.xml
