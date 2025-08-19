@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  metadataBase: new URL("https://mjpub.fr"),
+  metadataBase: new URL("https://lettre3dshop.com/"),
   openGraph: {
     title: "MJ PUB - Enseignes Lumineuses & Signalétique sur Mesure",
     description:
@@ -55,8 +55,6 @@ export const metadata: Metadata = {
       "Découvrez nos solutions d'enseignes et signalétique sur mesure pour valoriser votre image de marque.",
     images: ["/twitter-image.png"],
   },
-
-  // 🔑 Ajout Google Search Console
   verification: {
     google: "BLLN9xg6pbYTnR4ICVo_bgTIMQXVZ0Itu_Xo6ySTHgI",
   },
@@ -70,6 +68,7 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <body className={inter.className}>
+        <meta name="google-site-verification" content="BLLN9xg6pbYTnR4ICVo_bgTIMQXVZ0Itu_Xo6ySTHgI" />
         <Providers>
           <Header />
           {children}
