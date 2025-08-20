@@ -8,7 +8,6 @@ import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// --- Métadonnées Corrigées ---
 export const metadata: Metadata = {
   title: {
     template: "MJ PUB",
@@ -25,7 +24,7 @@ export const metadata: Metadata = {
   publisher: "MJ PUB",
   icons: {
     icon: "/favicon.ico",
-    apple: "/apple-icon.png",
+    apple: "/favicon.icon",
   },
   robots: {
     index: true,
@@ -48,13 +47,6 @@ export const metadata: Metadata = {
     ],
     locale: "fr_FR",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "MJ PUB - Enseignes Lumineuses & Signalétique sur Mesure",
-    description:
-      "Découvrez nos solutions d'enseignes et signalétique sur mesure pour valoriser votre image de marque.",
-    images: ["/twitter-image.png"],
   },
   verification: {
     google: "BLLN9xg6pbYTnR4ICVo_bgTIMQXVZ0Itu_Xo6ySTHgI",

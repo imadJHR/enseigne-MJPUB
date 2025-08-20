@@ -6,7 +6,17 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { ShoppingCart, Star, Search, Filter, Eye, X, Check, Truck, Shield } from "lucide-react";
+import {
+  ShoppingCart,
+  Star,
+  Search,
+  Filter,
+  Eye,
+  X,
+  Check,
+  Truck,
+  Shield,
+} from "lucide-react";
 import { useCart } from "../context/CartContext";
 import Image from "next/image";
 import {
@@ -40,7 +50,8 @@ export default function AccessoriesPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("name");
-  const [quickViewAccessory, setQuickViewAccessory] = useState<Accessory | null>(null);
+  const [quickViewAccessory, setQuickViewAccessory] =
+    useState<Accessory | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const { addToCart } = useCart();
 
@@ -49,14 +60,16 @@ export default function AccessoriesPage() {
       id: 1,
       name: "Alimentation LED 12V 60W",
       price: 45,
-      image: "https://m.media-amazon.com/images/I/81I9VDDMrdL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      image:
+        "https://m.media-amazon.com/images/I/81I9VDDMrdL.__AC_SX300_SY300_QL70_ML2_.jpg",
       images: [
         "https://m.media-amazon.com/images/I/81I9VDDMrdL.__AC_SX300_SY300_QL70_ML2_.jpg",
         "https://m.media-amazon.com/images/I/71S5ucJAAbL._AC_SL1500_.jpg",
-        "https://m.media-amazon.com/images/I/71vjH6pEQGL._AC_SL1500_.jpg"
+        "https://m.media-amazon.com/images/I/71vjH6pEQGL._AC_SL1500_.jpg",
       ],
       description: "Alimentation stabilisée pour enseignes LED",
-      detailedDescription: "Cette alimentation LED 12V 60W est parfaite pour alimenter vos bandeaux et enseignes LED. Avec une efficacité énergétique de 85% et une protection contre les surtensions, elle garantit une longue durée de vie à vos installations. Conforme aux normes de sécurité internationales, elle est également étanche (IP67) pour une utilisation en extérieur.",
+      detailedDescription:
+        "Cette alimentation LED 12V 60W est parfaite pour alimenter vos bandeaux et enseignes LED. Avec une efficacité énergétique de 85% et une protection contre les surtensions, elle garantit une longue durée de vie à vos installations. Conforme aux normes de sécurité internationales, elle est également étanche (IP67) pour une utilisation en extérieur.",
       rating: 4.8,
       inStock: true,
       category: "alimentations",
@@ -66,17 +79,17 @@ export default function AccessoriesPage() {
         "Étanche IP67 pour utilisation extérieure",
         "Efficacité énergétique de 85%",
         "Conforme aux normes CE et RoHS",
-        "Câble d'alimentation inclus"
+        "Câble d'alimentation inclus",
       ],
       specifications: [
         { name: "Tension de sortie", value: "12V DC" },
         { name: "Puissance", value: "60W" },
         { name: "Dimensions", value: "150x80x35mm" },
         { name: "Poids", value: "280g" },
-        { name: "Température de fonctionnement", value: "-20°C à +60°C" }
+        { name: "Température de fonctionnement", value: "-20°C à +60°C" },
       ],
       warranty: "3 ans",
-      shipping: "Livraison gratuite sous 48h"
+      shipping: "Livraison gratuite sous 48h",
     },
     {
       id: 2,
@@ -86,10 +99,11 @@ export default function AccessoriesPage() {
       images: [
         "https://m.media-amazon.com/images/I/61gUm5cWuzL._AC_UL320_.jpg",
         "https://m.media-amazon.com/images/I/71LcIWDTz9L.__AC_SY445_SX342_QL70_ML2_.jpg",
-        "https://m.media-amazon.com/images/I/61Q+8+-P2aL._AC_SL1000_.jpg"
+        "https://m.media-amazon.com/images/I/61Q+8+-P2aL._AC_SL1000_.jpg",
       ],
       description: "Supports et fixations pour montage mural",
-      detailedDescription: "Ce kit de fixation complet vous permet d'installer facilement vos enseignes LED en intérieur comme en extérieur. Inclut tous les supports, vis et chevilles nécessaires pour une installation sécurisée. Les pièces sont en acier inoxydable pour résister à la corrosion et aux intempéries.",
+      detailedDescription:
+        "Ce kit de fixation complet vous permet d'installer facilement vos enseignes LED en intérieur comme en extérieur. Inclut tous les supports, vis et chevilles nécessaires pour une installation sécurisée. Les pièces sont en acier inoxydable pour résister à la corrosion et aux intempéries.",
       rating: 4.9,
       inStock: true,
       category: "fixations",
@@ -99,29 +113,31 @@ export default function AccessoriesPage() {
         "Convient pour intérieur et extérieur",
         "Inclut tous les éléments de fixation",
         "Support jusqu'à 15kg",
-        "Instructions détaillées incluses"
+        "Instructions détaillées incluses",
       ],
       specifications: [
         { name: "Matériau", value: "Acier inoxydable 304" },
         { name: "Charge maximale", value: "15kg" },
         { name: "Contenu du kit", value: "6 supports, 24 vis, 12 chevilles" },
-        { name: "Compatibilité", value: "Toutes enseignes standards" }
+        { name: "Compatibilité", value: "Toutes enseignes standards" },
       ],
       warranty: "5 ans",
-      shipping: "Livraison gratuite sous 48h"
+      shipping: "Livraison gratuite sous 48h",
     },
     {
       id: 3,
       name: "Câble d'extension 5m",
       price: 15,
-      image: "https://m.media-amazon.com/images/I/51qXOjkak+L._AC_SX300_SY300_.jpg",
+      image:
+        "https://m.media-amazon.com/images/I/51qXOjkak+L._AC_SX300_SY300_.jpg",
       images: [
         "https://m.media-amazon.com/images/I/51qXOjkak+L._AC_SX300_SY300_.jpg",
         "https://m.media-amazon.com/images/I/61lVcD3Xb-L._AC_SL1500_.jpg",
-        "https://m.media-amazon.com/images/I/71stQ3WP0eL._AC_SL1500_.jpg"
+        "https://m.media-amazon.com/images/I/71stQ3WP0eL._AC_SL1500_.jpg",
       ],
       description: "Câble d'extension étanche IP65",
-      detailedDescription: "Ce câble d'extension de 5 mètres avec connecteurs étanches IP65 vous permet de prolonger facilement vos installations LED. Parfait pour relier des bandeaux LED entre eux ou pour connecter une enseigne à son alimentation. La gaine extérieure résistante aux UV protège le câble contre les intempéries.",
+      detailedDescription:
+        "Ce câble d'extension de 5 mètres avec connecteurs étanches IP65 vous permet de prolonger facilement vos installations LED. Parfait pour relier des bandeaux LED entre eux ou pour connecter une enseigne à son alimentation. La gaine extérieure résistante aux UV protège le câble contre les intempéries.",
       rating: 4.7,
       inStock: true,
       category: "cables",
@@ -131,17 +147,17 @@ export default function AccessoriesPage() {
         "Gaine résistante aux UV",
         "Connecteurs plaqués or pour une meilleure conduction",
         "Câble de 2,5mm² pour une faible chute de tension",
-        "Certifié CE et RoHS"
+        "Certifié CE et RoHS",
       ],
       specifications: [
         { name: "Longueur", value: "5m" },
         { name: "Section", value: "2,5mm²" },
         { name: "Tension max", value: "24V DC" },
         { name: "Intensité max", value: "10A" },
-        { name: "Degré de protection", value: "IP65" }
+        { name: "Degré de protection", value: "IP65" },
       ],
       warranty: "2 ans",
-      shipping: "Livraison gratuite sous 48h"
+      shipping: "Livraison gratuite sous 48h",
     },
   ];
 
@@ -164,7 +180,9 @@ export default function AccessoriesPage() {
     .filter((accessory) => {
       const matchesSearch =
         accessory.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        accessory.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        accessory.description
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
         accessory.brand.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory =
         selectedCategory === "all" || accessory.category === selectedCategory;
@@ -211,7 +229,8 @@ export default function AccessoriesPage() {
               Accessoires
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Tous les accessoires nécessaires pour l&apos;installation et le fonctionnement de vos enseignes LED
+              Tous les accessoires nécessaires pour l&apos;installation et le
+              fonctionnement de vos enseignes LED
             </p>
           </div>
 
@@ -231,7 +250,9 @@ export default function AccessoriesPage() {
                 {categories.map((category) => (
                   <Button
                     key={category.id}
-                    variant={selectedCategory === category.id ? "default" : "outline"}
+                    variant={
+                      selectedCategory === category.id ? "default" : "outline"
+                    }
                     onClick={() => setSelectedCategory(category.id)}
                     size="sm"
                     className={`${
@@ -264,7 +285,9 @@ export default function AccessoriesPage() {
           {/* Results Info */}
           <div className="mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-600">
-              {filteredAccessories.length} accessoire{filteredAccessories.length > 1 ? "s" : ""} trouvé{filteredAccessories.length > 1 ? "s" : ""}
+              {filteredAccessories.length} accessoire
+              {filteredAccessories.length > 1 ? "s" : ""} trouvé
+              {filteredAccessories.length > 1 ? "s" : ""}
             </p>
             <div className="flex items-center gap-2 text-sm text-gray-600">
               <span>En stock:</span>
@@ -305,7 +328,9 @@ export default function AccessoriesPage() {
                     </Badge>
                   )}
                   <div className="absolute top-2 right-2 bg-black/80 rounded px-2 py-1">
-                    <span className="text-xs text-white">{accessory.brand}</span>
+                    <span className="text-xs text-white">
+                      {accessory.brand}
+                    </span>
                   </div>
                   <div className="absolute top-2 right-12 bg-black/80 rounded p-1 opacity-0 group-hover:opacity-100 transition-opacity">
                     <Dialog>
@@ -377,7 +402,8 @@ export default function AccessoriesPage() {
                 Aucun accessoire trouvé
               </h3>
               <p className="text-gray-600 mb-6">
-                Essayez de modifier vos critères de recherche ou parcourez toutes nos catégories
+                Essayez de modifier vos critères de recherche ou parcourez
+                toutes nos catégories
               </p>
               <Button
                 onClick={() => {
@@ -398,7 +424,8 @@ export default function AccessoriesPage() {
               Besoin d&apos;aide pour choisir ?
             </h2>
             <p className="text-gray-600 mb-6">
-              Notre équipe technique est là pour vous conseiller dans le choix de vos accessoires
+              Notre équipe technique est là pour vous conseiller dans le choix
+              de vos accessoires
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-blue-600 hover:bg-blue-700 text-white">
@@ -416,7 +443,10 @@ export default function AccessoriesPage() {
       </div>
 
       {/* Quick View Dialog */}
-      <Dialog open={!!quickViewAccessory} onOpenChange={() => setQuickViewAccessory(null)}>
+      <Dialog
+        open={!!quickViewAccessory}
+        onOpenChange={() => setQuickViewAccessory(null)}
+      >
         <DialogContent className="max-w-4xl w-[95vw] md:w-full bg-white p-0 overflow-hidden">
           {quickViewAccessory && (
             <>
@@ -435,7 +465,10 @@ export default function AccessoriesPage() {
                 <div className="space-y-4">
                   <div className="relative h-64 md:h-80 rounded-lg overflow-hidden bg-gray-100">
                     <Image
-                      src={quickViewAccessory.images[selectedImage] || "/placeholder.svg"}
+                      src={
+                        quickViewAccessory.images[selectedImage] ||
+                        "/placeholder.svg"
+                      }
                       alt={quickViewAccessory.name}
                       fill
                       className="object-contain"
@@ -455,7 +488,11 @@ export default function AccessoriesPage() {
                     {quickViewAccessory.images.map((img, index) => (
                       <div
                         key={index}
-                        className={`relative h-24 cursor-pointer rounded-md overflow-hidden border-2 ${selectedImage === index ? 'border-blue-500' : 'border-gray-200'}`}
+                        className={`relative h-24 cursor-pointer rounded-md overflow-hidden border-2 ${
+                          selectedImage === index
+                            ? "border-blue-500"
+                            : "border-gray-200"
+                        }`}
                         onClick={() => setSelectedImage(index)}
                       >
                         <Image
@@ -504,8 +541,12 @@ export default function AccessoriesPage() {
                   <Tabs defaultValue="description" className="w-full">
                     <TabsList className="grid grid-cols-3 mb-4">
                       <TabsTrigger value="description">Description</TabsTrigger>
-                      <TabsTrigger value="specifications">Spécifications</TabsTrigger>
-                      <TabsTrigger value="features">Caractéristiques</TabsTrigger>
+                      <TabsTrigger value="specifications">
+                        Spécifications
+                      </TabsTrigger>
+                      <TabsTrigger value="features">
+                        Caractéristiques
+                      </TabsTrigger>
                     </TabsList>
 
                     <TabsContent value="description" className="text-gray-600">
@@ -514,12 +555,19 @@ export default function AccessoriesPage() {
 
                     <TabsContent value="specifications">
                       <div className="space-y-2">
-                        {quickViewAccessory.specifications.map((spec, index) => (
-                          <div key={index} className="flex justify-between border-b pb-2">
-                            <span className="text-gray-600">{spec.name}</span>
-                            <span className="text-gray-900 font-medium">{spec.value}</span>
-                          </div>
-                        ))}
+                        {quickViewAccessory.specifications.map(
+                          (spec, index) => (
+                            <div
+                              key={index}
+                              className="flex justify-between border-b pb-2"
+                            >
+                              <span className="text-gray-600">{spec.name}</span>
+                              <span className="text-gray-900 font-medium">
+                                {spec.value}
+                              </span>
+                            </div>
+                          )
+                        )}
                       </div>
                     </TabsContent>
 
@@ -561,7 +609,9 @@ export default function AccessoriesPage() {
                       size="lg"
                     >
                       <ShoppingCart className="h-5 w-5 mr-2" />
-                      {quickViewAccessory.inStock ? "Ajouter au panier" : "Indisponible"}
+                      {quickViewAccessory.inStock
+                        ? "Ajouter au panier"
+                        : "Indisponible"}
                     </Button>
                   </div>
                 </div>
