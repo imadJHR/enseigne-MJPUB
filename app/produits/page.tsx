@@ -17,7 +17,7 @@ import {
   Settings,
   Layers,
 } from "lucide-react";
-
+import img1 from "../../public/img1.jpg";
 export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -25,82 +25,20 @@ export default function ProductsPage() {
   const products = [
     {
       id: 1,
-      name: "Enseigne LED Premium",
-      category: "led",
-      price: 299,
-      image: "https://images.pexels.com/photos/8296426/pexels-photo-8296426.jpeg",
-      description:
-        "Enseigne LED haute qualité avec éclairage uniforme et longue durée de vie",
-      rating: 4.8,
-      badge: "Bestseller",
-      slug: "enseigne-led-premium",
-    },
-    {
-      id: 2,
-      name: "Lettres Découpées PVC",
-      category: "lettres",
-      price: 89,
-      image: "https://images.pexels.com/photos/6185232/pexels-photo-6185232.jpeg",
-      description:
-        "Lettres découpées en PVC haute qualité, résistantes aux intempéries",
-      rating: 4.7,
-      badge: "Économique",
-      slug: "lettres-decoupees-pvc",
-    },
-    {
-      id: 3,
       name: "Panneau Dibond",
       category: "panneaux",
       price: 159,
-      image: "https://images.pexels.com/photos/33315758/pexels-photo-33315758.jpeg",
+      image: "/img1.jpg",
       description: "Panneau en Dibond avec impression haute définition",
       rating: 4.9,
       badge: "Résistant",
       slug: "panneau-dibond",
     },
-    {
-      id: 4,
-      name: "Enseigne LED RGB",
-      category: "led",
-      price: 449,
-      image: "https://images.pexels.com/photos/7317291/pexels-photo-7317291.jpeg",
-      description: "Enseigne LED avec changement de couleurs et télécommande",
-      rating: 4.6,
-      badge: "Nouveau",
-      slug: "enseigne-led-rgb",
-    },
-    {
-      id: 5,
-      name: "Lettres Plexiglas",
-      category: "lettres",
-      price: 199,
-      image: "https://www.deleage.com/store/wp-content/uploads/2021/05/plexi-3mm-d-705x705.jpg",
-      description:
-        "Lettres en plexiglas transparent ou coloré, finition premium",
-      rating: 4.8,
-      badge: "Premium",
-      slug: "lettres-plexiglas",
-    },
-    {
-      id: 6,
-      name: "Totem Lumineux",
-      category: "totems",
-      price: 899,
-      image: "https://com1pub.com/wp-content/uploads/2020/01/totem-lumineux-harry-cafeteria-2.jpg",
-      description:
-        "Totem publicitaire lumineux double face avec structure aluminium",
-      rating: 4.7,
-      badge: "Pro",
-      slug: "totem-lumineux",
-    },
   ];
 
   const categories = [
     { id: "all", name: "Tous les produits", icon: Layers },
-    { id: "led", name: "Enseignes LED", icon: Lightbulb },
-    { id: "lettres", name: "Lettres Découpées", icon: Scissors },
     { id: "panneaux", name: "Panneaux", icon: Settings },
-    { id: "totems", name: "Totems", icon: Settings },
   ];
 
   const filteredProducts = products.filter((product) => {
@@ -218,7 +156,7 @@ export default function ProductsPage() {
                       }}
                       aria-label={`Image du produit ${product.name}`}
                     ></div>
-                    
+
                     <Badge
                       className={`absolute top-4 left-4 ${getBadgeColor(
                         product.badge

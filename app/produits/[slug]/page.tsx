@@ -26,103 +26,9 @@ import {
 import Link from "next/link";
 import { useCart } from "../../context/CartContext";
 import Image from "next/image";
+import img1 from "../../../public/img1.jpg"
 
 export const productsData = {
-  "enseigne-led-premium": {
-    id: 1,
-    name: "Enseigne LED Premium",
-    category: "led",
-    basePrice: 299,
-    description:
-      "Enseigne LED haute qualité avec éclairage uniforme et longue durée de vie. Parfaite pour mettre en valeur votre commerce avec un rendu professionnel exceptionnel.",
-    rating: 4.8,
-    reviewCount: 47,
-    badge: "Bestseller",
-    images: [
-      "https://images.pexels.com/photos/8296426/pexels-photo-8296426.jpeg",
-    ],
-    materials: [
-      {
-        id: "pvc",
-        name: "PVC",
-        price: 299,
-        description: "Économique et résistant",
-      },
-      {
-        id: "dibond",
-        name: "Dibond",
-        price: 449,
-        description: "Haute résistance",
-      },
-      {
-        id: "plexiglas",
-        name: "Plexiglas",
-        price: 599,
-        description: "Finition premium",
-      },
-    ],
-    features: [
-      "LEDs haute efficacité",
-      "Durée de vie 50 000h",
-      "Étanche IP65",
-      "Garantie 2 ans",
-    ],
-    specifications: {
-      "Température de couleur": "6500K (blanc froid)",
-      Consommation: "12W par mètre linéaire",
-      Alimentation: "12V DC",
-      "Indice de protection": "IP65",
-      Épaisseur: "20mm",
-    },
-  },
-
-  "lettres-decoupees-pvc": {
-    id: 2,
-    name: "Lettres Découpées PVC",
-    category: "lettres",
-    basePrice: 79,
-    description:
-      "Des lettres découpées en PVC léger et résistant, parfaites pour une signalétique intérieure ou extérieure. Personnalisez votre message avec style et durabilité.",
-    rating: 4.5,
-    reviewCount: 22,
-    badge: "Économique",
-    images: [
-      "https://images.pexels.com/photos/6185232/pexels-photo-6185232.jpeg",
-    ],
-    materials: [
-      {
-        id: "pvc",
-        name: "PVC expansé (5mm)",
-        price: 79,
-        description: "Léger, économique et facile à installer.",
-      },
-      {
-        id: "plexiglas",
-        name: "Plexiglas (3mm)",
-        price: 119,
-        description: "Finition brillante, idéal pour l'intérieur.",
-      },
-      {
-        id: "aluminium",
-        name: "Aluminium composite (Dibond)",
-        price: 189,
-        description: "Haute résistance aux intempéries, usage pro.",
-      },
-    ],
-    features: [
-      "Découpe de précision",
-      "Usage intérieur et extérieur",
-      "Facile à fixer",
-      "Large choix de couleurs",
-    ],
-    specifications: {
-      "Épaisseur": "5mm à 19mm selon le matériau",
-      "Hauteur minimale": "10cm",
-      "Type de découpe": "Fraisage numérique",
-      "Fixation": "Adhésif double face ou entretoises (en option)",
-    },
-  },
-
   "panneau-dibond": {
     id: 3,
     name: "Panneau Dibond",
@@ -134,7 +40,7 @@ export const productsData = {
     reviewCount: 65,
     badge: "Résistant",
     images: [
-      "https://images.pexels.com/photos/33315758/pexels-photo-33315758.jpeg",
+      img1,
     ],
     materials: [
       {
@@ -164,123 +70,6 @@ export const productsData = {
     },
   },
 
-  "enseigne-led-rgb": {
-    id: 4,
-    name: "Enseigne LED RGB",
-    category: "led",
-    basePrice: 449,
-    description:
-      "Enseigne LED avec changement de couleurs et télécommande. Attirez l'attention avec des effets lumineux dynamiques et personnalisables pour un impact visuel fort.",
-    rating: 4.6,
-    reviewCount: 38,
-    badge: "Nouveau",
-    images: [
-      "https://images.pexels.com/photos/7317291/pexels-photo-7317291.jpeg",
-    ],
-    materials: [
-      {
-        id: "pvc",
-        name: "PVC",
-        price: 449,
-        description: "Économique et léger",
-      },
-      {
-        id: "dibond",
-        name: "Dibond",
-        price: 599,
-        description: "Haute résistance",
-      },
-    ],
-    features: [
-      "LEDs RGB programmables",
-      "Télécommande incluse",
-      "Multiples modes d'éclairage",
-      "Garantie 2 ans",
-    ],
-    specifications: {
-      "Couleurs": "16 millions de couleurs",
-      Alimentation: "12V DC",
-      Contrôle: "Télécommande RF",
-      "Indice de protection": "IP65",
-      Épaisseur: "25mm",
-    },
-  },
-
-  "lettres-plexiglas": {
-    id: 5,
-    name: "Lettres Plexiglas",
-    category: "lettres",
-    basePrice: 199,
-    description:
-      "Lettres en plexiglas transparent ou coloré, finition premium. Offrez à votre marque une élégance moderne avec des lettres au rendu impeccable et sophistiqué.",
-    rating: 4.8,
-    reviewCount: 51,
-    badge: "Premium",
-    images: [
-      "https://www.deleage.com/store/wp-content/uploads/2021/05/plexi-3mm-d-705x705.jpg",
-    ],
-    materials: [
-      {
-        id: "plexiglas-transparent",
-        name: "Plexiglas transparent (10mm)",
-        price: 199,
-        description: "Finition brillante et moderne.",
-      },
-      {
-        id: "plexiglas-colore",
-        name: "Plexiglas coloré (8mm)",
-        price: 229,
-        description: "Large choix de teintes, finition brillante.",
-      },
-    ],
-    features: [
-      "Découpe laser haute précision",
-      "Bords polis brillants",
-      "Résistant aux UV",
-      "Fixation invisible (en option)",
-    ],
-    specifications: {
-      Épaisseur: "8mm, 10mm",
-      "Couleurs": "Transparent, blanc, noir, rouge, etc.",
-      "Type de découpe": "Laser",
-      "Hauteur minimale": "15cm",
-    },
-  },
-
-  "totem-lumineux": {
-    id: 6,
-    name: "Totem Lumineux",
-    category: "totems",
-    basePrice: 899,
-    description:
-      "Totem publicitaire lumineux double face avec structure aluminium. Un support de communication imposant et visible de loin pour renforcer l'identité de votre marque.",
-    rating: 4.7,
-    reviewCount: 15,
-    badge: "Pro",
-    images: [
-      "https://com1pub.com/wp-content/uploads/2020/01/totem-lumineux-harry-cafeteria-2.jpg",
-    ],
-    materials: [
-      {
-        id: "aluminium",
-        name: "Aluminium composite",
-        price: 899,
-        description: "Structure robuste et durable.",
-      },
-    ],
-    features: [
-      "Éclairage LED interne",
-      "Impression haute qualité sur les deux faces",
-      "Structure en aluminium résistant",
-      "Installation facile",
-    ],
-    specifications: {
-      Dimensions: "Sur mesure (ex: 200cm x 80cm)",
-      "Indice de protection": "IP65",
-      "Éclairage": "LED 12V",
-      "Type de fixation": "À sceller au sol",
-    },
-  },
 };
 
 export default function ProductDetailPage({ params }) {
