@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     siteName: "MJ PUB",
     images: [
       {
-        url: "/og-image.png", // URL résolue grâce à metadataBase: https://lettre3dshop.com/og-image.png
+        url: "/og-image.png", 
         width: 1200,
         height: 630,
         alt: "Présentation des enseignes lumineuses de MJ PUB",

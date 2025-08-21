@@ -263,7 +263,7 @@ export default function AccessoriesPage() {
               Accessoires pour Enseignes LED & Signalétique
             </h1>
             <p className="text-lg max-w-3xl mx-auto">
-              Découvrez notre gamme complète d'accessoires pour l'installation et la maintenance de vos enseignes LED, lettres découpées et signalétique.
+              Découvrez notre gamme complète d&apos;accessoires pour l&apos;installation et la maintenance de vos enseignes LED, lettres découpées et signalétique.
               Butées de porte, connecteurs Wago, câbles, alimentations et fixations de qualité professionnelle.
               Livraison rapide au Maroc et devis gratuit sur demande.
             </p>
@@ -396,13 +396,13 @@ export default function AccessoriesPage() {
                 </h3>
                 <p className="text-gray-700">
                   Pour installer une enseigne LED, vous aurez besoin de fixations adaptées à votre support (mur, sol, plafond),
-                  d'alimentations compatibles avec la puissance de vos modules LED,
+                  d&apos;alimentations compatibles avec la puissance de vos modules LED,
                   de câbles de connexion, et éventuellement de connecteurs pour un raccordement propre et sécurisé.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg border border-indigo-200">
                 <h3 className="font-bold mb-2 text-indigo-700">
-                  Proposez-vous des accessoires pour l'installation au Maroc ?
+                  Proposez-vous des accessoires pour l&apos;installation au Maroc ?
                 </h3>
                 <p className="text-gray-700">
                   Oui, tous nos accessoires sont disponibles pour une livraison rapide au Maroc.
@@ -414,8 +414,8 @@ export default function AccessoriesPage() {
                   Comment choisir le bon connecteur pour mon installation ?
                 </h3>
                 <p className="text-gray-700">
-                  Le choix du connecteur dépend de la section de vos câbles, de l'intensité du courant,
-                  et de l'environnement (intérieur/extérieur). Nos connecteurs Wago sont universels et adaptés à la plupart des installations.
+                  Le choix du connecteur dépend de la section de vos câbles, de l&apos;intensité du courant,
+                  et de l&apos;environnement (intérieur/extérieur). Nos connecteurs Wago sont universels et adaptés à la plupart des installations.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg border border-indigo-200">

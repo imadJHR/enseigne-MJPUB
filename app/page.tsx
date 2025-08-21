@@ -163,7 +163,7 @@ export default function HomePageClient() {
             Sur Mesure
           </h1>
           <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-600 max-w-2xl mx-auto font-light">
-            Votre marque brille de mille feux avec nos solutions d'enseignes LED et
+            Votre marque brille de mille feux avec nos solutions d&apos;enseignes LED et
             <Link href="/produits/lettres-decoupees-pvc" className="text-indigo-600 hover:underline ml-1">lettres découpées</Link>
             personnalisées.
           </p>
@@ -202,7 +202,7 @@ export default function HomePageClient() {
               Des Enseignes Sur Mesure pour une Visibilité Maximale
             </h2>
             <p className="text-base sm:text-lg text-gray-600">
-              Les avantages d'une signalétique professionnelle conçue pour vous.
+              Les avantages d&apos;une signalétique professionnelle conçue pour vous.
             </p>
           </div>
 
@@ -254,7 +254,7 @@ export default function HomePageClient() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10 sm:mb-16">
             <h2 id="produits-title" className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
-              Nos Solutions d'Enseignes
+              Nos Solutions d&apos;Enseignes
             </h2>
             <p className="text-base sm:text-lg text-gray-600">
               Une gamme complète de signalétique pour professionnels.

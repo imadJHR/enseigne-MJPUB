@@ -548,7 +548,7 @@ export default function ConfigurateurPage() {
     <Head>
   {/* --- Primary Meta Tags --- */}
   <title>
-    Configurateur d'Enseigne sur Mesure | Lettres Découpées & Lumineuses en PVC/Alu
+    Configurateur d&apos;Enseigne sur Mesure | Lettres Découpées & Lumineuses en PVC/Alu
   </title>
   <meta
     name="description"
