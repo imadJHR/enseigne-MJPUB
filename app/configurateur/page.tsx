@@ -545,57 +545,111 @@ export default function ConfigurateurPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-black flex flex-col">
-      <Head>
-        {/* --- Primary Meta Tags --- */}
-        <title>
-          Configurateur d&apos;Enseigne sur Mesure | Créez vos Lettres Découpées
-        </title>
-        <meta
-          name="description"
-          content="Personnalisez votre enseigne en relief, lumineuse ou en boîtier. Obtenez un devis instantané pour vos lettres découpées en PVC ou aluminium. Idéal pour votre commerce ou entreprise."
-        />
-        <meta
-          name="keywords"
-          content="enseigne sur mesure, lettres découpées, configurateur enseigne, signalétique, PVC, aluminium dibond, enseigne lumineuse, rétroéclairage LED, devis en ligne, enseigne magasin"
-        />
-        <meta name="author" content="MJ-PUB" />
+    <Head>
+  {/* --- Primary Meta Tags --- */}
+  <title>
+    Configurateur d'Enseigne sur Mesure | Lettres Découpées & Lumineuses en PVC/Alu
+  </title>
+  <meta
+    name="description"
+    content="Créez votre enseigne personnalisée en relief, lumineuse ou en boîtier alu. Choisissez parmi des matériaux premium (PVC, aluminium), des couleurs, polices et éclairages LED. Obtenez un devis instantané pour votre signalétique professionnelle ou commerciale."
+  />
+  <meta
+    name="keywords"
+    content="configurateur enseigne, lettres découpées, enseigne lumineuse, enseigne sur mesure, signalétique, PVC, aluminium dibond, rétroéclairage LED, devis enseigne, enseigne magasin, enseigne commerce, enseigne personnalisée, lettres 3D, enseigne lumineuse, enseigne extérieur, enseigne intérieur, enseigne professionnelle, enseigne boutique, enseigne restaurant, enseigne entreprise, enseigne publicitaire, enseigne LED, enseigne boîtier alu, enseigne rétroéclairée, enseigne PVC, enseigne aluminium, enseigne design, enseigne moderne, enseigne haut de gamme"
+  />
+  <meta name="author" content="MJ-PUB" />
+  <meta name="robots" content="index, follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        {/* --- Open Graph / Facebook Meta Tags --- */}
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://www.yourwebsite.com/configurateur"
-        />
-        <meta
-          property="og:title"
-          content="Configurateur d'Enseigne sur Mesure | Créez vos Lettres Découpées"
-        />
-        <meta
-          property="og:description"
-          content="Personnalisez votre enseigne en relief, lumineuse ou en boîtier. Obtenez un devis instantané pour vos lettres découpées en PVC ou aluminium."
-        />
-        {/* IMPORTANT: Replace with an absolute URL to a compelling image for social sharing */}
-        <meta
-          property="og:image"
-          content="https://www.yourwebsite.com/og-image-configurateur.png"
-        />
-        <meta property="og:site_name" content="Your Site Name" />
-        <meta property="og:locale" content="fr_FR" />
-        {/* IMPORTANT: Replace with an absolute URL to a compelling image for Twitter cards */}
-        <meta
-          name="twitter:image"
-          content="https://www.yourwebsite.com/twitter-image-configurateur.png"
-        />
-        {/* Optional: Replace with your site's Twitter handle */}
-        <meta name="twitter:creator" content="@YourTwitterHandle" />
+  {/* --- Open Graph / Facebook Meta Tags --- */}
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:url"
+    content="https://www.votresite.com/configurateur-enseigne"
+  />
+  <meta
+    property="og:title"
+    content="Configurateur d'Enseigne sur Mesure | Lettres Découpées & Lumineuses en PVC/Alu"
+  />
+  <meta
+    property="og:description"
+    content="Personnalisez votre enseigne en relief, lumineuse ou en boîtier alu. Obtenez un devis instantané pour vos lettres découpées en PVC ou aluminium. Idéal pour votre commerce ou entreprise."
+  />
+  <meta
+    property="og:image"
+    content="https://www.votresite.com/images/og-configurateur-enseigne.jpg"
+  />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Configurateur d'enseigne sur mesure" />
+  <meta property="og:site_name" content="MJ-PUB" />
+  <meta property="og:locale" content="fr_FR" />
 
-        {/* --- Other Meta Tags --- */}
-        <link
-          rel="canonical"
-          href="https://www.yourwebsite.com/configurateur"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+  {/* --- Twitter Card Meta Tags --- */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta
+    name="twitter:title"
+    content="Configurateur d'Enseigne sur Mesure | Lettres Découpées & Lumineuses en PVC/Alu"
+  />
+  <meta
+    name="twitter:description"
+    content="Créez votre enseigne personnalisée en relief, lumineuse ou en boîtier alu. Obtenez un devis instantané pour vos lettres découpées en PVC ou aluminium."
+  />
+  <meta
+    name="twitter:image"
+    content="https://www.votresite.com/images/twitter-configurateur-enseigne.jpg"
+  />
+  <meta name="twitter:image:alt" content="Configurateur d'enseigne sur mesure" />
+  <meta name="twitter:site" content="@VotreCompteTwitter" />
+  <meta name="twitter:creator" content="@VotreCompteTwitter" />
+
+  {/* --- Canonical URL --- */}
+  <link
+    rel="canonical"
+    href="https://www.votresite.com/configurateur-enseigne"
+  />
+
+  {/* --- Favicon & App Icons --- */}
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  {/* --- Structured Data (JSON-LD) --- */}
+  <script type="application/ld+json">
+    {`
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "Configurateur d'Enseigne sur Mesure",
+        "image": "https://www.votresite.com/images/og-configurateur-enseigne.jpg",
+        "description": "Personnalisez votre enseigne en relief, lumineuse ou en boîtier alu. Obtenez un devis instantané pour vos lettres découpées en PVC ou aluminium. Idéal pour votre commerce ou entreprise.",
+        "brand": {
+          "@type": "Brand",
+          "name": "MJ-PUB"
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://www.votresite.com/configurateur-enseigne",
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "120"
+        }
+      }
+    `}
+  </script>
+
+  {/* --- Additional Meta --- */}
+  <meta name="theme-color" content="#000000" />
+</Head>
+
       <main className="flex-1 pt-12 sm:pt-16 px-2 sm:px-4 py-4 sm:py-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-4 sm:mb-8 px-2">

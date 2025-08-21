@@ -5,7 +5,7 @@ export const blogPosts = [
     excerpt:
       "Découvrez les innovations et les styles qui marqueront l&apos;année pour votre signalétique.",
     image: "https://images.pexels.com/photos/7317291/pexels-photo-7317291.jpeg",
-    date: "06 Août 2025",
+    date: "2023-11-01",
     author: "MJ PUB Team",
     category: "Tendances",
     slug: "tendances-2024-enseignes-lumineuses",
@@ -30,7 +30,7 @@ export const blogPosts = [
     excerpt:
       "PVC, Dibond, Plexiglas... Guide pour sélectionner le matériau idéal selon vos besoins.",
     image: "https://www.resultats-services-publics.fr/wp-content/uploads/2022/07/0-4.jpg",
-    date: "06 Août 2025",
+    date: "2023-11-01",
     author: "MJ PUB Team",
     category: "Conseils",
     slug: "choisir-materiau-enseigne",
@@ -70,7 +70,7 @@ export const blogPosts = [
     excerpt:
       "Découvrez comment une enseigne bien conçue peut transformer votre visibilité et attirer plus de clients.",
     image: "https://www.realisaprint.com/blog/wp-content/uploads/2023/05/visu-enseigne-drapeau.jpg",
-    date: "06 Août 2025",
+    date: "2023-11-01",
     author: "MJ PUB Team",
     category: "Marketing",
     slug: "impact-bonne-signaletique",
@@ -97,7 +97,7 @@ export const blogPosts = [
     excerpt:
       "Découvrez pourquoi les LEDs sont le choix numéro un pour les enseignes modernes.",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO0gndiZGW-caZhrOzdCYn6DOcAwzAE1R12w&s",
-    date: "06 Août 2025",
+    date: "2023-11-01",
     author: "MJ PUB Team",
     category: "Technologie",
     slug: "eclairage-led-avantages-innovations",

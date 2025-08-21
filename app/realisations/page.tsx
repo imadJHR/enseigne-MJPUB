@@ -24,7 +24,6 @@ import img16 from "@/public/img16.jpg";
 import img17 from "@/public/img17.jpg";
 import img19 from "@/public/img19.jpg";
 
-
 const realisations = [
   {
     id: 1,
@@ -176,7 +175,55 @@ export default function RealisationsPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <Header />
-
+      {/* SEO: JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "Nos Réalisations d'Enseignes Lumineuses",
+            description:
+              "Découvrez nos réalisations d'enseignes lumineuses et signalétiques sur mesure pour restaurants, boutiques, salons de coiffure et plus.",
+            url: "https://lettre3dshop.com/realisations",
+            breadcrumb: {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Accueil",
+                  item: "https://lettre3dshop.com",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Réalisations",
+                  item: "https://lettre3dshop.com/realisations",
+                },
+              ],
+            },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Réalisations d'Enseignes Lumineuses",
+            itemListElement: realisations.map((project, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              url: `https://lettre3dshop.com/realisations/${project.slug}`,
+              name: project.title,
+              description: project.description,
+              image: project.image.src,
+            })),
+          }),
+        }}
+      />
       <div className="pt-20 px-4 py-12">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
@@ -189,7 +236,6 @@ export default function RealisationsPage() {
               et signalétiques sur mesure
             </p>
           </div>
-
           {/* Realisations Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {realisations.map((project) => (
@@ -199,8 +245,8 @@ export default function RealisationsPage() {
               >
                 <div className="relative h-56">
                   <Image
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
+                    src={project.image}
+                    alt={`Photo de la réalisation : ${project.title}`}
                     width={400}
                     height={300}
                     className="w-full h-full object-cover"
@@ -228,7 +274,6 @@ export default function RealisationsPage() {
               </Card>
             ))}
           </div>
-
           {/* CTA Section */}
           <div className="mt-16 text-center bg-gray-50 rounded-lg p-8 border border-gray-200">
             <h2 className="text-3xl font-bold mb-4 text-black">
@@ -255,7 +300,6 @@ export default function RealisationsPage() {
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   );

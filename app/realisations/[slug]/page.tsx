@@ -354,6 +354,49 @@ interface RealisationPageProps {
   };
 }
 
+export async function generateMetadata({ params }: RealisationPageProps): Promise<Metadata> {
+  const realisation = realisations.find((r) => r.slug === params.slug);
+
+  if (!realisation) {
+    return {
+      title: "Réalisation non trouvée | MJ PUB",
+      description: "La réalisation que vous recherchez n'existe pas.",
+    };
+  }
+
+  return {
+    title: `${realisation.title} | MJ PUB`,
+    description: realisation.description,
+    keywords: [
+      "réalisation enseigne lumineuse",
+      `${realisation.category.toLowerCase()}`,
+      `${realisation.client}`,
+      "enseigne sur mesure",
+      "signalétique professionnelle",
+      "enseigne lumineuse Maroc",
+      "enseigne lumineuse France",
+      "enseigne lumineuse Belgique",
+    ],
+    alternates: {
+      canonical: `https://lettre3dshop.com/realisations/${realisation.slug}`,
+    },
+    openGraph: {
+      title: `${realisation.title} | MJ PUB`,
+      description: realisation.description,
+      url: `https://lettre3dshop.com/realisations/${realisation.slug}`,
+      type: "article",
+      images: [
+        {
+          url: realisation.image.src,
+          width: 800,
+          height: 600,
+          alt: realisation.title,
+        },
+      ],
+    },
+  };
+}
+
 export default function RealisationPage({ params }: RealisationPageProps) {
   const realisation = realisations.find((r) => r.slug === params.slug);
 
@@ -380,8 +423,74 @@ export default function RealisationPage({ params }: RealisationPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 flex flex-col">
+  <div className="min-h-screen bg-white text-gray-900 flex flex-col">
       <Header />
+      {/* SEO: JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: realisation.title,
+            description: realisation.description,
+            url: `https://lettre3dshop.com/realisations/${realisation.slug}`,
+            image: realisation.image.src,
+            author: {
+              "@type": "Organization",
+              name: "MJ PUB",
+            },
+            datePublished: new Date(realisation.date).toISOString(),
+            publisher: {
+              "@type": "Organization",
+              name: "MJ PUB",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://lettre3dshop.com/logo.png",
+              },
+            },
+            breadcrumb: {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Accueil",
+                  item: "https://lettre3dshop.com",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Réalisations",
+                  item: "https://lettre3dshop.com/realisations",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: realisation.title,
+                  item: `https://lettre3dshop.com/realisations/${realisation.slug}`,
+                },
+              ],
+            },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Project",
+            name: realisation.title,
+            description: realisation.description,
+            client: realisation.client,
+            location: realisation.location,
+            dateCompleted: new Date(realisation.date).toISOString(),
+            image: realisation.image.src,
+            features: realisation.features,
+          }),
+        }}
+      />
       <div className="flex-grow pt-20 px-4 py-12">
         <div className="max-w-6xl mx-auto">
           {/* Back Button */}
@@ -396,13 +505,12 @@ export default function RealisationPage({ params }: RealisationPageProps) {
               </Button>
             </Link>
           </div>
-
           {/* Realization Content */}
           <article className="bg-gray-50 p-8 rounded-lg shadow-lg">
             <div className="w-full h-[24rem] md:h-[30rem] lg:h-[36rem] overflow-hidden rounded-lg mb-6 relative">
               <Image
                 src={realisation.image}
-                alt={realisation.title}
+                alt={`Photo de la réalisation : ${realisation.title} pour ${realisation.client}`}
                 layout="fill"
                 objectFit="cover"
                 className="rounded-lg"
@@ -460,7 +568,7 @@ export default function RealisationPage({ params }: RealisationPageProps) {
                       >
                         <Image
                           src={imgSrc}
-                          alt={`${realisation.title} - Image ${index + 1}`}
+                          alt={`Galerie de la réalisation : ${realisation.title} - Image ${index + 1}`}
                           layout="fill"
                           objectFit="cover"
                         />
@@ -470,7 +578,6 @@ export default function RealisationPage({ params }: RealisationPageProps) {
                 </div>
               )}
           </article>
-
           {/* CTA Section */}
           <div className="mt-12 text-center bg-gray-100 rounded-lg p-8">
             <h2 className="text-3xl font-bold mb-4 text-gray-900">

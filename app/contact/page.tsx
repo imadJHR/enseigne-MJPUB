@@ -1,7 +1,6 @@
 "use client";
 
-import type React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -49,16 +48,13 @@ export default function ContactPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        "http://localhost:5001/api/contact",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch("http://localhost:5001/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         setIsSubmitted(true);
@@ -78,9 +74,45 @@ export default function ContactPage() {
     }
   };
 
+  const siteUrl = "https://lettre3dshop.com";
+
+  // DONNÉES STRUCTURÉES (JSON-LD) POUR LES RICH SNIPPETS
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "MJ PUB",
+    description:
+      "Fabrication et installation d'enseignes lumineuses et signalétique sur mesure.",
+    url: siteUrl,
+    telephone: "+33781546359",
+    email: "mjpub59@gmail.com",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "644 route de Lille",
+      addressLocality: "Saint-Amand-les-Eaux",
+      postalCode: "59230",
+      addressCountry: "FR",
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "08:30",
+        closes: "19:00",
+      },
+    ],
+    image: `${siteUrl}/og-image.png`,
+    priceRange: "€€",
+  };
+
+
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <Header />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       <div className="pt-20 px-4 py-12">
         <div className="max-w-7xl mx-auto">
@@ -90,8 +122,7 @@ export default function ContactPage() {
               Contactez-nous
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Une question ? Un projet ? Notre équipe est là pour vous
-              accompagner
+              Une question ? Un projet ? Notre équipe est là pour vous accompagner
             </p>
           </div>
 
@@ -250,8 +281,8 @@ export default function ContactPage() {
                     <MapPin className="h-6 w-6 text-blue-600 mt-1" />
                     <div>
                       <h3 className="font-bold mb-1 text-gray-900">Adresse</h3>
-                      <p className="text-gray-600">644 route de lille saint </p>
-                      <p className="text-gray-600"> Amand les eaux 59230</p>
+                      <p className="text-gray-600">644 route de Lille</p>
+                      <p className="text-gray-600">59230 Saint-Amand-les-Eaux</p>
                     </div>
                   </div>
 
@@ -276,9 +307,8 @@ export default function ContactPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="w-full h-64 rounded-lg overflow-hidden">
-                    {/* The iframe is now correctly formatted for React */}
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.991620862744!2d2.2922926156749917!3d48.85837367928741!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e23%3A0x8ddca9af5547b710!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1625078174780!5m2!1sfr!2sfr"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2524.991620862744!2d3.4172926156749917!3d50.45837367928741!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47dd2b1a2a4a4a4a%3A0x4b18d8f9f9f9f9f9!2s644+Route+de+Lille%2C+59230+Saint-Amand-les-Eaux!5e0!3m2!1sfr!2sfr!4v1724251200000!5m2!1sfr!2sfr"
                       width="100%"
                       height="100%"
                       style={{ border: 0 }}

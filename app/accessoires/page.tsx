@@ -12,11 +12,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { QuickViewDialog } from "../components/QuickViewDialog"; // Assuming this component exists
-import Header from "../components/Header"; // Assuming this component exists
-import Footer from "../components/Footer"; // Assuming this component exists
+import { QuickViewDialog } from "../components/QuickViewDialog";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { ShoppingCart, Search, Filter, Eye } from "lucide-react";
-import { useCart } from "../context/CartContext"; // Assuming this context exists
+import { useCart } from "../context/CartContext";
 import Image, { StaticImageData } from "next/image";
 
 // Local image imports
@@ -47,7 +47,6 @@ interface Accessory {
 }
 
 // --- Data Section ---
-
 const accessories: Accessory[] = [
   {
     id: 1,
@@ -61,7 +60,7 @@ const accessories: Accessory[] = [
       "La butée de porte EASYFIX Grand Blanc à coller est une solution simple et efficace pour protéger vos murs, portes et meubles des impacts. Elle est composée d'un corps en plastique blanc et d'un amortisseur transparent qui absorbe les chocs en silence. Son installation est un jeu d'enfant : pas besoin de percer, il suffit de la coller sur une surface propre et lisse. Son design discret s'intègre facilement dans n'importe quel décor.",
     rating: 4.5,
     inStock: true,
-    category: "fixations", 
+    category: "fixations",
     brand: "EASYFIX",
     features: [
       "Installation facile sans perçage (à coller)",
@@ -90,10 +89,8 @@ const accessories: Accessory[] = [
     id: 2,
     name: "Connecteur Wago 221-412 pour 2 conducteurs 20 pcs",
     price: 10,
-    image:a3,
-    images: [
-      a3
-    ],
+    image: a3,
+    images: [a3],
     description:
       "Borne de connexion compacte Wago série 221 pour le raccordement de 2 conducteurs. Idéale pour tous types de fils (souples, semi-rigides et rigides) sans outils.",
     detailedDescription:
@@ -141,16 +138,13 @@ const sortOptions = [
 ];
 
 // --- Component ---
-
 export default function AccessoriesPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("name");
-  const [quickViewAccessory, setQuickViewAccessory] =
-    useState<Accessory | null>(null);
+  const [quickViewAccessory, setQuickViewAccessory] = useState<Accessory | null>(null);
   const { addToCart } = useCart();
 
-  // Helper to get a string URL from either a string or a StaticImageData object
   const getImageUrl = (image: ImageSource): string => {
     return typeof image === "string" ? image : image.src;
   };
@@ -159,9 +153,7 @@ export default function AccessoriesPage() {
     .filter((accessory) => {
       const matchesSearch =
         accessory.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        accessory.description
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase()) ||
+        accessory.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
         accessory.brand.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory =
         selectedCategory === "all" || accessory.category === selectedCategory;
@@ -187,7 +179,7 @@ export default function AccessoriesPage() {
       id: `accessory-${accessory.id}`,
       name: accessory.name,
       price: accessory.price,
-      image: getImageUrl(accessory.image), // Ensure the image is a string URL for the cart
+      image: getImageUrl(accessory.image),
       quantity: 1,
       type: "accessory",
     });
@@ -198,7 +190,7 @@ export default function AccessoriesPage() {
       id: `accessory-${accessory.id}`,
       name: accessory.name,
       price: accessory.price,
-      image: getImageUrl(accessory.image), // Ensure the image is a string URL for the cart
+      image: getImageUrl(accessory.image),
       quantity: quantity,
       type: "accessory",
     });
@@ -207,19 +199,75 @@ export default function AccessoriesPage() {
   return (
     <div className="min-h-screen mt-26 bg-white flex flex-col">
       <Header />
+      {/* SEO: JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "Accessoires pour Enseignes LED & Signalétique",
+            description:
+              "Découvrez notre gamme complète d'accessoires pour l'installation et la maintenance de vos enseignes LED, lettres découpées et signalétique.",
+            url: "https://lettre3dshop.com/accessoires",
+            breadcrumb: {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Accueil",
+                  item: "https://lettre3dshop.com",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Accessoires",
+                  item: "https://lettre3dshop.com/accessoires",
+                },
+              ],
+            },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Accessoires pour Enseignes LED",
+            itemListElement: accessories.map((accessory, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              url: `https://lettre3dshop.com/accessoires#${accessory.id}`,
+              name: accessory.name,
+              description: accessory.description,
+              offers: {
+                "@type": "Offer",
+                price: accessory.price,
+                priceCurrency: "EUR",
+                availability: accessory.inStock
+                  ? "https://schema.org/InStock"
+                  : "https://schema.org/OutOfStock",
+              },
+            })),
+          }),
+        }}
+      />
       <main className="flex-grow">
         <div className="container mx-auto px-4 py-12">
           {/* Hero Section */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-black to-blue-500 bg-clip-text text-transparent">
-              Accessoires Essentiels
+              Accessoires pour Enseignes LED & Signalétique
             </h1>
-            <p className="text-lg max-w-2xl mx-auto">
-              Tous les composants nécessaires pour l&apos;installation et la
-              maintenance de vos enseignes LED.
+            <p className="text-lg max-w-3xl mx-auto">
+              Découvrez notre gamme complète d'accessoires pour l'installation et la maintenance de vos enseignes LED, lettres découpées et signalétique.
+              Butées de porte, connecteurs Wago, câbles, alimentations et fixations de qualité professionnelle.
+              Livraison rapide au Maroc et devis gratuit sur demande.
             </p>
           </div>
-
           {/* Search and Filter */}
           <div className="mb-8 p-4 bg-white rounded-lg border border-indigo-200 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -239,9 +287,7 @@ export default function AccessoriesPage() {
                   {categories.map((category) => (
                     <Button
                       key={category.id}
-                      variant={
-                        selectedCategory === category.id ? "default" : "outline"
-                      }
+                      variant={selectedCategory === category.id ? "default" : "outline"}
                       className={
                         selectedCategory === category.id
                           ? "bg-indigo-600 text-white"
@@ -272,25 +318,24 @@ export default function AccessoriesPage() {
               </div>
             </div>
           </div>
-
           <div className="mb-6">
             <p className="text-indigo-700">
               {filteredAccessories.length} résultat
               {filteredAccessories.length > 1 ? "s" : ""}
             </p>
           </div>
-
           {/* Accessories Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredAccessories.map((accessory) => (
               <Card
                 key={accessory.id}
+                id={`accessory-${accessory.id}`}
                 className="overflow-hidden group flex flex-col border border-indigo-200"
               >
                 <div className="relative">
                   <Image
                     src={accessory.image}
-                    alt={accessory.name}
+                    alt={`Accessoire ${accessory.name} - ${accessory.brand} - ${accessory.description}`}
                     width={400}
                     height={300}
                     className="w-full h-48 object-cover"
@@ -318,12 +363,12 @@ export default function AccessoriesPage() {
                   <h3 className="font-bold text-sm mb-1 text-indigo-700 truncate">
                     {accessory.name}
                   </h3>
-                  <p className="text-sm text-vlack mb-2 flex-grow">
+                  <p className="text-sm text-gray-700 mb-2 flex-grow">
                     {accessory.description}
                   </p>
                   <div className="flex justify-between items-center mt-4">
                     <span className="font-bold text-lg text-indigo-800">
-                      {accessory.price.toFixed(2)} € 
+                      {accessory.price.toFixed(2)} €
                     </span>
                     <Button
                       size="sm"
@@ -339,10 +384,54 @@ export default function AccessoriesPage() {
               </Card>
             ))}
           </div>
+          {/* FAQ Section */}
+          <div className="mt-16">
+            <h2 className="text-3xl font-bold text-center mb-8 text-indigo-800">
+              Questions Fréquentes sur nos Accessoires
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white p-6 rounded-lg border border-indigo-200">
+                <h3 className="font-bold mb-2 text-indigo-700">
+                  Quels accessoires sont indispensables pour installer une enseigne LED ?
+                </h3>
+                <p className="text-gray-700">
+                  Pour installer une enseigne LED, vous aurez besoin de fixations adaptées à votre support (mur, sol, plafond),
+                  d'alimentations compatibles avec la puissance de vos modules LED,
+                  de câbles de connexion, et éventuellement de connecteurs pour un raccordement propre et sécurisé.
+                </p>
+              </div>
+              <div className="bg-white p-6 rounded-lg border border-indigo-200">
+                <h3 className="font-bold mb-2 text-indigo-700">
+                  Proposez-vous des accessoires pour l'installation au Maroc ?
+                </h3>
+                <p className="text-gray-700">
+                  Oui, tous nos accessoires sont disponibles pour une livraison rapide au Maroc.
+                  Nous proposons également un service de conseil pour vous aider à choisir les bons produits selon votre projet.
+                </p>
+              </div>
+              <div className="bg-white p-6 rounded-lg border border-indigo-200">
+                <h3 className="font-bold mb-2 text-indigo-700">
+                  Comment choisir le bon connecteur pour mon installation ?
+                </h3>
+                <p className="text-gray-700">
+                  Le choix du connecteur dépend de la section de vos câbles, de l'intensité du courant,
+                  et de l'environnement (intérieur/extérieur). Nos connecteurs Wago sont universels et adaptés à la plupart des installations.
+                </p>
+              </div>
+              <div className="bg-white p-6 rounded-lg border border-indigo-200">
+                <h3 className="font-bold mb-2 text-indigo-700">
+                  Puis-je obtenir un devis pour des accessoires en gros ?
+                </h3>
+                <p className="text-gray-700">
+                  Absolument ! Contactez-nous via notre formulaire ou par email pour un devis personnalisé,
+                  que ce soit pour des petites ou grandes quantités.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
       <Footer />
-
       {/* Quick View Dialog - Rendered conditionally */}
       {quickViewAccessory && (
         <QuickViewDialog

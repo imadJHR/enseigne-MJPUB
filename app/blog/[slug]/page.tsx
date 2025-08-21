@@ -6,9 +6,75 @@ import { ArrowLeft, Calendar, User } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { blogPosts } from "@/lib/blogPosts";
+import { Metadata } from "next";
 
 export interface PageParams {
   slug: string;
+}
+
+// Helper function to safely convert date to ISO string
+const getISODate = (dateString: string): string => {
+  try {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      return new Date().toISOString();
+    }
+    return date.toISOString();
+  } catch (e) {
+    return new Date().toISOString();
+  }
+};
+
+export async function generateMetadata({ params }: { params: PageParams }): Promise<Metadata> {
+  const post = blogPosts.find((p) => p.slug === params.slug);
+
+  if (!post) {
+    return {
+      title: "Article non trouvé | MJ PUB",
+      description: "L'article que vous recherchez n'existe pas.",
+    };
+  }
+
+  return {
+    title: `${post.title} | MJ PUB`,
+    description: post.excerpt,
+    keywords: [
+      post.title,
+      post.category,
+      "enseignes lumineuses",
+      "signalétique",
+      "conseils enseignes",
+      "innovations enseignes",
+      "actualités enseignes",
+      "enseignes LED",
+      "signalétique sur mesure",
+    ],
+    alternates: {
+      canonical: `https://lettre3dshop.com/blog/${post.slug}`,
+    },
+    openGraph: {
+      title: `${post.title} | MJ PUB`,
+      description: post.excerpt,
+      url: `https://lettre3dshop.com/blog/${post.slug}`,
+      type: "article",
+      images: [
+        {
+          url: post.image.src || "https://lettre3dshop.com/og-blog-post.png",
+          width: 800,
+          height: 600,
+          alt: post.title,
+        },
+      ],
+      publishedTime: getISODate(post.date),
+      authors: [post.author],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${post.title} | MJ PUB`,
+      description: post.excerpt,
+      images: [post.image.src || "https://lettre3dshop.com/og-blog-post.png"],
+    },
+  };
 }
 
 export default function BlogPostPage({ params }: { params: PageParams }) {
@@ -37,6 +103,58 @@ export default function BlogPostPage({ params }: { params: PageParams }) {
   return (
     <div className="min-h-screen bg-white text-gray-900 flex flex-col">
       <Header />
+      {/* SEO: JSON-LD for BlogPosting and Breadcrumb */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: post.title,
+            description: post.excerpt,
+            url: `https://lettre3dshop.com/blog/${post.slug}`,
+            datePublished: getISODate(post.date),
+            dateModified: getISODate(post.date),
+            author: {
+              "@type": "Person",
+              name: post.author,
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "MJ PUB",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://lettre3dshop.com/logo.png",
+              },
+            },
+            image: post.image.src || "https://lettre3dshop.com/og-blog-post.png",
+            articleSection: post.category,
+            breadcrumb: {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Accueil",
+                  item: "https://lettre3dshop.com",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Blog",
+                  item: "https://lettre3dshop.com/blog",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: post.title,
+                  item: `https://lettre3dshop.com/blog/${post.slug}`,
+                },
+              ],
+            },
+          }),
+        }}
+      />
       <main className="pt-20 px-4 py-12 flex-grow">
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
@@ -50,11 +168,10 @@ export default function BlogPostPage({ params }: { params: PageParams }) {
               </Button>
             </Link>
           </div>
-
           <article className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
             <Image
               src={post.image}
-              alt={post.title}
+              alt={`Image de l'article : ${post.title}`}
               width={800}
               height={450}
               className="w-full h-auto aspect-video object-cover rounded-lg mb-6"
@@ -76,12 +193,11 @@ export default function BlogPostPage({ params }: { params: PageParams }) {
                 <span>{post.author}</span>
               </div>
             </div>
-            <div 
+            <div
               className="prose max-w-none text-gray-700 leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: post.content }} 
+              dangerouslySetInnerHTML={{ __html: post.content }}
             />
           </article>
-
           <div className="mt-12 text-center bg-white rounded-lg p-8 border border-gray-200">
             <h2 className="text-3xl font-bold mb-4 text-gray-900">
               Intéressé par nos solutions ?

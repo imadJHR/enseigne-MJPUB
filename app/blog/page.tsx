@@ -13,7 +13,6 @@ import Image from "next/image";
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState("");
-
   const filteredPosts = blogPosts.filter(
     (post) =>
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -21,9 +20,83 @@ export default function BlogPage() {
       post.author.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Helper function to safely convert date to ISO string
+  const getISODate = (dateString: string): string => {
+    try {
+      // Try to parse the date string
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) {
+        // If parsing fails, return a default date
+        return new Date().toISOString();
+      }
+      return date.toISOString();
+    } catch (e) {
+      // If any error occurs, return current date
+      return new Date().toISOString();
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <Header />
+      {/* SEO: JSON-LD for Blog and Breadcrumb */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "Notre Blog - Actualités, conseils et innovations sur les enseignes lumineuses et la signalétique",
+            description:
+              "Découvrez nos articles sur les enseignes lumineuses, la signalétique, les innovations et conseils pour les professionnels et les commerçants.",
+            url: "https://lettre3dshop.com/blog",
+            breadcrumb: {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Accueil",
+                  item: "https://lettre3dshop.com",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Blog",
+                  item: "https://lettre3dshop.com/blog",
+                },
+              ],
+            },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            name: "Blog MJ PUB",
+            description:
+              "Actualités, conseils et innovations sur les enseignes lumineuses et la signalétique",
+            url: "https://lettre3dshop.com/blog",
+            blogPost: blogPosts.map((post) => ({
+              "@type": "BlogPosting",
+              url: `https://lettre3dshop.com/blog/${post.slug}`,
+              name: post.title,
+              headline: post.title,
+              description: post.excerpt,
+              datePublished: getISODate(post.date),
+              author: {
+                "@type": "Person",
+                name: post.author,
+              },
+              image: post.image || "/placeholder.svg",
+              articleSection: post.category,
+            })),
+          }),
+        }}
+      />
       <div className="pt-20 px-4 py-12">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
@@ -36,7 +109,6 @@ export default function BlogPage() {
               et la signalétique
             </p>
           </div>
-
           {/* Search Bar */}
           <div className="relative max-w-md mx-auto mb-8">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
@@ -47,7 +119,6 @@ export default function BlogPage() {
               className="pl-10 bg-white border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
-
           {/* Blog Posts Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredPosts.map((post) => (
@@ -63,7 +134,7 @@ export default function BlogPage() {
                         post.image ||
                         "/placeholder.svg?height=300&width=400&text=Blog+Image"
                       }
-                      alt={post.title}
+                      alt={`Image de l'article : ${post.title}`}
                       width={400}
                       height={300}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
@@ -99,7 +170,6 @@ export default function BlogPage() {
               </Link>
             ))}
           </div>
-
           {/* No Results */}
           {filteredPosts.length === 0 && (
             <div className="text-center py-12">
