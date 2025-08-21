@@ -81,57 +81,13 @@ export default function Header() {
               Configurateur
             </Link>
 
-            {/* Dropdown Produits (Desktop) */}
-            <div className="relative group">
-              <button
-                onClick={toggleProductsDropdown}
-                className="flex items-center space-x-1 text-gray-900 hover:text-blue-600 transition-colors font-medium text-xs lg:text-sm px-2 py-1"
-                aria-expanded={isProductsDropdownOpen}
-                aria-haspopup="true"
-              >
-                <span>Produits</span>
-                <ChevronDown
-                  className={`h-3 w-3 transition-transform ${
-                    isProductsDropdownOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-              {isProductsDropdownOpen && (
-                <div
-                  className="absolute left-0 top-full mt-1 w-48 sm:w-56 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden z-50"
-                  onMouseLeave={() => setIsProductsDropdownOpen(false)}
-                >
-                  <Link
-                    href="/produits"
-                    onClick={handleLinkClick}
-                    className="block px-3 py-2 text-gray-900 hover:bg-blue-50 font-medium text-xs sm:text-sm border-b border-gray-100"
-                  >
-                    Tous les produits
-                  </Link>
-                  <Link
-                    href="/produits/enseigne-led-premium"
-                    onClick={handleLinkClick}
-                    className="block px-3 py-2 text-gray-900 hover:bg-blue-50 text-xs sm:text-sm border-b border-gray-100"
-                  >
-                    Enseignes LED
-                  </Link>
-                  <Link
-                    href="/produits/lettres-decoupees-pvc"
-                    onClick={handleLinkClick}
-                    className="block px-3 py-2 text-gray-900 hover:bg-blue-50 text-xs sm:text-sm border-b border-gray-100"
-                  >
-                    Lettres Découpées
-                  </Link>
-                  <Link
-                    href="/produits/panneau-dibond"
-                    onClick={handleLinkClick}
-                    className="block px-3 py-2 text-gray-900 hover:bg-blue-50 text-xs sm:text-sm"
-                  >
-                    Panneaux Dibond
-                  </Link>
-                </div>
-              )}
-            </div>
+           <Link
+              href="/produits"
+              onClick={handleLinkClick}
+              className="text-gray-900 hover:text-blue-600 transition-colors font-medium text-xs lg:text-sm px-2 py-1"
+            >
+              Produits
+            </Link>
 
             <Link
               href="/accessoires"
@@ -236,54 +192,13 @@ export default function Header() {
                 Configurateur
               </Link>
 
-              {/* Dropdown Produits (Mobile) */}
-              <div className="border-t border-gray-100 my-1 pt-1">
-                <button
-                  onClick={() => setIsProductsDropdownOpen(!isProductsDropdownOpen)}
-                  className="w-full flex justify-between items-center py-2 px-3 text-gray-900 hover:bg-blue-50 rounded-md transition-colors font-medium text-sm"
-                  aria-expanded={isProductsDropdownOpen}
-                >
-                  <span>Produits</span>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${
-                      isProductsDropdownOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-                {isProductsDropdownOpen && (
-                  <div className="pl-4 pb-1 space-y-1">
-                    <Link
-                      href="/produits"
-                      onClick={handleLinkClick}
-                      className="block py-1.5 px-3 text-gray-900 hover:bg-blue-50 rounded-md transition-colors text-sm"
-                    >
-                      Tous les produits
-                    </Link>
-                    <Link
-                      href="/produits/enseigne-led-premium"
-                      onClick={handleLinkClick}
-                      className="block py-1.5 px-3 text-gray-900 hover:bg-blue-50 rounded-md transition-colors text-sm"
-                    >
-                      Enseignes LED
-                    </Link>
-                    <Link
-                      href="/produits/lettres-decoupees-pvc"
-                      onClick={handleLinkClick}
-                      className="block py-1.5 px-3 text-gray-900 hover:bg-blue-50 rounded-md transition-colors text-sm"
-                    >
-                      Lettres Découpées
-                    </Link>
-                    <Link
-                      href="/produits/panneau-dibond"
-                      onClick={handleLinkClick}
-                      className="block py-1.5 px-3 text-gray-900 hover:bg-blue-50 rounded-md transition-colors text-sm"
-                    >
-                      Panneaux Dibond
-                    </Link>
-                  </div>
-                )}
-              </div>
-
+              <Link
+                href="/produits"
+                onClick={handleLinkClick}
+                className="py-2 px-3 text-gray-900 hover:bg-blue-50 rounded-md transition-colors font-medium text-sm"
+              >
+                Produits
+              </Link>
               <Link
                 href="/accessoires"
                 onClick={handleLinkClick}

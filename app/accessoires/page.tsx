@@ -88,8 +88,8 @@ const accessories: Accessory[] = [
   },
   {
     id: 2,
-    name: "Connecteur Wago 221-412 pour 2 conducteurs",
-    price: 5.5,
+    name: "Connecteur Wago 221-412 pour 2 conducteurs 20 pcs",
+    price: 10,
     image:a3,
     images: [
       a3
@@ -100,7 +100,7 @@ const accessories: Accessory[] = [
       "Le connecteur Wago 221-412 est une borne de raccordement universelle qui simplifie les installations électriques. Grâce à ses leviers de manipulation orange, la connexion et la déconnexion des fils se font sans effort et sans aucun outil. Son boîtier transparent permet de vérifier visuellement si les conducteurs sont correctement insérés et dénudés. Sa taille compacte le rend parfait pour une utilisation dans les boîtes de dérivation et les espaces restreints. Il est réutilisable et garantit une connexion sûre et durable.",
     rating: 4.9,
     inStock: true,
-    category: "Matériel Électrique",
+    category: "connecteurs",
     brand: "Wago",
     features: [
       "Connexion facile et rapide avec leviers",

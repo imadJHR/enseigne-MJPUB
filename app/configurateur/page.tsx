@@ -24,6 +24,8 @@ import {
   HardHat,
   CheckCircle,
   Zap,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
@@ -223,6 +225,22 @@ export default function ConfigurateurPage() {
   });
   const [isSuccessPage, setIsSuccessPage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [expandedSections, setExpandedSections] = useState({
+    text: true,
+    style: true,
+    materials: true,
+    colors: true,
+    lighting: false,
+    fixation: false,
+  });
+
+  // Toggle section expansion
+  const toggleSection = (section: string) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section as keyof typeof prev]
+    }));
+  };
 
   // --- Material Image Mapping ---
   const materialImageMap: Record<string, StaticImageData> = {
@@ -525,7 +543,6 @@ export default function ConfigurateurPage() {
     );
   }
 
- 
   return (
     <div className="min-h-screen bg-gray-50 text-black flex flex-col">
       <Head>
@@ -596,297 +613,352 @@ export default function ConfigurateurPage() {
             <div className="lg:col-span-2 bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-lg border border-gray-200 space-y-4 sm:space-y-6">
               {/* Sign Text */}
               <div className="space-y-1">
-                <Label
-                  htmlFor="signText"
-                  className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800"
+                <div 
+                  className="flex items-center justify-between cursor-pointer"
+                  onClick={() => toggleSection('text')}
                 >
-                  <TextCursorInput className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
-                  Texte de l&apos;Enseigne
-                </Label>
-                <Input
-                  id="signText"
-                  type="text"
-                  placeholder="Votre texte ici..."
-                  value={signText}
-                  onChange={(e) => setSignText(e.target.value)}
-                  maxLength={50}
-                  className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 rounded-md p-2 text-xs sm:text-sm md:text-base"
-                />
-                <p className="text-xs text-gray-500">
-                  Max 50 caractères. Restants: {50 - signText.length}
-                </p>
+                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                    <TextCursorInput className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
+                    Texte de l&apos;Enseigne
+                  </Label>
+                  {expandedSections.text ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                </div>
+                {expandedSections.text && (
+                  <>
+                    <Input
+                      id="signText"
+                      type="text"
+                      placeholder="Votre texte ici..."
+                      value={signText}
+                      onChange={(e) => setSignText(e.target.value)}
+                      maxLength={50}
+                      className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 rounded-md p-2 text-xs sm:text-sm md:text-base mt-2"
+                    />
+                    <p className="text-xs text-gray-500">
+                      Max 50 caractères. Restants: {50 - signText.length}
+                    </p>
+                  </>
+                )}
               </div>
 
               {/* Font */}
-              <div className="space-y-1">
-                <Label
-                  htmlFor="font"
-                  className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800"
-                >
-                  <Type className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
-                  Police
-                </Label>
-                <Select value={font} onValueChange={setFont}>
-                  <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500 text-xs sm:text-sm md:text-base">
-                    <SelectValue placeholder="Sélectionnez une police" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white text-gray-900 border-gray-300 max-h-60 overflow-y-auto text-xs sm:text-sm md:text-base">
-                    {fontOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        <span style={{ fontFamily: option.value }}>
-                          {option.label}
-                        </span>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+              {expandedSections.text && (
+                <div className="space-y-1">
+                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                    <Type className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
+                    Police
+                  </Label>
+                  <Select value={font} onValueChange={setFont}>
+                    <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500 text-xs sm:text-sm md:text-base">
+                      <SelectValue placeholder="Sélectionnez une police" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white text-gray-900 border-gray-300 max-h-60 overflow-y-auto text-xs sm:text-sm md:text-base">
+                      {fontOptions.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          <span style={{ fontFamily: option.value }}>
+                            {option.label}
+                          </span>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
 
               {/* Height */}
-              <div className="space-y-1">
-                <Label
-                  htmlFor="height"
-                  className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800"
-                >
-                  <Ruler className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
-                  Hauteur du Texte:{" "}
-                  <span className="font-bold ml-1">{height} cm</span>
-                </Label>
-                <Slider
-                  id="height"
-                  min={10}
-                  max={100}
-                  step={1}
-                  value={[height]}
-                  onValueChange={(val) => setHeight(val[0])}
-                  className="mt-2 [&>span:first-child]:bg-blue-600 [&>span:first-child]:border-blue-600"
-                />
-                <p className="text-xs text-gray-500">
-                  Largeur estimée: {estimatedWidth.toFixed(0)} cm
-                </p>
-              </div>
+              {expandedSections.text && (
+                <div className="space-y-1">
+                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                    <Ruler className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
+                    Hauteur du Texte:{" "}
+                    <span className="font-bold ml-1">{height} cm</span>
+                  </Label>
+                  <Slider
+                    id="height"
+                    min={10}
+                    max={100}
+                    step={1}
+                    value={[height]}
+                    onValueChange={(val) => setHeight(val[0])}
+                    className="mt-2 [&>span:first-child]:bg-blue-600 [&>span:first-child]:border-blue-600"
+                  />
+                  <p className="text-xs text-gray-500">
+                    Largeur estimée: {estimatedWidth.toFixed(0)} cm
+                  </p>
+                </div>
+              )}
 
               {/* Sign Style */}
               <div className="space-y-1">
-                <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
-                  <Layers className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
-                  Type d&apos;Enseigne
-                </Label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
-                  <Card
-                    className={`cursor-pointer border-2 ${
-                      signStyle === "cut-out"
-                        ? "border-blue-600 ring-2 ring-blue-500"
-                        : "border-gray-300"
-                    } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
-                    onClick={() => setSignStyle("cut-out")}
-                  >
-                    <CardContent className="p-2 sm:p-3 flex flex-col items-center">
-                      <Image
-                        src={imgCutOut}
-                        alt="Lettres en relief"
-                        className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain mb-1 sm:mb-2"
-                        width={80}
-                        height={80}
-                      />
-                      <h3 className="text-xs sm:text-sm font-bold text-gray-900 text-center">
-                        Lettres en relief
-                      </h3>
-                    </CardContent>
-                  </Card>
-                  <Card
-                    className={`cursor-pointer border-2 ${
-                      signStyle === "lighted"
-                        ? "border-blue-600 ring-2 ring-blue-500"
-                        : "border-gray-300"
-                    } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
-                    onClick={() => setSignStyle("lighted")}
-                  >
-                    <CardContent className="p-2 sm:p-3 flex flex-col items-center">
-                      <Image
-                        src={imgLighted}
-                        alt="Lettres lumineuses"
-                        className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain mb-1 sm:mb-2"
-                        width={80}
-                        height={80}
-                      />
-                      <h3 className="text-xs sm:text-sm font-bold text-gray-900 text-center">
-                        Lettres lumineuses rétroéclairées
-                      </h3>
-                    </CardContent>
-                  </Card>
-                  <Card
-                    className={`cursor-pointer border-2 ${
-                      signStyle === "lighted-box"
-                        ? "border-blue-600 ring-2 ring-blue-500"
-                        : "border-gray-300"
-                    } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
-                    onClick={() => setSignStyle("lighted-box")}
-                  >
-                    <CardContent className="p-2 sm:p-3 flex flex-col items-center">
-                      <Image
-                        src={imgLightedBox}
-                        alt="Lettres lumineuses boîtier alu"
-                        className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain mb-1 sm:mb-2"
-                        width={80}
-                        height={80}
-                      />
-                      <h3 className="text-xs sm:text-sm font-bold text-gray-900 text-center">
-                        Lettres lumineuses boîtier alu
-                      </h3>
-                    </CardContent>
-                  </Card>
+                <div 
+                  className="flex items-center justify-between cursor-pointer"
+                  onClick={() => toggleSection('style')}
+                >
+                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                    <Layers className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
+                    Type d&apos;Enseigne
+                  </Label>
+                  {expandedSections.style ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </div>
+                {expandedSections.style && (
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 mt-2">
+                    <Card
+                      className={`cursor-pointer border-2 ${
+                        signStyle === "cut-out"
+                          ? "border-blue-600 ring-2 ring-blue-500"
+                          : "border-gray-300"
+                      } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
+                      onClick={() => setSignStyle("cut-out")}
+                    >
+                      <CardContent className="p-2 sm:p-3 flex flex-col items-center">
+                        <Image
+                          src={imgCutOut}
+                          alt="Lettres en relief"
+                          className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain mb-1 sm:mb-2"
+                          width={96}
+                          height={96}
+                        />
+                        <h3 className="text-xs sm:text-sm font-bold text-gray-900 text-center">
+                          Lettres en relief
+                        </h3>
+                      </CardContent>
+                    </Card>
+                    <Card
+                      className={`cursor-pointer border-2 ${
+                        signStyle === "lighted"
+                          ? "border-blue-600 ring-2 ring-blue-500"
+                          : "border-gray-300"
+                      } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
+                      onClick={() => setSignStyle("lighted")}
+                    >
+                      <CardContent className="p-2 sm:p-3 flex flex-col items-center">
+                        <Image
+                          src={imgLighted}
+                          alt="Lettres lumineuses"
+                          className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain mb-1 sm:mb-2"
+                          width={96}
+                          height={96}
+                        />
+                        <h3 className="text-xs sm:text-sm font-bold text-gray-900 text-center">
+                          Lettres lumineuses rétroéclairées
+                        </h3>
+                      </CardContent>
+                    </Card>
+                    <Card
+                      className={`cursor-pointer border-2 ${
+                        signStyle === "lighted-box"
+                          ? "border-blue-600 ring-2 ring-blue-500"
+                          : "border-gray-300"
+                      } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
+                      onClick={() => setSignStyle("lighted-box")}
+                    >
+                      <CardContent className="p-2 sm:p-3 flex flex-col items-center">
+                        <Image
+                          src={imgLightedBox}
+                          alt="Lettres lumineuses boîtier alu"
+                          className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain mb-1 sm:mb-2"
+                          width={96}
+                          height={96}
+                        />
+                        <h3 className="text-xs sm:text-sm font-bold text-gray-900 text-center">
+                          Lettres lumineuses boîtier alu
+                        </h3>
+                      </CardContent>
+                    </Card>
+                  </div>
+                )}
               </div>
 
               {/* Materials */}
               <div className="space-y-1">
-                <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
-                  <Ruler className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
-                  Matériaux
-                </Label>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
-                  {allMaterialOptions.map((opt) => (
-                    <Card
-                      key={opt.id}
-                      className={`cursor-pointer border-2 ${
-                        selectedMaterialId === opt.id
-                          ? "border-blue-600 ring-2 ring-blue-500"
-                          : "border-gray-300"
-                      } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
-                      onClick={() => setSelectedMaterialId(opt.id)}
-                    >
-                      <CardContent className="p-1 sm:p-2 flex flex-col items-center">
-                        <div className="relative w-full h-10 sm:h-12 md:h-16 mb-1 overflow-hidden rounded-md">
-                          <Image
-                            src={opt.image}
-                            alt={opt.label}
-                            layout="fill"
-                            objectFit="cover"
-                          />
-                        </div>
-                        <h3 className="text-xxs sm:text-xs md:text-sm capitalize font-semibold text-center h-8 flex items-center justify-center">
-                          {opt.label}
-                        </h3>
-                      </CardContent>
-                    </Card>
-                  ))}
+                <div 
+                  className="flex items-center justify-between cursor-pointer"
+                  onClick={() => toggleSection('materials')}
+                >
+                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                    <Ruler className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
+                    Matériaux
+                  </Label>
+                  {expandedSections.materials ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </div>
+                {expandedSections.materials && (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 mt-2">
+                    {allMaterialOptions.map((opt) => (
+                      <Card
+                        key={opt.id}
+                        className={`cursor-pointer border-2 ${
+                          selectedMaterialId === opt.id
+                            ? "border-blue-600 ring-2 ring-blue-500"
+                            : "border-gray-300"
+                        } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
+                        onClick={() => setSelectedMaterialId(opt.id)}
+                      >
+                        <CardContent className="p-1 sm:p-2 flex flex-col items-center">
+                          <div className="relative w-full h-16 sm:h-20 md:h-24 mb-1 overflow-hidden rounded-md">
+                            <Image
+                              src={opt.image}
+                              alt={opt.label}
+                              layout="fill"
+                              objectFit="cover"
+                              className="scale-110"
+                            />
+                          </div>
+                          <h3 className="text-xxs sm:text-xs md:text-sm capitalize font-semibold text-center h-8 flex items-center justify-center">
+                            {opt.label}
+                          </h3>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Text Color & Background Color */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                <div className="space-y-1">
+              <div className="space-y-1">
+                <div 
+                  className="flex items-center justify-between cursor-pointer"
+                  onClick={() => toggleSection('colors')}
+                >
                   <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
                     <Palette className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
-                    Couleur du Texte
+                    Couleurs
                   </Label>
-                  <div className="flex items-center gap-2">
-                    <Input
-                      type="color"
-                      value={textColor}
-                      onChange={(e) => setTextColor(e.target.value)}
-                      className="w-10 h-10 p-0 border-none rounded-md overflow-hidden"
-                    />
-                    <span className="text-xs sm:text-sm">
-                      {textColor.toUpperCase()}
-                    </span>
-                  </div>
+                  {expandedSections.colors ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </div>
-                <div className="space-y-1">
-                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
-                    <Palette className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
-                    Couleur de Fond
-                  </Label>
-                  <div className="flex items-center gap-2">
-                    <Input
-                      type="color"
-                      value={backgroundColor}
-                      onChange={(e) => setBackgroundColor(e.target.value)}
-                      className="w-10 h-10 p-0 border-none rounded-md overflow-hidden"
-                    />
-                    <span className="text-xs sm:text-sm">
-                      {backgroundColor.toUpperCase()}
-                    </span>
+                {expandedSections.colors && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mt-2">
+                    <div className="space-y-1">
+                      <Label className="text-xs sm:text-sm md:text-base font-semibold">
+                        Couleur du Texte
+                      </Label>
+                      <div className="flex items-center gap-2">
+                        <Input
+                          type="color"
+                          value={textColor}
+                          onChange={(e) => setTextColor(e.target.value)}
+                          className="w-12 h-12 p-0 border-none rounded-md overflow-hidden cursor-pointer"
+                        />
+                        <span className="text-xs sm:text-sm">
+                          {textColor.toUpperCase()}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <Label className="text-xs sm:text-sm md:text-base font-semibold">
+                        Couleur de Fond
+                      </Label>
+                      <div className="flex items-center gap-2">
+                        <Input
+                          type="color"
+                          value={backgroundColor}
+                          onChange={(e) => setBackgroundColor(e.target.value)}
+                          className="w-12 h-12 p-0 border-none rounded-md overflow-hidden cursor-pointer"
+                        />
+                        <span className="text-xs sm:text-sm">
+                          {backgroundColor.toUpperCase()}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
 
               {/* Lighting Options (if lighted or lighted-box) */}
               {(signStyle === "lighted" || signStyle === "lighted-box") && (
-                <div className="space-y-2 sm:space-y-3">
-                  <div className="space-y-1">
+                <div className="space-y-1">
+                  <div 
+                    className="flex items-center justify-between cursor-pointer"
+                    onClick={() => toggleSection('lighting')}
+                  >
                     <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
                       <Lightbulb className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
-                      Couleur des LEDs
+                      Options d&apos;Éclairage
                     </Label>
-                    <Select
-                      value={ledColor}
-                      onValueChange={(value: LedColor) => setLedColor(value)}
-                    >
-                      <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500 text-xs sm:text-sm md:text-base">
-                        <SelectValue placeholder="Sélectionnez une couleur" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-white text-gray-900 border-gray-300 text-xs sm:text-sm md:text-base">
-                        <SelectItem value="blanc-froid">Blanc Froid</SelectItem>
-                        <SelectItem value="blanc-chaud">Blanc Chaud</SelectItem>
-                        <SelectItem value="rouge">Rouge</SelectItem>
-                        <SelectItem value="bleu">Bleu</SelectItem>
-                        <SelectItem value="vert">Vert</SelectItem>
-                        <SelectItem value="rgb">RGB</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    {expandedSections.lighting ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                   </div>
-                  <div className="space-y-1">
-                    <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
-                      <Zap className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
-                      Intensité: {intensity}%
-                    </Label>
-                    <Slider
-                      min={10}
-                      max={100}
-                      step={10}
-                      value={[intensity]}
-                      onValueChange={(val) => setIntensity(val[0])}
-                      className="mt-2 [&>span:first-child]:bg-blue-600 [&>span:first-child]:border-blue-600"
-                    />
-                  </div>
+                  {expandedSections.lighting && (
+                    <div className="space-y-2 sm:space-y-3 mt-2">
+                      <div className="space-y-1">
+                        <Label className="text-xs sm:text-sm md:text-base font-semibold">
+                          Couleur des LEDs
+                        </Label>
+                        <Select
+                          value={ledColor}
+                          onValueChange={(value: LedColor) => setLedColor(value)}
+                        >
+                          <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500 text-xs sm:text-sm md:text-base">
+                            <SelectValue placeholder="Sélectionnez une couleur" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-white text-gray-900 border-gray-300 text-xs sm:text-sm md:text-base">
+                            <SelectItem value="blanc-froid">Blanc Froid</SelectItem>
+                            <SelectItem value="blanc-chaud">Blanc Chaud</SelectItem>
+                            <SelectItem value="rouge">Rouge</SelectItem>
+                            <SelectItem value="bleu">Bleu</SelectItem>
+                            <SelectItem value="vert">Vert</SelectItem>
+                            <SelectItem value="rgb">RGB</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-1">
+                        <Label className="text-xs sm:text-sm md:text-base font-semibold">
+                          Intensité: {intensity}%
+                        </Label>
+                        <Slider
+                          min={10}
+                          max={100}
+                          step={10}
+                          value={[intensity]}
+                          onValueChange={(val) => setIntensity(val[0])}
+                          className="mt-2 [&>span:first-child]:bg-blue-600 [&>span:first-child]:border-blue-600"
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 
               {/* Fixation (for all sign types) */}
               <div className="space-y-1">
-                <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
-                  <HardHat className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
-                  Fixation
-                </Label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                  {fixationOptions.map((option) => (
-                    <Card
-                      key={option.value}
-                      className={`cursor-pointer border-2 ${
-                        fixationType === option.value
-                          ? "border-blue-600 ring-2 ring-blue-500"
-                          : "border-gray-300"
-                      } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
-                      onClick={() => setFixationType(option.value)}
-                    >
-                      <CardContent className="p-2 sm:p-3 flex flex-col items-center">
-                        <div className="relative w-full h-12 sm:h-16 md:h-20 mb-1 sm:mb-2 overflow-hidden rounded-md">
-                          <Image
-                            src={option.image}
-                            alt={option.label}
-                            layout="fill"
-                            objectFit="cover"
-                          />
-                        </div>
-                        <h3 className="text-xs sm:text-sm md:text-base font-bold text-gray-900 text-center">
-                          {option.label}
-                        </h3>
-                      </CardContent>
-                    </Card>
-                  ))}
+                <div 
+                  className="flex items-center justify-between cursor-pointer"
+                  onClick={() => toggleSection('fixation')}
+                >
+                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                    <HardHat className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
+                    Fixation
+                  </Label>
+                  {expandedSections.fixation ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </div>
+                {expandedSections.fixation && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mt-2">
+                    {fixationOptions.map((option) => (
+                      <Card
+                        key={option.value}
+                        className={`cursor-pointer border-2 ${
+                          fixationType === option.value
+                            ? "border-blue-600 ring-2 ring-blue-500"
+                            : "border-gray-300"
+                        } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
+                        onClick={() => setFixationType(option.value)}
+                      >
+                        <CardContent className="p-2 sm:p-3 flex flex-col items-center">
+                          <div className="relative w-full h-16 sm:h-20 md:h-24 mb-1 sm:mb-2 overflow-hidden rounded-md">
+                            <Image
+                              src={option.image}
+                              alt={option.label}
+                              layout="fill"
+                              objectFit="cover"
+                              className="scale-110"
+                            />
+                          </div>
+                          <h3 className="text-xs sm:text-sm md:text-base font-bold text-gray-900 text-center">
+                            {option.label}
+                          </h3>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -901,7 +973,7 @@ export default function ConfigurateurPage() {
                 </CardHeader>
                 <CardContent className="p-2 sm:p-3 md:p-4 space-y-2 sm:space-y-3">
                   <div
-                    className="relative w-full h-20 sm:h-24 md:h-32 rounded-lg flex items-center justify-center overflow-hidden border border-gray-300"
+                    className="relative w-full h-24 sm:h-28 md:h-36 rounded-lg flex items-center justify-center overflow-hidden border border-gray-300 shadow-md"
                     style={{ backgroundColor: backgroundColor }}
                   >
                     <p
@@ -909,7 +981,7 @@ export default function ConfigurateurPage() {
                       style={{
                         fontFamily: font,
                         color: textColor,
-                        fontSize: `${Math.min(1.5, height / 25)}rem`,
+                        fontSize: `${Math.min(2, height / 20)}rem`,
                         lineHeight: 1,
                         textShadow:
                           signStyle === "lighted" || signStyle === "lighted-box"
@@ -924,18 +996,18 @@ export default function ConfigurateurPage() {
                     <h4 className="text-xs sm:text-sm md:text-base font-bold text-gray-800">
                       Exemples de réalisations
                     </h4>
-                    <div className="grid grid-cols-2 gap-1 sm:gap-2">
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2">
                       {examples[signStyle].map((example) => (
                         <div
                           key={example.id}
-                          className="relative w-full h-12 sm:h-16 md:h-20 overflow-hidden rounded-md"
+                          className="relative w-full h-16 sm:h-20 md:h-24 overflow-hidden rounded-md border border-gray-200"
                         >
                           <Image
                             src={example.img}
                             alt={example.alt}
                             layout="fill"
                             objectFit="cover"
-                            className="rounded-lg"
+                            className="rounded-lg hover:scale-105 transition-transform duration-300"
                           />
                         </div>
                       ))}
@@ -995,11 +1067,11 @@ export default function ConfigurateurPage() {
                   </div>
                   <div className="space-y-1 sm:space-y-2 pt-2 sm:pt-3">
                     <Button
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm md:text-base py-1 sm:py-2 rounded-md transition-colors"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm md:text-base py-2 sm:py-3 rounded-md transition-colors shadow-md"
                       onClick={handleSendEmail}
                       disabled={isLoading}
                     >
-                      <ShoppingCart className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                      <ShoppingCart className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                       {isLoading
                         ? "Envoi en cours..."
                         : "Envoyer ma configuration"}
