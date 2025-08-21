@@ -53,7 +53,7 @@ import fixationNone from "@/public/fixationNone.png";
 import fixationStandoffs from "@/public/fixationStandoffs.png";
 import Head from "next/head";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://enseigne-mjpub-api.vercel.app/api/configurator-email";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://enseigne-mjpub-api.vercel.app";
 
 // --- TYPES ---
 type SignStyle = "cut-out" | "lighted" | "lighted-box";
