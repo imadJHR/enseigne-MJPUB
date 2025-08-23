@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 // Data
 import { blogPosts } from "@/lib/blogPosts";
+import Footer from "./components/Footer";
 
 // Composant pour les données structurées (à placer dans le layout ou via un hook)
 export function HomePageJsonLd() {
@@ -780,6 +781,7 @@ export default function HomePageClient() {
           </Link>
         </div>
       </section>
+      <Footer/>
     </div>
   );
 }
