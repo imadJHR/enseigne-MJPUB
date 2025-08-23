@@ -25,7 +25,7 @@ export default function Footer() {
                 width={120}
                 height={40}
                 priority
-              />
+              />ttest
             </Link>
             <p className="text-gray-300">
               Spécialiste des enseignes lumineuses et lettres découpées sur mesure.
