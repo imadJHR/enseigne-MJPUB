@@ -12,7 +12,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-// Icons from Lucide React
 import {
   Star,
   Phone,
@@ -167,12 +166,12 @@ export default function HomePageClient() {
             Votre marque brille de mille feux avec nos solutions
             d&apos;enseignes LED et
             <Link
-              href="/produits/lettres-decoupees-pvc"
+              href="/produits/panneau-dibond"
               className="text-indigo-600 hover:underline ml-1"
             >
-              lettres découpées
+             Panneau Dibond <span className="text-sm">(à partir de 159€)</span> 
             </Link>
-            personnalisées.
+             personnalisées.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
@@ -323,9 +322,9 @@ export default function HomePageClient() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
-                href: "/produits/enseigne-led-premium",
+                href: "/produits/panneau-dibond",
                 image:
-                  "https://images.pexels.com/photos/8296426/pexels-photo-8296426.jpeg",
+                  "/img1.jpg",
                 alt: "Enseigne lumineuse LED personnalisée pour commerce - MJ PUB",
                 badge: {
                   color: "bg-indigo-500",
@@ -337,31 +336,12 @@ export default function HomePageClient() {
                   ),
                   text: "LED",
                 },
-                title: "Enseignes LED Lumineuses",
+                title: "Panneau Dibond",
                 description:
-                  "Visibilité optimale jour et nuit avec nos enseignes LED premium.",
+                  "Panneau en Dibond avec impression haute définition. Idéal pour une signalétique extérieure durable, résistant aux UV et aux intempéries pour une visibilité maximale.",
                 linkColor: "text-indigo-500",
               },
-              {
-                href: "/produits/lettres-decoupees-pvc",
-                image:
-                  "https://images.pexels.com/photos/6185232/pexels-photo-6185232.jpeg",
-                alt: "Lettres découpées en PVC pour signalétique professionnelle - MJ PUB",
-                badge: {
-                  color: "bg-teal-500",
-                  icon: (
-                    <Scissors
-                      className="h-3 w-3 sm:h-4 sm:w-4 mr-1"
-                      aria-hidden="true"
-                    />
-                  ),
-                  text: "Découpe",
-                },
-                title: "Lettres Découpées",
-                description:
-                  "Découpe laser précise sur PVC, Dibond ou Plexiglas.",
-                linkColor: "text-teal-500",
-              },
+
               {
                 href: "/accessoires",
                 image:
@@ -781,7 +761,7 @@ export default function HomePageClient() {
           </Link>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
