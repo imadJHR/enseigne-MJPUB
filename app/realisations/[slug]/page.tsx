@@ -209,45 +209,6 @@ export const realisations = [
     galleryImages: [img10],
   },
   {
-    id: 10,
-    title: "Enseigne de Comptoir 'Number One Tacos'",
-    description:
-      "Réalisation d'une enseigne lumineuse sur mesure pour le comptoir de 'Number One Tacos'. Le caisson rond rétro-éclairé met en valeur le logo de la marque et s'intègre harmonieusement dans la décoration intérieure du restaurant, renforçant l'identité visuelle de l'établissement.",
-    image: img11,
-    category: "Décoration intérieure",
-    slug: "number-one-tacos",
-    client: "Number One Tacos",
-    location: "Marseille, France",
-    date: "Septembre 2024",
-    features: [
-      "Enseigne ronde lumineuse",
-      "Design personnalisé pour le logo",
-      "Éclairage LED interne",
-      "Installation sur le comptoir d'accueil",
-      "Intégration au carrelage mosaïque du comptoir",
-    ],
-    galleryImages: [img11,img22],
-  },
-  {
-    id: 11,
-    title: "Enseigne 'Barbershop Dender'",
-    description:
-      "Conception d'une enseigne de façade pour le salon 'Barbershop Dender'. L'enseigne combine des lettres boîtiers lumineuses pour le nom et un logo central rond, créant un look à la fois classique et moderne, et maximisant la visibilité du salon.",
-    image: img12,
-    category: "Salon de coiffure",
-    slug: "barbershop-dender",
-    client: "Barbershop Dender",
-    location: "Bruxelles, Belgique",
-    date: "Octobre 2024",
-    features: [
-      "Panneau de façade noir brillant",
-      "Lettres boîtiers lumineuses blanches en relief",
-      "Logo central rond rétro-éclairé",
-      "Éclairage LED intégré pour une visibilité nocturne",
-    ],
-    galleryImages: [img12],
-  },
-  {
     id: 12,
     title: "Enseigne 'SN Institut de Beauté'",
     description:
@@ -286,26 +247,7 @@ export const realisations = [
     ],
     galleryImages: [img14, img15],
   },
-  {
-    id: 14,
-    title: "Enseigne Lumineuse 'Shisha Company'",
-    description:
-      "Conception et installation d'une enseigne de façade pour le commerce 'Shisha Company'. Le panneau noir brillant sert de fond à des lettres boîtiers lumineuses blanches et un logo rond rétro-éclairé. Le design sobre et élégant confère une image de marque professionnelle et moderne.",
-    image: img16,
-    category: "Commerce de détail",
-    slug: "shisha-company",
-    client: "Shisha Company",
-    location: "Bruxelles, Belgique",
-    date: "Janvier 2025",
-    features: [
-      "Panneau de façade en composite noir laqué",
-      "Lettres boîtiers lumineuses blanches",
-      "Caisson lumineux rond avec logo",
-      "Éclairage LED intégré et halo lumineux",
-      "Design élégant et professionnel",
-    ],
-    galleryImages: [img16],
-  },
+  
   {
     id: 15,
     title: "Enseigne Lumineuse 'MJ Barber'",
@@ -326,26 +268,7 @@ export const realisations = [
     ],
     galleryImages: [img17],
   },
-  {
-    id: 16,
-    title: "Enseigne Caisson Lumineux 'Ch'ti Kebab'",
-    description:
-      "Réalisation d'un caisson lumineux rond double face pour 'Ch'ti Kebab'. Le design est personnalisé avec un fond jaune vif et une illustration de chef cuisinier. L'enseigne est conçue pour être installée en potence, garantissant une visibilité maximale aux passants.",
-    image: img19,
-    category: "Restauration Rapide",
-    slug: "chti-kebab",
-    client: "Ch'ti Kebab",
-    location: "Lille, France",
-    date: "Mars 2025",
-    features: [
-      "Caisson lumineux rond double face",
-      "Design graphique personnalisé 'Ch'ti Kebab'",
-      "Fond jaune pour un contraste élevé",
-      "Illustration d'un chef stylisé",
-      "Conçu pour une installation sur potence",
-    ],
-    galleryImages: [img19 , img18],
-  },
+  
 ];
 
 interface RealisationPageProps {

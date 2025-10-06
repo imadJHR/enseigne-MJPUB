@@ -20,7 +20,7 @@ export default function BlogPage() {
       post.author.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Helper function to safely convert date to ISO string
+  // Helper function to safely dat date to ISO string
   const getISODate = (dateString: string): string => {
     try {
       // Try to parse the date string
@@ -152,10 +152,7 @@ export default function BlogPage() {
                       {post.excerpt}
                     </p>
                     <div className="flex items-center justify-between text-gray-500 text-xs mb-4">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        <span>{post.date}</span>
-                      </div>
+
                       <div className="flex items-center gap-1">
                         <User className="h-3 w-3" />
                         <span>{post.author}</span>

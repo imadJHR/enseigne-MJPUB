@@ -6,38 +6,28 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/Header"; // Assuming Header is in "../components/Header"
+import Footer from "../components/Footer"; // Assuming Footer is in "../components/Footer"
 import {
   Search,
   Star,
   ArrowRight,
   Lightbulb,
-  Scissors,
   Settings,
   Layers,
 } from "lucide-react";
-import img1 from "../../public/img1.jpg";
+// import img1 from "../../public/img1.jpg"; // Not needed if products array is empty
+
 export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
-  const products = [
-    {
-      id: 1,
-      name: "Panneau Dibond",
-      category: "panneaux",
-      price: 159,
-      image: "/img1.jpg",
-      description: "Panneau en Dibond avec impression haute définition",
-      rating: 4.9,
-      badge: "Résistant",
-      slug: "panneau-dibond",
-    },
-  ];
+  // Removed the default product: array is now empty []
+  const products = [];
 
   const categories = [
     { id: "all", name: "Tous les produits", icon: Layers },
+    // You can keep other categories for filtering, even if no products match
     { id: "panneaux", name: "Panneaux", icon: Settings },
   ];
 
@@ -139,7 +129,7 @@ export default function ProductsPage() {
             </p>
           </div>
 
-          {/* Products Grid */}
+          {/* Products Grid - Will be empty, leading to "No Results" */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProducts.map((product) => (
               <Link

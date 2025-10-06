@@ -23,15 +23,18 @@ import {
   Lightbulb,
   HardHat,
   CheckCircle,
-  Zap,
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
+import Head from "next/head";
 
-// --- IMPORT IMAGES ---
+// Animation imports
+import { motion, AnimatePresence } from "framer-motion";
+
+// Image imports
 import imgCutOut from "@/public/imgCutOut.png";
 import imgLighted from "@/public/imgLightedt.png";
 import imgLightedBox from "@/public/imgLightedBoxx.png";
@@ -51,7 +54,6 @@ import aluMiroirImg from "@/public/aluMiroirImg.png";
 import aluBrosseImg from "@/public/aluBrosseImg.png";
 import fixationNone from "@/public/fixationNone.png";
 import fixationStandoffs from "@/public/fixationStandoffs.png";
-import Head from "next/head";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://enseigne-mjpub-api.vercel.app";
 
@@ -192,6 +194,55 @@ const PRIX_FIXATION_ENTRETOISES = 88;
 const PRIX_BOITIER_LUMINEUX = {
   "chant-alu-noir-plexi-blanc": 950,
   "chant-alu-blanc-plexi-blanc": 950,
+};
+
+// --- Animation Variants ---
+const gridContainerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { y: 20, opacity: 0 },
+  show: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 100 } },
+};
+
+const expandVariants = {
+  hidden: { opacity: 0, height: 0 },
+  visible: { opacity: 1, height: "auto" },
+  exit: { opacity: 0, height: 0 }
+};
+
+// --- Responsive Design Constants ---
+const RESPONSIVE = {
+  text: {
+    xs: "text-xs",
+    sm: "text-sm",
+    base: "text-base",
+    lg: "text-lg",
+    xl: "text-xl",
+    "2xl": "text-2xl",
+    "3xl": "text-3xl",
+    "4xl": "text-4xl",
+    "5xl": "text-5xl"
+  },
+  padding: {
+    xs: "p-2",
+    sm: "p-3",
+    md: "p-4",
+    lg: "p-6"
+  },
+  spacing: {
+    xs: "space-y-1",
+    sm: "space-y-2",
+    md: "space-y-3",
+    lg: "space-y-4"
+  }
 };
 
 export default function ConfigurateurPage() {
@@ -545,110 +596,103 @@ export default function ConfigurateurPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-black flex flex-col">
-    <Head>
-  {/* --- Primary Meta Tags --- */}
-  <title>
-    Configurateur d&apos;Enseigne sur Mesure | Lettres Découpées & Lumineuses en PVC/Alu
-  </title>
-  <meta
-    name="description"
-    content="Créez votre enseigne personnalisée en relief, lumineuse ou en boîtier alu. Choisissez parmi des matériaux premium (PVC, aluminium), des couleurs, polices et éclairages LED. Obtenez un devis instantané pour votre signalétique professionnelle ou commerciale."
-  />
-  <meta
-    name="keywords"
-    content="configurateur enseigne, lettres découpées, enseigne lumineuse, enseigne sur mesure, signalétique, PVC, aluminium dibond, rétroéclairage LED, devis enseigne, enseigne magasin, enseigne commerce, enseigne personnalisée, lettres 3D, enseigne lumineuse, enseigne extérieur, enseigne intérieur, enseigne professionnelle, enseigne boutique, enseigne restaurant, enseigne entreprise, enseigne publicitaire, enseigne LED, enseigne boîtier alu, enseigne rétroéclairée, enseigne PVC, enseigne aluminium, enseigne design, enseigne moderne, enseigne haut de gamme"
-  />
-  <meta name="author" content="MJ-PUB" />
-  <meta name="robots" content="index, follow" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <Head>
+        <title>
+          Configurateur d&apos;Enseigne sur Mesure | Lettres Découpées & Lumineuses en PVC/Alu
+        </title>
+        <meta
+          name="description"
+          content="Créez votre enseigne personnalisée en relief, lumineuse ou en boîtier alu. Choisissez parmi des matériaux premium (PVC, aluminium), des couleurs, polices et éclairages LED. Obtenez un devis instantané pour votre signalétique professionnelle ou commerciale."
+        />
+        <meta
+          name="keywords"
+          content="configurateur enseigne, lettres découpées, enseigne lumineuse, enseigne sur mesure, signalétique, PVC, aluminium dibond, rétroéclairage LED, devis enseigne, enseigne magasin, enseigne commerce, enseigne personnalisée, lettres 3D, enseigne lumineuse, enseigne extérieur, enseigne intérieur, enseigne professionnelle, enseigne boutique, enseigne restaurant, enseigne entreprise, enseigne publicitaire, enseigne LED, enseigne boîtier alu, enseigne rétroéclairée, enseigne PVC, enseigne aluminium, enseigne design, enseigne moderne, enseigne haut de gamme"
+        />
+        <meta name="author" content="MJ-PUB" />
+        <meta name="robots" content="index, follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  {/* --- Open Graph / Facebook Meta Tags --- */}
-  <meta property="og:type" content="website" />
-  <meta
-    property="og:url"
-    content="https://www.votresite.com/configurateur-enseigne"
-  />
-  <meta
-    property="og:title"
-    content="Configurateur d'Enseigne sur Mesure | Lettres Découpées & Lumineuses en PVC/Alu"
-  />
-  <meta
-    property="og:description"
-    content="Personnalisez votre enseigne en relief, lumineuse ou en boîtier alu. Obtenez un devis instantané pour vos lettres découpées en PVC ou aluminium. Idéal pour votre commerce ou entreprise."
-  />
-  <meta
-    property="og:image"
-    content="https://www.votresite.com/images/og-configurateur-enseigne.jpg"
-  />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Configurateur d'enseigne sur mesure" />
-  <meta property="og:site_name" content="MJ-PUB" />
-  <meta property="og:locale" content="fr_FR" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://www.votresite.com/configurateur-enseigne"
+        />
+        <meta
+          property="og:title"
+          content="Configurateur d'Enseigne sur Mesure | Lettres Découpées & Lumineuses en PVC/Alu"
+        />
+        <meta
+          property="og:description"
+          content="Personnalisez votre enseigne en relief, lumineuse ou en boîtier alu. Obtenez un devis instantané pour vos lettres découpées en PVC ou aluminium. Idéal pour votre commerce ou entreprise."
+        />
+        <meta
+          property="og:image"
+          content="https://www.votresite.com/images/og-configurateur-enseigne.jpg"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Configurateur d'enseigne sur mesure" />
+        <meta property="og:site_name" content="MJ-PUB" />
+        <meta property="og:locale" content="fr_FR" />
 
-  {/* --- Twitter Card Meta Tags --- */}
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta
-    name="twitter:title"
-    content="Configurateur d'Enseigne sur Mesure | Lettres Découpées & Lumineuses en PVC/Alu"
-  />
-  <meta
-    name="twitter:description"
-    content="Créez votre enseigne personnalisée en relief, lumineuse ou en boîtier alu. Obtenez un devis instantané pour vos lettres découpées en PVC ou aluminium."
-  />
-  <meta
-    name="twitter:image"
-    content="https://www.votresite.com/images/twitter-configurateur-enseigne.jpg"
-  />
-  <meta name="twitter:image:alt" content="Configurateur d'enseigne sur mesure" />
-  <meta name="twitter:site" content="@VotreCompteTwitter" />
-  <meta name="twitter:creator" content="@VotreCompteTwitter" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Configurateur d'Enseigne sur Mesure | Lettres Découpées & Lumineuses en PVC/Alu"
+        />
+        <meta
+          name="twitter:description"
+          content="Créez votre enseigne personnalisée en relief, lumineuse ou en boîtier alu. Obtenez un devis instantané pour vos lettres découpées en PVC ou aluminium."
+        />
+        <meta
+          name="twitter:image"
+          content="https://www.votresite.com/images/twitter-configurateur-enseigne.jpg"
+        />
+        <meta name="twitter:image:alt" content="Configurateur d'enseigne sur mesure" />
+        <meta name="twitter:site" content="@VotreCompteTwitter" />
+        <meta name="twitter:creator" content="@VotreCompteTwitter" />
 
-  {/* --- Canonical URL --- */}
-  <link
-    rel="canonical"
-    href="https://www.votresite.com/configurateur-enseigne"
-  />
+        <link
+          rel="canonical"
+          href="https://www.votresite.com/configurateur-enseigne"
+        />
 
-  {/* --- Favicon & App Icons --- */}
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="manifest" href="/site.webmanifest" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
 
-  {/* --- Structured Data (JSON-LD) --- */}
-  <script type="application/ld+json">
-    {`
-      {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": "Configurateur d'Enseigne sur Mesure",
-        "image": "https://www.votresite.com/images/og-configurateur-enseigne.jpg",
-        "description": "Personnalisez votre enseigne en relief, lumineuse ou en boîtier alu. Obtenez un devis instantané pour vos lettres découpées en PVC ou aluminium. Idéal pour votre commerce ou entreprise.",
-        "brand": {
-          "@type": "Brand",
-          "name": "MJ-PUB"
-        },
-        "offers": {
-          "@type": "Offer",
-          "url": "https://www.votresite.com/configurateur-enseigne",
-          "priceCurrency": "EUR",
-          "availability": "https://schema.org/InStock",
-          "itemCondition": "https://schema.org/NewCondition"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.9",
-          "reviewCount": "120"
-        }
-      }
-    `}
-  </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "Configurateur d'Enseigne sur Mesure",
+              "image": "https://www.votresite.com/images/og-configurateur-enseigne.jpg",
+              "description": "Personnalisez votre enseigne en relief, lumineuse ou en boîtier alu. Obtenez un devis instantané pour vos lettres découpées en PVC ou aluminium. Idéal pour votre commerce ou entreprise.",
+              "brand": {
+                "@type": "Brand",
+                "name": "MJ-PUB"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": "https://www.votresite.com/configurateur-enseigne",
+                "priceCurrency": "EUR",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "120"
+              }
+            }
+          `}
+        </script>
 
-  {/* --- Additional Meta --- */}
-  <meta name="theme-color" content="#000000" />
-</Head>
+        <meta name="theme-color" content="#000000" />
+      </Head>
 
       <main className="flex-1 pt-12 sm:pt-16 px-2 sm:px-4 py-4 sm:py-8">
         <div className="max-w-7xl mx-auto">
@@ -665,7 +709,8 @@ export default function ConfigurateurPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
             {/* Configuration Options */}
             <div className="lg:col-span-2 bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-lg border border-gray-200 space-y-4 sm:space-y-6">
-              {/* Sign Text */}
+              
+              {/* Sign Text Section */}
               <div className="space-y-1">
                 <div 
                   className="flex items-center justify-between cursor-pointer"
@@ -677,72 +722,100 @@ export default function ConfigurateurPage() {
                   </Label>
                   {expandedSections.text ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </div>
-                {expandedSections.text && (
-                  <>
-                    <Input
-                      id="signText"
-                      type="text"
-                      placeholder="Votre texte ici..."
-                      value={signText}
-                      onChange={(e) => setSignText(e.target.value)}
-                      maxLength={50}
-                      className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 rounded-md p-2 text-xs sm:text-sm md:text-base mt-2"
-                    />
-                    <p className="text-xs text-gray-500">
-                      Max 50 caractères. Restants: {50 - signText.length}
-                    </p>
-                  </>
-                )}
+                <AnimatePresence>
+                  {expandedSections.text && (
+                    <motion.div
+                      variants={expandVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      className="overflow-hidden"
+                    >
+                      <Input
+                        id="signText"
+                        type="text"
+                        placeholder="Votre texte ici..."
+                        value={signText}
+                        onChange={(e) => setSignText(e.target.value)}
+                        maxLength={50}
+                        className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 rounded-md p-2 text-xs sm:text-sm md:text-base mt-2 shadow-sm"
+                      />
+                      <p className="text-xs text-gray-500 pt-1">
+                        Max 50 caractères. Restants: {50 - signText.length}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
-              {/* Font */}
-              {expandedSections.text && (
-                <div className="space-y-1">
-                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
-                    <Type className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
-                    Police
-                  </Label>
-                  <Select value={font} onValueChange={setFont}>
-                    <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500 text-xs sm:text-sm md:text-base">
-                      <SelectValue placeholder="Sélectionnez une police" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-white text-gray-900 border-gray-300 max-h-60 overflow-y-auto text-xs sm:text-sm md:text-base">
-                      {fontOptions.map((option) => (
-                        <SelectItem key={option.value} value={option.value}>
-                          <span style={{ fontFamily: option.value }}>
-                            {option.label}
-                          </span>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              )}
+              {/* Font Section */}
+              <AnimatePresence>
+                {expandedSections.text && (
+                  <motion.div 
+                    className="space-y-1"
+                    variants={expandVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                  >
+                    <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                      <Type className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
+                      Police
+                    </Label>
+                    <Select value={font} onValueChange={setFont}>
+                      <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500 text-xs sm:text-sm md:text-base shadow-sm hover:shadow-md transition-shadow">
+                        <SelectValue placeholder="Sélectionnez une police" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white text-gray-900 border-gray-300 max-h-60 overflow-y-auto text-xs sm:text-sm md:text-base shadow-lg rounded-md">
+                        {fontOptions.map((option) => (
+                          <SelectItem 
+                            key={option.value} 
+                            value={option.value}
+                            className="focus:bg-blue-50 focus:text-blue-700 transition-colors cursor-pointer"
+                          >
+                            <span style={{ fontFamily: option.value }}>
+                              {option.label}
+                            </span>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-              {/* Height */}
-              {expandedSections.text && (
-                <div className="space-y-1">
-                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
-                    <Ruler className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
-                    Hauteur du Texte:{" "}
-                    <span className="font-bold ml-1">{height} cm</span>
-                  </Label>
-                  <Slider
-                    id="height"
-                    min={10}
-                    max={100}
-                    step={1}
-                    value={[height]}
-                    onValueChange={(val) => setHeight(val[0])}
-                    className="mt-2 [&>span:first-child]:bg-blue-600 [&>span:first-child]:border-blue-600"
-                  />
-                  <p className="text-xs text-gray-500">
-                    Largeur estimée: {estimatedWidth.toFixed(0)} cm
-                  </p>
-                </div>
-              )}
+              {/* Height Section */}
+              <AnimatePresence>
+                {expandedSections.text && (
+                  <motion.div 
+                    className="space-y-1"
+                    variants={expandVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                  >
+                    <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                      <Ruler className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
+                      Hauteur du Texte:{" "}
+                      <span className="font-bold ml-1">{height} cm</span>
+                    </Label>
+                    <Slider
+                      id="height"
+                      min={10}
+                      max={100}
+                      step={1}
+                      value={[height]}
+                      onValueChange={(val) => setHeight(val[0])}
+                      className="mt-2 [&>span:first-child]:bg-blue-600 [&>span:first-child]:border-blue-600"
+                    />
+                    <p className="text-xs text-gray-500 pt-1">
+                      Largeur estimée: {estimatedWidth.toFixed(0)} cm
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-              {/* Sign Style */}
+              {/* Sign Style Section */}
               <div className="space-y-1">
                 <div 
                   className="flex items-center justify-between cursor-pointer"
@@ -754,76 +827,56 @@ export default function ConfigurateurPage() {
                   </Label>
                   {expandedSections.style ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </div>
-                {expandedSections.style && (
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 mt-2">
-                    <Card
-                      className={`cursor-pointer border-2 ${
-                        signStyle === "cut-out"
-                          ? "border-blue-600 ring-2 ring-blue-500"
-                          : "border-gray-300"
-                      } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
-                      onClick={() => setSignStyle("cut-out")}
+                <AnimatePresence>
+                  {expandedSections.style && (
+                    <motion.div 
+                      className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 mt-2"
+                      variants={gridContainerVariants}
+                      initial="hidden"
+                      animate="show"
+                      exit="hidden"
                     >
-                      <CardContent className="p-2 sm:p-3 flex flex-col items-center">
-                        <Image
-                          src={imgCutOut}
-                          alt="Lettres en relief"
-                          className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain mb-1 sm:mb-2"
-                          width={96}
-                          height={96}
-                        />
-                        <h3 className="text-xs sm:text-sm font-bold text-gray-900 text-center">
-                          Lettres en relief
-                        </h3>
-                      </CardContent>
-                    </Card>
-                    <Card
-                      className={`cursor-pointer border-2 ${
-                        signStyle === "lighted"
-                          ? "border-blue-600 ring-2 ring-blue-500"
-                          : "border-gray-300"
-                      } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
-                      onClick={() => setSignStyle("lighted")}
-                    >
-                      <CardContent className="p-2 sm:p-3 flex flex-col items-center">
-                        <Image
-                          src={imgLighted}
-                          alt="Lettres lumineuses"
-                          className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain mb-1 sm:mb-2"
-                          width={96}
-                          height={96}
-                        />
-                        <h3 className="text-xs sm:text-sm font-bold text-gray-900 text-center">
-                          Lettres lumineuses rétroéclairées
-                        </h3>
-                      </CardContent>
-                    </Card>
-                    <Card
-                      className={`cursor-pointer border-2 ${
-                        signStyle === "lighted-box"
-                          ? "border-blue-600 ring-2 ring-blue-500"
-                          : "border-gray-300"
-                      } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
-                      onClick={() => setSignStyle("lighted-box")}
-                    >
-                      <CardContent className="p-2 sm:p-3 flex flex-col items-center">
-                        <Image
-                          src={imgLightedBox}
-                          alt="Lettres lumineuses boîtier alu"
-                          className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain mb-1 sm:mb-2"
-                          width={96}
-                          height={96}
-                        />
-                        <h3 className="text-xs sm:text-sm font-bold text-gray-900 text-center">
-                          Lettres lumineuses boîtier alu
-                        </h3>
-                      </CardContent>
-                    </Card>
-                  </div>
-                )}
+                      {[
+                        { value: "cut-out", label: "Lettres en relief", image: imgCutOut },
+                        { value: "lighted", label: "Lettres lumineuses rétroéclairées", image: imgLighted },
+                        { value: "lighted-box", label: "Lettres lumineuses boîtier alu", image: imgLightedBox }
+                      ].map((style) => (
+                        <motion.div
+                          key={style.value}
+                          variants={cardVariants}
+                          whileHover={{ scale: 1.05, y: -5 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="h-full"
+                        >
+                          <Card
+                            className={`cursor-pointer border-2 h-full ${
+                              signStyle === style.value
+                                ? "border-blue-600 ring-2 ring-blue-500/50 shadow-lg"
+                                : "border-gray-300 shadow-sm"
+                            } hover:border-blue-500 hover:shadow-lg transition-all duration-200 rounded-lg bg-gray-100 text-black`}
+                            onClick={() => setSignStyle(style.value as SignStyle)}
+                          >
+                            <CardContent className="p-2 sm:p-3 flex flex-col items-center justify-center h-full">
+                              <Image
+                                src={style.image}
+                                alt={style.label}
+                                className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain mb-1 sm:mb-2"
+                                width={96}
+                                height={96}
+                              />
+                              <h3 className="text-xs sm:text-sm font-bold text-gray-900 text-center">
+                                {style.label}
+                              </h3>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
-              {/* Materials */}
+              {/* Materials Section */}
               <div className="space-y-1">
                 <div 
                   className="flex items-center justify-between cursor-pointer"
@@ -835,39 +888,47 @@ export default function ConfigurateurPage() {
                   </Label>
                   {expandedSections.materials ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </div>
-                {expandedSections.materials && (
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 mt-2">
-                    {allMaterialOptions.map((opt) => (
-                      <Card
-                        key={opt.id}
-                        className={`cursor-pointer border-2 ${
-                          selectedMaterialId === opt.id
-                            ? "border-blue-600 ring-2 ring-blue-500"
-                            : "border-gray-300"
-                        } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
-                        onClick={() => setSelectedMaterialId(opt.id)}
-                      >
-                        <CardContent className="p-1 sm:p-2 flex flex-col items-center">
-                          <div className="relative w-full h-16 sm:h-20 md:h-24 mb-1 overflow-hidden rounded-md">
-                            <Image
-                              src={opt.image}
-                              alt={opt.label}
-                              layout="fill"
-                              objectFit="cover"
-                              className="scale-110"
-                            />
-                          </div>
-                          <h3 className="text-xxs sm:text-xs md:text-sm capitalize font-semibold text-center h-8 flex items-center justify-center">
-                            {opt.label}
-                          </h3>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                )}
+                <AnimatePresence>
+                  {expandedSections.materials && (
+                    <motion.div 
+                      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 mt-2"
+                      variants={expandVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                    >
+                      {allMaterialOptions.map((opt) => (
+                        <Card
+                          key={opt.id}
+                          className={`cursor-pointer border-2 ${
+                            selectedMaterialId === opt.id
+                              ? "border-blue-600 ring-2 ring-blue-500/50 shadow-lg"
+                              : "border-gray-300 shadow-sm"
+                          } hover:border-blue-500 hover:shadow-lg transition-all duration-200 rounded-lg bg-gray-100 text-black`}
+                          onClick={() => setSelectedMaterialId(opt.id)}
+                        >
+                          <CardContent className="p-1 sm:p-2 flex flex-col items-center">
+                            <div className="relative w-full h-16 sm:h-20 md:h-24 mb-1 overflow-hidden rounded-md">
+                              <Image
+                                src={opt.image}
+                                alt={opt.label}
+                                layout="fill"
+                                objectFit="cover"
+                                className="scale-110"
+                              />
+                            </div>
+                            <h3 className="text-xxs sm:text-xs md:text-sm capitalize font-semibold text-center h-8 flex items-center justify-center">
+                              {opt.label}
+                            </h3>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
-              {/* Text Color & Background Color */}
+              {/* Colors Section */}
               <div className="space-y-1">
                 <div 
                   className="flex items-center justify-between cursor-pointer"
@@ -879,45 +940,53 @@ export default function ConfigurateurPage() {
                   </Label>
                   {expandedSections.colors ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </div>
-                {expandedSections.colors && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mt-2">
-                    <div className="space-y-1">
-                      <Label className="text-xs sm:text-sm md:text-base font-semibold">
-                        Couleur du Texte
-                      </Label>
-                      <div className="flex items-center gap-2">
-                        <Input
-                          type="color"
-                          value={textColor}
-                          onChange={(e) => setTextColor(e.target.value)}
-                          className="w-12 h-12 p-0 border-none rounded-md overflow-hidden cursor-pointer"
-                        />
-                        <span className="text-xs sm:text-sm">
-                          {textColor.toUpperCase()}
-                        </span>
+                <AnimatePresence>
+                  {expandedSections.colors && (
+                    <motion.div 
+                      className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mt-2"
+                      variants={expandVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                    >
+                      <div className="space-y-1">
+                        <Label className="text-xs sm:text-sm md:text-base font-semibold">
+                          Couleur du Texte
+                        </Label>
+                        <div className="flex items-center gap-2">
+                          <Input
+                            type="color"
+                            value={textColor}
+                            onChange={(e) => setTextColor(e.target.value)}
+                            className="w-12 h-12 p-0 border-none rounded-md overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow"
+                          />
+                          <span className="text-xs sm:text-sm font-medium">
+                            {textColor.toUpperCase()}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="space-y-1">
-                      <Label className="text-xs sm:text-sm md:text-base font-semibold">
-                        Couleur de Fond
-                      </Label>
-                      <div className="flex items-center gap-2">
-                        <Input
-                          type="color"
-                          value={backgroundColor}
-                          onChange={(e) => setBackgroundColor(e.target.value)}
-                          className="w-12 h-12 p-0 border-none rounded-md overflow-hidden cursor-pointer"
-                        />
-                        <span className="text-xs sm:text-sm">
-                          {backgroundColor.toUpperCase()}
-                        </span>
+                      <div className="space-y-1">
+                        <Label className="text-xs sm:text-sm md:text-base font-semibold">
+                          Couleur de Fond
+                        </Label>
+                        <div className="flex items-center gap-2">
+                          <Input
+                            type="color"
+                            value={backgroundColor}
+                            onChange={(e) => setBackgroundColor(e.target.value)}
+                            className="w-12 h-12 p-0 border-none rounded-md overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow"
+                          />
+                          <span className="text-xs sm:text-sm font-medium">
+                            {backgroundColor.toUpperCase()}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
-              {/* Lighting Options (if lighted or lighted-box) */}
+              {/* Lighting Options */}
               {(signStyle === "lighted" || signStyle === "lighted-box") && (
                 <div className="space-y-1">
                   <div 
@@ -930,48 +999,56 @@ export default function ConfigurateurPage() {
                     </Label>
                     {expandedSections.lighting ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                   </div>
-                  {expandedSections.lighting && (
-                    <div className="space-y-2 sm:space-y-3 mt-2">
-                      <div className="space-y-1">
-                        <Label className="text-xs sm:text-sm md:text-base font-semibold">
-                          Couleur des LEDs
-                        </Label>
-                        <Select
-                          value={ledColor}
-                          onValueChange={(value: LedColor) => setLedColor(value)}
-                        >
-                          <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500 text-xs sm:text-sm md:text-base">
-                            <SelectValue placeholder="Sélectionnez une couleur" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-white text-gray-900 border-gray-300 text-xs sm:text-sm md:text-base">
-                            <SelectItem value="blanc-froid">Blanc Froid</SelectItem>
-                            <SelectItem value="blanc-chaud">Blanc Chaud</SelectItem>
-                            <SelectItem value="rouge">Rouge</SelectItem>
-                            <SelectItem value="bleu">Bleu</SelectItem>
-                            <SelectItem value="vert">Vert</SelectItem>
-                            <SelectItem value="rgb">RGB</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="space-y-1">
-                        <Label className="text-xs sm:text-sm md:text-base font-semibold">
-                          Intensité: {intensity}%
-                        </Label>
-                        <Slider
-                          min={10}
-                          max={100}
-                          step={10}
-                          value={[intensity]}
-                          onValueChange={(val) => setIntensity(val[0])}
-                          className="mt-2 [&>span:first-child]:bg-blue-600 [&>span:first-child]:border-blue-600"
-                        />
-                      </div>
-                    </div>
-                  )}
+                  <AnimatePresence>
+                    {expandedSections.lighting && (
+                      <motion.div 
+                        className="space-y-2 sm:space-y-3 mt-2"
+                        variants={expandVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                      >
+                        <div className="space-y-1">
+                          <Label className="text-xs sm:text-sm md:text-base font-semibold">
+                            Couleur des LEDs
+                          </Label>
+                          <Select
+                            value={ledColor}
+                            onValueChange={(value: LedColor) => setLedColor(value)}
+                          >
+                            <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500 text-xs sm:text-sm md:text-base shadow-sm hover:shadow-md transition-shadow">
+                              <SelectValue placeholder="Sélectionnez une couleur" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white text-gray-900 border-gray-300 text-xs sm:text-sm md:text-base shadow-lg rounded-md">
+                              <SelectItem value="blanc-froid" className="focus:bg-blue-50 focus:text-blue-700">Blanc Froid</SelectItem>
+                              <SelectItem value="blanc-chaud" className="focus:bg-blue-50 focus:text-blue-700">Blanc Chaud</SelectItem>
+                              <SelectItem value="rouge" className="focus:bg-blue-50 focus:text-blue-700">Rouge</SelectItem>
+                              <SelectItem value="bleu" className="focus:bg-blue-50 focus:text-blue-700">Bleu</SelectItem>
+                              <SelectItem value="vert" className="focus:bg-blue-50 focus:text-blue-700">Vert</SelectItem>
+                              <SelectItem value="rgb" className="focus:bg-blue-50 focus:text-blue-700">RGB</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-1">
+                          <Label className="text-xs sm:text-sm md:text-base font-semibold">
+                            Intensité: {intensity}%
+                          </Label>
+                          <Slider
+                            min={10}
+                            max={100}
+                            step={10}
+                            value={[intensity]}
+                            onValueChange={(val) => setIntensity(val[0])}
+                            className="mt-2 [&>span:first-child]:bg-blue-600 [&>span:first-child]:border-blue-600"
+                          />
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               )}
 
-              {/* Fixation (for all sign types) */}
+              {/* Fixation Section */}
               <div className="space-y-1">
                 <div 
                   className="flex items-center justify-between cursor-pointer"
@@ -983,36 +1060,44 @@ export default function ConfigurateurPage() {
                   </Label>
                   {expandedSections.fixation ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </div>
-                {expandedSections.fixation && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mt-2">
-                    {fixationOptions.map((option) => (
-                      <Card
-                        key={option.value}
-                        className={`cursor-pointer border-2 ${
-                          fixationType === option.value
-                            ? "border-blue-600 ring-2 ring-blue-500"
-                            : "border-gray-300"
-                        } hover:border-blue-500 transition-all duration-200 rounded-lg bg-gray-100 text-black`}
-                        onClick={() => setFixationType(option.value)}
-                      >
-                        <CardContent className="p-2 sm:p-3 flex flex-col items-center">
-                          <div className="relative w-full h-16 sm:h-20 md:h-24 mb-1 sm:mb-2 overflow-hidden rounded-md">
-                            <Image
-                              src={option.image}
-                              alt={option.label}
-                              layout="fill"
-                              objectFit="cover"
-                              className="scale-110"
-                            />
-                          </div>
-                          <h3 className="text-xs sm:text-sm md:text-base font-bold text-gray-900 text-center">
-                            {option.label}
-                          </h3>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                )}
+                <AnimatePresence>
+                  {expandedSections.fixation && (
+                    <motion.div 
+                      className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mt-2"
+                      variants={expandVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                    >
+                      {fixationOptions.map((option) => (
+                        <Card
+                          key={option.value}
+                          className={`cursor-pointer border-2 ${
+                            fixationType === option.value
+                              ? "border-blue-600 ring-2 ring-blue-500/50 shadow-lg"
+                              : "border-gray-300 shadow-sm"
+                          } hover:border-blue-500 hover:shadow-lg transition-all duration-200 rounded-lg bg-gray-100 text-black`}
+                          onClick={() => setFixationType(option.value)}
+                        >
+                          <CardContent className="p-2 sm:p-3 flex flex-col items-center">
+                            <div className="relative w-full h-16 sm:h-20 md:h-24 mb-1 sm:mb-2 overflow-hidden rounded-md">
+                              <Image
+                                src={option.image}
+                                alt={option.label}
+                                layout="fill"
+                                objectFit="cover"
+                                className="scale-110"
+                              />
+                            </div>
+                            <h3 className="text-xs sm:text-sm md:text-base font-bold text-gray-900 text-center">
+                              {option.label}
+                            </h3>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
 
@@ -1054,7 +1139,7 @@ export default function ConfigurateurPage() {
                       {examples[signStyle].map((example) => (
                         <div
                           key={example.id}
-                          className="relative w-full h-16 sm:h-20 md:h-24 overflow-hidden rounded-md border border-gray-200"
+                          className="relative w-full h-16 sm:h-20 md:h-24 overflow-hidden rounded-md border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
                         >
                           <Image
                             src={example.img}
@@ -1121,7 +1206,7 @@ export default function ConfigurateurPage() {
                   </div>
                   <div className="space-y-1 sm:space-y-2 pt-2 sm:pt-3">
                     <Button
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm md:text-base py-2 sm:py-3 rounded-md transition-colors shadow-md"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm md:text-base py-2 sm:py-3 rounded-md transition-colors shadow-md hover:shadow-lg"
                       onClick={handleSendEmail}
                       disabled={isLoading}
                     >

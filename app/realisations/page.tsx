@@ -107,24 +107,6 @@ const realisations = [
     slug: "la-fayette-food",
   },
   {
-    id: 10,
-    title: "Enseigne de Comptoir 'Number One Tacos'",
-    description:
-      "Réalisation d'une enseigne lumineuse sur mesure pour le comptoir de 'Number One Tacos'. Le caisson rond rétro-éclairé met en valeur le logo de la marque et s'intègre harmonieusement dans la décoration intérieure du restaurant, renforçant l'identité visuelle de l'établissement.",
-    image: img11,
-    category: "Décoration intérieure",
-    slug: "number-one-tacos",
-  },
-  {
-    id: 11,
-    title: "Enseigne 'Barbershop Dender'",
-    description:
-      "Conception d'une enseigne de façade pour le salon 'Barbershop Dender'. L'enseigne combine des lettres boîtiers lumineuses pour le nom et un logo central rond, créant un look à la fois classique et moderne, et maximisant la visibilité du salon.",
-    image: img12,
-    category: "Salon de coiffure",
-    slug: "barbershop-dender",
-  },
-  {
     id: 12,
     title: "Enseigne 'SN Institut de Beauté'",
     description:
@@ -142,15 +124,7 @@ const realisations = [
     category: "Restauration Rapide",
     slug: "fresh-pizza",
   },
-  {
-    id: 14,
-    title: "Enseigne Lumineuse 'Shisha Company'",
-    description:
-      "Conception et installation d'une enseigne de façade pour le commerce 'Shisha Company'. Le panneau noir brillant sert de fond à des lettres boîtiers lumineuses blanches et un logo rond rétro-éclairé. Le design sobre et élégant confère une image de marque professionnelle et moderne.",
-    image: img16,
-    category: "Commerce de détail",
-    slug: "shisha-company",
-  },
+
   {
     id: 15,
     title: "Enseigne Lumineuse 'MJ Barber'",
@@ -160,15 +134,7 @@ const realisations = [
     category: "Salon de coiffure",
     slug: "mj-barber",
   },
-  {
-    id: 16,
-    title: "Enseigne Caisson Lumineux 'Ch'ti Kebab'",
-    description:
-      "Réalisation d'un caisson lumineux rond double face pour 'Ch'ti Kebab'. Le design est personnalisé avec un fond jaune vif et une illustration de chef cuisinier. L'enseigne est conçue pour être installée en potence, garantissant une visibilité maximale aux passants.",
-    image: img19,
-    category: "Restauration Rapide",
-    slug: "chti-kebab",
-  },
+  
 ];
 
 export default function RealisationsPage() {

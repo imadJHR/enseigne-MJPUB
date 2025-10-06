@@ -184,10 +184,7 @@ export default function BlogPostPage({ params }: { params: PageParams }) {
               {post.title}
             </h1>
             <div className="flex items-center text-gray-600 text-sm mb-6 space-x-4">
-              <div className="flex items-center gap-1">
-                <Calendar className="h-4 w-4" />
-                <span>{post.date}</span>
-              </div>
+              
               <div className="flex items-center gap-1">
                 <User className="h-4 w-4" />
                 <span>{post.author}</span>
