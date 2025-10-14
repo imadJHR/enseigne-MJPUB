@@ -83,7 +83,7 @@ const accessories: Accessory[] = [
       },
     ],
     warranty: "Garantie 1 an contre les défauts de fabrication.",
-    shipping: "Expédié sous 24h. Livraison au Maroc en 2 à 3 jours ouvrables.",
+    shipping: "Expédié sous 24h. Livraison au France en 2 à 3 jours ouvrables.",
   },
 ];
 
@@ -227,7 +227,7 @@ export default function AccessoriesPage() {
             <p className="text-lg max-w-3xl mx-auto">
               Découvrez notre gamme complète d&apos;accessoires pour l&apos;installation et la maintenance de vos enseignes LED, lettres découpées et signalétique.
               Butées de porte, connecteurs Wago, câbles, alimentations et fixations de qualité professionnelle.
-              Livraison rapide au Maroc et devis gratuit sur demande.
+              Livraison rapide au France et devis gratuit sur demande.
             </p>
           </div>
           {/* Search and Filter */}
@@ -364,10 +364,10 @@ export default function AccessoriesPage() {
               </div>
               <div className="bg-white p-6 rounded-lg border border-indigo-200">
                 <h3 className="font-bold mb-2 text-indigo-700">
-                  Proposez-vous des accessoires pour l&apos;installation au Maroc ?
+                  Proposez-vous des accessoires pour l&apos;installation au France ?
                 </h3>
                 <p className="text-gray-700">
-                  Oui, tous nos accessoires sont disponibles pour une livraison rapide au Maroc.
+                  Oui, tous nos accessoires sont disponibles pour une livraison rapide au France.
                   Nous proposons également un service de conseil pour vous aider à choisir les bons produits selon votre projet.
                 </p>
               </div>
