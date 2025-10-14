@@ -1,6 +1,6 @@
 // src/types.ts
 
-// Interface for a material option
+// Interface pour une option de matériau
 export interface Material {
   id: string;
   name: string;
@@ -8,25 +8,30 @@ export interface Material {
   description: string;
 }
 
-// Interface for the full product structure
+// Interface pour les spécifications techniques
+export interface Specifications {
+  [key: string]: string;
+}
+
+// Interface pour la structure complète d'un produit
 export interface Product {
   id: number;
   name: string;
+  slug: string; // CLÉ NÉCESSAIRE POUR LES LIENS
   category: string;
   basePrice: number;
+  price: number; // Utilisé dans ProductsPage pour l'affichage de base
   description: string;
   rating: number;
   reviewCount: number;
   badge: string;
-  images: string[]; // Use string[] for image paths/imports
+  image: string; // CLÉ NÉCESSAIRE POUR L'AFFICHAGE DANS PRODUCTS PAGE
   materials: Material[];
   features: string[];
-  specifications: {
-    [key: string]: string;
-  };
+  specifications: Specifications;
 }
 
-// Interface for the productsData object (slug-indexed)
+// Interface pour l'objet de données indexé par le slug
 export interface ProductsData {
   [slug: string]: Product;
 }

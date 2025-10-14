@@ -18,7 +18,8 @@ import {
 } from "lucide-react";
 
 // Importez les données des produits et l'interface Product
-import { productsData, Product } from "@/data/productsData";
+// Assurez-vous que le chemin d'importation est correct (ici, il utilise l'alias @/data)
+import { productsData, Product } from "@/data/productsData"; 
 
 export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -102,7 +103,6 @@ export default function ProductsPage() {
             {/* Category Filters */}
             <div className="flex flex-wrap justify-center gap-4">
               {categories.map((category) => {
-                // S'assurer que 'category.icon' est un composant React valide (ici, il est un composant lucide-react)
                 const IconComponent = category.icon; 
                 return (
                   <Button
@@ -139,8 +139,8 @@ export default function ProductsPage() {
             {filteredProducts.map((product) => (
               <Link
                 key={product.id}
-                // Utiliser le slug du produit pour le lien
-                href={`/produits/${product.slug}`}
+                // Utilise product.slug pour le lien vers la page de détail
+                href={`/produits/${product.slug}`} 
                 className="group block"
               >
                 <Card className="bg-white border border-gray-200 hover:border-blue-500 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg overflow-hidden h-full shadow-sm">
@@ -148,7 +148,8 @@ export default function ProductsPage() {
                     <div
                       className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-300"
                       style={{
-                        backgroundImage: `url('${product.image}')`,
+                        // Utilise product.image (le chemin public) pour le fond
+                        backgroundImage: `url('${product.image}')`, 
                       }}
                       aria-label={`Image du produit ${product.name}`}
                     ></div>
@@ -176,7 +177,8 @@ export default function ProductsPage() {
                     </p>
                     <div className="flex items-center justify-between">
                       <div className="text-2xl font-bold text-blue-600">
-                        À partir de {product.price} €
+                        {/* Utilise product.price défini dans les données */}
+                        À partir de {product.price} € 
                         <span className="text-sm text-gray-500 ml-1">HT</span>
                       </div>
                       <div className="flex items-center text-blue-600 group-hover:text-blue-800 transition-colors">

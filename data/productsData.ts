@@ -1,23 +1,24 @@
-// data/productsData.ts (or wherever you prefer)
-
+// src/data/productsData.ts
 
 import { ProductsData } from "@/types";
+
+// NOTE IMPORTANTE : Assurez-vous que le fichier img1.jpg est dans votre dossier /public
+const productImage = "/img1.jpg"; 
 
 export const productsData: ProductsData = {
   "panneau-dibond": {
     id: 1,
     name: "Panneau Dibond",
+    slug: "panneau-dibond", // Correction: Ajout du slug pour le lien
     category: "panneaux",
     basePrice: 159,
+    price: 159, // Ajout de 'price' pour la page produit
     description:
       "Panneau en Dibond avec impression haute définition. Idéal pour une signalétique extérieure durable, résistant aux UV et aux intempéries pour une visibilité maximale.",
     rating: 4.9,
     reviewCount: 65,
     badge: "Résistant",
-    // Use the actual path/src from the Next.js static import
-    images: [
-     "/img4/jpg", // Assuming img1 is the object resulting from 'import img1 from ...'
-    ],
+    image: productImage, // Correction: Utilisation du chemin public pour le background-image
     materials: [
       {
         id: "dibond",
@@ -45,4 +46,5 @@ export const productsData: ProductsData = {
       "Format": "Sur mesure",
     },
   },
+  // Ajoutez d'autres produits ici
 };

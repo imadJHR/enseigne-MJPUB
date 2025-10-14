@@ -257,7 +257,7 @@ export default function HomePageClient() {
                 color: "bg-teal-500",
                 title: "Livraison Rapide",
                 description:
-                  "Expédition sous 5-7 jours ouvrés en France et au Maroc.",
+                  "Expédition sous 5-7 jours ouvrés en France ",
               },
               {
                 icon: (
