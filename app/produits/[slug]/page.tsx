@@ -30,7 +30,7 @@ import img1 from "../../../public/img1.jpg"
 
 export const productsData = {
   "panneau-dibond": {
-    id: 3,
+    id: 1,
     name: "Panneau Dibond",
     category: "panneaux",
     basePrice: 159,

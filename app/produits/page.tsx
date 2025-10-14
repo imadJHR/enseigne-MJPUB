@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import Header from "../components/Header"; // Assuming Header is in "../components/Header"
-import Footer from "../components/Footer"; // Assuming Footer is in "../components/Footer"
+import Header from "../components/Header";
+import Footer from "../components/Footer"; 
 import {
   Search,
   Star,
@@ -16,22 +16,26 @@ import {
   Settings,
   Layers,
 } from "lucide-react";
-// import img1 from "../../public/img1.jpg"; // Not needed if products array is empty
+
+// Importez les données des produits et l'interface Product
+import { productsData, Product } from "@/data/productsData";
 
 export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
-  // Removed the default product: array is now empty []
-  const products = [];
+  // Transformation de l'objet productsData en un tableau de produits (typé Product[])
+  const products: Product[] = useMemo(() => {
+    return Object.values(productsData);
+  }, []);
 
   const categories = [
     { id: "all", name: "Tous les produits", icon: Layers },
-    // You can keep other categories for filtering, even if no products match
     { id: "panneaux", name: "Panneaux", icon: Settings },
   ];
 
-  const filteredProducts = products.filter((product) => {
+  // Le filtrage se fait sur le tableau de produits typé
+  const filteredProducts: Product[] = products.filter((product) => {
     const matchesSearch =
       product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.description.toLowerCase().includes(searchTerm.toLowerCase());
@@ -98,7 +102,8 @@ export default function ProductsPage() {
             {/* Category Filters */}
             <div className="flex flex-wrap justify-center gap-4">
               {categories.map((category) => {
-                const IconComponent = category.icon;
+                // S'assurer que 'category.icon' est un composant React valide (ici, il est un composant lucide-react)
+                const IconComponent = category.icon; 
                 return (
                   <Button
                     key={category.id}
@@ -129,11 +134,12 @@ export default function ProductsPage() {
             </p>
           </div>
 
-          {/* Products Grid - Will be empty, leading to "No Results" */}
+          {/* Products Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProducts.map((product) => (
               <Link
                 key={product.id}
+                // Utiliser le slug du produit pour le lien
                 href={`/produits/${product.slug}`}
                 className="group block"
               >

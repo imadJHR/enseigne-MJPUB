@@ -16,13 +16,9 @@ import img7 from "@/public/img7.jpg";
 import img8 from "@/public/img8.jpg";
 import img9 from "@/public/img9.jpg";
 import img10 from "@/public/img10.jpg";
-import img11 from "@/public/img11.jpg";
-import img12 from "@/public/img12.jpg";
 import img13 from "@/public/img13.jpg";
 import img14 from "@/public/img14.jpg";
-import img16 from "@/public/img16.jpg";
 import img17 from "@/public/img17.jpg";
-import img19 from "@/public/img19.jpg";
 
 const realisations = [
   {

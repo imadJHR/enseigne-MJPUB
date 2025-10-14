@@ -25,6 +25,9 @@ import {
   CheckCircle,
   ChevronDown,
   ChevronUp,
+  Sparkles,
+  Sun,
+  Box,
 } from "lucide-react";
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
@@ -97,6 +100,16 @@ interface FixationOption {
   image: StaticImageData;
 }
 
+interface SignStyleOption {
+  value: SignStyle;
+  label: string;
+  description: string;
+  image: StaticImageData;
+  icon: React.ReactNode;
+  gradient: string;
+  badgeColor: string;
+}
+
 interface Options {
   installationKit: boolean;
   dimmer: boolean;
@@ -137,6 +150,37 @@ const fontOptions: FontOption[] = [
   { value: "Dancing Script, cursive", label: "Dancing Script" },
   { value: "Oswald, sans-serif", label: "Oswald (Strong)" },
   { value: "Lato, sans-serif", label: "Lato (Clean)" },
+];
+
+// --- Sign Style Options with Colors ---
+const signStyleOptions: SignStyleOption[] = [
+  {
+    value: "cut-out",
+    label: "Lettres en relief",
+    description: "Élégant • Moderne • Professionnel",
+    image: imgCutOut,
+    icon: <Sparkles className="h-4 w-4 sm:h-5 sm:w-5" />,
+    gradient: "from-purple-500 to-blue-500",
+    badgeColor: "bg-gradient-to-r from-purple-500 to-blue-500",
+  },
+  {
+    value: "lighted",
+    label: "Lettres lumineuses rétroéclairées",
+    description: "Brillant • Visible • Élégant",
+    image: imgLighted,
+    icon: <Sun className="h-4 w-4 sm:h-5 sm:w-5" />,
+    gradient: "from-amber-500 to-orange-500",
+    badgeColor: "bg-gradient-to-r from-amber-500 to-orange-500",
+  },
+  {
+    value: "lighted-box",
+    label: "Lettres lumineuses boîtier alu",
+    description: "Premium • Luxueux • Professionnel",
+    image: imgLightedBox,
+    icon: <Box className="h-4 w-4 sm:h-5 sm:w-5" />,
+    gradient: "from-gray-700 to-gray-900",
+    badgeColor: "bg-gradient-to-r from-gray-700 to-gray-900",
+  },
 ];
 
 // --- Fixation Options ---
@@ -491,15 +535,15 @@ export default function ConfigurateurPage() {
         backgroundColor: backgroundColor.toUpperCase(),
         ...(signStyle === "lighted" || signStyle === "lighted-box"
           ? {
-              ledColor: ledColor.replace("-", " "),
-              intensity: `${intensity}%`,
-            }
+            ledColor: ledColor.replace("-", " "),
+            intensity: `${intensity}%`,
+          }
           : {}),
         fixationType:
           fixationType === "boitier-lumineux"
             ? `Boîtier lumineux ${aluChant} + Plexi Blanc`
             : fixationOptions.find((f) => f.value === fixationType)?.label ||
-              fixationType,
+            fixationType,
         additionalOptions: Object.keys(options)
           .filter((key) => {
             const value = options[key as keyof Options];
@@ -595,7 +639,7 @@ export default function ConfigurateurPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 text-black flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 text-black flex flex-col">
       <Head>
         <title>
           Configurateur d&apos;Enseigne sur Mesure | Lettres Découpées & Lumineuses en PVC/Alu
@@ -697,7 +741,7 @@ export default function ConfigurateurPage() {
       <main className="flex-1 pt-12 sm:pt-16 px-2 sm:px-4 py-4 sm:py-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-4 sm:mb-8 px-2">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase mt-16 font-bold mb-2 sm:mb-4 bg-gradient-to-r from-black to-blue-500 bg-clip-text text-transparent">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase mt-16 font-bold mb-2 sm:mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
               Créez vos lettres découpées
             </h1>
             <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 max-w-xl sm:max-w-2xl mx-auto">
@@ -708,19 +752,22 @@ export default function ConfigurateurPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
             {/* Configuration Options */}
-            <div className="lg:col-span-2 bg-white p-3 sm:p-4 md:p-6 rounded-lg shadow-lg border border-gray-200 space-y-4 sm:space-y-6">
-              
+            <div className="lg:col-span-2 bg-white/80 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-xl shadow-2xl border border-white/20 space-y-4 sm:space-y-6">
+
               {/* Sign Text Section */}
               <div className="space-y-1">
-                <div 
-                  className="flex items-center justify-between cursor-pointer"
+                <div
+                  className="flex items-center justify-between cursor-pointer group"
                   onClick={() => toggleSection('text')}
                 >
-                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800 group-hover:text-blue-700 transition-colors">
                     <TextCursorInput className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                     Texte de l&apos;Enseigne
                   </Label>
-                  {expandedSections.text ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                  {expandedSections.text ?
+                    <ChevronUp size={16} className="text-blue-600" /> :
+                    <ChevronDown size={16} className="text-gray-500 group-hover:text-blue-600 transition-colors" />
+                  }
                 </div>
                 <AnimatePresence>
                   {expandedSections.text && (
@@ -738,7 +785,7 @@ export default function ConfigurateurPage() {
                         value={signText}
                         onChange={(e) => setSignText(e.target.value)}
                         maxLength={50}
-                        className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 rounded-md p-2 text-xs sm:text-sm md:text-base mt-2 shadow-sm"
+                        className="w-full bg-white border-2 border-gray-200 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg p-3 text-xs sm:text-sm md:text-base mt-2 shadow-sm transition-all"
                       />
                       <p className="text-xs text-gray-500 pt-1">
                         Max 50 caractères. Restants: {50 - signText.length}
@@ -751,7 +798,7 @@ export default function ConfigurateurPage() {
               {/* Font Section */}
               <AnimatePresence>
                 {expandedSections.text && (
-                  <motion.div 
+                  <motion.div
                     className="space-y-1"
                     variants={expandVariants}
                     initial="hidden"
@@ -763,15 +810,15 @@ export default function ConfigurateurPage() {
                       Police
                     </Label>
                     <Select value={font} onValueChange={setFont}>
-                      <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500 text-xs sm:text-sm md:text-base shadow-sm hover:shadow-md transition-shadow">
+                      <SelectTrigger className="w-full bg-white border-2 border-gray-200 text-gray-900 focus:ring-2 focus:ring-blue-200 text-xs sm:text-sm md:text-base shadow-sm hover:shadow-md transition-all rounded-lg p-3">
                         <SelectValue placeholder="Sélectionnez une police" />
                       </SelectTrigger>
-                      <SelectContent className="bg-white text-gray-900 border-gray-300 max-h-60 overflow-y-auto text-xs sm:text-sm md:text-base shadow-lg rounded-md">
+                      <SelectContent className="bg-white text-gray-900 border-2 border-gray-200 max-h-60 overflow-y-auto text-xs sm:text-sm md:text-base shadow-xl rounded-lg">
                         {fontOptions.map((option) => (
-                          <SelectItem 
-                            key={option.value} 
+                          <SelectItem
+                            key={option.value}
                             value={option.value}
-                            className="focus:bg-blue-50 focus:text-blue-700 transition-colors cursor-pointer"
+                            className="focus:bg-blue-50 focus:text-blue-700 transition-colors cursor-pointer rounded-md"
                           >
                             <span style={{ fontFamily: option.value }}>
                               {option.label}
@@ -787,7 +834,7 @@ export default function ConfigurateurPage() {
               {/* Height Section */}
               <AnimatePresence>
                 {expandedSections.text && (
-                  <motion.div 
+                  <motion.div
                     className="space-y-1"
                     variants={expandVariants}
                     initial="hidden"
@@ -797,7 +844,7 @@ export default function ConfigurateurPage() {
                     <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
                       <Ruler className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                       Hauteur du Texte:{" "}
-                      <span className="font-bold ml-1">{height} cm</span>
+                      <span className="font-bold ml-1 text-blue-700">{height} cm</span>
                     </Label>
                     <Slider
                       id="height"
@@ -806,10 +853,10 @@ export default function ConfigurateurPage() {
                       step={1}
                       value={[height]}
                       onValueChange={(val) => setHeight(val[0])}
-                      className="mt-2 [&>span:first-child]:bg-blue-600 [&>span:first-child]:border-blue-600"
+                      className="mt-2 [&>span:first-child]:bg-gradient-to-r [&>span:first-child]:from-blue-500 [&>span:first-child]:to-purple-500 [&>span:first-child]:border-blue-500"
                     />
                     <p className="text-xs text-gray-500 pt-1">
-                      Largeur estimée: {estimatedWidth.toFixed(0)} cm
+                      Largeur estimée: <span className="font-semibold text-blue-700">{estimatedWidth.toFixed(0)} cm</span>
                     </p>
                   </motion.div>
                 )}
@@ -817,56 +864,77 @@ export default function ConfigurateurPage() {
 
               {/* Sign Style Section */}
               <div className="space-y-1">
-                <div 
-                  className="flex items-center justify-between cursor-pointer"
+                <div
+                  className="flex items-center justify-between cursor-pointer group"
                   onClick={() => toggleSection('style')}
                 >
-                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800 group-hover:text-blue-700 transition-colors">
                     <Layers className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                     Type d&apos;Enseigne
                   </Label>
-                  {expandedSections.style ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                  {expandedSections.style ?
+                    <ChevronUp size={16} className="text-blue-600" /> :
+                    <ChevronDown size={16} className="text-gray-500 group-hover:text-blue-600 transition-colors" />
+                  }
                 </div>
                 <AnimatePresence>
                   {expandedSections.style && (
-                    <motion.div 
-                      className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 mt-2"
+                    <motion.div
+                      className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-2"
                       variants={gridContainerVariants}
                       initial="hidden"
                       animate="show"
                       exit="hidden"
                     >
-                      {[
-                        { value: "cut-out", label: "Lettres en relief", image: imgCutOut },
-                        { value: "lighted", label: "Lettres lumineuses rétroéclairées", image: imgLighted },
-                        { value: "lighted-box", label: "Lettres lumineuses boîtier alu", image: imgLightedBox }
-                      ].map((style) => (
+                      {signStyleOptions.map((style) => (
                         <motion.div
                           key={style.value}
                           variants={cardVariants}
-                          whileHover={{ scale: 1.05, y: -5 }}
+                          whileHover={{ scale: 1.03, y: -5 }}
                           whileTap={{ scale: 0.98 }}
                           className="h-full"
                         >
                           <Card
-                            className={`cursor-pointer border-2 h-full ${
-                              signStyle === style.value
-                                ? "border-blue-600 ring-2 ring-blue-500/50 shadow-lg"
-                                : "border-gray-300 shadow-sm"
-                            } hover:border-blue-500 hover:shadow-lg transition-all duration-200 rounded-lg bg-gray-100 text-black`}
+                            className={`cursor-pointer border-2 h-full transition-all duration-300 rounded-xl overflow-hidden ${signStyle === style.value
+                                ? `border-transparent bg-gradient-to-br ${style.gradient} shadow-2xl scale-105`
+                                : "border-gray-200/80 bg-white/90 shadow-lg hover:shadow-xl"
+                              } hover:border-blue-300`}
                             onClick={() => setSignStyle(style.value as SignStyle)}
                           >
-                            <CardContent className="p-2 sm:p-3 flex flex-col items-center justify-center h-full">
-                              <Image
-                                src={style.image}
-                                alt={style.label}
-                                className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain mb-1 sm:mb-2"
-                                width={96}
-                                height={96}
-                              />
-                              <h3 className="text-xs sm:text-sm font-bold text-gray-900 text-center">
+                            <CardContent className="p-3 sm:p-4 flex flex-col items-center justify-center h-full relative">
+                              {/* Badge */}
+                              <div className={`absolute -top-2 -right-2 ${style.badgeColor} text-white text-xs px-2 py-1 rounded-full font-bold shadow-lg`}>
+                                {style.icon}
+                              </div>
+
+                              <div className={`p-2 rounded-lg mb-2 ${signStyle === style.value ? 'bg-white/20' : 'bg-gray-100'}`}>
+                                <Image
+                                  src={style.image}
+                                  alt={style.label}
+                                  className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain"
+                                  width={96}
+                                  height={96}
+                                />
+                              </div>
+
+                              <h3 className={`text-xs sm:text-sm font-bold text-center mb-1 ${signStyle === style.value ? 'text-white' : 'text-gray-900'
+                                }`}>
                                 {style.label}
                               </h3>
+
+                              <p className={`text-xxs sm:text-xs text-center ${signStyle === style.value ? 'text-white/90' : 'text-gray-600'
+                                }`}>
+                                {style.description}
+                              </p>
+
+                              {/* Selection Indicator */}
+                              {signStyle === style.value && (
+                                <div className="absolute bottom-2 right-2">
+                                  <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                                    <CheckCircle className="h-4 w-4 text-green-600" />
+                                  </div>
+                                </div>
+                              )}
                             </CardContent>
                           </Card>
                         </motion.div>
@@ -878,19 +946,22 @@ export default function ConfigurateurPage() {
 
               {/* Materials Section */}
               <div className="space-y-1">
-                <div 
-                  className="flex items-center justify-between cursor-pointer"
+                <div
+                  className="flex items-center justify-between cursor-pointer group"
                   onClick={() => toggleSection('materials')}
                 >
-                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800 group-hover:text-blue-700 transition-colors">
                     <Ruler className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                     Matériaux
                   </Label>
-                  {expandedSections.materials ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                  {expandedSections.materials ?
+                    <ChevronUp size={16} className="text-blue-600" /> :
+                    <ChevronDown size={16} className="text-gray-500 group-hover:text-blue-600 transition-colors" />
+                  }
                 </div>
                 <AnimatePresence>
                   {expandedSections.materials && (
-                    <motion.div 
+                    <motion.div
                       className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 mt-2"
                       variants={expandVariants}
                       initial="hidden"
@@ -900,26 +971,33 @@ export default function ConfigurateurPage() {
                       {allMaterialOptions.map((opt) => (
                         <Card
                           key={opt.id}
-                          className={`cursor-pointer border-2 ${
-                            selectedMaterialId === opt.id
-                              ? "border-blue-600 ring-2 ring-blue-500/50 shadow-lg"
-                              : "border-gray-300 shadow-sm"
-                          } hover:border-blue-500 hover:shadow-lg transition-all duration-200 rounded-lg bg-gray-100 text-black`}
+                          className={`cursor-pointer border-2 transition-all duration-200 rounded-lg overflow-hidden ${selectedMaterialId === opt.id
+                              ? "border-blue-500 ring-2 ring-blue-500/20 shadow-lg bg-blue-50 scale-105"
+                              : "border-gray-200 shadow-sm bg-white hover:border-blue-300 hover:shadow-md"
+                            }`}
                           onClick={() => setSelectedMaterialId(opt.id)}
                         >
-                          <CardContent className="p-1 sm:p-2 flex flex-col items-center">
-                            <div className="relative w-full h-16 sm:h-20 md:h-24 mb-1 overflow-hidden rounded-md">
+                          <CardContent className="p-2 sm:p-3 flex flex-col items-center">
+                            <div className="relative w-full h-16 sm:h-20 md:h-24 mb-2 overflow-hidden rounded-md bg-gray-100">
                               <Image
                                 src={opt.image}
                                 alt={opt.label}
                                 layout="fill"
                                 objectFit="cover"
-                                className="scale-110"
+                                className="transition-transform hover:scale-110"
                               />
                             </div>
-                            <h3 className="text-xxs sm:text-xs md:text-sm capitalize font-semibold text-center h-8 flex items-center justify-center">
+                            <h3 className="text-xxs sm:text-xs md:text-sm capitalize font-semibold text-center text-gray-900 leading-tight">
                               {opt.label}
                             </h3>
+
+                            {selectedMaterialId === opt.id && (
+                              <div className="absolute top-1 right-1">
+                                <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                                  <CheckCircle className="h-3 w-3 text-white" />
+                                </div>
+                              </div>
+                            )}
                           </CardContent>
                         </Card>
                       ))}
@@ -930,55 +1008,70 @@ export default function ConfigurateurPage() {
 
               {/* Colors Section */}
               <div className="space-y-1">
-                <div 
-                  className="flex items-center justify-between cursor-pointer"
+                <div
+                  className="flex items-center justify-between cursor-pointer group"
                   onClick={() => toggleSection('colors')}
                 >
-                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800 group-hover:text-blue-700 transition-colors">
                     <Palette className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                     Couleurs
                   </Label>
-                  {expandedSections.colors ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                  {expandedSections.colors ?
+                    <ChevronUp size={16} className="text-blue-600" /> :
+                    <ChevronDown size={16} className="text-gray-500 group-hover:text-blue-600 transition-colors" />
+                  }
                 </div>
                 <AnimatePresence>
                   {expandedSections.colors && (
-                    <motion.div 
-                      className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mt-2"
+                    <motion.div
+                      className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-2"
                       variants={expandVariants}
                       initial="hidden"
                       animate="visible"
                       exit="exit"
                     >
-                      <div className="space-y-1">
-                        <Label className="text-xs sm:text-sm md:text-base font-semibold">
+                      <div className="space-y-2 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                        <Label className="text-xs sm:text-sm md:text-base font-semibold text-gray-800 flex items-center">
+                          <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: textColor }} />
                           Couleur du Texte
                         </Label>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-3">
                           <Input
                             type="color"
                             value={textColor}
                             onChange={(e) => setTextColor(e.target.value)}
-                            className="w-12 h-12 p-0 border-none rounded-md overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow"
+                            className="w-12 h-12 p-0 border-2 border-gray-300 rounded-lg overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow"
                           />
-                          <span className="text-xs sm:text-sm font-medium">
-                            {textColor.toUpperCase()}
-                          </span>
+                          <div className="flex-1">
+                            <Input
+                              type="text"
+                              value={textColor.toUpperCase()}
+                              onChange={(e) => setTextColor(e.target.value)}
+                              className="w-full text-xs sm:text-sm font-mono bg-white border-gray-300"
+                            />
+                          </div>
                         </div>
                       </div>
-                      <div className="space-y-1">
-                        <Label className="text-xs sm:text-sm md:text-base font-semibold">
+                      <div className="space-y-2 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                        <Label className="text-xs sm:text-sm md:text-base font-semibold text-gray-800 flex items-center">
+                          <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: backgroundColor }} />
                           Couleur de Fond
                         </Label>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-3">
                           <Input
                             type="color"
                             value={backgroundColor}
                             onChange={(e) => setBackgroundColor(e.target.value)}
-                            className="w-12 h-12 p-0 border-none rounded-md overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow"
+                            className="w-12 h-12 p-0 border-2 border-gray-300 rounded-lg overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow"
                           />
-                          <span className="text-xs sm:text-sm font-medium">
-                            {backgroundColor.toUpperCase()}
-                          </span>
+                          <div className="flex-1">
+                            <Input
+                              type="text"
+                              value={backgroundColor.toUpperCase()}
+                              onChange={(e) => setBackgroundColor(e.target.value)}
+                              className="w-full text-xs sm:text-sm font-mono bg-white border-gray-300"
+                            />
+                          </div>
                         </div>
                       </div>
                     </motion.div>
@@ -989,49 +1082,52 @@ export default function ConfigurateurPage() {
               {/* Lighting Options */}
               {(signStyle === "lighted" || signStyle === "lighted-box") && (
                 <div className="space-y-1">
-                  <div 
-                    className="flex items-center justify-between cursor-pointer"
+                  <div
+                    className="flex items-center justify-between cursor-pointer group"
                     onClick={() => toggleSection('lighting')}
                   >
-                    <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
-                      <Lightbulb className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
+                    <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800 group-hover:text-blue-700 transition-colors">
+                      <Lightbulb className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-yellow-500" />
                       Options d&apos;Éclairage
                     </Label>
-                    {expandedSections.lighting ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                    {expandedSections.lighting ?
+                      <ChevronUp size={16} className="text-blue-600" /> :
+                      <ChevronDown size={16} className="text-gray-500 group-hover:text-blue-600 transition-colors" />
+                    }
                   </div>
                   <AnimatePresence>
                     {expandedSections.lighting && (
-                      <motion.div 
-                        className="space-y-2 sm:space-y-3 mt-2"
+                      <motion.div
+                        className="space-y-3 mt-2 bg-gradient-to-r from-amber-50 to-orange-50 p-4 rounded-xl border border-amber-200"
                         variants={expandVariants}
                         initial="hidden"
                         animate="visible"
                         exit="exit"
                       >
-                        <div className="space-y-1">
-                          <Label className="text-xs sm:text-sm md:text-base font-semibold">
+                        <div className="space-y-2">
+                          <Label className="text-xs sm:text-sm md:text-base font-semibold text-gray-800">
                             Couleur des LEDs
                           </Label>
                           <Select
                             value={ledColor}
                             onValueChange={(value: LedColor) => setLedColor(value)}
                           >
-                            <SelectTrigger className="w-full bg-gray-100 border-gray-300 text-gray-900 focus:ring-blue-500 text-xs sm:text-sm md:text-base shadow-sm hover:shadow-md transition-shadow">
+                            <SelectTrigger className="w-full bg-white border-2 border-amber-200 text-gray-900 focus:ring-2 focus:ring-amber-200 text-xs sm:text-sm md:text-base shadow-sm rounded-lg p-3">
                               <SelectValue placeholder="Sélectionnez une couleur" />
                             </SelectTrigger>
-                            <SelectContent className="bg-white text-gray-900 border-gray-300 text-xs sm:text-sm md:text-base shadow-lg rounded-md">
-                              <SelectItem value="blanc-froid" className="focus:bg-blue-50 focus:text-blue-700">Blanc Froid</SelectItem>
-                              <SelectItem value="blanc-chaud" className="focus:bg-blue-50 focus:text-blue-700">Blanc Chaud</SelectItem>
-                              <SelectItem value="rouge" className="focus:bg-blue-50 focus:text-blue-700">Rouge</SelectItem>
-                              <SelectItem value="bleu" className="focus:bg-blue-50 focus:text-blue-700">Bleu</SelectItem>
-                              <SelectItem value="vert" className="focus:bg-blue-50 focus:text-blue-700">Vert</SelectItem>
-                              <SelectItem value="rgb" className="focus:bg-blue-50 focus:text-blue-700">RGB</SelectItem>
+                            <SelectContent className="bg-white text-gray-900 border-2 border-amber-200 text-xs sm:text-sm md:text-base shadow-xl rounded-lg">
+                              <SelectItem value="blanc-froid" className="focus:bg-amber-50 focus:text-amber-700">❄️ Blanc Froid</SelectItem>
+                              <SelectItem value="blanc-chaud" className="focus:bg-amber-50 focus:text-amber-700">☀️ Blanc Chaud</SelectItem>
+                              <SelectItem value="rouge" className="focus:bg-red-50 focus:text-red-700">🔴 Rouge</SelectItem>
+                              <SelectItem value="bleu" className="focus:bg-blue-50 focus:text-blue-700">🔵 Bleu</SelectItem>
+                              <SelectItem value="vert" className="focus:bg-green-50 focus:text-green-700">🟢 Vert</SelectItem>
+                              <SelectItem value="rgb" className="focus:bg-purple-50 focus:text-purple-700">🌈 RGB Multicolore</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
-                        <div className="space-y-1">
-                          <Label className="text-xs sm:text-sm md:text-base font-semibold">
-                            Intensité: {intensity}%
+                        <div className="space-y-2">
+                          <Label className="text-xs sm:text-sm md:text-base font-semibold text-gray-800">
+                            Intensité: <span className="text-amber-600 font-bold">{intensity}%</span>
                           </Label>
                           <Slider
                             min={10}
@@ -1039,8 +1135,14 @@ export default function ConfigurateurPage() {
                             step={10}
                             value={[intensity]}
                             onValueChange={(val) => setIntensity(val[0])}
-                            className="mt-2 [&>span:first-child]:bg-blue-600 [&>span:first-child]:border-blue-600"
+                            className="mt-2 [&>span:first-child]:bg-gradient-to-r [&>span:first-child]:from-amber-400 [&>span:first-child]:to-orange-500 [&>span:first-child]:border-amber-400"
                           />
+                          <div className="flex justify-between text-xs text-gray-600">
+                            <span>Faible</span>
+                            <span>Moyen</span>
+                            <span>Fort</span>
+                            <span>Max</span>
+                          </div>
                         </div>
                       </motion.div>
                     )}
@@ -1050,20 +1152,23 @@ export default function ConfigurateurPage() {
 
               {/* Fixation Section */}
               <div className="space-y-1">
-                <div 
-                  className="flex items-center justify-between cursor-pointer"
+                <div
+                  className="flex items-center justify-between cursor-pointer group"
                   onClick={() => toggleSection('fixation')}
                 >
-                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800">
+                  <Label className="text-xs sm:text-sm md:text-base font-semibold flex items-center text-gray-800 group-hover:text-blue-700 transition-colors">
                     <HardHat className="mr-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-blue-600" />
                     Fixation
                   </Label>
-                  {expandedSections.fixation ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                  {expandedSections.fixation ?
+                    <ChevronUp size={16} className="text-blue-600" /> :
+                    <ChevronDown size={16} className="text-gray-500 group-hover:text-blue-600 transition-colors" />
+                  }
                 </div>
                 <AnimatePresence>
                   {expandedSections.fixation && (
-                    <motion.div 
-                      className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mt-2"
+                    <motion.div
+                      className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-2"
                       variants={expandVariants}
                       initial="hidden"
                       animate="visible"
@@ -1072,26 +1177,33 @@ export default function ConfigurateurPage() {
                       {fixationOptions.map((option) => (
                         <Card
                           key={option.value}
-                          className={`cursor-pointer border-2 ${
-                            fixationType === option.value
-                              ? "border-blue-600 ring-2 ring-blue-500/50 shadow-lg"
-                              : "border-gray-300 shadow-sm"
-                          } hover:border-blue-500 hover:shadow-lg transition-all duration-200 rounded-lg bg-gray-100 text-black`}
+                          className={`cursor-pointer border-2 transition-all duration-200 rounded-xl overflow-hidden ${fixationType === option.value
+                              ? "border-blue-500 ring-2 ring-blue-500/20 shadow-xl bg-blue-50 scale-105"
+                              : "border-gray-200 shadow-lg bg-white hover:border-blue-300 hover:shadow-xl"
+                            }`}
                           onClick={() => setFixationType(option.value)}
                         >
-                          <CardContent className="p-2 sm:p-3 flex flex-col items-center">
-                            <div className="relative w-full h-16 sm:h-20 md:h-24 mb-1 sm:mb-2 overflow-hidden rounded-md">
+                          <CardContent className="p-3 sm:p-4 flex flex-col items-center">
+                            <div className="relative w-full h-16 sm:h-20 md:h-24 mb-2 overflow-hidden rounded-lg bg-gray-100">
                               <Image
                                 src={option.image}
                                 alt={option.label}
                                 layout="fill"
                                 objectFit="cover"
-                                className="scale-110"
+                                className="transition-transform hover:scale-110"
                               />
                             </div>
                             <h3 className="text-xs sm:text-sm md:text-base font-bold text-gray-900 text-center">
                               {option.label}
                             </h3>
+
+                            {fixationType === option.value && (
+                              <div className="absolute top-2 right-2">
+                                <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                                  <CheckCircle className="h-4 w-4 text-white" />
+                                </div>
+                              </div>
+                            )}
                           </CardContent>
                         </Card>
                       ))}
@@ -1103,20 +1215,20 @@ export default function ConfigurateurPage() {
 
             {/* Preview and Summary */}
             <div className="lg:sticky lg:top-4 h-fit self-start">
-              <Card className="bg-white border-gray-200 shadow-lg w-full">
-                <CardHeader className="border-b border-gray-200 p-2 sm:p-3 md:p-4">
-                  <CardTitle className="flex items-center text-sm sm:text-base md:text-lg font-bold text-gray-900">
-                    <ImageIcon className="mr-2 h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
+              <Card className="bg-white/90 backdrop-blur-sm border-white/20 shadow-2xl w-full rounded-xl overflow-hidden">
+                <CardHeader className="border-b border-gray-200/30 p-3 sm:p-4 md:p-5 bg-gradient-to-r from-blue-600 to-purple-600">
+                  <CardTitle className="flex items-center text-sm sm:text-base md:text-lg font-bold text-white">
+                    <ImageIcon className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                     Aperçu & Récapitulatif
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="p-2 sm:p-3 md:p-4 space-y-2 sm:space-y-3">
+                <CardContent className="p-3 sm:p-4 md:p-5 space-y-3 sm:space-y-4">
                   <div
-                    className="relative w-full h-24 sm:h-28 md:h-36 rounded-lg flex items-center justify-center overflow-hidden border border-gray-300 shadow-md"
+                    className="relative w-full h-24 sm:h-28 md:h-36 rounded-xl flex items-center justify-center overflow-hidden border-2 border-gray-300/50 shadow-lg bg-gradient-to-br from-white to-gray-100"
                     style={{ backgroundColor: backgroundColor }}
                   >
                     <p
-                      className="font-extrabold break-words leading-tight text-center px-1 sm:px-2"
+                      className="font-extrabold break-words leading-tight text-center px-2 sm:px-3"
                       style={{
                         fontFamily: font,
                         color: textColor,
@@ -1124,89 +1236,106 @@ export default function ConfigurateurPage() {
                         lineHeight: 1,
                         textShadow:
                           signStyle === "lighted" || signStyle === "lighted-box"
-                            ? `0 0 ${intensity / 10}px ${ledColor}`
+                            ? `0 0 ${intensity / 10}px ${ledColor}, 0 0 ${intensity / 5}px ${ledColor}40`
                             : "none",
                       }}
                     >
                       {signText || "Votre Enseigne"}
                     </p>
+
+                    {/* LED Effect for lighted signs */}
+                    {(signStyle === "lighted" || signStyle === "lighted-box") && (
+                      <div
+                        className="absolute inset-0 rounded-xl pointer-events-none"
+                        style={{
+                          boxShadow: `inset 0 0 ${intensity * 2}px ${intensity}px ${ledColor}30`,
+                        }}
+                      />
+                    )}
                   </div>
-                  <div className="space-y-1 sm:space-y-2">
-                    <h4 className="text-xs sm:text-sm md:text-base font-bold text-gray-800">
+
+                  <div className="space-y-2 sm:space-y-3">
+                    <h4 className="text-xs sm:text-sm md:text-base font-bold text-gray-800 flex items-center">
+                      <Sparkles className="h-4 w-4 mr-2 text-yellow-500" />
                       Exemples de réalisations
                     </h4>
-                    <div className="grid grid-cols-3 gap-1 sm:gap-2">
+                    <div className="grid grid-cols-3 gap-2 sm:gap-3">
                       {examples[signStyle].map((example) => (
                         <div
                           key={example.id}
-                          className="relative w-full h-16 sm:h-20 md:h-24 overflow-hidden rounded-md border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
+                          className="relative w-full h-16 sm:h-20 md:h-24 overflow-hidden rounded-lg border-2 border-gray-200/50 shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105"
                         >
                           <Image
                             src={example.img}
                             alt={example.alt}
                             layout="fill"
                             objectFit="cover"
-                            className="rounded-lg hover:scale-105 transition-transform duration-300"
+                            className="rounded-lg"
                           />
+                          <div className="absolute inset-0 bg-black/0 hover:bg-black/10 transition-colors" />
                         </div>
                       ))}
                     </div>
                   </div>
-                  <div className="space-y-1 sm:space-y-2 text-gray-700 text-xxs sm:text-xs md:text-sm border-t border-gray-200 pt-2 sm:pt-3">
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium">Texte:</span>
-                      <span className="font-semibold text-right">
+
+                  <div className="space-y-2 sm:space-y-3 text-gray-700 text-xxs sm:text-xs md:text-sm border-t border-gray-200/50 pt-3 sm:pt-4">
+                    <div className="flex justify-between items-center py-1">
+                      <span className="font-medium text-gray-600">Texte:</span>
+                      <span className="font-semibold text-gray-900 text-right">
                         {signText || "Non défini"}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium">Style:</span>
-                      <span className="capitalize font-semibold text-right">
-                        {signStyle === "cut-out"
-                          ? "Lettres en relief"
-                          : signStyle === "lighted"
-                          ? "Lettres lumineuses rétroéclairées"
-                          : "Lettres lumineuses boîtier alu"}
+                    <div className="flex justify-between items-center py-1">
+                      <span className="font-medium text-gray-600">Style:</span>
+                      <span className="capitalize font-semibold text-gray-900 text-right">
+                        {signStyleOptions.find(s => s.value === signStyle)?.label || signStyle}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium">Matériau:</span>
-                      <span className="capitalize font-semibold text-right">
+                    <div className="flex justify-between items-center py-1">
+                      <span className="font-medium text-gray-600">Matériau:</span>
+                      <span className="capitalize font-semibold text-gray-900 text-right">
                         {allMaterialOptions.find(
                           (opt) => opt.id === selectedMaterialId
                         )?.label || "N/A"}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium">Fixation:</span>
-                      <span className="font-semibold text-right">
+                    <div className="flex justify-between items-center py-1">
+                      <span className="font-medium text-gray-600">Fixation:</span>
+                      <span className="font-semibold text-gray-900 text-right">
                         {fixationType === "boitier-lumineux"
                           ? `Boîtier lumineux ${aluChant} + Plexi Blanc`
                           : fixationOptions.find(
-                              (f) => f.value === fixationType
-                            )?.label || fixationType}
+                            (f) => f.value === fixationType
+                          )?.label || fixationType}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium">Dimensions:</span>
-                      <span className="font-semibold text-right">
+                    <div className="flex justify-between items-center py-1">
+                      <span className="font-medium text-gray-600">Dimensions:</span>
+                      <span className="font-semibold text-gray-900 text-right">
                         {estimatedWidth.toFixed(0)} x {height} cm
                       </span>
                     </div>
                   </div>
-                  <div className="border-t border-gray-300 pt-2 sm:pt-3 space-y-1 sm:space-y-2">
+
+                  <div className="border-t border-gray-300/50 pt-3 sm:pt-4 space-y-2 sm:space-y-3">
                     {!isPriceOnQuote && (
-                      <div className="flex justify-between text-xs sm:text-sm md:text-base font-bold text-gray-900">
-                        <span>Total TTC:</span>
-                        <span className="font-bold text-sm sm:text-base md:text-lg text-blue-800">
+                      <div className="flex justify-between items-center text-sm sm:text-base md:text-lg font-bold">
+                        <span className="text-gray-700">Total TTC:</span>
+                        <span className="font-bold text-lg sm:text-xl md:text-2xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                           {(Number.parseFloat(finalPrice) * 1.2).toFixed(2)} €
                         </span>
                       </div>
                     )}
+                    {isPriceOnQuote && (
+                      <div className="text-center py-2 bg-yellow-50 border border-yellow-200 rounded-lg">
+                        <span className="text-yellow-800 font-semibold text-sm">Sur devis personnalisé</span>
+                      </div>
+                    )}
                   </div>
-                  <div className="space-y-1 sm:space-y-2 pt-2 sm:pt-3">
+
+                  <div className="space-y-2 sm:space-y-3 pt-2 sm:pt-3">
                     <Button
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm md:text-base py-2 sm:py-3 rounded-md transition-colors shadow-md hover:shadow-lg"
+                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-xs sm:text-sm md:text-base py-3 sm:py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 border-0"
                       onClick={handleSendEmail}
                       disabled={isLoading}
                     >
@@ -1215,6 +1344,9 @@ export default function ConfigurateurPage() {
                         ? "Envoi en cours..."
                         : "Envoyer ma configuration"}
                     </Button>
+                    <p className="text-xxs sm:text-xs text-gray-500 text-center">
+                      Un expert vous contactera sous 24h pour finaliser votre devis
+                    </p>
                   </div>
                 </CardContent>
               </Card>
