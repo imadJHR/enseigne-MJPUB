@@ -9,13 +9,10 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  // Le metadataBase est essentiel pour que les URLs relatives (comme /og-image.png) fonctionnent correctement
-  metadataBase: new URL("https://lettre3dshop.com/"),
+  metadataBase: new URL("https://lettre3dshop.com"),
 
   title: {
-    // Le titre par défaut pour la page d'accueil ou les pages sans titre spécifique
     default: "MJ PUB - Enseignes Lumineuses & Signalétique sur Mesure",
-    // Le modèle pour les titres des autres pages. `%s` sera remplacé par le titre de la page.
     template: "%s | MJ PUB",
   },
   description:
@@ -36,7 +33,7 @@ export const metadata: Metadata = {
   publisher: "MJ PUB",
   icons: {
     icon: "/favicon.ico",
-    apple: "/favicon.ico", // Corrigé : le chemin doit être valide, par ex. /apple-icon.png
+    apple: "/favicon.ico",
   },
   robots: {
     index: true,
@@ -50,10 +47,11 @@ export const metadata: Metadata = {
     siteName: "MJ PUB",
     images: [
       {
-        url: "/og-image.png", 
+        // ✅ Remplace /logo.png par une image de taille 1200x630px (og-image.jpg ou .png)
+        url: "https://lettre3dshop.com/logo.png",
         width: 1200,
         height: 630,
-        alt: "Présentation des enseignes lumineuses de MJ PUB",
+        alt: "Aperçu du site MJ PUB - Enseignes lumineuses et signalétique sur mesure",
       },
     ],
     locale: "fr_FR",
@@ -63,6 +61,7 @@ export const metadata: Metadata = {
     google: "BLLN9xg6pbYTnR4ICVo_bgTIMQXVZ0Itu_Xo6ySTHgI",
   },
 };
+
 
 export default function RootLayout({
   children,
