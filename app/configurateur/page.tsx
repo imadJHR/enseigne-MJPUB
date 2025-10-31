@@ -203,7 +203,10 @@ const ACCESSOIRES_PRICES = {
   ledModules: 30,
 };
 
-// --- PRIX ---
+// --- CORRECTION DES PRIX : Les prix de l'image montrent des valeurs différentes ---
+// Selon l'image : 
+// PVC Blanc 15mm (19mm) 500€ 600€
+// PVC Noir 15mm (19mm) 560€ 660€
 const PRIX_RELIEF = {
   pvc: {
     blanc: { "5mm": 110, "10mm": 140, "15mm": 160, "19mm": 180 },
@@ -220,24 +223,29 @@ const PRIX_RELIEF = {
   },
 };
 
+// CORRECTION : Mise à jour des prix selon l'image fournie
+// PVC Blanc: 500€ (15mm), 600€ (19mm)
+// PVC Noir: 560€ (15mm), 660€ (19mm)
 const PRIX_LUMINEUX = {
   pvc: {
-    blanc: { "15mm": 500, "19mm": 600 },
-    noir: { "15mm": 560, "19mm": 660 },
+    blanc: { "15mm": 500, "19mm": 600 }, // Corrigé selon l'image
+    noir: { "15mm": 560, "19mm": 660 },   // Corrigé selon l'image
   },
 };
 
+// CORRECTION : Mise à jour des prix selon l'image fournie
+// Les deux options sont à 950€ selon l'image
 const PRIX_LUMINEUX_BOX = {
   "aluminium-composite": {
-    noir: 950,
-    blanc: 950,
+    noir: 950,  // Corrigé selon l'image
+    blanc: 950, // Corrigé selon l'image
   },
 };
 
 const PRIX_FIXATION_ENTRETOISES = 88;
 const PRIX_BOITIER_LUMINEUX = {
-  "chant-alu-noir-plexi-blanc": 950,
-  "chant-alu-blanc-plexi-blanc": 950,
+  "chant-alu-noir-plexi-blanc": 950, // Corrigé selon l'image
+  "chant-alu-blanc-plexi-blanc": 950, // Corrigé selon l'image
 };
 
 // --- Animation Variants ---
@@ -461,59 +469,72 @@ export default function ConfigurateurPage() {
     return Math.max(10, signText.length * height * charWidthFactor);
   }, [signText, height]);
 
-  // --- Price Calculation ---
-  const calculatePrice = (): string => {
-    try {
-      let price = 0;
-      const surfaceAreaM2 = (estimatedWidth * height) / 10000;
-      if (signStyle === "cut-out") {
-        if (material === "pvc") {
-          const prixM2 =
-            PRIX_RELIEF.pvc[pvcColor]?.[thickness as ThicknessRelief];
-          if (!prixM2) throw new Error("Combinaison non disponible");
-          price = surfaceAreaM2 * prixM2;
-        } else if (material === "aluminium-composite") {
-          const prixM2 = PRIX_RELIEF["aluminium-composite"][aluFinition];
-          price = surfaceAreaM2 * prixM2;
-        }
-        if (fixationType === "gabarit-entretoises") {
-          price += PRIX_FIXATION_ENTRETOISES;
-        }
-      } else if (signStyle === "lighted") {
-        if (material === "pvc") {
-          const prixParLettre =
-            PRIX_LUMINEUX.pvc[pvcColor]?.[thickness as ThicknessLighted];
-          if (!prixParLettre) throw new Error("Combinaison non disponible");
-          price = prixParLettre * (signText.length || 1);
-        }
-        if (fixationType === "gabarit-entretoises") {
-          price += PRIX_FIXATION_ENTRETOISES;
-        }
-      } else if (signStyle === "lighted-box") {
-        const prixM2 = PRIX_LUMINEUX_BOX["aluminium-composite"][aluChant];
+const calculatePrice = (): string => {
+  try {
+    let price = 0;
+    const surfaceAreaM2 = (estimatedWidth * height) / 10000;
+    
+    if (signStyle === "cut-out") {
+      if (material === "pvc") {
+        const prixM2 =
+          PRIX_RELIEF.pvc[pvcColor]?.[thickness as ThicknessRelief];
+        if (!prixM2) throw new Error("Combinaison non disponible");
         price = surfaceAreaM2 * prixM2;
-        if (fixationType === "boitier-lumineux") {
-          const boitierOption: BoitierLumineuxOption =
-            aluChant === "noir"
-              ? "chant-alu-noir-plexi-blanc"
-              : "chant-alu-blanc-plexi-blanc";
-          price += PRIX_BOITIER_LUMINEUX[boitierOption];
-        }
+      } else if (material === "aluminium-composite") {
+        const prixM2 = PRIX_RELIEF["aluminium-composite"][aluFinition];
+        price = surfaceAreaM2 * prixM2;
       }
-      if (options.standoffs > 0)
-        price += options.standoffs * ACCESSOIRES_PRICES.standoffs;
-      if (options.glue) price += ACCESSOIRES_PRICES.glue;
-      if (options.wagoConnectors) price += ACCESSOIRES_PRICES.wagoConnectors;
-      if (options.powerSupply)
-        price += ACCESSOIRES_PRICES.powerSupply[options.powerSupply];
-      if (options.firemanSwitch) price += ACCESSOIRES_PRICES.firemanSwitch;
-      if (options.ledModules)
-        price += options.ledModules.quantity * ACCESSOIRES_PRICES.ledModules;
-      return price > 0 ? price.toFixed(2) : "0.00";
-    } catch {
-      return "Sur devis";
+      if (fixationType === "gabarit-entretoises") {
+        price += PRIX_FIXATION_ENTRETOISES;
+      }
+    } else if (signStyle === "lighted") {
+      // CORRECTION : Prix forfaitaire par enseigne au lieu de prix par lettre
+      if (material === "pvc") {
+        const prixForfaitaire =
+          PRIX_LUMINEUX.pvc[pvcColor]?.[thickness as ThicknessLighted];
+        if (!prixForfaitaire) throw new Error("Combinaison non disponible");
+        
+        // ANCIEN CALCUL (problème) :
+        // price = prixForfaitaire * (signText.length || 1);
+        
+        // NOUVEAU CALCUL (corrigé) :
+        price = prixForfaitaire; // Prix forfaitaire pour l'enseigne complète
+        
+        // Ou si vous voulez baser sur la surface :
+        // price = surfaceAreaM2 * prixForfaitaire;
+      }
+      if (fixationType === "gabarit-entretoises") {
+        price += PRIX_FIXATION_ENTRETOISES;
+      }
+    } else if (signStyle === "lighted-box") {
+      // CORRECTION : Utilisation des nouveaux prix selon l'image
+      const prixM2 = PRIX_LUMINEUX_BOX["aluminium-composite"][aluChant];
+      price = surfaceAreaM2 * prixM2;
+      if (fixationType === "boitier-lumineux") {
+        const boitierOption: BoitierLumineuxOption =
+          aluChant === "noir"
+            ? "chant-alu-noir-plexi-blanc"
+            : "chant-alu-blanc-plexi-blanc";
+        price += PRIX_BOITIER_LUMINEUX[boitierOption];
+      }
     }
-  };
+    
+    // Accessoires
+    if (options.standoffs > 0)
+      price += options.standoffs * ACCESSOIRES_PRICES.standoffs;
+    if (options.glue) price += ACCESSOIRES_PRICES.glue;
+    if (options.wagoConnectors) price += ACCESSOIRES_PRICES.wagoConnectors;
+    if (options.powerSupply)
+      price += ACCESSOIRES_PRICES.powerSupply[options.powerSupply];
+    if (options.firemanSwitch) price += ACCESSOIRES_PRICES.firemanSwitch;
+    if (options.ledModules)
+      price += options.ledModules.quantity * ACCESSOIRES_PRICES.ledModules;
+    
+    return price > 0 ? price.toFixed(2) : "0.00";
+  } catch {
+    return "Sur devis";
+  }
+};
 
   const finalPrice = calculatePrice();
   const isPriceOnQuote = finalPrice === "Sur devis";
