@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MJ PUB : site d’enseignes et de signalétique
 
-## Getting Started
+Site Next.js en français : enseignes lumineuses LED, lettres découpées, panneaux et accessoires. Refonte de l’interface et des contenus aux couleurs du logo, avec modes clair et sombre et un parcours vers le configurateur. Contenus locaux pour Saint-Amand-les-Eaux et le secteur de Valenciennes.
 
-First, run the development server:
+## Démarrer
 
-```bash
+Node.js 20.9 ou supérieur et npm sont nécessaires.
+
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Le site est disponible sur http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+npm run typecheck
+npm run lint
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Configuration
 
-## Learn More
+- `NEXT_PUBLIC_SITE_URL` : URL publique définitive, sans barre oblique finale. Valeur par défaut : https://lettre3dshop.com.
+- `NEXT_PUBLIC_API_URL` : serveur des formulaires. Valeur par défaut : https://enseigne-mjpub-api.vercel.app.
 
-To learn more about Next.js, take a look at the following resources:
+Ces variables doivent être définies **avant le build**. Ce dépôt contient le frontend ; le traitement des demandes dépend du serveur externe.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Modifier le site
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `lib/site.ts` : coordonnées, communes ciblées, URL et métadonnées communes.
+- `lib/services.ts` : trois pages de services.
+- `lib/realisations.ts` : projets, photos et anciennes URL conservées.
+- `lib/blogPosts.ts` : articles et liens associés.
+- `lib/blogSummaries.ts` : type des résumés ; le journal les extrait automatiquement des articles.
+- `data/productsData.ts` : panneau et variantes.
+- `lib/configurator.ts` : matériaux, tarifs indicatifs et accessoires.
+- `app/globals.css` : structure et composants communs.
+- `app/brand.css` : palette du logo, thèmes, nouvelle identité et responsive.
+- `app/context/ThemeContext.tsx` et `lib/theme.ts` : préférence de thème et application avant le premier rendu.
+- `app/components/ConfigurationEntry.tsx` : choix d’enseigne sur l’accueil.
+- `app/enseigne-saint-amand-les-eaux/page.tsx` : page locale.
+- `app/opengraph-image.tsx` : image de partage aux couleurs du logo.
+- `components/Icons.tsx` : icônes SVG personnalisées, sans bibliothèque d’icônes.
 
-## Deploy on Vercel
+Le sitemap et robots.txt sont générés par Next.js. Les anciennes pages publiques restent accessibles. Le panier, la commande et les pages juridiques sont en noindex.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Formulaires
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Les contrats de l’API existante sont conservés :
+- Contact : `POST /api/contact`, JSON.
+- Devis : `POST /api/devis-request`, multipart avec fichier facultatif.
+- Commande : `POST /api/checkout`, JSON contenant `formData` et `orderSummary`.
+
+Les erreurs sont affichées, les doublons de soumission sont bloqués et le délai réseau est limité à 20 secondes. Le configurateur accepte ?style=cut-out, ?style=lighted ou ?style=lighted-box et passe ses choix au formulaire de devis via le stockage de session. Le panier est conservé dans le stockage local.
+
+Les prix sont affichés en HT et TTC estimés. La validation du prix, des quantités, des fichiers et des disponibilités doit également exister côté serveur. Une demande de commande ne déclenche aucun paiement en ligne.
+
+## Avant publication
+
+Compléter les mentions légales avec la raison sociale, le SIRET, le responsable de publication et l’hébergeur. Préciser les durées de conservation et les prestataires dans la politique de confidentialité. Confirmer les tarifs et modalités commerciales, puis vérifier le traitement réel des demandes par le backend.
+
+Voir `DESIGN-SEO.md` pour les choix de refonte et les vérifications.

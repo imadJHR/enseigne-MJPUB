@@ -1,523 +1,96 @@
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, CheckCircle, MapPin, Calendar, User } from "lucide-react";
-import Link from "next/link";
+export const dynamicParams = false;
 import Image from "next/image";
-import img1 from "@/public/img1.jpg";
-import img2 from "@/public/img2.jpg";
-import img3 from "@/public/img3.jpg";
-import img4 from "@/public/img4.jpg";
-import img5 from "@/public/img5.jpg";
-import img6 from "@/public/img6.jpg";
-import img7 from "@/public/img7.jpg";
-import img8 from "@/public/img8.jpg";
-import img9 from "@/public/img9.jpg";
-import img10 from "@/public/img10.jpg";
-import img11 from "@/public/img11.jpg";
-import img12 from "@/public/img12.jpg";
-import img13 from "@/public/img13.jpg";
-import img14 from "@/public/img14.jpg";
-import img15 from "@/public/img15.jpg";
-import img16 from "@/public/img16.jpg";
-import img17 from "@/public/img17.jpg";
-import img18 from "@/public/img18.jpg";
-import img19 from "@/public/img19.jpg";
-import img22 from "@/public/img22.jpg"
-
-export const realisations = [
-  {
-    id: 1,
-    title: "Enseigne Lumineuse 'Frite Fraîche Kebab Maison'",
-    description:
-      "Création et installation d'une enseigne lumineuse ronde pour un établissement proposant des frites fraîches et des kebabs faits maison. L'enseigne présente un design moderne avec un logo stylisé et des inscriptions claires. Le projet a été réalisé sur mesure pour attirer l'attention des passants avec un éclairage LED vif et un design attrayant, reflétant la qualité des produits proposés.",
-    image: img1,
-    category: "Restauration Rapide",
-    slug: "frite-fraiche-kebab-maison",
-    client: "Frite Fraîche Kebab Maison",
-    location: "Casablanca, Maroc",
-    date: "Novembre 2023",
-    features: [
-      "Enseigne lumineuse ronde double face",
-      "Structure en aluminium laqué noir",
-      "Éclairage LED haute luminosité",
-      "Logo stylisé 'TF' avec un kebab",
-      "Inscriptions 'FRITE FRAÎCHE' et 'KEBAB MAISON' claires",
-      "Installation murale sur potence discrète",
-    ],
-    galleryImages: [img1],
-  },
-  {
-    id: 2,
-    title: "Enseigne Lumineuse 'TIME FOOD'",
-    description:
-      "Conception et installation d'un ensemble d'enseignes lumineuses pour un restaurant de restauration rapide. Le projet inclut une grande enseigne en lettres boîtiers lumineuses pour le nom 'TIME', un caisson lumineux pour le mot 'FOOD' et deux enseignes rondes suspendues 'Frite Fraîche Kebab Maison'. L'objectif était de maximiser la visibilité nocturne et de créer une identité visuelle moderne et percutante.",
-    image: img2,
-    category: "Restauration Rapide",
-    slug: "enseigne-time-food",
-    client: "TIME FOOD",
-    location: "Rabat, Maroc",
-    date: "Janvier 2024",
-    features: [
-      "Lettres boîtiers lumineuses pour 'TIME'",
-      "Éclairage LED rouge et blanc",
-      "Caisson lumineux pour 'FOOD'",
-      "Deux enseignes rondes suspendues 'Frite Fraîche Kebab Maison'",
-      "Combinaison de plusieurs types d'enseignes pour une visibilité optimale",
-    ],
-    galleryImages: [img2],
-  },
-  {
-    id: 3,
-    title: "Enseigne Restaurant 'La Médina'",
-    description:
-      "Création d'une enseigne de façade pour le restaurant 'La Médina'. Le panneau principal de couleur orange vive est mis en valeur par des lettres découpées en relief. Le design inclut un logo distinctif avec une silhouette de chameau et de palmiers, évoquant une ambiance exotique et chaleureuse.",
-    image: img3,
-    category: "Restaurant",
-    slug: "restaurant-la-medina",
-    client: "La Médina",
-    location: "Lille, France",
-    date: "Février 2024",
-    features: [
-      "Enseigne de façade en panneau rigide",
-      "Fond orange mat",
-      "Lettres découpées en relief de couleur noire",
-      "Logo avec un chameau et des palmiers",
-      "Informations de contact et type d'établissement visibles",
-    ],
-    galleryImages: [img3],
-  },
-  {
-    id: 4,
-    title: "Enseigne 'Mister Cook 99'",
-    description:
-      "Conception et installation d'une enseigne moderne et percutante pour l'établissement 'Mister Cook 99'. Le panneau noir laqué offre un contraste saisissant avec le logo rond et les lettres en relief blanches. L'éclairage extérieur par spots accentue la visibilité et met en avant les services proposés : 'Grillades' et 'Snack'.",
-    image: img4,
-    category: "Restauration Rapide",
-    slug: "enseigne-mister-cook-99",
-    client: "Mister Cook 99",
-    location: "Paris, France",
-    date: "Mars 2024",
-    features: [
-      "Panneau en composite laqué noir brillant",
-      "Lettres boîtiers en relief 'COOK'",
-      "Chiffres '99' en relief rouge",
-      "Logo circulaire avec illustration d'un chef",
-      "Éclairage par spots orientables externes",
-      "Mention des spécialités 'Grillades' et 'Snack'",
-    ],
-    galleryImages: [img4, img5],
-  },
-  {
-    id: 5,
-    title: "Enseigne 'Time Shop'",
-    description:
-      "Création et installation d'une enseigne de façade et de deux enseignes rondes suspendues pour le commerce 'Time Shop'. Le panneau principal en noir brillant met en valeur le nom du magasin en lettres boîtiers lumineuses. Des informations clés comme les horaires et les services sont ajoutées en rose pour une touche de modernité.",
-    image: img8,
-    category: "Alimentation Générale",
-    slug: "enseigne-time-shop",
-    client: "Time Shop",
-    location: "Lille, France",
-    date: "Avril 2024",
-    features: [
-      "Enseigne de façade sur panneau noir laqué",
-      "Lettres boîtiers en relief pour 'TIME SHOP'",
-      "Texte d'information en vinyle rose",
-      "Deux enseignes rondes suspendues double face",
-      "Éclairage par spots orientables et lettres lumineuses",
-    ],
-    galleryImages: [img6],
-  },
-  {
-    id: 6,
-    title: "Enseigne Lumineuse 'La Renaissance du Wonen'",
-    description:
-      "Conception et installation d'une enseigne lumineuse pour une boutique de prêt-à-porter. Le nom 'La Renaissance du Wonen' est réalisé en néon LED sur mesure avec une typographie cursive élégante, offrant un style moderne et distinctif qui attire l'attention en soirée.",
-    image: img9,
-    category: "Prêt-à-porter",
-    slug: "la-renaissance-du-wonen",
-    client: "La Renaissance du Wonen",
-    location: "Paris, France",
-    date: "Mai 2024",
-    features: [
-      "Enseigne en néon LED sur mesure",
-      "Typographie cursive personnalisée",
-      "Éclairage blanc froid",
-      "Installation sur une façade sombre",
-      "Design minimaliste et chic",
-    ],
-    galleryImages: [img7],
-  },
-  {
-    id: 7,
-    title: "Enseigne Intérieure 'L'Atelier'",
-    description:
-      "Création d'une enseigne intérieure rétro-éclairée pour une boutique de robes traditionnelles. Le logo 'LH' est mis en valeur par un halo lumineux sur un panneau blanc, accompagné des inscriptions 'L'Atelier' et 'Robes Traditionnelles'. Le design sobre et élégant s'intègre parfaitement à la décoration intérieure de la boutique.",
-    image: img6,
-    category: "Boutique de vêtements",
-    slug: "enseigne-interieure-l-atelier",
-    client: "L'Atelier",
-    location: "Casablanca, Maroc",
-    date: "Juin 2024",
-    features: [
-      "Panneau mural décoratif blanc mat",
-      "Logo ovale rétro-éclairé",
-      "Lettres découpées en relief pour le texte",
-      "Éclairage LED intégré",
-      "Design sur mesure pour la décoration intérieure",
-    ],
-    galleryImages: [img8],
-  },
-  {
-    id: 8,
-    title: "Enseigne Façade 'Sidi Bou Said'",
-    description:
-      "Conception d'une enseigne de façade simple et efficace pour un établissement nommé 'Sidi Bou Said'. Les lettres boîtiers en relief, de couleur cyan sur un fond gris clair, offrent une excellente lisibilité et un style épuré, tout en évoquant les couleurs de la célèbre ville tunisienne.",
-    image: img7,
-    category: "Restaurant",
-    slug: "sidi-bou-said",
-    client: "Sidi Bou Said",
-    location: "Paris, France",
-    date: "Juillet 2024",
-    features: [
-      "Panneau de façade en aluminium composite",
-      "Lettres boîtiers en relief non lumineuses",
-      "Couleurs: texte cyan sur fond gris clair",
-      "Design minimaliste et moderne",
-      "Installation sur une façade en briques",
-    ],
-    galleryImages: [img9],
-  },
-  {
-    id: 9,
-    title: "Enseigne Lumineuse 'La Fayette Food'",
-    description:
-      "Création d'une enseigne de façade lumineuse pour le restaurant 'La Fayette Food'. L'enseigne se compose de lettres boîtiers rétro-éclairées sur un panneau noir, offrant une visibilité maximale de nuit. Les spécialités du restaurant sont clairement indiquées pour attirer la clientèle.",
-    image: img10,
-    category: "Restauration Rapide",
-    slug: "la-fayette-food",
-    client: "La Fayette Food",
-    location: "Lyon, France",
-    date: "Août 2024",
-    features: [
-      "Panneau de façade en composite noir",
-      "Lettres boîtiers lumineuses blanches",
-      "Typographie personnalisée et élégante",
-      "Liste des spécialités en lettres adhésives",
-    ],
-    galleryImages: [img10],
-  },
-  {
-    id: 12,
-    title: "Enseigne 'SN Institut de Beauté'",
-    description:
-      "Réalisation d'une enseigne moderne pour l'institut de beauté 'SN'. L'enseigne se compose d'un panneau blanc avec le logo 'SN' en lettres boîtiers rétro-éclairées, créant un halo lumineux élégant. Le design épuré et contemporain s'accorde parfaitement avec l'esthétique du bâtiment.",
-    image: img13,
-    category: "Institut de beauté",
-    slug: "sn-institut-de-beaute",
-    client: "SN Institut de Beauté",
-    location: "Lille, France",
-    date: "Novembre 2024",
-    features: [
-      "Panneau de façade blanc mat",
-      "Lettres boîtiers en relief 'SN'",
-      "Rétro-éclairage LED par halo lumineux",
-      "Texte 'Institut de Beauté' en lettres découpées noires",
-    ],
-    galleryImages: [img13],
-  },
-  {
-    id: 13,
-    title: "Enseigne Lumineuse 'Fresh Pizza'",
-    description:
-      "Création d'une enseigne de façade et de caissons lumineux ronds pour la pizzeria 'Fresh Pizza'. L'ensemble allie un panneau noir brillant avec des lettres lumineuses et deux caissons suspendus, pour une identité visuelle moderne et une visibilité optimale de jour comme de nuit. Le design met en avant le logo de la marque et les services proposés.",
-    image: img14,
-    category: "Restauration Rapide",
-    slug: "fresh-pizza",
-    client: "Fresh Pizza",
-    location: "Lille, France",
-    date: "Décembre 2024",
-    features: [
-      "Panneau de façade en composite noir",
-      "Lettres boîtiers lumineuses en relief 'Fresh Pizza'",
-      "Deux caissons lumineux ronds avec logo",
-      "Mentions des services : 'Sur Place - Emporter - Livraison'",
-      "Design moderne et harmonieux",
-    ],
-    galleryImages: [img14, img15],
-  },
-  
-  {
-    id: 15,
-    title: "Enseigne Lumineuse 'MJ Barber'",
-    description:
-      "Création d'une enseigne de façade pour le salon de coiffure 'MJ Barber'. Le projet combine des lettres lumineuses pour le nom, un caisson lumineux rond avec le logo, et un poteau de barbier traditionnel. Une guirlande lumineuse a été ajoutée pour un effet festif et une visibilité accrue de nuit.",
-    image: img17,
-    category: "Salon de coiffure",
-    slug: "mj-barber",
-    client: "MJ Barber",
-    location: "Paris, France",
-    date: "Février 2025",
-    features: [
-      "Lettres boîtiers lumineuses pour 'MJ BARBER'",
-      "Caisson lumineux rond avec logo",
-      "Guirlande lumineuse LED décorative",
-      "Poteau de barbier traditionnel lumineux",
-      "Combinaison de plusieurs éléments lumineux",
-    ],
-    galleryImages: [img17],
-  },
-  
-];
-
-interface RealisationPageProps {
-  params: {
-    slug: string;
-  };
+import { notFound } from "next/navigation";
+import { Check } from "@/components/Icons";
+import { realisations } from "@/lib/realisations";
+import { pageMetadata } from "@/lib/site";
+import {
+  Breadcrumbs,
+  CTA,
+  PageIntro,
+  ProjectCard,
+} from "../../components/SiteUI";
+export function generateStaticParams() {
+  return realisations.map((project) => ({ slug: project.slug }));
 }
-
-export async function generateMetadata({ params }: RealisationPageProps): Promise<Metadata> {
-  const realisation = realisations.find((r) => r.slug === params.slug);
-
-  if (!realisation) {
-    return {
-      title: "Réalisation non trouvée | MJ PUB",
-      description: "La réalisation que vous recherchez n'existe pas.",
-    };
-  }
-
-  return {
-    title: `${realisation.title} | MJ PUB`,
-    description: realisation.description,
-    keywords: [
-      "réalisation enseigne lumineuse",
-      `${realisation.category.toLowerCase()}`,
-      `${realisation.client}`,
-      "enseigne sur mesure",
-      "signalétique professionnelle",
-      "enseigne lumineuse Maroc",
-      "enseigne lumineuse France",
-      "enseigne lumineuse Belgique",
-    ],
-    alternates: {
-      canonical: `https://lettre3dshop.com/realisations/${realisation.slug}`,
-    },
-    openGraph: {
-      title: `${realisation.title} | MJ PUB`,
-      description: realisation.description,
-      url: `https://lettre3dshop.com/realisations/${realisation.slug}`,
-      type: "article",
-      images: [
-        {
-          url: realisation.image.src,
-          width: 800,
-          height: 600,
-          alt: realisation.title,
-        },
-      ],
-    },
-  };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const project = realisations.find((p) => p.slug === slug);
+  return project
+    ? pageMetadata(
+        project.title + " : réalisation d’enseigne",
+        project.description.slice(0, 155),
+        "/realisations/" + slug,
+      )
+    : {};
 }
-
-export default function RealisationPage({ params }: RealisationPageProps) {
-  const realisation = realisations.find((r) => r.slug === params.slug);
-
-  if (!realisation) {
-    return (
-      <div className="min-h-screen bg-white text-gray-900 flex flex-col">
-        <Header />
-        <div className="flex-grow flex items-center justify-center text-center py-12 px-4">
-          <div>
-            <h1 className="text-4xl font-bold mb-4">Réalisation non trouvée</h1>
-            <p className="text-xl text-gray-600">
-              La réalisation que vous recherchez n&apos;existe pas.
-            </p>
-            <Link href="/realisations">
-              <Button className="mt-8 bg-blue-600 hover:bg-blue-700">
-                Retour aux réalisations
-              </Button>
-            </Link>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
+export default async function RealisationPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const project = realisations.find((p) => p.slug === slug);
+  if (!project) notFound();
   return (
-  <div className="min-h-screen bg-white text-gray-900 flex flex-col">
-      <Header />
-      {/* SEO: JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Article",
-            headline: realisation.title,
-            description: realisation.description,
-            url: `https://lettre3dshop.com/realisations/${realisation.slug}`,
-            image: realisation.image.src,
-            author: {
-              "@type": "Organization",
-              name: "MJ PUB",
-            },
-            datePublished: new Date(realisation.date).toISOString(),
-            publisher: {
-              "@type": "Organization",
-              name: "MJ PUB",
-              logo: {
-                "@type": "ImageObject",
-                url: "https://lettre3dshop.com/logo.png",
-              },
-            },
-            breadcrumb: {
-              "@type": "BreadcrumbList",
-              itemListElement: [
-                {
-                  "@type": "ListItem",
-                  position: 1,
-                  name: "Accueil",
-                  item: "https://lettre3dshop.com",
-                },
-                {
-                  "@type": "ListItem",
-                  position: 2,
-                  name: "Réalisations",
-                  item: "https://lettre3dshop.com/realisations",
-                },
-                {
-                  "@type": "ListItem",
-                  position: 3,
-                  name: realisation.title,
-                  item: `https://lettre3dshop.com/realisations/${realisation.slug}`,
-                },
-              ],
-            },
-          }),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Project",
-            name: realisation.title,
-            description: realisation.description,
-            client: realisation.client,
-            location: realisation.location,
-            dateCompleted: new Date(realisation.date).toISOString(),
-            image: realisation.image.src,
-            features: realisation.features,
-          }),
-        }}
-      />
-      <div className="flex-grow pt-20 px-4 py-12">
-        <div className="max-w-6xl mx-auto">
-          {/* Back Button */}
-          <div className="mb-8">
-            <Link href="/realisations">
-              <Button
-                variant="outline"
-                className="border-gray-300 text-gray-700 hover:bg-gray-100 bg-transparent"
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Retour aux réalisations
-              </Button>
-            </Link>
+    <>
+      <div className="container page-content">
+        <Breadcrumbs
+          items={[
+            { name: "Réalisations", href: "/realisations" },
+            { name: project.title },
+          ]}
+        />
+        <PageIntro
+          eyebrow={project.category}
+          title={project.title}
+          description="Une identité mise en valeur, une façade pensée pour être repérée."
+        />
+        <div className="project-detail-hero">
+          <Image
+            src={project.image}
+            alt={project.title + ", réalisation d’enseigne par MJ PUB"}
+            fill
+            priority
+            sizes="100vw"
+          />
+        </div>
+        <div className="project-body">
+          <div>
+            <h2>Le projet.</h2>
+            <p>{project.description}</p>
           </div>
-          {/* Realization Content */}
-          <article className="bg-gray-50 p-8 rounded-lg shadow-lg">
-            <div className="w-full h-[24rem] md:h-[30rem] lg:h-[36rem] overflow-hidden rounded-lg mb-6 relative">
-              <Image
-                src={realisation.image}
-                alt={`Photo de la réalisation : ${realisation.title} pour ${realisation.client}`}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-lg"
-              />
-            </div>
-            <Badge className="bg-blue-600 text-white mb-4">
-              {realisation.category}
-            </Badge>
-            <h1 className="text-4xl font-bold mb-4 text-gray-900">
-              {realisation.title}
-            </h1>
-            <div className="flex flex-wrap items-center text-gray-600 text-sm mb-6 space-x-4">
-              <div className="flex items-center gap-1">
-                <User className="h-4 w-4" />
-                <span>Client: {realisation.client}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <MapPin className="h-4 w-4" />
-                <span>Lieu: {realisation.location}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Calendar className="h-4 w-4" />
-                <span>Date: {realisation.date}</span>
-              </div>
-            </div>
-            <p className="text-gray-700 leading-relaxed mb-8">
-              {realisation.description}
-            </p>
-            {realisation.features && realisation.features.length > 0 && (
-              <div className="mb-8">
-                <h2 className="text-2xl font-bold mb-4 text-gray-900">
-                  Points Clés du Projet
-                </h2>
-                <ul className="space-y-2 text-gray-700">
-                  {realisation.features.map((feature, index) => (
-                    <li key={index} className="flex items-center">
-                      <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            {realisation.galleryImages &&
-              realisation.galleryImages.length > 0 && (
-                <div className="mb-8">
-                  <h2 className="text-2xl font-bold mb-4 text-gray-900">
-                    Galerie du Projet
-                  </h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {realisation.galleryImages.map((imgSrc, index) => (
-                      <div
-                        key={index}
-                        className="w-full h-48 relative rounded-lg shadow-md overflow-hidden"
-                      >
-                        <Image
-                          src={imgSrc}
-                          alt={`Galerie de la réalisation : ${realisation.title} - Image ${index + 1}`}
-                          layout="fill"
-                          objectFit="cover"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-          </article>
-          {/* CTA Section */}
-          <div className="mt-12 text-center bg-gray-100 rounded-lg p-8">
-            <h2 className="text-3xl font-bold mb-4 text-gray-900">
-              Un projet similaire en tête ?
-            </h2>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Laissez-nous transformer votre vision en une enseigne percutante.
-            </p>
-            <Link href="/demande-devis">
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3">
-                Demander un devis
-              </Button>
-            </Link>
+          <div>
+            <h2>Les détails qui font la différence.</h2>
+            <ul className="check-list">
+              {project.features.map((feature) => (
+                <li key={feature}>
+                  <Check size={17} />
+                  {feature}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
+        <section>
+          <div className="section-heading">
+            <h2>D’autres projets à découvrir.</h2>
+          </div>
+          <div className="portfolio-grid">
+            {realisations
+              .filter((p) => p.slug !== slug)
+              .slice(0, 2)
+              .map((p) => (
+                <ProjectCard key={p.slug} project={p} />
+              ))}
+          </div>
+        </section>
       </div>
-      <Footer />
-    </div>
+      <CTA title="Votre façade, votre prochaine signature." />
+    </>
   );
 }

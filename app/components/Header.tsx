@@ -1,267 +1,166 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, Lightbulb, ShoppingCart, ChevronDown } from "lucide-react";
+import {
+  ArrowUpRight,
+  Menu,
+  ShoppingBag,
+  X,
+  Phone,
+  MapPin,
+} from "@/components/Icons";
 import { useCart } from "../context/CartContext";
-import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
-import logo from "@/public/logo.png";
-
+import { site } from "@/lib/site";
+import ThemeToggle from "./ThemeToggle";
+import BrandLogo from "./BrandLogo";
+const links = [
+  { href: "/produits", label: "Nos enseignes" },
+  { href: "/realisations", label: "Réalisations" },
+  { href: "/enseigne-saint-amand-les-eaux", label: "Votre atelier local" },
+  { href: "/contact", label: "Contact" },
+];
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const { getTotalItems, setIsOpen } = useCart();
-
-  // Gestion du scroll pour l'effet de fond
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+    if (!open) return;
+    const handler = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Fermer le menu et le dropdown après clic sur un lien
-  const handleLinkClick = () => {
-    setIsMenuOpen(false);
-    setIsProductsDropdownOpen(false);
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 100);
-  };
-
-  // Toggle du dropdown "Produits"
-  const toggleProductsDropdown = () => {
-    setIsProductsDropdownOpen(!isProductsDropdownOpen);
-  };
-
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [open]);
+  const close = () => setOpen(false);
+  const showMobileCTA = ![
+    "/configurateur",
+    "/demande-devis",
+    "/checkout",
+  ].includes(pathname);
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-200"
-          : "bg-white/90 backdrop-blur-sm"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 md:h-16 lg:h-20">
-          {/* Logo */}
+    <>
+      <div className="local-topbar">
+        <div className="container">
+          <Link href="/enseigne-saint-amand-les-eaux">
+            <MapPin size={13} />
+            Saint-Amand-les-Eaux & ses environs
+          </Link>
+          <a href={site.phoneHref}>
+            <Phone size={13} />
+            {site.phone}
+          </a>
+        </div>
+      </div>
+      <header className="site-header">
+        <div className="container header-inner">
           <Link
             href="/"
-            onClick={handleLinkClick}
-            className="flex items-center space-x-2 group"
-            aria-label="Accueil - Enseigne42"
+            className="brand"
+            aria-label="MJ PUB, accueil"
+            onClick={close}
           >
-            <Image
-              src={logo}
-              alt="Enseigne42 Logo"
-              className="h-8 sm:h-10 w-auto"
-              width={120}
-              height={40}
-              priority
-            />
+            <BrandLogo />
+            <span>
+              <b>
+                MJ<span className="brand-light">PUB</span>
+              </b>
+              <small>Enseignes & signalétique</small>
+            </span>
           </Link>
-
-          {/* Navigation Desktop */}
-          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2 xl:space-x-4">
-            <Link
-              href="/"
-              onClick={handleLinkClick}
-              className="text-gray-900 hover:text-blue-600 transition-colors font-medium text-xs lg:text-sm px-2 py-1"
+          <nav className="desktop-nav" aria-label="Navigation principale">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={
+                  pathname.startsWith(link.href) ? "page" : undefined
+                }
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="header-actions">
+            <ThemeToggle />
+            <button
+              className="icon-button cart-trigger"
+              aria-label={`Ouvrir le panier, ${getTotalItems()} articles`}
+              onClick={() => {
+                close();
+                setIsOpen(true);
+              }}
             >
-              Accueil
-            </Link>
+              <ShoppingBag size={20} />
+              {getTotalItems() > 0 && (
+                <span className="cart-count">{getTotalItems()}</span>
+              )}
+            </button>
             <Link
               href="/configurateur"
-              onClick={handleLinkClick}
-              className="text-gray-900 hover:text-blue-600 transition-colors font-medium text-xs lg:text-sm px-2 py-1"
+              className="button button-primary header-configure"
             >
-              Configurateur
+              Configurer mon enseigne
+              <ArrowUpRight size={17} />
             </Link>
-
-           <Link
-              href="/produits"
-              onClick={handleLinkClick}
-              className="text-gray-900 hover:text-blue-600 transition-colors font-medium text-xs lg:text-sm px-2 py-1"
+            <button
+              className="icon-button menu-trigger"
+              aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={open}
+              aria-controls="navigation-mobile"
+              onClick={() => setOpen(!open)}
             >
-              Produits
-            </Link>
-
-            <Link
-              href="/accessoires"
-              onClick={handleLinkClick}
-              className="text-gray-900 hover:text-blue-600 transition-colors font-medium text-xs lg:text-sm px-2 py-1"
-            >
+              {open ? <X /> : <Menu />}
+            </button>
+          </div>
+        </div>
+        {open && (
+          <nav
+            id="navigation-mobile"
+            className="mobile-nav container"
+            aria-label="Navigation mobile"
+          >
+            {links.map((link) => (
+              <Link onClick={close} key={link.href} href={link.href}>
+                {link.label}
+                <ArrowUpRight size={18} />
+              </Link>
+            ))}
+            <Link onClick={close} href="/accessoires">
               Accessoires
+              <ArrowUpRight size={18} />
+            </Link>
+            <Link onClick={close} href="/blog">
+              Conseils pour votre projet
+              <ArrowUpRight size={18} />
+            </Link>
+            <Link onClick={close} href="/demande-devis">
+              Demander un devis
+              <ArrowUpRight size={18} />
             </Link>
             <Link
-              href="/realisations"
-              onClick={handleLinkClick}
-              className="text-gray-900 hover:text-blue-600 transition-colors font-medium text-xs lg:text-sm px-2 py-1"
+              onClick={close}
+              href="/configurateur"
+              className="button button-primary"
             >
-              Réalisations
-            </Link>
-            <Link
-              href="/blog"
-              onClick={handleLinkClick}
-              className="text-gray-900 hover:text-blue-600 transition-colors font-medium text-xs lg:text-sm px-2 py-1"
-            >
-              Blog
+              Configurer mon enseigne
+              <ArrowUpRight size={18} />
             </Link>
           </nav>
-
-          {/* Boutons CTA (Desktop) */}
-          <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
-            <Button
-              onClick={() => setIsOpen(true)}
-              variant="outline"
-              size="sm"
-              className="border-gray-300 hover:border-blue-600 text-gray-900 hover:text-blue-600 hover:bg-blue-50 bg-transparent relative group h-8 sm:h-9 px-2 sm:px-3"
-            >
-              <ShoppingCart className="h-3 w-3 sm:h-4 sm:w-4 mr-1 group-hover:scale-110 transition-transform" />
-              <span className="text-xs sm:text-sm">Panier</span>
-              {getTotalItems() > 0 && (
-                <Badge className="absolute -top-1.5 -right-1.5 bg-blue-600 text-white text-[10px] h-4 w-4 rounded-full flex items-center justify-center p-0">
-                  {getTotalItems()}
-                </Badge>
-              )}
-            </Button>
-
-            <Button
-              asChild
-              size="sm"
-              className="hidden lg:inline-flex bg-blue-600 hover:bg-blue-700 text-white h-8 sm:h-9 px-2 sm:px-3"
-            >
-              <Link href="/contact" onClick={handleLinkClick} className="flex items-center">
-                <Phone className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
-                <span className="text-xs sm:text-sm">Contact</span>
-              </Link>
-            </Button>
-
-            <Button
-              asChild
-              size="sm"
-              className="hidden xl:inline-flex bg-green-600 hover:bg-green-700 text-white h-8 sm:h-9 px-2 sm:px-3"
-            >
-              <Link href="/demande-devis" onClick={handleLinkClick} className="flex items-center">
-                <Lightbulb className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
-                <span className="text-xs sm:text-sm">Devis Gratuit</span>
-              </Link>
-            </Button>
-          </div>
-
-          {/* Bouton Menu Mobile */}
-          <button
-            className="md:hidden text-gray-900 p-1.5 rounded-md hover:bg-gray-100 transition-colors relative"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          >
-            {isMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <>
-                <Menu className="h-5 w-5" />
-                {getTotalItems() > 0 && (
-                  <span className="absolute top-0 right-0 bg-blue-600 text-white text-[10px] h-4 w-4 rounded-full flex items-center justify-center -mt-1 -mr-1">
-                    {getTotalItems()}
-                  </span>
-                )}
-              </>
-            )}
-          </button>
-        </div>
-
-        {/* Menu Mobile (Dropdown) */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white rounded-b-lg shadow-lg border-x border-b border-gray-200 px-3 pb-3 pt-2">
-            <div className="flex flex-col space-y-1">
-              <Link
-                href="/"
-                onClick={handleLinkClick}
-                className="py-2 px-3 text-gray-900 hover:bg-blue-50 rounded-md transition-colors font-medium text-sm"
-              >
-                Accueil
-              </Link>
-              <Link
-                href="/configurateur"
-                onClick={handleLinkClick}
-                className="py-2 px-3 text-gray-900 hover:bg-blue-50 rounded-md transition-colors font-medium text-sm"
-              >
-                Configurateur
-              </Link>
-
-              <Link
-                href="/produits"
-                onClick={handleLinkClick}
-                className="py-2 px-3 text-gray-900 hover:bg-blue-50 rounded-md transition-colors font-medium text-sm"
-              >
-                Produits
-              </Link>
-              <Link
-                href="/accessoires"
-                onClick={handleLinkClick}
-                className="py-2 px-3 text-gray-900 hover:bg-blue-50 rounded-md transition-colors font-medium text-sm"
-              >
-                Accessoires
-              </Link>
-              <Link
-                href="/realisations"
-                onClick={handleLinkClick}
-                className="py-2 px-3 text-gray-900 hover:bg-blue-50 rounded-md transition-colors font-medium text-sm"
-              >
-                Réalisations
-              </Link>
-              <Link
-                href="/blog"
-                onClick={handleLinkClick}
-                className="py-2 px-3 text-gray-900 hover:bg-blue-50 rounded-md transition-colors font-medium text-sm"
-              >
-                Blog
-              </Link>
-              <Link
-                href="/contact"
-                onClick={handleLinkClick}
-                className="py-2 px-3 text-gray-900 hover:bg-blue-50 rounded-md transition-colors font-medium text-sm"
-              >
-                Contact
-              </Link>
-              <Link
-                href="/demande-devis"
-                onClick={handleLinkClick}
-                className="py-2 px-3 text-gray-900 hover:bg-blue-50 rounded-md transition-colors font-medium text-sm"
-              >
-                Demande Devis Gratuit
-              </Link>
-            </div>
-
-            {/* Boutons Mobile */}
-            <div className="pt-3 mt-2 border-t border-gray-200 space-y-2">
-              <Button
-                onClick={() => {
-                  setIsOpen(true);
-                  setIsMenuOpen(false);
-                }}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white h-9 text-sm"
-              >
-                <ShoppingCart className="h-4 w-4 mr-2" />
-                Panier ({getTotalItems()})
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                className="w-full border-gray-300 text-gray-900 hover:bg-blue-50 h-9 text-sm"
-              >
-                <a href="tel:+33123456789" className="flex items-center justify-center">
-                  <Phone className="h-4 w-4 mr-2" />
-                  Appelez-nous
-                </a>
-              </Button>
-            </div>
-          </div>
         )}
-      </div>
-    </header>
+      </header>
+      {showMobileCTA && (
+        <div className="mobile-configure">
+          <Link
+            className="button button-primary"
+            href="/configurateur"
+            onClick={close}
+          >
+            Configurer mon enseigne
+            <ArrowUpRight size={18} />
+          </Link>
+        </div>
+      )}
+    </>
   );
 }

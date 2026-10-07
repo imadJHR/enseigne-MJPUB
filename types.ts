@@ -1,37 +1,20 @@
-// src/types.ts
-
-// Interface pour une option de matériau
 export interface Material {
   id: string;
   name: string;
   price: number;
   description: string;
 }
-
-// Interface pour les spécifications techniques
-export interface Specifications {
-  [key: string]: string;
-}
-
-// Interface pour la structure complète d'un produit
 export interface Product {
   id: number;
   name: string;
-  slug: string; // CLÉ NÉCESSAIRE POUR LES LIENS
+  slug: string;
   category: string;
   basePrice: number;
-  price: number; // Utilisé dans ProductsPage pour l'affichage de base
+  price: number;
   description: string;
-  rating: number;
-  reviewCount: number;
-  badge: string;
-  image: string; // CLÉ NÉCESSAIRE POUR L'AFFICHAGE DANS PRODUCTS PAGE
+  image: string;
   materials: Material[];
   features: string[];
-  specifications: Specifications;
+  specifications: Record<string, string>;
 }
-
-// Interface pour l'objet de données indexé par le slug
-export interface ProductsData {
-  [slug: string]: Product;
-}
+export type ProductsData = Record<string, Product>;

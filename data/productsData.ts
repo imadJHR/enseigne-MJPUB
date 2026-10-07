@@ -1,50 +1,39 @@
-// src/data/productsData.ts
-
-import { ProductsData } from "@/types";
-
-// NOTE IMPORTANTE : Assurez-vous que le fichier img1.jpg est dans votre dossier /public
-const productImage = "/img1.jpg"; 
-
+import type { ProductsData } from "@/types";
 export const productsData: ProductsData = {
   "panneau-dibond": {
     id: 1,
-    name: "Panneau Dibond",
-    slug: "panneau-dibond", // Correction: Ajout du slug pour le lien
+    name: "Panneau personnalisé Dibond ou PVC",
+    slug: "panneau-dibond",
     category: "panneaux",
-    basePrice: 159,
-    price: 159, // Ajout de 'price' pour la page produit
+    basePrice: 129,
+    price: 159,
+    image: "/img1.jpg",
     description:
-      "Panneau en Dibond avec impression haute définition. Idéal pour une signalétique extérieure durable, résistant aux UV et aux intempéries pour une visibilité maximale.",
-    rating: 4.9,
-    reviewCount: 65,
-    badge: "Résistant",
-    image: productImage, // Correction: Utilisation du chemin public pour le background-image
+      "Affichez votre identité sur un panneau personnalisé. Choisissez le composite aluminium Dibond ou le PVC expansé selon votre emplacement et votre besoin de signalétique.",
     materials: [
       {
         id: "dibond",
-        name: "Dibond (3mm)",
+        name: "Dibond 3 mm",
         price: 159,
-        description: "Matériau composite aluminium, haute durabilité.",
+        description: "Composite aluminium pour une signalétique rigide.",
       },
       {
         id: "pvc",
-        name: "PVC expansé (10mm)",
+        name: "PVC expansé 10 mm",
         price: 129,
-        description: "Léger, pour usage intérieur ou extérieur court terme.",
+        description: "Un support léger pour votre panneau personnalisé.",
       },
     ],
     features: [
-      "Impression numérique haute résolution",
-      "Résistant aux UV et aux intempéries",
-      "Usage intérieur/extérieur",
-      "Facile à installer",
+      "Impression de votre identité visuelle",
+      "Choix du support selon l’usage",
+      "Finition et format à préciser avec notre équipe",
     ],
     specifications: {
-      "Épaisseur": "3mm (Dibond), 10mm (PVC)",
-      "Finition": "Mate ou brillante",
-      "Méthode d'impression": "Impression directe UV",
-      "Format": "Sur mesure",
+      Matériaux: "Dibond 3 mm ou PVC 10 mm",
+      Personnalisation: "Votre logo et votre fichier d’impression",
+      Format: "À confirmer avant fabrication",
+      Finition: "À définir selon votre projet",
     },
   },
-  // Ajoutez d'autres produits ici
 };

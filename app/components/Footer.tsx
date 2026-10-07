@@ -1,149 +1,70 @@
-"use client";
 import Link from "next/link";
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
-import logo from "@/public/logo.png";
-import Image from "next/image";
-
+import { ArrowUpRight } from "@/components/Icons";
+import { site } from "@/lib/site";
+import BrandLogo from "./BrandLogo";
 export default function Footer() {
-  const handleLinkClick = () => {
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 100);
-  };
-
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div className="space-y-4">
-            <Link href="/" onClick={handleLinkClick} className="flex items-center space-x-2">
-              <Image
-                src={logo}
-                alt="Enseigne42 Logo"
-                className="h-10 w-auto"
-                width={120}
-                height={40}
-                priority
-              />
-            </Link>
-            <p className="text-gray-300">
-              Spécialiste des enseignes lumineuses et lettres découpées sur mesure.
-            </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-indigo-400 transition-colors">
-                <Facebook className="h-6 w-6" />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-indigo-400 transition-colors">
-                <Instagram className="h-6 w-6" />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-indigo-400 transition-colors">
-                <Twitter className="h-6 w-6" />
-              </a>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 text-indigo-400">Liens Rapides</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" onClick={handleLinkClick} className="text-gray-300 hover:text-indigo-400 transition-colors">
-                  Accueil
-                </Link>
-              </li>
-              <li>
-                <Link href="/configurateur" onClick={handleLinkClick} className="text-gray-300 hover:text-indigo-400 transition-colors">
-                  Configurateur
-                </Link>
-              </li>
-              <li>
-                <Link href="/produits" onClick={handleLinkClick} className="text-gray-300 hover:text-indigo-400 transition-colors">
-                  Nos Produits
-                </Link>
-              </li>
-              <li>
-                <Link href="/accessoires" onClick={handleLinkClick} className="text-gray-300 hover:text-indigo-400 transition-colors">
-                  Accessoires
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" onClick={handleLinkClick} className="text-gray-300 hover:text-indigo-400 transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" onClick={handleLinkClick} className="text-gray-300 hover:text-indigo-400 transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Products */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 text-indigo-400">Nos Produits</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/produits/enseigne-led-premium" onClick={handleLinkClick} className="text-gray-300 hover:text-indigo-400 transition-colors">
-                  Enseignes LED
-                </Link>
-              </li>
-              <li>
-                <Link href="/produits/lettres-decoupees-pvc" onClick={handleLinkClick} className="text-gray-300 hover:text-indigo-400 transition-colors">
-                  Lettres Découpées
-                </Link>
-              </li>
-              <li>
-                <Link href="/produits/panneau-dibond" onClick={handleLinkClick} className="text-gray-300 hover:text-indigo-400 transition-colors">
-                  Panneaux Dibond
-                </Link>
-              </li>
-              <li>
-                <Link href="/produits" onClick={handleLinkClick} className="text-gray-300 hover:text-indigo-400 transition-colors">
-                  Voir tous les produits
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 text-indigo-400">Contact</h3>
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-indigo-400" />
-                <span className="text-gray-300">+33 7 81 54 63 59</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-indigo-400" />
-                <span className="text-gray-300">mjpub59@gmail.com</span>
-              </div>
-              <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 mt-1 text-indigo-400" />
-                <span className="text-gray-300">
-                  644 route de lille  <br />saint Amand les eaux 59230
-                 
-                  
-                </span>
-              </div>
-            </div>
-          </div>
+    <footer className="site-footer">
+      <div className="container footer-grid">
+        <div className="footer-brand">
+          <Link
+            href="/"
+            className="brand"
+            aria-label="MJ PUB, revenir à l’accueil"
+          >
+            <BrandLogo priority={false} filterId="mjpub-footer-logo-dark" />
+            <span>
+              <b>
+                MJ<span className="brand-light">PUB</span>
+              </b>
+              <small>Enseignes & signalétique</small>
+            </span>
+          </Link>
+          <p>
+            Donner du relief à votre identité.
+            <br />
+            Et de la visibilité à votre activité.
+          </p>
+          <span>Saint-Amand-les-Eaux · Valenciennes & environs</span>
         </div>
-        <div className="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">© 2025 MJ PUB. Tous droits réservés.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="/mentions-legales" onClick={handleLinkClick} className="text-gray-400 hover:text-indigo-400 text-sm transition-colors">
-              Mentions Légales
-            </Link>
-            <Link href="/cgv" onClick={handleLinkClick} className="text-gray-400 hover:text-indigo-400 text-sm transition-colors">
-              CGV
-            </Link>
-            <Link href="/politique-confidentialite" onClick={handleLinkClick} className="text-gray-400 hover:text-indigo-400 text-sm transition-colors">
-              Politique de Confidentialité
-            </Link>
-          </div>
+        <div>
+          <h2>Nos solutions</h2>
+          <Link href="/enseignes-lumineuses">Enseignes lumineuses</Link>
+          <Link href="/lettres-decoupees">Lettres découpées</Link>
+          <Link href="/signaletique">Panneaux & signalétique</Link>
+          <Link href="/accessoires">Accessoires de fixation</Link>
         </div>
+        <div>
+          <h2>Votre projet</h2>
+          <Link href="/realisations">Nos réalisations</Link>
+          <Link href="/configurateur">Configurer une enseigne</Link>
+          <Link href="/blog">Conseils & inspiration</Link>
+          <Link href="/enseigne-saint-amand-les-eaux">
+            Votre partenaire local
+          </Link>
+          <Link href="/contact">Nous contacter</Link>
+        </div>
+        <div>
+          <h2>Parlons-en</h2>
+          <a className="footer-phone" href={site.phoneHref}>
+            {site.phone}
+            <ArrowUpRight size={16} />
+          </a>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+          <p>
+            {site.address}
+            <br />
+            {site.postalCode} {site.city}
+          </p>
+        </div>
+      </div>
+      <div className="container footer-bottom">
+        <p>© {new Date().getFullYear()} MJ PUB</p>
+        <div>
+          <Link href="/mentions-legales">Mentions légales</Link>
+          <Link href="/politique-confidentialite">Confidentialité</Link>
+        </div>
+        <span>De l’idée à l’enseigne.</span>
       </div>
     </footer>
   );

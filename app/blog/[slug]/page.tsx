@@ -1,217 +1,129 @@
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Calendar, User } from "lucide-react";
+export const dynamicParams = false;
 import Link from "next/link";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { blogPosts } from "@/lib/blogPosts";
-import { Metadata } from "next";
-
-export interface PageParams {
-  slug: string;
+import { pageMetadata, site } from "@/lib/site";
+import { Breadcrumbs, CTA, JsonLd, PageIntro } from "../../components/SiteUI";
+export function generateStaticParams() {
+  return blogPosts.map((post) => ({ slug: post.slug }));
 }
-
-// Helper function to safely convert date to ISO string
-const getISODate = (dateString: string): string => {
-  try {
-    const date = new Date(dateString);
-    if (isNaN(date.getTime())) {
-      return new Date().toISOString();
-    }
-    return date.toISOString();
-  } catch (e) {
-    return new Date().toISOString();
-  }
-};
-
-export async function generateMetadata({ params }: { params: PageParams }): Promise<Metadata> {
-  const post = blogPosts.find((p) => p.slug === params.slug);
-
-  if (!post) {
-    return {
-      title: "Article non trouvé | MJ PUB",
-      description: "L'article que vous recherchez n'existe pas.",
-    };
-  }
-
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = blogPosts.find((p) => p.slug === slug);
+  if (!post) return {};
+  const meta = pageMetadata(post.title, post.excerpt, "/blog/" + slug);
   return {
-    title: `${post.title} | MJ PUB`,
-    description: post.excerpt,
-    keywords: [
-      post.title,
-      post.category,
-      "enseignes lumineuses",
-      "signalétique",
-      "conseils enseignes",
-      "innovations enseignes",
-      "actualités enseignes",
-      "enseignes LED",
-      "signalétique sur mesure",
-    ],
-    alternates: {
-      canonical: `https://lettre3dshop.com/blog/${post.slug}`,
-    },
+    ...meta,
     openGraph: {
-      title: `${post.title} | MJ PUB`,
-      description: post.excerpt,
-      url: `https://lettre3dshop.com/blog/${post.slug}`,
-      type: "article",
-      images: [
-        {
-          url: post.image.src || "https://lettre3dshop.com/og-blog-post.png",
-          width: 800,
-          height: 600,
-          alt: post.title,
-        },
-      ],
-      publishedTime: getISODate(post.date),
-      authors: [post.author],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${post.title} | MJ PUB`,
-      description: post.excerpt,
-      images: [post.image.src || "https://lettre3dshop.com/og-blog-post.png"],
+      ...meta.openGraph,
+      type: "article" as const,
+      publishedTime: post.date,
+      modifiedTime: post.modified,
+      authors: ["MJ PUB"],
+      images: [{ url: post.image, alt: post.imageAlt }],
     },
   };
 }
-
-export default function BlogPostPage({ params }: { params: PageParams }) {
-  const post = blogPosts.find((p) => p.slug === params.slug);
-
-  if (!post) {
-    return (
-      <div className="min-h-screen bg-white text-gray-900 flex flex-col">
-        <Header />
-        <div className="text-center py-12 flex-grow flex flex-col justify-center items-center">
-          <h1 className="text-4xl font-bold mb-4">Article non trouvé</h1>
-          <p className="text-xl text-gray-600">
-            L&apos;article que vous recherchez n&apos;existe pas.
-          </p>
-          <Link href="/blog">
-            <Button className="mt-8 bg-blue-600 hover:bg-blue-700">
-              Retour au blog
-            </Button>
-          </Link>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = blogPosts.find((p) => p.slug === slug);
+  if (!post) notFound();
   return (
-    <div className="min-h-screen bg-white text-gray-900 flex flex-col">
-      <Header />
-      {/* SEO: JSON-LD for BlogPosting and Breadcrumb */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.title,
-            description: post.excerpt,
-            url: `https://lettre3dshop.com/blog/${post.slug}`,
-            datePublished: getISODate(post.date),
-            dateModified: getISODate(post.date),
-            author: {
-              "@type": "Person",
-              name: post.author,
-            },
-            publisher: {
-              "@type": "Organization",
-              name: "MJ PUB",
-              logo: {
-                "@type": "ImageObject",
-                url: "https://lettre3dshop.com/logo.png",
-              },
-            },
-            image: post.image.src || "https://lettre3dshop.com/og-blog-post.png",
-            articleSection: post.category,
-            breadcrumb: {
-              "@type": "BreadcrumbList",
-              itemListElement: [
-                {
-                  "@type": "ListItem",
-                  position: 1,
-                  name: "Accueil",
-                  item: "https://lettre3dshop.com",
-                },
-                {
-                  "@type": "ListItem",
-                  position: 2,
-                  name: "Blog",
-                  item: "https://lettre3dshop.com/blog",
-                },
-                {
-                  "@type": "ListItem",
-                  position: 3,
-                  name: post.title,
-                  item: `https://lettre3dshop.com/blog/${post.slug}`,
-                },
-              ],
-            },
-          }),
-        }}
-      />
-      <main className="pt-20 px-4 py-12 flex-grow">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-8">
-            <Link href="/blog">
-              <Button
-                variant="outline"
-                className="border-gray-300 text-gray-700 hover:bg-gray-100 bg-white"
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Retour au blog
-              </Button>
-            </Link>
-          </div>
-          <article className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
+    <>
+      <div className="container">
+        <div className="article-layout">
+          <Breadcrumbs
+            items={[
+              { name: "Le journal", href: "/blog" },
+              { name: post.title },
+            ]}
+          />
+          <PageIntro
+            eyebrow={post.category}
+            title={post.title}
+            description={post.excerpt}
+          >
+            <div className="article-meta">
+              <span>Par MJ PUB</span>
+              <span>
+                Mis à jour le{" "}
+                {new Intl.DateTimeFormat("fr-FR", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                  timeZone: "UTC",
+                }).format(new Date(post.modified))}
+              </span>
+            </div>
+          </PageIntro>
+          <div className="article-cover">
             <Image
               src={post.image}
-              alt={`Image de l'article : ${post.title}`}
-              width={800}
-              height={450}
-              className="w-full h-auto aspect-video object-cover rounded-lg mb-6"
+              alt={post.imageAlt}
+              fill
               priority
+              sizes="(max-width: 850px) 100vw, 830px"
             />
-            <Badge className="bg-blue-600 text-white mb-4">
-              {post.category}
-            </Badge>
-            <h1 className="text-4xl font-bold mb-4 text-gray-900">
-              {post.title}
-            </h1>
-            <div className="flex items-center text-gray-600 text-sm mb-6 space-x-4">
-              
-              <div className="flex items-center gap-1">
-                <User className="h-4 w-4" />
-                <span>{post.author}</span>
-              </div>
-            </div>
-            <div
-              className="prose max-w-none text-gray-700 leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-          </article>
-          <div className="mt-12 text-center bg-white rounded-lg p-8 border border-gray-200">
-            <h2 className="text-3xl font-bold mb-4 text-gray-900">
-              Intéressé par nos solutions ?
-            </h2>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Contactez-nous pour discuter de votre projet d&apos;enseigne
-              lumineuse ou de signalétique.
-            </p>
-            <Link href="/demande-devis">
-              <Button className="bg-blue-600 hover:bg-blue-700 px-8 py-3">
-                Demander un devis
-              </Button>
-            </Link>
           </div>
+          <article className="article-body">
+            {post.sections.map(([heading, body]) => (
+              <section key={heading}>
+                <h2>{heading}</h2>
+                <p>{body}</p>
+              </section>
+            ))}
+            {"source" in post && (
+              <p>
+                Pour les règles en vigueur, consultez{" "}
+                <a href={post.source}>
+                  Service Public Entreprendre : règles d’installation d’une
+                  enseigne
+                </a>
+                .
+              </p>
+            )}
+            <h2>Parlons de votre projet.</h2>
+            <p>
+              Découvrez notre solution{" "}
+              <Link href={"/" + post.related}>
+                {post.related === "enseignes-lumineuses"
+                  ? "d’enseigne lumineuse"
+                  : post.related === "lettres-decoupees"
+                    ? "de lettres découpées"
+                    : "de signalétique professionnelle"}
+              </Link>{" "}
+              ou{" "}
+              <Link href="/demande-devis">demandez un devis personnalisé</Link>.
+              Depuis Saint-Amand-les-Eaux, MJ PUB étudie votre projet et ses
+              contraintes.
+            </p>
+          </article>
         </div>
-      </main>
-      <Footer />
-    </div>
+      </div>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.excerpt,
+          image: site.url + post.image,
+          datePublished: post.date,
+          dateModified: post.modified,
+          author: { "@type": "Organization", name: "MJ PUB", url: site.url },
+          publisher: { "@id": site.url + "/#entreprise" },
+          mainEntityOfPage: site.url + "/blog/" + post.slug,
+        }}
+      />
+      <CTA />
+    </>
   );
 }

@@ -22,8 +22,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postbuild": "next-sitemap"
+    "lint": "eslint app components data lib types.ts next.config.ts tailwind.config.ts",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write app components/Icons.tsx data lib types.ts next.config.ts tailwind.config.ts"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
@@ -36,19 +37,13 @@
     "@radix-ui/react-switch": "^1.2.5",
     "@radix-ui/react-tabs": "^1.1.12",
     "@radix-ui/react-tooltip": "^1.2.7",
-    "@vercel/speed-insights": "^1.2.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "dotenv": "^17.2.1",
-    "framer-motion": "^12.23.12",
-    "jspdf-html2canvas": "^1.5.2",
-    "lucide-react": "^0.536.0",
-    "next": "^15.4.5",
-    "next-sitemap": "^4.2.3",
-    "nodemailer": "^7.0.5",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "tailwind-merge": "^3.3.1"
+    "next": "15.5.27",
+    "react": "19.1.9",
+    "react-dom": "19.1.9",
+    "tailwind-merge": "^3.3.1",
+    "sharp": "0.35.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -56,15 +51,16 @@
     "@types/node": "^20",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
-    "@types/tailwindcss": "^3.0.11",
-    "autoprefixer": "^10.4.21",
     "eslint": "^9",
-    "eslint-config-next": "15.4.5",
-    "glob": "^11.0.3",
-    "postcss": "^8.5.6",
-    "sitemap": "^8.0.0",
+    "eslint-config-next": "15.5.27",
+    "postcss": "^8.5.23",
     "tailwindcss": "^4.1.11",
     "tw-animate-css": "^1.3.6",
-    "typescript": "^5"
+    "typescript": "^5",
+    "prettier": "^3.6.2"
+  },
+  "overrides": {
+    "postcss": "$postcss",
+    "sharp": "$sharp"
   }
 }

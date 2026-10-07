@@ -1,68 +1,47 @@
-// app/layout.tsx
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Barlow, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
+import "./brand.css";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { Providers } from "./providers";
-import Script from "next/script";
-
-const inter = Inter({ subsets: ["latin"] });
-
+import { JsonLd } from "./components/SiteUI";
+import { businessSchema, site } from "@/lib/site";
+import { themeBootstrap } from "@/lib/theme";
+const barlow = Barlow({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-barlow",
+  display: "swap",
+});
+const barlowCondensed = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: "700",
+  variable: "--font-barlow-condensed",
+  display: "swap",
+});
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lettre3dshop.com"),
-
+  metadataBase: new URL(site.url),
   title: {
-    default: "MJ PUB - Enseignes Lumineuses & Signalétique sur Mesure",
+    default: "Enseignes à Saint-Amand-les-Eaux | MJ PUB",
     template: "%s | MJ PUB",
   },
   description:
-    "Spécialiste de la fabrication et installation d'enseignes LED, lettres découpées et panneaux personnalisés en France. Devis gratuit et rapide.",
-  keywords: [
-    "enseigne LED",
-    "lettres découpées",
-    "enseigne lumineuse",
-    "signalétique",
-    "PVC",
-    "Dibond",
-    "Plexiglas",
-    "fabrication française",
-    "devis enseigne",
-  ],
-  authors: [{ name: "MJ PUB Team" }],
+    "MJ PUB à Saint-Amand-les-Eaux : enseignes lumineuses LED, lettres 3D et panneaux pour commerces du secteur de Valenciennes. Configurez votre enseigne sur mesure.",
+  authors: [{ name: "MJ PUB" }],
   creator: "MJ PUB",
   publisher: "MJ PUB",
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
+  icons: { icon: "/favicon.ico" },
   openGraph: {
-    title: "MJ PUB - Enseignes Lumineuses & Signalétique sur Mesure",
-    description:
-      "Découvrez nos solutions d'enseignes et signalétique sur mesure pour valoriser votre image de marque.",
-    url: "https://lettre3dshop.com",
-    siteName: "MJ PUB",
-    images: [
-      {
-        // ✅ Remplace /logo.png par une image de taille 1200x630px (og-image.jpg ou .png)
-        url: "https://lettre3dshop.com/logo.png",
-        width: 1200,
-        height: 630,
-        alt: "Aperçu du site MJ PUB - Enseignes lumineuses et signalétique sur mesure",
-      },
-    ],
     locale: "fr_FR",
+    siteName: "MJ PUB",
     type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
-  verification: {
-    google: "BLLN9xg6pbYTnR4ICVo_bgTIMQXVZ0Itu_Xo6ySTHgI",
-  },
+  twitter: { card: "summary_large_image", images: ["/opengraph-image"] },
+  verification: { google: "BLLN9xg6pbYTnR4ICVo_bgTIMQXVZ0Itu_Xo6ySTHgI" },
 };
-
-
 export default function RootLayout({
   children,
 }: {
@@ -71,27 +50,20 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <head>
-        {/* Le meta google-site-verification peut être gardé ici ou uniquement dans l'objet metadata.
-            Next.js le rendra automatiquement depuis l'objet `verification`. Le garder ici est redondant. */}
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
       </head>
-      <body className={inter.className}>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-6T3BMYYDWD"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-6T3BMYYDWD');
-          `}
-        </Script>
+      <body className={`${barlow.variable} ${barlowCondensed.variable}`}>
+        <a className="skip-link" href="#contenu">
+          Aller au contenu
+        </a>
         <Providers>
           <Header />
-          {children}
-        
+          <main id="contenu" className="site-main">
+            {children}
+          </main>
+          <Footer />
         </Providers>
+        <JsonLd data={businessSchema} />
       </body>
     </html>
   );
