@@ -1,5 +1,6 @@
 import { pageMetadata, site } from "@/lib/site";
 import { Breadcrumbs, PageIntro } from "@/app/components/SiteUI";
+import CookieSettings from "./CookieSettings";
 export const metadata = pageMetadata(
   "Confidentialité",
   "Comprenez l’utilisation des coordonnées transmises à MJ PUB et du stockage local de votre panier.",
@@ -33,9 +34,14 @@ export default function Page() {
         </p>
         <h2>Mesure d’audience</h2>
         <p>
-          Cette version du site n’intègre aucun outil de mesure d’audience ou de
-          publicité. Le stockage du panier sert au fonctionnement de la
-          commande.
+          Le site utilise Google Analytics (Google Ireland Limited){" "}
+          <strong>uniquement si vous l’acceptez</strong> via le bandeau affiché
+          lors de votre première visite. Sans acceptation, aucune donnée de
+          navigation n’est transmise à Google. Votre choix est conservé sur
+          votre appareil et vous pouvez le modifier à tout moment :
+        </p>
+        <p>
+          <CookieSettings />
         </p>
         <h2>Questions et demandes concernant vos données</h2>
         <p>

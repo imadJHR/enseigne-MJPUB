@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import { Providers } from "./providers";
 import { JsonLd } from "./components/SiteUI";
 import GoogleAnalytics from "./components/GoogleAnalytics";
+import CookieBanner from "./components/CookieBanner";
 import { businessSchema, site } from "@/lib/site";
 import { themeBootstrap } from "@/lib/theme";
 const barlow = Barlow({
@@ -64,6 +65,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <CookieBanner />
         </Providers>
         <JsonLd data={businessSchema} />
       </body>
