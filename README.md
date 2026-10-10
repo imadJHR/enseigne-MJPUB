@@ -22,7 +22,7 @@ npm start
 
 ## Configuration
 
-- `NEXT_PUBLIC_SITE_URL` : URL publique définitive, sans barre oblique finale. Valeur par défaut : https://lettre3dshop.com.
+- `NEXT_PUBLIC_SITE_URL` : URL publique définitive, sans barre oblique finale. Valeur par défaut : https://lettre.enseigne-mjpub.fr.
 - `NEXT_PUBLIC_API_URL` : serveur des formulaires. Valeur par défaut : https://enseigne-mjpub-api.vercel.app.
 
 Ces variables doivent être définies **avant le build**. Ce dépôt contient le frontend ; le traitement des demandes dépend du serveur externe.
