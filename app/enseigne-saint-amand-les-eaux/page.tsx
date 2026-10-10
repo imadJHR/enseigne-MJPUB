@@ -1,11 +1,15 @@
 import Link from "next/link";
 import { ArrowUpRight, MapPin, Phone } from "@/components/Icons";
-import { pageMetadata, site } from "@/lib/site";
+import { pageMetadata, localAreaSchema, site } from "@/lib/site";
+import { communes } from "@/lib/communes";
+import { realisations } from "@/lib/realisations";
 import {
   Breadcrumbs,
   CTA,
   FAQ,
+  JsonLd,
   PageIntro,
+  ProjectCard,
   TextLink,
 } from "@/app/components/SiteUI";
 export const metadata = pageMetadata(
@@ -76,6 +80,74 @@ export default function LocalPage() {
               </p>
               <TextLink href="/signaletique">Préparer un panneau</TextLink>
             </article>
+          </div>
+        </section>
+        <section className="local-hub-cta">
+          <div>
+            <p className="eyebrow">Réponse rapide</p>
+            <h2>Un projet ? Parlons-en directement.</h2>
+            <p>
+              Décrivez votre façade en deux minutes : nous vous disons si des
+              lettres en relief, un éclairage LED ou un panneau conviennent le
+              mieux, puis nous chiffrons.
+            </p>
+          </div>
+          <div className="hero-actions">
+            <a href={site.phoneHref} className="button button-primary">
+              <Phone size={18} /> {site.phone}
+            </a>
+            <Link href="/demande-devis" className="button button-secondary">
+              Demander un devis
+            </Link>
+          </div>
+        </section>
+        <section className="section">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Réalisé près de chez vous</p>
+              <h2>
+                Des enseignes visibles
+                <br />
+                dans le secteur.
+              </h2>
+            </div>
+            <TextLink href="/realisations">
+              Voir toutes les réalisations
+            </TextLink>
+          </div>
+          <div className="home-projects">
+            {[realisations[0], realisations[5], realisations[9]].map(
+              (project) => (
+                <ProjectCard project={project} key={project.slug} />
+              ),
+            )}
+          </div>
+        </section>
+        <section className="section">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Saint-Amand-les-Eaux & ses environs</p>
+              <h2>
+                Votre commune,
+                <br />
+                notre secteur.
+              </h2>
+            </div>
+            <p>
+              Chaque commune a ses façades et ses contraintes : retrouvez nos
+              conseils pour la vôtre.
+            </p>
+          </div>
+          <div className="local-hub-services">
+            {communes.map((commune) => (
+              <article key={commune.slug}>
+                <h2>Enseigne à {commune.name}</h2>
+                <p>{commune.description}</p>
+                <TextLink href={`/enseigne-${commune.slug}`}>
+                  Projet à {commune.name}
+                </TextLink>
+              </article>
+            ))}
           </div>
         </section>
         <section className="local-section">
@@ -178,6 +250,18 @@ export default function LocalPage() {
           />
         </section>
       </div>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: "Enseignes et signalétique à Saint-Amand-les-Eaux",
+          description:
+            "Enseignes lumineuses LED, lettres découpées 3D et panneaux pour commerces à Saint-Amand-les-Eaux et environs.",
+          url: `${site.url}/enseigne-saint-amand-les-eaux`,
+          provider: { "@id": `${site.url}/#entreprise` },
+          areaServed: localAreaSchema,
+        }}
+      />
       <CTA title="Faisons remarquer votre commerce." />
     </>
   );

@@ -827,6 +827,39 @@ html[data-theme="dark"] .tag-green {
   border-radius: 0;
   margin-top: 35px;
 }
+.local-hub-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  background: #111214;
+  color: #fff;
+  padding: 36px 40px;
+  margin-top: 45px;
+}
+.local-hub-cta .eyebrow {
+  color: var(--yellow);
+}
+.local-hub-cta h2 {
+  color: #fff;
+  font-size: clamp(24px, 2.6vw, 34px);
+  margin: 10px 0 14px;
+}
+.local-hub-cta p {
+  color: #c9cdd4;
+  font-size: 14px;
+  max-width: 520px;
+}
+.local-hub-cta .hero-actions {
+  flex-shrink: 0;
+}
+@media (max-width: 850px) {
+  .local-hub-cta {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 28px 24px;
+  }
+}
 @media (min-width: 1400px) {
   .brand-hero {
     gap: 85px;
