@@ -3,6 +3,7 @@ import { ArrowUpRight, MapPin, Phone } from "@/components/Icons";
 import { pageMetadata, localAreaSchema, site } from "@/lib/site";
 import { communes } from "@/lib/communes";
 import { realisations } from "@/lib/realisations";
+import AvisSection from "@/app/components/AvisSection";
 import {
   Breadcrumbs,
   CTA,
@@ -150,6 +151,7 @@ export default function LocalPage() {
             ))}
           </div>
         </section>
+        <AvisSection />
         <section className="local-section">
           <div className="local-copy">
             <p className="eyebrow">
