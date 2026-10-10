@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { realisations } from "@/lib/realisations";
 import { blogPosts } from "@/lib/blogPosts";
+import { communes } from "@/lib/communes";
 import { productsData } from "@/data/productsData";
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
@@ -17,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/demande-devis",
     "/configurateur",
+    ...communes.map((commune) => "/enseigne-" + commune.slug),
     ...realisations.map((project) => "/realisations/" + project.slug),
     ...blogPosts.map((post) => "/blog/" + post.slug),
     ...Object.keys(productsData).map((slug) => "/produits/" + slug),

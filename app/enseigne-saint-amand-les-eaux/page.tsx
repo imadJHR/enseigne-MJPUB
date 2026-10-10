@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, MapPin, Phone } from "@/components/Icons";
-import { pageMetadata, serviceAreas, site } from "@/lib/site";
+import { pageMetadata, site } from "@/lib/site";
 import {
   Breadcrumbs,
   CTA,
@@ -100,8 +100,20 @@ export default function LocalPage() {
               modalités de livraison et de pose dans votre devis.
             </p>
             <ul className="area-chips">
-              {serviceAreas.map((city) => (
-                <li key={city}>{city}</li>
+              {(
+                [
+                  ["Saint-Amand-les-Eaux", "/enseigne-saint-amand-les-eaux"],
+                  ["Hasnon", "/enseigne-hasnon"],
+                  ["Lecelles", "/enseigne-lecelles"],
+                  ["Rosult", "/enseigne-rosult"],
+                  ["Raismes", "/enseigne-raismes"],
+                  ["Bruille-Saint-Amand", ""],
+                  ["Valenciennes", "/enseigne-valenciennes"],
+                ] as [string, string][]
+              ).map(([city, href]) => (
+                <li key={city}>
+                  {href ? <Link href={href}>{city}</Link> : city}
+                </li>
               ))}
             </ul>
           </div>
