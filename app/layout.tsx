@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Providers } from "./providers";
 import { JsonLd } from "./components/SiteUI";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 import { businessSchema, site } from "@/lib/site";
 import { themeBootstrap } from "@/lib/theme";
 const barlow = Barlow({
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
   twitter: { card: "summary_large_image", images: ["/opengraph-image"] },
-  verification: { google: "BLLN9xg6pbYTnR4ICVo_bgTIMQXVZ0Itu_Xo6ySTHgI" },
+  verification: { google: "mxv0pEZo-6OydhrKmsfNSx11PFbnL3VzDC6MLJQ4xs0" },
 };
 export default function RootLayout({
   children,
@@ -51,6 +52,7 @@ export default function RootLayout({
     <html lang="fr" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
+        <GoogleAnalytics />
       </head>
       <body className={`${barlow.variable} ${barlowCondensed.variable}`}>
         <a className="skip-link" href="#contenu">
