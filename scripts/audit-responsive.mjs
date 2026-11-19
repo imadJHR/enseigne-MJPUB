@@ -90,6 +90,17 @@ for (const width of widths) {
       if (result.brokenImages.length) failures.push({ width, route, issue: "Broken images", sources: result.brokenImages });
       if (result.clippedControls.length) warnings.push({ width, route, issue: "Controls outside viewport", details: result.clippedControls });
 
+      if (route === "/produits" && width <= 430) {
+        const photos = await page.locator(".catalog-service-row").evaluateAll(rows =>
+          rows.map(row => ({
+            cardWidth: row.getBoundingClientRect().width,
+            imageWidth: row.querySelector(".row-image")?.getBoundingClientRect().width || 0
+          }))
+        );
+        if (photos.length !== 3 || photos.some(({cardWidth,imageWidth}) => imageWidth < cardWidth * 0.9)) {
+          failures.push({width,route,issue:"Catalogue images must occupy at least 90% of each mobile card",photos});
+        }
+      }
       if (route === "/" && (width === 320 || width === 390)) {
         const debug = await page.evaluate(() => {
           const describe = selector => {
