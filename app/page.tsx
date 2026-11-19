@@ -8,8 +8,7 @@ import {
   Check,
 } from "@/components/Icons";
 import { pageMetadata, serviceAreas, site } from "@/lib/site";
-import { realisations } from "@/lib/realisations";
-import { CTA, FAQ, ProjectCard, TextLink } from "./components/SiteUI";
+import { CTA, FAQ, TextLink } from "./components/SiteUI";
 import ConfigurationEntry from "./components/ConfigurationEntry";
 export const metadata = pageMetadata(
   "Enseignes à Saint-Amand-les-Eaux : LED, lettres 3D & signalétique",
@@ -38,9 +37,6 @@ export default function HomePage() {
           <div className="hero-actions">
             <Link className="button button-primary" href="#choisir-enseigne">
               Créer mon enseigne <ArrowUpRight size={19} />
-            </Link>
-            <Link className="button button-text" href="/realisations">
-              Voir nos réalisations <ArrowRight size={17} />
             </Link>
           </div>
           <ul className="hero-reassurance">
@@ -79,9 +75,6 @@ export default function HomePage() {
           <figcaption>
             <span>Une réalisation MJ PUB</span>
             <strong>Une façade qui se remarque.</strong>
-            <Link href="/realisations/mj-barber">
-              Découvrir ce projet <ArrowUpRight size={17} />
-            </Link>
           </figcaption>
         </figure>
       </section>
@@ -181,9 +174,9 @@ export default function HomePage() {
               <div className="solution-links">
                 <Link
                   className="button button-primary"
-                  href="/configurateur?style=lighted-box"
+                  href="/demande-devis"
                 >
-                  Configurer en LED <ArrowRight size={17} />
+                  Demander un devis <ArrowRight size={17} />
                 </Link>
                 <Link className="solution-detail" href="/enseignes-lumineuses">
                   Découvrir les options
@@ -202,7 +195,7 @@ export default function HomePage() {
               </p>
               <div className="solution-links">
                 <Link className="text-link" href="/configurateur?style=cut-out">
-                  Configurer mes lettres <ArrowRight size={17} />
+                  Créer vos lettres découpées <ArrowRight size={17} />
                 </Link>
                 <Link href="/lettres-decoupees" className="solution-detail">
                   Voir les matériaux
@@ -221,33 +214,10 @@ export default function HomePage() {
                 Votre logo et vos informations sur un support adapté à vos
                 locaux.
               </p>
-              <Link href="/signaletique" className="text-link">
-                Préparer mon panneau <ArrowRight size={17} />
+              <Link href="/demande-devis" className="text-link">
+                Demander un devis <ArrowRight size={17} />
               </Link>
             </article>
-          </div>
-        </div>
-      </section>
-      <section className="project-band">
-        <div className="container section">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">Du projet à la façade</p>
-              <h2>
-                Ils ont donné du relief
-                <br />à leur activité.
-              </h2>
-            </div>
-            <TextLink href="/realisations">
-              Voir toutes les réalisations
-            </TextLink>
-          </div>
-          <div className="home-projects">
-            {[realisations[1], realisations[4], realisations[11]].map(
-              (project) => (
-                <ProjectCard project={project} key={project.slug} />
-              ),
-            )}
           </div>
         </div>
       </section>

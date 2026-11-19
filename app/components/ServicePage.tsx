@@ -24,24 +24,23 @@ export default function ServicePage({ slug }: { slug: string }) {
             />
             <Link
               href={
-                slug === "signaletique"
-                  ? "/demande-devis"
-                  : "/configurateur?style=" +
-                    (slug === "lettres-decoupees" ? "cut-out" : "lighted-box")
+                slug === "lettres-decoupees"
+                  ? "/configurateur?style=cut-out"
+                  : "/demande-devis"
               }
               className="button button-primary"
               style={{ marginTop: 28 }}
             >
-              {slug === "signaletique"
-                ? "Préparer mon devis"
-                : "Configurer mon enseigne"}{" "}
+              {slug === "lettres-decoupees"
+                ? "Créer vos lettres découpées"
+                : "Demander un devis"}{" "}
               <ArrowUpRight size={18} />
             </Link>
           </div>
           <div className="service-hero-image">
             <Image
               src={service.image}
-              alt={service.name + " réalisées par MJ PUB"}
+              alt={"Illustration IA : " + service.name}
               fill
               priority
               sizes="(max-width: 640px) 100vw, 50vw"
@@ -68,7 +67,6 @@ export default function ServicePage({ slug }: { slug: string }) {
               ))}
             </ul>
             <TextLink href="/configurateur">Imaginer votre enseigne</TextLink>
-            <TextLink href="/realisations">Voir des projets réalisés</TextLink>
           </aside>
         </div>
         <section className="section faq-section">

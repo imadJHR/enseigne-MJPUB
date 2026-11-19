@@ -112,9 +112,6 @@ export default function LocalPage() {
                 dans le secteur.
               </h2>
             </div>
-            <TextLink href="/realisations">
-              Voir toutes les réalisations
-            </TextLink>
           </div>
           <div className="home-projects">
             {[realisations[0], realisations[5], realisations[9]].map(

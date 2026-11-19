@@ -1655,3 +1655,57 @@ html {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* Client updates — clear product photography and explicit catalog CTAs. */
+.catalog-service-row {
+  grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+  gap: 36px;
+}
+.catalog-service-row .row-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  background: var(--soft);
+}
+.catalog-service-info { min-width: 0; }
+.catalog-service-row:hover h2 { color: var(--ink); }
+.catalog-service-cta {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 18px;
+  white-space: normal;
+  text-align: center;
+  gap: 10px;
+}
+@media (max-width: 850px) {
+  .catalog-service-row {
+    grid-template-columns: minmax(0, 180px) minmax(0, 1fr);
+    gap: 22px;
+  }
+  .catalog-service-row .row-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+  }
+}
+@media (max-width: 640px) {
+  .catalog-service-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding-block: 26px;
+  }
+  .catalog-service-row .row-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+  }
+  .catalog-service-row h2 { font-size: clamp(1.3rem, 5vw, 1.6rem); }
+  .catalog-service-row p { font-size: 13px; }
+  .catalog-service-cta {
+    width: 100%;
+    justify-content: center;
+    margin-top: 16px;
+    font-size: 12px;
+  }
+}

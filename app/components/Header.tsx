@@ -16,7 +16,6 @@ import ThemeToggle from "./ThemeToggle";
 import BrandLogo from "./BrandLogo";
 const links = [
   { href: "/produits", label: "Nos enseignes" },
-  { href: "/realisations", label: "Réalisations" },
   { href: "/enseigne-saint-amand-les-eaux", label: "Votre atelier local" },
   { href: "/contact", label: "Contact" },
 ];

@@ -36,7 +36,6 @@ export default function Footer() {
         </div>
         <div>
           <h2>Votre projet</h2>
-          <Link href="/realisations">Nos réalisations</Link>
           <Link href="/configurateur">Configurer une enseigne</Link>
           <Link href="/blog">Conseils & inspiration</Link>
           <Link href="/enseigne-saint-amand-les-eaux">

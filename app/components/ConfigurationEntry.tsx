@@ -99,9 +99,9 @@ export default function ConfigurationEntry() {
       </div>
       <Link
         className="button button-primary entry-start"
-        href={"/configurateur?style=" + selected}
+        href={selected === "cut-out" ? "/configurateur?style=cut-out" : "/demande-devis"}
       >
-        Personnaliser cette enseigne
+        {selected === "cut-out" ? "Créer vos lettres découpées" : "Demander un devis"}
         <ArrowRight size={18} />
       </Link>
       <p className="entry-note">
