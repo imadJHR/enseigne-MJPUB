@@ -48,7 +48,7 @@ for (const width of widths) {
     const url = BASE + route;
     let response;
     try {
-      response = await page.goto(url, { waitUntil: "load", timeout: 25000 });
+      response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 20000 });
       await page.evaluate(() => document.fonts.ready);
       const result = await page.evaluate(() => {
         const root = document.documentElement;
@@ -85,10 +85,47 @@ for (const width of widths) {
       const visit = { width, route, status: response?.status(), ...result };
       visits.push(visit);
       if (!response || response.status() >= 400) failures.push({ width, route, issue: "HTTP " + response?.status() });
-      if (result.overflow > 3) failures.push({ width, route, issue: "Horizontal overflow", pixels: result.overflow });
+      const actualOverflow = Math.max(result.documentWidth, result.bodyWidth, result.viewport) - width;
+      if (actualOverflow > 3) failures.push({ width, route, issue: "Actual viewport expansion", pixels: actualOverflow });
       if (result.brokenImages.length) failures.push({ width, route, issue: "Broken images", sources: result.brokenImages });
       if (result.clippedControls.length) warnings.push({ width, route, issue: "Controls outside viewport", details: result.clippedControls });
 
+      if (route === "/" && (width === 320 || width === 390)) {
+        const debug = await page.evaluate(() => {
+          const describe = selector => {
+            const element = document.querySelector(selector);
+            if (!element) return null;
+            const r = element.getBoundingClientRect();
+            const style = getComputedStyle(element);
+            const hit = document.elementFromPoint(Math.min(window.innerWidth - 1, (r.left + r.right) / 2), Math.min(window.innerHeight - 1, (r.top + r.bottom) / 2));
+            return {
+              selector, display: style.display, position: style.position,
+              rect: [r.left,r.top,r.right,r.bottom].map(Math.round),
+              hit: hit?.className?.toString().slice(0,100)
+            };
+          };
+          return {
+            viewportMeta: document.querySelector('meta[name="viewport"]')?.content,
+            visualWidth: window.visualViewport?.width,
+            innerWidth: window.innerWidth, clientWidth: document.documentElement.clientWidth,
+            screenWidth: window.screen.width,
+            headerAction: describe(".header-configure"),
+            menu: describe(".menu-trigger"),
+            mobileCTA: describe(".mobile-configure"),
+            body: describe("body"),
+            wideElements: [...document.querySelectorAll("body *")]
+              .filter(el => {
+                const r = el.getBoundingClientRect();
+                const st = getComputedStyle(el);
+                return r.width > 0 && st.display!=="none" && st.visibility!=="hidden"
+                  && r.right > window.screen.width + 6;
+              })
+              .slice(0,16)
+              .map(el=>({tag:el.tagName,class:el.className?.toString().slice(0,70),right:Math.round(el.getBoundingClientRect().right),width:Math.round(el.getBoundingClientRect().width)}))
+          };
+        });
+        console.log("MOBILE DEBUG " + width + ": " + JSON.stringify(debug));
+      }
       if (route === "/" && width === 390) {
         const img = page.locator(".brand-hero-photo img, .solution-photo img, .solution-mini-visual img");
         if ((await img.count()) !== 4) failures.push({ width, route, issue: "Expected 4 homepage product photos" });
@@ -100,7 +137,7 @@ for (const width of widths) {
         } else failures.push({ width, route, issue: "Cut-out style radio missing" });
         const menu = page.getByRole("button", {name:/Ouvrir le menu/i});
         if (await menu.isVisible()) {
-          await menu.click();
+          await menu.click({timeout: 3000});
           if (!(await page.locator("#navigation-mobile").isVisible())) {
             failures.push({width, route, issue: "Mobile menu failed to open"});
           }
