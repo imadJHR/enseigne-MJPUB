@@ -6,6 +6,9 @@ on:
     paths:
       - "scripts/prepare-site-images.mjs"
       - ".github/workflows/prepare-site-images.yml"
+      - "app/page.tsx"
+      - "app/brand.css"
+      - "scripts/audit-responsive.mjs"
   workflow_dispatch:
 
 permissions:
@@ -32,6 +35,28 @@ jobs:
         run: npm run lint
       - name: Verify production build
         run: npm run build
+      - name: Install headless Chromium for real responsive testing
+        run: |
+          npm install --no-save --package-lock=false playwright@1.58.2
+          npx playwright install --with-deps chromium
+      - name: Test homepage and customer journeys at 10 viewport widths
+        shell: bash
+        run: |
+          npm run start -- --hostname 127.0.0.1 --port 3000 > /tmp/mjpub-next.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" || true' EXIT
+          for n in $(seq 1 60); do
+            if curl -fsS -o /dev/null http://127.0.0.1:3000/; then break; fi
+            sleep 2
+          done
+          node scripts/audit-responsive.mjs
+      - name: Upload screenshots and responsive audit report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mjpub-responsive-review
+          path: artifacts/responsive/
+          if-no-files-found: warn
       - name: Commit display assets to the pull-request branch
         shell: bash
         run: |
