@@ -1709,3 +1709,89 @@ html {
     font-size: 12px;
   }
 }
+
+
+/* Homepage visual polish: retain the complete real signage photographs.
+ * AI illustrations stay confined to product inspiration, not client projects. */
+.brand-hero-photo {
+  height: auto;
+  aspect-ratio: 4 / 3;
+  background: #111214;
+}
+.brand-hero-photo img {
+  object-fit: contain;
+  object-position: center;
+}
+.solution-photo {
+  height: auto;
+  aspect-ratio: 4 / 3;
+  background: #111214;
+}
+.solution-photo img {
+  object-fit: contain;
+  object-position: center;
+}
+.solution-small {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.solution-small:first-child {
+  padding-right: 28px;
+}
+.solution-mini-visual {
+  position: relative;
+  width: 100%;
+  height: clamp(128px, 14vw, 168px);
+  min-width: 0;
+  margin-block: 16px;
+  overflow: hidden;
+  background: var(--soft);
+}
+.solution-mini-visual img {
+  object-fit: contain;
+  object-position: center;
+}
+.solution-small .solution-links {
+  margin-top: auto;
+}
+.solution-small .text-link,
+.solution-links a {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.entry-art {
+  height: auto;
+  aspect-ratio: 4 / 3;
+  background: var(--surface);
+}
+.entry-art img {
+  object-fit: contain;
+}
+@media (max-width: 850px) {
+  .solution-small:first-child {
+    padding-right: 25px;
+  }
+}
+@media (max-width: 600px) {
+  .brand-hero-photo,
+  .solution-photo {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .entry-art {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .solution-small:first-child {
+    padding-right: 23px;
+  }
+  .solution-mini-visual {
+    height: auto;
+    aspect-ratio: 3 / 2;
+  }
+  .solution-main,
+  .solution-small {
+    min-width: 0;
+  }
+}
