@@ -1,0 +1,44 @@
+name: Optimize MJ PUB site images
+
+on:
+  push:
+    branches: [client-modifs-images-ia-20261119]
+    paths:
+      - "scripts/prepare-site-images.mjs"
+      - ".github/workflows/prepare-site-images.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Enhance referenced site images and rewrite display paths
+        run: node scripts/prepare-site-images.mjs
+      - name: Verify TypeScript
+        run: npm run typecheck
+      - name: Verify lint
+        run: npm run lint
+      - name: Verify production build
+        run: npm run build
+      - name: Commit display assets to the pull-request branch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/optimized app components data lib
+          if ! git diff --cached --quiet; then
+            git commit -m "Upscale and optimize all referenced MJ PUB visuals"
+            git push origin "HEAD:client-modifs-images-ia-20261119"
+          fi
