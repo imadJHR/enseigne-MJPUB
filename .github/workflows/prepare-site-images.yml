@@ -8,6 +8,7 @@ on:
       - ".github/workflows/prepare-site-images.yml"
       - "app/page.tsx"
       - "app/brand.css"
+      - "lib/site.ts"
       - "scripts/audit-responsive.mjs"
   workflow_dispatch:
 
