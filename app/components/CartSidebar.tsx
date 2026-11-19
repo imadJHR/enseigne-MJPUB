@@ -54,7 +54,7 @@ export default function CartSidebar() {
               {items.map((item) => (
                 <div className="drawer-item" key={item.id}>
                   <Image
-                    src={item.image || "/img1.jpg"}
+                    src={item.image || "/optimized/img1.webp"}
                     width={72}
                     height={72}
                     alt={item.name}

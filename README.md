@@ -22,7 +22,7 @@ npm start
 
 ## Configuration
 
-- `NEXT_PUBLIC_SITE_URL` : URL publique définitive, sans barre oblique finale. Valeur par défaut : https://lettre.enseigne-mjpub.fr.
+- `NEXT_PUBLIC_SITE_URL` : URL publique définitive, sans barre oblique finale. Valeur par défaut : https://enseigne-mjpub.fr. Dans Vercel → Settings → Environment Variables, vérifier que `NEXT_PUBLIC_SITE_URL` n’est pas resté sur l’ancien sous-domaine `lettre.enseigne-mjpub.fr`, car cette variable remplace la valeur par défaut.
 - `NEXT_PUBLIC_API_URL` : serveur des formulaires. Valeur par défaut : https://enseigne-mjpub-api.vercel.app.
 
 Ces variables doivent être définies **avant le build**. Ce dépôt contient le frontend ; le traitement des demandes dépend du serveur externe.

@@ -5,7 +5,7 @@ import { useCart } from "@/app/context/CartContext";
 import { ShoppingBag } from "@/components/Icons";
 import { formatPrice } from "@/lib/site";
 export default function AccessoryPurchase() {
-  const [image, setImage] = useState("/a1.jpeg");
+  const [image, setImage] = useState("/optimized/a1.webp");
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
   return (
@@ -20,7 +20,7 @@ export default function AccessoryPurchase() {
           />
         </div>
         <div className="accessory-thumbnails">
-          {["/a1.jpeg", "/a2.jpeg", "/a3.jpeg"].map((src, index) => (
+          {["/optimized/a1.webp", "/optimized/a2.webp", "/optimized/a3.webp"].map((src, index) => (
             <button
               className="icon-button"
               key={src}
@@ -68,7 +68,7 @@ export default function AccessoryPurchase() {
                   id: "easyfix-grand-blanc",
                   name: "EASYFIX blanc à coller · 50 pièces",
                   price: 20,
-                  image: "/a1.jpeg",
+                  image: "/optimized/a1.webp",
                   type: "accessory",
                 },
                 quantity,

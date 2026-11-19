@@ -5,7 +5,7 @@ export const realisations = [
     category: "Restauration Rapide",
     description:
       "Création et installation d'une enseigne lumineuse ronde pour un établissement proposant des frites fraîches et des kebabs faits maison. L'enseigne présente un design moderne avec un logo stylisé et des inscriptions claires. Le projet a été réalisé sur mesure pour attirer l'attention des passants avec un éclairage LED vif et un design attrayant, reflétant la qualité des produits proposés.",
-    image: "/img1.jpg",
+    image: "/optimized/img1.webp",
     features: [
       "Enseigne lumineuse ronde double face",
       "Structure en aluminium laqué noir",
@@ -14,7 +14,7 @@ export const realisations = [
       "Inscriptions 'FRITE FRAÎCHE' et 'KEBAB MAISON' claires",
       "Installation murale sur potence discrète",
     ],
-    galleryImages: ["/img1.jpg"],
+    galleryImages: ["/optimized/img1.webp"],
   },
   {
     slug: "enseigne-time-food",
@@ -22,7 +22,7 @@ export const realisations = [
     category: "Restauration Rapide",
     description:
       "Conception et installation d'un ensemble d'enseignes lumineuses pour un restaurant de restauration rapide. Le projet inclut une grande enseigne en lettres boîtiers lumineuses pour le nom 'TIME', un caisson lumineux pour le mot 'FOOD' et deux enseignes rondes suspendues 'Frite Fraîche Kebab Maison'. L'objectif était de maximiser la visibilité nocturne et de créer une identité visuelle moderne et percutante.",
-    image: "/img2.jpg",
+    image: "/optimized/img2.webp",
     features: [
       "Lettres boîtiers lumineuses pour 'TIME'",
       "Éclairage LED rouge et blanc",
@@ -30,7 +30,7 @@ export const realisations = [
       "Deux enseignes rondes suspendues 'Frite Fraîche Kebab Maison'",
       "Combinaison de plusieurs types d'enseignes pour une visibilité optimale",
     ],
-    galleryImages: ["/img2.jpg"],
+    galleryImages: ["/optimized/img2.webp"],
   },
   {
     slug: "restaurant-la-medina",
@@ -38,7 +38,7 @@ export const realisations = [
     category: "Restaurant",
     description:
       "Création d'une enseigne de façade pour le restaurant 'La Médina'. Le panneau principal de couleur orange vive est mis en valeur par des lettres découpées en relief. Le design inclut un logo distinctif avec une silhouette de chameau et de palmiers, évoquant une ambiance exotique et chaleureuse.",
-    image: "/img3.jpg",
+    image: "/optimized/img3.webp",
     features: [
       "Enseigne de façade en panneau rigide",
       "Fond orange mat",
@@ -46,7 +46,7 @@ export const realisations = [
       "Logo avec un chameau et des palmiers",
       "Informations de contact et type d'établissement visibles",
     ],
-    galleryImages: ["/img3.jpg"],
+    galleryImages: ["/optimized/img3.webp"],
   },
   {
     slug: "enseigne-mister-cook-99",
@@ -54,7 +54,7 @@ export const realisations = [
     category: "Restauration Rapide",
     description:
       "Conception et installation d'une enseigne moderne et percutante pour l'établissement 'Mister Cook 99'. Le panneau noir laqué offre un contraste saisissant avec le logo rond et les lettres en relief blanches. L'éclairage extérieur par spots accentue la visibilité et met en avant les services proposés : 'Grillades' et 'Snack'.",
-    image: "/img4.jpg",
+    image: "/optimized/img4.webp",
     features: [
       "Panneau en composite laqué noir brillant",
       "Lettres boîtiers en relief 'COOK'",
@@ -63,7 +63,7 @@ export const realisations = [
       "Éclairage par spots orientables externes",
       "Mention des spécialités 'Grillades' et 'Snack'",
     ],
-    galleryImages: ["/img4.jpg"],
+    galleryImages: ["/optimized/img4.webp"],
   },
   {
     slug: "enseigne-time-shop",
@@ -71,7 +71,7 @@ export const realisations = [
     category: "Alimentation Générale",
     description:
       "Création et installation d'une enseigne de façade et de deux enseignes rondes suspendues pour le commerce 'Time Shop'. Le panneau principal en noir brillant met en valeur le nom du magasin en lettres boîtiers lumineuses. Des informations clés comme les horaires et les services sont ajoutées en rose pour une touche de modernité.",
-    image: "/img8.jpg",
+    image: "/optimized/img8.webp",
     features: [
       "Enseigne de façade sur panneau noir laqué",
       "Lettres boîtiers en relief pour 'TIME SHOP'",
@@ -79,7 +79,7 @@ export const realisations = [
       "Deux enseignes rondes suspendues double face",
       "Éclairage par spots orientables et lettres lumineuses",
     ],
-    galleryImages: ["/img8.jpg"],
+    galleryImages: ["/optimized/img8.webp"],
   },
   {
     slug: "la-renaissance-du-wonen",
@@ -87,7 +87,7 @@ export const realisations = [
     category: "Prêt-à-porter",
     description:
       "Conception et installation d'une enseigne lumineuse pour une boutique de prêt-à-porter. Le nom 'La Renaissance du Wonen' est réalisé en néon LED sur mesure avec une typographie cursive élégante, offrant un style moderne et distinctif qui attire l'attention en soirée.",
-    image: "/img9.jpg",
+    image: "/optimized/img9.webp",
     features: [
       "Enseigne en néon LED sur mesure",
       "Typographie cursive personnalisée",
@@ -95,7 +95,7 @@ export const realisations = [
       "Installation sur une façade sombre",
       "Design minimaliste et chic",
     ],
-    galleryImages: ["/img9.jpg"],
+    galleryImages: ["/optimized/img9.webp"],
   },
   {
     slug: "enseigne-interieure-l-atelier",
@@ -103,7 +103,7 @@ export const realisations = [
     category: "Boutique de vêtements",
     description:
       "Création d'une enseigne intérieure rétro-éclairée pour une boutique de robes traditionnelles. Le logo 'LH' est mis en valeur par un halo lumineux sur un panneau blanc, accompagné des inscriptions 'L'Atelier' et 'Robes Traditionnelles'. Le design sobre et élégant s'intègre parfaitement à la décoration intérieure de la boutique.",
-    image: "/img6.jpg",
+    image: "/optimized/img6.webp",
     features: [
       "Panneau mural décoratif blanc mat",
       "Logo ovale rétro-éclairé",
@@ -111,7 +111,7 @@ export const realisations = [
       "Éclairage LED intégré",
       "Design sur mesure pour la décoration intérieure",
     ],
-    galleryImages: ["/img6.jpg"],
+    galleryImages: ["/optimized/img6.webp"],
   },
   {
     slug: "sidi-bou-said",
@@ -119,7 +119,7 @@ export const realisations = [
     category: "Restaurant",
     description:
       "Conception d'une enseigne de façade simple et efficace pour un établissement nommé 'Sidi Bou Said'. Les lettres boîtiers en relief, de couleur cyan sur un fond gris clair, offrent une excellente lisibilité et un style épuré, tout en évoquant les couleurs de la célèbre ville tunisienne.",
-    image: "/img7.jpg",
+    image: "/optimized/img7.webp",
     features: [
       "Panneau de façade en aluminium composite",
       "Lettres boîtiers en relief non lumineuses",
@@ -127,7 +127,7 @@ export const realisations = [
       "Design minimaliste et moderne",
       "Installation sur une façade en briques",
     ],
-    galleryImages: ["/img7.jpg"],
+    galleryImages: ["/optimized/img7.webp"],
   },
   {
     slug: "la-fayette-food",
@@ -135,14 +135,14 @@ export const realisations = [
     category: "Restauration Rapide",
     description:
       "Création d'une enseigne de façade lumineuse pour le restaurant 'La Fayette Food'. L'enseigne se compose de lettres boîtiers rétro-éclairées sur un panneau noir, offrant une visibilité maximale de nuit. Les spécialités du restaurant sont clairement indiquées pour attirer la clientèle.",
-    image: "/img10.jpg",
+    image: "/optimized/img10.webp",
     features: [
       "Panneau de façade en composite noir",
       "Lettres boîtiers lumineuses blanches",
       "Typographie personnalisée et élégante",
       "Liste des spécialités en lettres adhésives",
     ],
-    galleryImages: ["/img10.jpg"],
+    galleryImages: ["/optimized/img10.webp"],
   },
   {
     slug: "sn-institut-de-beaute",
@@ -150,14 +150,14 @@ export const realisations = [
     category: "Institut de beauté",
     description:
       "Réalisation d'une enseigne moderne pour l'institut de beauté 'SN'. L'enseigne se compose d'un panneau blanc avec le logo 'SN' en lettres boîtiers rétro-éclairées, créant un halo lumineux élégant. Le design épuré et contemporain s'accorde parfaitement avec l'esthétique du bâtiment.",
-    image: "/img13.jpg",
+    image: "/optimized/img13.webp",
     features: [
       "Panneau de façade blanc mat",
       "Lettres boîtiers en relief 'SN'",
       "Rétro-éclairage LED par halo lumineux",
       "Texte 'Institut de Beauté' en lettres découpées noires",
     ],
-    galleryImages: ["/img13.jpg"],
+    galleryImages: ["/optimized/img13.webp"],
   },
   {
     slug: "fresh-pizza",
@@ -165,7 +165,7 @@ export const realisations = [
     category: "Restauration Rapide",
     description:
       "Création d'une enseigne de façade et de caissons lumineux ronds pour la pizzeria 'Fresh Pizza'. L'ensemble allie un panneau noir brillant avec des lettres lumineuses et deux caissons suspendus, pour une identité visuelle moderne et une visibilité optimale de jour comme de nuit. Le design met en avant le logo de la marque et les services proposés.",
-    image: "/img14.jpg",
+    image: "/optimized/img14.webp",
     features: [
       "Panneau de façade en composite noir",
       "Lettres boîtiers lumineuses en relief 'Fresh Pizza'",
@@ -173,7 +173,7 @@ export const realisations = [
       "Mentions des services : 'Sur Place - Emporter - Livraison'",
       "Design moderne et harmonieux",
     ],
-    galleryImages: ["/img14.jpg"],
+    galleryImages: ["/optimized/img14.webp"],
   },
   {
     slug: "mj-barber",
@@ -181,7 +181,7 @@ export const realisations = [
     category: "Salon de coiffure",
     description:
       "Création d'une enseigne de façade pour le salon de coiffure 'MJ Barber'. Le projet combine des lettres lumineuses pour le nom, un caisson lumineux rond avec le logo, et un poteau de barbier traditionnel. Une guirlande lumineuse a été ajoutée pour un effet festif et une visibilité accrue de nuit.",
-    image: "/img17.jpg",
+    image: "/optimized/img17.webp",
     features: [
       "Lettres boîtiers lumineuses pour 'MJ BARBER'",
       "Caisson lumineux rond avec logo",
@@ -189,6 +189,6 @@ export const realisations = [
       "Poteau de barbier traditionnel lumineux",
       "Combinaison de plusieurs éléments lumineux",
     ],
-    galleryImages: ["/img17.jpg"],
+    galleryImages: ["/optimized/img17.webp"],
   },
 ];

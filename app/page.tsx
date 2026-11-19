@@ -8,8 +8,7 @@ import {
   Check,
 } from "@/components/Icons";
 import { pageMetadata, serviceAreas, site } from "@/lib/site";
-import { realisations } from "@/lib/realisations";
-import { CTA, FAQ, ProjectCard, TextLink } from "./components/SiteUI";
+import { CTA, FAQ, TextLink } from "./components/SiteUI";
 import ConfigurationEntry from "./components/ConfigurationEntry";
 export const metadata = pageMetadata(
   "Enseignes à Saint-Amand-les-Eaux : LED, lettres 3D & signalétique",
@@ -39,9 +38,6 @@ export default function HomePage() {
             <Link className="button button-primary" href="#choisir-enseigne">
               Créer mon enseigne <ArrowUpRight size={19} />
             </Link>
-            <Link className="button button-text" href="/realisations">
-              Voir nos réalisations <ArrowRight size={17} />
-            </Link>
           </div>
           <ul className="hero-reassurance">
             <li>
@@ -69,19 +65,16 @@ export default function HomePage() {
         <figure className="brand-hero-project">
           <div className="brand-hero-photo">
             <Image
-              src="/img17.jpg"
+              src="/optimized/img17.webp"
               alt="Devanture MJ Barber avec enseigne lumineuse réalisée par MJ PUB"
               fill
               priority
-              sizes="(max-width:850px) 100vw, 48vw"
+              sizes="(max-width: 600px) calc(100vw - 36px), (max-width: 850px) calc(100vw - 40px), 48vw"
             />
           </div>
           <figcaption>
             <span>Une réalisation MJ PUB</span>
             <strong>Une façade qui se remarque.</strong>
-            <Link href="/realisations/mj-barber">
-              Découvrir ce projet <ArrowUpRight size={17} />
-            </Link>
           </figcaption>
         </figure>
       </section>
@@ -99,9 +92,8 @@ export default function HomePage() {
               pour votre identité.
             </h2>
             <p>
-              Relief, lumière directe ou halo discret : comparez les rendus,
-              puis personnalisez votre texte, vos dimensions et vos matériaux
-              dans le configurateur.
+              Comparez les rendus : demandez un devis pour une enseigne
+              lumineuse ou configurez directement vos lettres découpées.
             </p>
             <p className="style-entry-hint">
               <Check size={18} />
@@ -126,8 +118,8 @@ export default function HomePage() {
           },
           {
             n: "02",
-            title: "Personnalisez votre enseigne",
-            text: "Votre texte, vos dimensions et vos matériaux.",
+            title: "Précisez votre projet",
+            text: "Demandez un devis ou configurez vos lettres découpées.",
           },
           {
             n: "03",
@@ -163,10 +155,10 @@ export default function HomePage() {
           <article className="solution-main">
             <div className="solution-photo">
               <Image
-                src="/img2.jpg"
+                src="/optimized/img2.webp"
                 alt="Réalisation MJ PUB : enseigne TIME FOOD en lettres lumineuses"
                 fill
-                sizes="(max-width:850px) 100vw, 55vw"
+                sizes="(max-width: 850px) calc(100vw - 40px), 55vw"
               />
             </div>
             <div className="solution-content">
@@ -181,9 +173,9 @@ export default function HomePage() {
               <div className="solution-links">
                 <Link
                   className="button button-primary"
-                  href="/configurateur?style=lighted-box"
+                  href="/demande-devis"
                 >
-                  Configurer en LED <ArrowRight size={17} />
+                  Demander un devis <ArrowRight size={17} />
                 </Link>
                 <Link className="solution-detail" href="/enseignes-lumineuses">
                   Découvrir les options
@@ -200,16 +192,21 @@ export default function HomePage() {
               <p>
                 Du PVC à l’aluminium composite, donnez du caractère à votre nom.
               </p>
+              <div className="solution-mini-visual">
+                <Image
+                  src="/optimized/images/ia-lettres-decoupees.webp"
+                  alt="Illustration de lettres découpées en relief, finition blanche et bords visibles"
+                  fill
+                  sizes="(max-width: 600px) calc(100vw - 86px), (max-width: 850px) 43vw, 35vw"
+                />
+              </div>
               <div className="solution-links">
                 <Link className="text-link" href="/configurateur?style=cut-out">
-                  Configurer mes lettres <ArrowRight size={17} />
+                  Créer vos lettres découpées <ArrowRight size={17} />
                 </Link>
                 <Link href="/lettres-decoupees" className="solution-detail">
                   Voir les matériaux
                 </Link>
-              </div>
-              <div className="mini-letter" aria-hidden="true">
-                Aa<span>3D</span>
               </div>
             </article>
             <article className="solution-small solution-panel">
@@ -221,33 +218,18 @@ export default function HomePage() {
                 Votre logo et vos informations sur un support adapté à vos
                 locaux.
               </p>
-              <Link href="/signaletique" className="text-link">
-                Préparer mon panneau <ArrowRight size={17} />
+              <div className="solution-mini-visual">
+                <Image
+                  src="/optimized/images/ia-panneaux-signaletique.webp"
+                  alt="Illustration de panneau de signalétique extérieur, fixé sur un support"
+                  fill
+                  sizes="(max-width: 600px) calc(100vw - 86px), (max-width: 850px) 43vw, 35vw"
+                />
+              </div>
+              <Link href="/demande-devis" className="text-link">
+                Demander un devis <ArrowRight size={17} />
               </Link>
             </article>
-          </div>
-        </div>
-      </section>
-      <section className="project-band">
-        <div className="container section">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">Du projet à la façade</p>
-              <h2>
-                Ils ont donné du relief
-                <br />à leur activité.
-              </h2>
-            </div>
-            <TextLink href="/realisations">
-              Voir toutes les réalisations
-            </TextLink>
-          </div>
-          <div className="home-projects">
-            {[realisations[1], realisations[4], realisations[11]].map(
-              (project) => (
-                <ProjectCard project={project} key={project.slug} />
-              ),
-            )}
           </div>
         </div>
       </section>

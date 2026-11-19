@@ -1,0 +1,305 @@
+{
+  "method": "Lanczos3 / restrained sharpening / WebP q88; originals preserved",
+  "images": [
+    {
+      "original": "/a1.jpeg",
+      "optimized": "/optimized/a1.webp",
+      "originalSize": 55079,
+      "size": 56320,
+      "sourceDimensions": [
+        1198,
+        898
+      ],
+      "displayDimensions": [
+        1440,
+        1079
+      ],
+      "scaled": true
+    },
+    {
+      "original": "/a2.jpeg",
+      "optimized": "/optimized/a2.webp",
+      "originalSize": 36795,
+      "size": 22936,
+      "sourceDimensions": [
+        1198,
+        707
+      ],
+      "displayDimensions": [
+        1440,
+        850
+      ],
+      "scaled": true
+    },
+    {
+      "original": "/a3.jpeg",
+      "optimized": "/optimized/a3.webp",
+      "originalSize": 25039,
+      "size": 51936,
+      "sourceDimensions": [
+        640,
+        480
+      ],
+      "displayDimensions": [
+        1440,
+        1080
+      ],
+      "scaled": true
+    },
+    {
+      "original": "/images/ia-enseignes-lumineuses.webp",
+      "optimized": "/optimized/images/ia-enseignes-lumineuses.webp",
+      "originalSize": 9700,
+      "size": 59850,
+      "sourceDimensions": [
+        540,
+        360
+      ],
+      "displayDimensions": [
+        1350,
+        900
+      ],
+      "scaled": true
+    },
+    {
+      "original": "/images/ia-lettres-decoupees.webp",
+      "optimized": "/optimized/images/ia-lettres-decoupees.webp",
+      "originalSize": 7854,
+      "size": 50836,
+      "sourceDimensions": [
+        540,
+        360
+      ],
+      "displayDimensions": [
+        1350,
+        900
+      ],
+      "scaled": true
+    },
+    {
+      "original": "/images/ia-panneau-personnalise.webp",
+      "optimized": "/optimized/images/ia-panneau-personnalise.webp",
+      "originalSize": 10556,
+      "size": 61170,
+      "sourceDimensions": [
+        540,
+        360
+      ],
+      "displayDimensions": [
+        1350,
+        900
+      ],
+      "scaled": true
+    },
+    {
+      "original": "/images/ia-panneaux-signaletique.webp",
+      "optimized": "/optimized/images/ia-panneaux-signaletique.webp",
+      "originalSize": 9038,
+      "size": 50734,
+      "sourceDimensions": [
+        540,
+        360
+      ],
+      "displayDimensions": [
+        1350,
+        900
+      ],
+      "scaled": true
+    },
+    {
+      "original": "/images/lettres-mjpub.webp",
+      "optimized": "/optimized/images/lettres-mjpub.webp",
+      "originalSize": 85534,
+      "size": 132982,
+      "sourceDimensions": [
+        1100,
+        733
+      ],
+      "displayDimensions": [
+        1440,
+        960
+      ],
+      "scaled": true
+    },
+    {
+      "original": "/img1.jpg",
+      "optimized": "/optimized/img1.webp",
+      "originalSize": 152332,
+      "size": 141948,
+      "sourceDimensions": [
+        1600,
+        1204
+      ],
+      "displayDimensions": [
+        1600,
+        1204
+      ],
+      "scaled": false
+    },
+    {
+      "original": "/img10.jpg",
+      "optimized": "/optimized/img10.webp",
+      "originalSize": 96153,
+      "size": 78094,
+      "sourceDimensions": [
+        1600,
+        1204
+      ],
+      "displayDimensions": [
+        1600,
+        1204
+      ],
+      "scaled": false
+    },
+    {
+      "original": "/img13.jpg",
+      "optimized": "/optimized/img13.webp",
+      "originalSize": 158701,
+      "size": 138986,
+      "sourceDimensions": [
+        1600,
+        1204
+      ],
+      "displayDimensions": [
+        1600,
+        1204
+      ],
+      "scaled": false
+    },
+    {
+      "original": "/img14.jpg",
+      "optimized": "/optimized/img14.webp",
+      "originalSize": 160368,
+      "size": 150046,
+      "sourceDimensions": [
+        1600,
+        1204
+      ],
+      "displayDimensions": [
+        1600,
+        1204
+      ],
+      "scaled": false
+    },
+    {
+      "original": "/img17.jpg",
+      "optimized": "/optimized/img17.webp",
+      "originalSize": 111728,
+      "size": 92342,
+      "sourceDimensions": [
+        1600,
+        1204
+      ],
+      "displayDimensions": [
+        1600,
+        1204
+      ],
+      "scaled": false
+    },
+    {
+      "original": "/img2.jpg",
+      "optimized": "/optimized/img2.webp",
+      "originalSize": 93686,
+      "size": 73882,
+      "sourceDimensions": [
+        1600,
+        1204
+      ],
+      "displayDimensions": [
+        1600,
+        1204
+      ],
+      "scaled": false
+    },
+    {
+      "original": "/img3.jpg",
+      "optimized": "/optimized/img3.webp",
+      "originalSize": 356208,
+      "size": 397334,
+      "sourceDimensions": [
+        1600,
+        1204
+      ],
+      "displayDimensions": [
+        1600,
+        1204
+      ],
+      "scaled": false
+    },
+    {
+      "original": "/img4.jpg",
+      "optimized": "/optimized/img4.webp",
+      "originalSize": 476719,
+      "size": 547808,
+      "sourceDimensions": [
+        2040,
+        1536
+      ],
+      "displayDimensions": [
+        2040,
+        1536
+      ],
+      "scaled": false
+    },
+    {
+      "original": "/img6.jpg",
+      "optimized": "/optimized/img6.webp",
+      "originalSize": 192062,
+      "size": 207998,
+      "sourceDimensions": [
+        1600,
+        1204
+      ],
+      "displayDimensions": [
+        1600,
+        1204
+      ],
+      "scaled": false
+    },
+    {
+      "original": "/img7.jpg",
+      "optimized": "/optimized/img7.webp",
+      "originalSize": 196452,
+      "size": 177376,
+      "sourceDimensions": [
+        1600,
+        1204
+      ],
+      "displayDimensions": [
+        1600,
+        1204
+      ],
+      "scaled": false
+    },
+    {
+      "original": "/img8.jpg",
+      "optimized": "/optimized/img8.webp",
+      "originalSize": 230802,
+      "size": 215790,
+      "sourceDimensions": [
+        1600,
+        1204
+      ],
+      "displayDimensions": [
+        1600,
+        1204
+      ],
+      "scaled": false
+    },
+    {
+      "original": "/img9.jpg",
+      "optimized": "/optimized/img9.webp",
+      "originalSize": 111106,
+      "size": 91010,
+      "sourceDimensions": [
+        1600,
+        1204
+      ],
+      "displayDimensions": [
+        1600,
+        1204
+      ],
+      "scaled": false
+    }
+  ]
+}

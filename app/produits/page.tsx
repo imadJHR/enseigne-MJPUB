@@ -22,27 +22,37 @@ export default function ProductsPage() {
           description="De la devanture lumineuse au logo en relief, choisissez le support qui fait parler votre identité. Nous vous aidons à adapter les matériaux et la finition à votre usage."
         />
         <div>
-          {services.map((service) => (
-            <Link
-              key={service.slug}
-              href={`/${service.slug}`}
-              className="catalog-service-row"
-            >
-              <div className="row-image">
-                <Image
-                  src={service.image}
-                  alt={service.name}
-                  fill
-                  sizes="(max-width: 640px) 85px, 240px"
-                />
-              </div>
-              <div>
-                <h2>{service.name}</h2>
-                <p>{service.short}</p>
-              </div>
-              <ArrowUpRight size={28} />
-            </Link>
-          ))}
+          {services.map((service) => {
+            const cutOut = service.slug === "lettres-decoupees";
+            const actionHref = cutOut
+              ? "/configurateur?style=cut-out"
+              : "/demande-devis";
+            const actionLabel = cutOut
+              ? "Créer vos lettres découpées"
+              : "Demander un devis";
+            return (
+              <article key={service.slug} className="catalog-service-row">
+                <div className="row-image">
+                  <Image
+                    src={service.image}
+                    alt={`Illustration IA : ${service.name.toLowerCase()}`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 850px) 180px, 280px"
+                  />
+                </div>
+                <div className="catalog-service-info">
+                  <h2>{service.name}</h2>
+                  <p>{service.short}</p>
+                  <Link
+                    className="button button-primary catalog-service-cta"
+                    href={actionHref}
+                  >
+                    {actionLabel} <ArrowUpRight size={17} />
+                  </Link>
+                </div>
+              </article>
+            );
+          })}
         </div>
         <section className="section">
           <div className="section-heading">
@@ -57,7 +67,7 @@ export default function ProductsPage() {
               <div className="journal-image">
                 <Image
                   src={product.image}
-                  alt="Exemple de panneau de façade personnalisé"
+                  alt="Illustration IA d’un panneau de façade personnalisé"
                   fill
                   sizes="(max-width: 640px) 100vw, 50vw"
                 />

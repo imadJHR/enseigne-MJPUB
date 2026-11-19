@@ -40,7 +40,7 @@ export default async function ProductPage({
           <div className="product-photo">
             <Image
               src={product.image}
-              alt="Exemple de panneau personnalisé pour une façade commerciale"
+              alt="Illustration IA d’un panneau personnalisé en composite aluminium"
               fill
               sizes="(max-width:850px) 100vw, 55vw"
               priority

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 export const site = {
   name: "MJ PUB",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://lettre.enseigne-mjpub.fr",
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://enseigne-mjpub.fr").replace(/\/$/, ""),
   phone: "+33 7 81 54 63 59",
   phoneHref: "tel:+33781546359",
   email: "mjpub59@gmail.com",

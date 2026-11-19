@@ -11,7 +11,7 @@ const options = [
     name: "Lettres boîtiers lumineuses",
     description: "Un nom visible, même à la tombée de la nuit.",
     icon: Box,
-    image: "/img2.jpg",
+    image: "/optimized/img2.webp",
     imageAlt:
       "Lettres boîtiers LED lumineuses de l’enseigne TIME FOOD, réalisation MJ PUB",
     photo: true,
@@ -22,7 +22,7 @@ const options = [
     name: "Lettres rétroéclairées",
     description: "Une lumière douce qui dessine votre identité.",
     icon: Lightbulb,
-    image: "/img13.jpg",
+    image: "/optimized/img13.webp",
     imageAlt:
       "Lettres rétroéclairées SN Institut et leur halo lumineux, réalisation MJ PUB",
     photo: true,
@@ -33,7 +33,7 @@ const options = [
     name: "Lettres découpées en relief",
     description: "Le caractère de votre marque, sans éclairage.",
     icon: Layers,
-    image: "/images/lettres-mjpub.webp",
+    image: "/optimized/images/lettres-mjpub.webp",
     imageAlt: "Illustration de lettres MJ PUB en relief, sans éclairage",
     photo: false,
   },
@@ -99,9 +99,9 @@ export default function ConfigurationEntry() {
       </div>
       <Link
         className="button button-primary entry-start"
-        href={"/configurateur?style=" + selected}
+        href={selected === "cut-out" ? "/configurateur?style=cut-out" : "/demande-devis"}
       >
-        Personnaliser cette enseigne
+        {selected === "cut-out" ? "Créer vos lettres découpées" : "Demander un devis"}
         <ArrowRight size={18} />
       </Link>
       <p className="entry-note">

@@ -6,7 +6,7 @@ export const signStyles = [
     description: "PVC ou composite aluminium",
     configurationDescription:
       "Lettres sans éclairage : choisissez le matériau, son épaisseur et sa finition.",
-    image: "/img8.jpg",
+    image: "/optimized/img8.webp",
   },
   {
     id: "lighted" as const,
@@ -14,7 +14,7 @@ export const signStyles = [
     description: "PVC avec éclairage LED arrière",
     configurationDescription:
       "Face en PVC et éclairage à l’arrière des lettres : choisissez l’épaisseur et la couleur du halo.",
-    image: "/img13.jpg",
+    image: "/optimized/img13.webp",
   },
   {
     id: "lighted-box" as const,
@@ -22,7 +22,7 @@ export const signStyles = [
     description: "Face lumineuse en plexiglas",
     configurationDescription:
       "Chants en aluminium et face lumineuse en plexiglas : choisissez la finition du chant et la couleur de l’éclairage.",
-    image: "/img2.jpg",
+    image: "/optimized/img2.webp",
   },
 ];
 export interface ConfigMaterial {
