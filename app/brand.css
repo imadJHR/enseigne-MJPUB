@@ -1795,3 +1795,33 @@ html {
     min-width: 0;
   }
 }
+
+
+/* Mobile navigation: desktop CTA must not force the mobile layout wider than
+ * the physical viewport. Keep the existing fixed bottom CTA for mobile. */
+@media (max-width: 850px) {
+  .site-header .header-actions > .header-configure {
+    display: none !important;
+  }
+  .site-header .header-actions > .menu-trigger {
+    display: inline-flex;
+  }
+  .site-header .header-inner,
+  .site-header .header-actions {
+    min-width: 0;
+  }
+}
+@media (max-width: 600px) {
+  .site-header .header-inner {
+    gap: 8px;
+  }
+  .site-header .brand {
+    min-width: 0;
+    flex: 0 1 auto;
+  }
+  .site-header .header-actions {
+    margin-left: auto;
+    flex: 0 0 auto;
+    gap: 4px;
+  }
+}
