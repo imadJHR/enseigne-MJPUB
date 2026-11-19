@@ -1825,3 +1825,42 @@ html {
     gap: 4px;
   }
 }
+
+
+/* Catalogue imagery: give each sign the full available width on small
+ * screens, instead of the old 85px portrait thumbnails that cropped letters. */
+.page-content .catalog-service-row .row-image img,
+.page-content .journal-card .journal-image img {
+  object-fit: contain;
+  object-position: center;
+}
+@media (max-width: 640px) {
+  .page-content .catalog-service-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px !important;
+    align-items: stretch;
+    padding-block: 25px;
+  }
+  .page-content .catalog-service-row .row-image {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 3 / 2;
+    min-height: 0;
+    background: var(--soft);
+  }
+  .page-content .catalog-service-row .catalog-service-info {
+    min-width: 0;
+  }
+  .page-content .catalog-service-row .catalog-service-cta {
+    display: flex;
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+  }
+  .page-content .journal-card .journal-image {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    background: var(--soft);
+  }
+}
