@@ -69,7 +69,7 @@ export default function HomePage() {
               alt="Devanture MJ Barber avec enseigne lumineuse réalisée par MJ PUB"
               fill
               priority
-              sizes="(max-width:850px) 100vw, 48vw"
+              sizes="(max-width: 600px) calc(100vw - 36px), (max-width: 850px) calc(100vw - 40px), 48vw"
             />
           </div>
           <figcaption>
@@ -92,9 +92,8 @@ export default function HomePage() {
               pour votre identité.
             </h2>
             <p>
-              Relief, lumière directe ou halo discret : comparez les rendus,
-              puis personnalisez votre texte, vos dimensions et vos matériaux
-              dans le configurateur.
+              Comparez les rendus : demandez un devis pour une enseigne
+              lumineuse ou configurez directement vos lettres découpées.
             </p>
             <p className="style-entry-hint">
               <Check size={18} />
@@ -119,8 +118,8 @@ export default function HomePage() {
           },
           {
             n: "02",
-            title: "Personnalisez votre enseigne",
-            text: "Votre texte, vos dimensions et vos matériaux.",
+            title: "Précisez votre projet",
+            text: "Demandez un devis ou configurez vos lettres découpées.",
           },
           {
             n: "03",
@@ -159,7 +158,7 @@ export default function HomePage() {
                 src="/optimized/img2.webp"
                 alt="Réalisation MJ PUB : enseigne TIME FOOD en lettres lumineuses"
                 fill
-                sizes="(max-width:850px) 100vw, 55vw"
+                sizes="(max-width: 850px) calc(100vw - 40px), 55vw"
               />
             </div>
             <div className="solution-content">
@@ -193,6 +192,14 @@ export default function HomePage() {
               <p>
                 Du PVC à l’aluminium composite, donnez du caractère à votre nom.
               </p>
+              <div className="solution-mini-visual">
+                <Image
+                  src="/optimized/images/ia-lettres-decoupees.webp"
+                  alt="Illustration de lettres découpées en relief, finition blanche et bords visibles"
+                  fill
+                  sizes="(max-width: 600px) calc(100vw - 86px), (max-width: 850px) 43vw, 35vw"
+                />
+              </div>
               <div className="solution-links">
                 <Link className="text-link" href="/configurateur?style=cut-out">
                   Créer vos lettres découpées <ArrowRight size={17} />
@@ -200,9 +207,6 @@ export default function HomePage() {
                 <Link href="/lettres-decoupees" className="solution-detail">
                   Voir les matériaux
                 </Link>
-              </div>
-              <div className="mini-letter" aria-hidden="true">
-                Aa<span>3D</span>
               </div>
             </article>
             <article className="solution-small solution-panel">
@@ -214,6 +218,14 @@ export default function HomePage() {
                 Votre logo et vos informations sur un support adapté à vos
                 locaux.
               </p>
+              <div className="solution-mini-visual">
+                <Image
+                  src="/optimized/images/ia-panneaux-signaletique.webp"
+                  alt="Illustration de panneau de signalétique extérieur, fixé sur un support"
+                  fill
+                  sizes="(max-width: 600px) calc(100vw - 86px), (max-width: 850px) 43vw, 35vw"
+                />
+              </div>
               <Link href="/demande-devis" className="text-link">
                 Demander un devis <ArrowRight size={17} />
               </Link>
