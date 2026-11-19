@@ -5,7 +5,7 @@ export const blogPosts = [
     excerpt:
       "Commerce à Saint-Amand-les-Eaux ou près de Valenciennes : comparez lettres boîtiers, rétroéclairage et caissons pour préparer votre façade.",
     category: "Enseignes LED",
-    image: "/img2.jpg",
+    image: "/optimized/img2.webp",
     imageAlt: "Façade Time Food avec lettres lumineuses rouges et blanches",
     date: "2024-10-15",
     related: "enseignes-lumineuses",
@@ -38,7 +38,7 @@ export const blogPosts = [
     excerpt:
       "Poids, relief, finition et emplacement : les critères à comparer pour choisir le support de votre enseigne ou de votre panneau.",
     category: "Matériaux",
-    image: "/img3.jpg",
+    image: "/optimized/img3.webp",
     imageAlt: "Panneau de façade orange avec lettrage en relief",
     date: "2024-10-05",
     related: "lettres-decoupees",
@@ -71,7 +71,7 @@ export const blogPosts = [
     excerpt:
       "Façade, entrée, accueil : organisez vos informations pour aider vos clients à vous repérer et à comprendre votre activité.",
     category: "Conseils commerce",
-    image: "/img14.jpg",
+    image: "/optimized/img14.webp",
     imageAlt:
       "Enseigne de restauration avec nom du commerce et signalétique de façade",
     date: "2024-09-20",
@@ -105,7 +105,7 @@ export const blogPosts = [
     excerpt:
       "Comprenez la différence entre lettres éclairées en face avant et halo lumineux pour préparer une enseigne adaptée à votre façade.",
     category: "Éclairage",
-    image: "/img13.jpg",
+    image: "/optimized/img13.webp",
     imageAlt: "Logo en lettres rétroéclairées sur une façade claire",
     date: "2024-09-10",
     related: "enseignes-lumineuses",
@@ -138,7 +138,7 @@ export const blogPosts = [
     excerpt:
       "Emplacement, règlement local et démarches : les vérifications à engager auprès de votre mairie avant de faire fabriquer votre enseigne.",
     category: "Préparer son projet",
-    image: "/img4.jpg",
+    image: "/optimized/img4.webp",
     imageAlt: "Enseigne de commerce posée sur une façade",
     date: "2024-08-25",
     related: "signaletique",
@@ -172,7 +172,7 @@ export const blogPosts = [
     excerpt:
       "Nettoyage, inspection des fixations et contrôle de l’éclairage : des gestes simples pour préserver l’aspect de votre enseigne.",
     category: "Entretien",
-    image: "/img17.jpg",
+    image: "/optimized/img17.webp",
     imageAlt: "Enseigne lumineuse de façade MJ Barber",
     date: "2024-08-15",
     related: "enseignes-lumineuses",

@@ -3,7 +3,7 @@ export const services = [
     slug: "enseignes-lumineuses",
     name: "Enseignes lumineuses",
     short: "Une façade qui se remarque, de jour comme de nuit.",
-    image: "/images/ia-enseignes-lumineuses.webp",
+    image: "/optimized/images/ia-enseignes-lumineuses.webp",
     title: "Enseignes lumineuses LED à Saint-Amand-les-Eaux",
     description:
       "Lettres boîtiers, rétroéclairage et caissons LED : une enseigne lumineuse adaptée à votre commerce. MJ PUB à Saint-Amand-les-Eaux, près de Valenciennes : configurez votre projet.",
@@ -46,7 +46,7 @@ export const services = [
     slug: "lettres-decoupees",
     name: "Lettres découpées",
     short: "Du relief et du caractère pour votre identité.",
-    image: "/images/ia-lettres-decoupees.webp",
+    image: "/optimized/images/ia-lettres-decoupees.webp",
     title: "Lettres découpées 3D à Saint-Amand-les-Eaux",
     description:
       "Donnez du relief à votre logo avec des lettres découpées en PVC ou aluminium composite. Façade et intérieur : votre projet à Saint-Amand-les-Eaux et près de Valenciennes.",
@@ -89,7 +89,7 @@ export const services = [
     slug: "signaletique",
     name: "Panneaux & signalétique",
     short: "Des informations claires. Une image cohérente.",
-    image: "/images/ia-panneaux-signaletique.webp",
+    image: "/optimized/images/ia-panneaux-signaletique.webp",
     title: "Panneaux & signalétique à Saint-Amand-les-Eaux",
     description:
       "Panneaux Dibond, plaques et signalétique pour commerces à Saint-Amand-les-Eaux, Rosult, Raismes et dans le secteur de Valenciennes. Devis sur mesure MJ PUB.",

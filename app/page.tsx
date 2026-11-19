@@ -65,7 +65,7 @@ export default function HomePage() {
         <figure className="brand-hero-project">
           <div className="brand-hero-photo">
             <Image
-              src="/img17.jpg"
+              src="/optimized/img17.webp"
               alt="Devanture MJ Barber avec enseigne lumineuse réalisée par MJ PUB"
               fill
               priority
@@ -156,7 +156,7 @@ export default function HomePage() {
           <article className="solution-main">
             <div className="solution-photo">
               <Image
-                src="/img2.jpg"
+                src="/optimized/img2.webp"
                 alt="Réalisation MJ PUB : enseigne TIME FOOD en lettres lumineuses"
                 fill
                 sizes="(max-width:850px) 100vw, 55vw"

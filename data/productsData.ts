@@ -7,7 +7,7 @@ export const productsData: ProductsData = {
     category: "panneaux",
     basePrice: 129,
     price: 159,
-    image: "/images/ia-panneau-personnalise.webp",
+    image: "/optimized/images/ia-panneau-personnalise.webp",
     description:
       "Affichez votre identité sur un panneau personnalisé. Choisissez le composite aluminium Dibond ou le PVC expansé selon votre emplacement et votre besoin de signalétique.",
     materials: [
