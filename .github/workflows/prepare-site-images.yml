@@ -38,7 +38,7 @@ jobs:
       - name: Install headless Chromium for real responsive testing
         run: |
           npm install --no-save --package-lock=false playwright@1.58.2
-          npx playwright install --with-deps chromium
+          npx playwright install chromium
       - name: Test homepage and customer journeys at 10 viewport widths
         shell: bash
         run: |
